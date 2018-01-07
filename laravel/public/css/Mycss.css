@@ -1,0 +1,163 @@
+.mail-form{
+    position: relative;
+    top: 20px;
+    
+}
+
+.chat-outline{
+    position: relative;
+    width: 800px;
+    height: 700px;
+    border-radius: 10px;
+    border:#A6A6A6 5px  solid;
+    padding-right: 7px;
+    background: white;
+}
+
+.chat-user-list{
+    height: 100%;
+    width: 200px;
+    border-right: 1px solid black;
+}
+
+#user-list{
+    padding: 5px;
+    overflow: auto;
+    min-width: 100%;
+    min-height: 680px;
+}
+
+#user-list li{    
+    width: 190px;
+    height: 50px;
+    line-height: 50px;
+    margin-bottom: 5px;
+}
+
+#user-list li:hover:not(.curr-object-client){
+    background:#E2E2E2;
+}
+
+#user-list li:hover i{
+    visibility: visible;
+}
+
+#user-list li img{
+    margin-top: 8px;
+    margin-left: 5px;
+    border-radius: 100%;
+}
+
+#user-list li h1{
+    position: relative;
+    top:5px;
+    left:10px;
+}
+#user-list li span{
+    position: relative;
+    top: -42px;
+    left:160px;
+}
+#user-list li i{
+    position: relative;
+    top: -42px;
+    left:170px;
+    visibility: hidden;
+}
+
+#user-list li i:hover{
+    color: red;
+}
+
+.chat-area{
+    position: absolute;
+    width: 600px;
+    height: 560px;
+    align-self: center;
+    overflow: auto;
+    min-height: 560px;
+    position: absolute;
+    top: 5px;
+    left: 210px;
+    word-wrap:break-word;
+}
+
+.summit-area{
+    position: absolute;
+    top: 560px;
+    left: 210px;
+}
+
+#sumitContent{
+    width: 500px;   
+}
+
+.chat-user-list{
+    background: #D9D9D9;
+}
+/*隐藏指定聊天*/
+.hidden-chat{
+    display: none;
+}
+/*选中的当前聊天*/
+.curr-object-client{
+    background: #F3F3F3;
+}
+/*表情*/
+.t{
+	font-size:12px;
+	color:#666666;
+	line-height:20px;
+}
+/*h1{
+	color:#000000;
+	border-bottom:1px #ccc solid;
+}*/
+.tools{
+	width:100%;
+	display:inline-block;
+	background:#ebeff8;
+	border:1px #d4d7e6 solid;
+	padding:5px;
+}
+.faceBtn{
+	color:#656565;
+	font-size:12px;
+	width:80px;
+	height:25px;
+	line-height:25px;
+	padding-left:25px;
+	background:url("/bighomework/./Public/img/face/face.gif") 4px 4px no-repeat;
+	cursor:pointer;
+}
+
+.layui-colla-content{
+    background: white;
+}
+   
+
+.pagination a{
+    float: left;
+    margin: 2px;
+    padding: 3px 8px;
+    background: #f9f9f9;
+    display: inline-block;
+}
+
+.pagination li.active{
+    background: #f60;
+     float: left;
+    padding: 3px 8px;
+    margin: 2px;
+    display: inline-block;
+}
+
+.pagination a:hover ,.pagination a:focus{
+    background: #f60;
+    color: #4B0082;
+    cursor: pointer;
+}
+
+.disabled{
+    display: none;
+}

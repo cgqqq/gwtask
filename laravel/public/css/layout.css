@@ -1,0 +1,27 @@
+#header{
+	height: 100px;
+	background:red;
+}
+
+#middle{
+	width: 100%;
+}
+#menu{
+	min-height: 800px;
+
+	width: 100px;
+	float: left;
+	background: orange;
+}
+
+#content{
+	min-height: 800px;
+	
+	background: grey;
+}
+
+#footer{
+	clear: both;
+	background: blue;
+	height: 100px;
+}
