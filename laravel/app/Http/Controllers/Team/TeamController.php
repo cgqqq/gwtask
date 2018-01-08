@@ -11,32 +11,47 @@ use App\Http\Controllers\Controller;
 
 class TeamController extends Controller
 {
-    //创建团队
+    //添加一个团队
     public function add(Request $request,Team $team,Membership $membership){
+        //对前端传过来的参数进行检查
     	$request->validate([
+            //要求存在该参数
     		'team_name'=>'required',
+            //要求存在该参数，大小限制为1000
     		'team_info'=>'required|max:1000'
     	]);
+        //要添加的团队信息
     	$data_team = [
+            //使用随机字符生成唯一id
     		'team_id'=>md5(uniqid(mt_rand(),true)),
+            //团队名
     		'team_name'=>$request->input('team_name'),
+            //创建日期
     		'created_at'=>strtotime(date("Y-m-d H:i:s")),
+            //创建者id
     		'team_funder_id'=>session('user_id'),
+            //团队介绍
     		'team_info'=>$request->input('team_info')
     	];
+        //用户-团队关系表中，添加一条记录：创建者和ta的团队
         $data_membership = [
+            //使用随机字符生成唯一id
             'membership_id'=>md5(uniqid(mt_rand(),true)),
-            'team_id'=>$data_team['team_id'],            
+            //团队id
+            'team_id'=>$data_team['team_id'],    
+            //用户id        
             'member_id'=>session('user_id'),
         ];
+        //判断添加团队和关系记录是否成功
     	if($team->add($data_team)&&$membership->add($data_membership)){
     		return response()->json(['msg'=>'添加成功!','icon'=>'1']);
     	}else{
     		return response()->json(['msg'=>'添加失败!','icon'=>'2']);
     	}
     }
-    //显示为我的团队
+    //显示为我的所有团队
     public function displayMine(Team $team,Membership $membership,Request $request){
+        //从数据库获取“我”的团队信息，使用“to_array()”方法将结果对象转换为数组，便于处理
         $pagedata = $membership->where(['member_id'=>session('user_id')])->get()->toarray();
         foreach ($pagedata as $key => &$value) {
             $team_info = $team->get(['team_id'=>$value['team_id']])->toarray();
