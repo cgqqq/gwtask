@@ -2,13 +2,37 @@
 
 
 @section('content')
-<script type="text/javascript">
+
+	<div class="layui-inline" style="margin-left:430px;" id="profile" >
+		<img class="layui-circle" style="height: 150px;width:150px;" src="{{ asset(session('user_profile')) }}">
+
+	</div>
+	<div class="icons" style="float: none;padding-top:10px;margin-left: 408px">
+		<ul>
+			<li style="margin-right: 25px;"><a href="{{  url('user/displayFollow')  }}" class="following_icon"> </a></li>
+			<li><a href="#" class="follower_icon"> </a></li>
+
+		</ul>
+	</div>
+	<div class="personal_info">
+	<hr class="layui-bg-black">
+	User ID ：{{ $assign['user_id']}}
+	<hr class="layui-bg-black">
+	Name ：{{ $assign['user_name']}}
+	<hr class="layui-bg-black">
+	Email Address：{{ $assign['user_email']}}
+	<hr id="password-field" class="layui-bg-black">
+	Passcode ：<input type="password" name="" value="{{ $assign['user_password']}}" readonly="" style="border: 0px;width: 100%;">
+		<button id="edit" class="layui-btn layui-btn-small">修改密码</button>
+
+	</div>
+	<script type="text/javascript">
 	$(function() {
 		layui.use('layer',function(){
 			$('#edit').on('click', function(event) {
-				if($(this).text()==='修改密码'){
+				if($(this).text()==='Change Passcode'){
 					$('#password-field').html("<input type='password' name='password' value={{ $assign['user_password']}}>");
-					$('#edit').text('确认修改');
+					$('#edit').text('Confirm');
 					return false;
 				}else{
 					event.preventDefault();
@@ -60,7 +84,7 @@
 		
 	});
 </script>
-<form action="" class='layui-form' >
+{{--<form action="" class='layui-form' >
 	<table class='layui-table' style="width: 900px;" class="layui-table">
 		<thead>
 			<tr>
@@ -80,6 +104,6 @@
 				<button id="edit" class="layui-btn layui-btn-small">修改密码</button>
 			</td>
 		</table>
-	</form>
+	</form>--}}
 
 	@endsection

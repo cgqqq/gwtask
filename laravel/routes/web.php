@@ -10,8 +10,12 @@
 	| contains the "web" middleware group. Now create something great!
 |
 */
-//起始登录页面路由
+//index页面
 Route::get('/', function () {
+    return view('Index/index');
+});
+//登录页面路由
+Route::get('login1', function () {
 	return view('Index/login');
 });
 Route::post('user/login','User\UserController@login');

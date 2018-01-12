@@ -1,0 +1,319 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="03c77c43-de62-47b9-8a66-f413799d84dc" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/laravel/.env.example" afterPath="$PROJECT_DIR$/laravel/.env.example" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/laravel/.gitattributes" afterPath="$PROJECT_DIR$/laravel/.gitattributes" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/laravel/.gitignore" afterPath="$PROJECT_DIR$/laravel/.gitignore" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/laravel/app/Console/Kernel.php" afterPath="$PROJECT_DIR$/laravel/app/Console/Kernel.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/laravel/app/Exceptions/Handler.php" afterPath="$PROJECT_DIR$/laravel/app/Exceptions/Handler.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/laravel/app/Http/Controllers/Auth/ForgotPasswordController.php" afterPath="$PROJECT_DIR$/laravel/app/Http/Controllers/Auth/ForgotPasswordController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/laravel/app/Http/Controllers/Auth/LoginController.php" afterPath="$PROJECT_DIR$/laravel/app/Http/Controllers/Auth/LoginController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/laravel/app/Http/Controllers/Auth/RegisterController.php" afterPath="$PROJECT_DIR$/laravel/app/Http/Controllers/Auth/RegisterController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/laravel/app/Http/Controllers/Auth/ResetPasswordController.php" afterPath="$PROJECT_DIR$/laravel/app/Http/Controllers/Auth/ResetPasswordController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/laravel/app/Http/Controllers/Controller.php" afterPath="$PROJECT_DIR$/laravel/app/Http/Controllers/Controller.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/laravel/app/Http/Controllers/HomeController.php" afterPath="$PROJECT_DIR$/laravel/app/Http/Controllers/HomeController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/laravel/app/Http/Controllers/Index/IndexController.php" afterPath="$PROJECT_DIR$/laravel/app/Http/Controllers/Index/IndexController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/laravel/app/Http/Controllers/Team/TeamController.php" afterPath="$PROJECT_DIR$/laravel/app/Http/Controllers/Team/TeamController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/laravel/app/Http/Controllers/User/UserController.php" afterPath="$PROJECT_DIR$/laravel/app/Http/Controllers/User/UserController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/laravel/app/Http/Kernel.php" afterPath="$PROJECT_DIR$/laravel/app/Http/Kernel.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/laravel/app/Http/Middleware/EncryptCookies.php" afterPath="$PROJECT_DIR$/laravel/app/Http/Middleware/EncryptCookies.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/laravel/app/Http/Middleware/IsLogged.php" afterPath="$PROJECT_DIR$/laravel/app/Http/Middleware/IsLogged.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/laravel/app/Http/Middleware/RedirectIfAuthenticated.php" afterPath="$PROJECT_DIR$/laravel/app/Http/Middleware/RedirectIfAuthenticated.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/laravel/app/Http/Middleware/TrimStrings.php" afterPath="$PROJECT_DIR$/laravel/app/Http/Middleware/TrimStrings.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/laravel/app/Http/Middleware/TrustProxies.php" afterPath="$PROJECT_DIR$/laravel/app/Http/Middleware/TrustProxies.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/laravel/app/Http/Middleware/VerifyCsrfToken.php" afterPath="$PROJECT_DIR$/laravel/app/Http/Middleware/VerifyCsrfToken.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/laravel/app/Libraries/Functions/helpers.php" afterPath="$PROJECT_DIR$/laravel/app/Libraries/Functions/helpers.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/laravel/app/Libraries/Org/UploadClass.php" afterPath="$PROJECT_DIR$/laravel/app/Libraries/Org/UploadClass.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/laravel/app/Models/Base.php" afterPath="$PROJECT_DIR$/laravel/app/Models/Base.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/laravel/app/Models/Friend.php" afterPath="$PROJECT_DIR$/laravel/app/Models/Friend.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/laravel/app/Models/Membership.php" afterPath="$PROJECT_DIR$/laravel/app/Models/Membership.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/laravel/app/Models/Team.php" afterPath="$PROJECT_DIR$/laravel/app/Models/Team.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/laravel/app/Models/User.php" afterPath="$PROJECT_DIR$/laravel/app/Models/User.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/laravel/app/Providers/AppServiceProvider.php" afterPath="$PROJECT_DIR$/laravel/app/Providers/AppServiceProvider.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/laravel/app/Providers/AuthServiceProvider.php" afterPath="$PROJECT_DIR$/laravel/app/Providers/AuthServiceProvider.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/laravel/app/Providers/BroadcastServiceProvider.php" afterPath="$PROJECT_DIR$/laravel/app/Providers/BroadcastServiceProvider.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/laravel/app/Providers/EventServiceProvider.php" afterPath="$PROJECT_DIR$/laravel/app/Providers/EventServiceProvider.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/laravel/app/Providers/RouteServiceProvider.php" afterPath="$PROJECT_DIR$/laravel/app/Providers/RouteServiceProvider.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/laravel/artisan" afterPath="$PROJECT_DIR$/laravel/artisan" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/laravel/bootstrap/app.php" afterPath="$PROJECT_DIR$/laravel/bootstrap/app.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/laravel/bootstrap/cache/.gitignore" afterPath="$PROJECT_DIR$/laravel/bootstrap/cache/.gitignore" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/laravel/composer.json" afterPath="$PROJECT_DIR$/laravel/composer.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/laravel/composer.lock" afterPath="$PROJECT_DIR$/laravel/composer.lock" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/laravel/config/app.php" afterPath="$PROJECT_DIR$/laravel/config/app.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/laravel/config/auth.php" afterPath="$PROJECT_DIR$/laravel/config/auth.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/laravel/config/broadcasting.php" afterPath="$PROJECT_DIR$/laravel/config/broadcasting.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/laravel/config/cache.php" afterPath="$PROJECT_DIR$/laravel/config/cache.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/laravel/config/database.php" afterPath="$PROJECT_DIR$/laravel/config/database.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/laravel/config/filesystems.php" afterPath="$PROJECT_DIR$/laravel/config/filesystems.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/laravel/config/mail.php" afterPath="$PROJECT_DIR$/laravel/config/mail.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/laravel/config/queue.php" afterPath="$PROJECT_DIR$/laravel/config/queue.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/laravel/config/services.php" afterPath="$PROJECT_DIR$/laravel/config/services.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/laravel/config/session.php" afterPath="$PROJECT_DIR$/laravel/config/session.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/laravel/config/view.php" afterPath="$PROJECT_DIR$/laravel/config/view.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/laravel/database/.gitignore" afterPath="$PROJECT_DIR$/laravel/database/.gitignore" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/laravel/database/factories/UserFactory.php" afterPath="$PROJECT_DIR$/laravel/database/factories/UserFactory.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/laravel/database/migrations/2014_10_12_100000_create_password_resets_table.php" afterPath="$PROJECT_DIR$/laravel/database/migrations/2014_10_12_100000_create_password_resets_table.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/laravel/database/migrations/2017_10_30_154746_create_user_table.php" afterPath="$PROJECT_DIR$/laravel/database/migrations/2017_10_30_154746_create_user_table.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/laravel/database/migrations/2017_11_01_075321_create_friend_table.php" afterPath="$PROJECT_DIR$/laravel/database/migrations/2017_11_01_075321_create_friend_table.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/laravel/database/migrations/2017_11_18_094317_create_team_table.php" afterPath="$PROJECT_DIR$/laravel/database/migrations/2017_11_18_094317_create_team_table.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/laravel/database/migrations/2017_11_20_134658_create_membership_table.php" afterPath="$PROJECT_DIR$/laravel/database/migrations/2017_11_20_134658_create_membership_table.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/laravel/database/migrations/2017_11_23_131726_create_membership_table.php" afterPath="$PROJECT_DIR$/laravel/database/migrations/2017_11_23_131726_create_membership_table.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/laravel/database/seeds/DatabaseSeeder.php" afterPath="$PROJECT_DIR$/laravel/database/seeds/DatabaseSeeder.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/laravel/package.json" afterPath="$PROJECT_DIR$/laravel/package.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/laravel/phpunit.xml" afterPath="$PROJECT_DIR$/laravel/phpunit.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/laravel/public/.htaccess" afterPath="$PROJECT_DIR$/laravel/public/.htaccess" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/laravel/public/css/Mycss.css" afterPath="$PROJECT_DIR$/laravel/public/css/Mycss.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/laravel/public/css/app.css" afterPath="$PROJECT_DIR$/laravel/public/css/app.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/laravel/public/css/bootstrap.css" afterPath="$PROJECT_DIR$/laravel/public/css/bootstrap.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/laravel/public/css/bootstrap.min.css" afterPath="$PROJECT_DIR$/laravel/public/css/bootstrap.min.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/laravel/public/css/drag.css" afterPath="$PROJECT_DIR$/laravel/public/css/drag.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/laravel/public/css/form-elements.css" afterPath="$PROJECT_DIR$/laravel/public/css/form-elements.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/laravel/public/css/layout.css" afterPath="$PROJECT_DIR$/laravel/public/css/layout.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/laravel/public/css/layui.css" afterPath="$PROJECT_DIR$/laravel/public/css/layui.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/laravel/public/css/layui.mobile.css" afterPath="$PROJECT_DIR$/laravel/public/css/layui.mobile.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/laravel/public/css/modules/code.css" afterPath="$PROJECT_DIR$/laravel/public/css/modules/code.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/laravel/public/css/modules/laydate/default/laydate.css" afterPath="$PROJECT_DIR$/laravel/public/css/modules/laydate/default/laydate.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/laravel/public/css/modules/layer/default/layer.css" afterPath="$PROJECT_DIR$/laravel/public/css/modules/layer/default/layer.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/laravel/public/css/register.css" afterPath="$PROJECT_DIR$/laravel/public/css/register.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/laravel/public/css/style.css" afterPath="$PROJECT_DIR$/laravel/public/css/style.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/laravel/public/font/iconfont.svg" afterPath="$PROJECT_DIR$/laravel/public/font/iconfont.svg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/laravel/public/index.php" afterPath="$PROJECT_DIR$/laravel/public/index.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/laravel/public/js/app.js" afterPath="$PROJECT_DIR$/laravel/public/js/app.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/laravel/public/js/drag.js" afterPath="$PROJECT_DIR$/laravel/public/js/drag.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/laravel/public/js/jquery-3.2.1.js" afterPath="$PROJECT_DIR$/laravel/public/js/jquery-3.2.1.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/laravel/public/js/jquery-3.2.1.min.js" afterPath="$PROJECT_DIR$/laravel/public/js/jquery-3.2.1.min.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/laravel/public/js/jquery.validate.js" afterPath="$PROJECT_DIR$/laravel/public/js/jquery.validate.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/laravel/public/lay/modules/carousel.js" afterPath="$PROJECT_DIR$/laravel/public/lay/modules/carousel.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/laravel/public/lay/modules/code.js" afterPath="$PROJECT_DIR$/laravel/public/lay/modules/code.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/laravel/public/lay/modules/element.js" afterPath="$PROJECT_DIR$/laravel/public/lay/modules/element.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/laravel/public/lay/modules/flow.js" afterPath="$PROJECT_DIR$/laravel/public/lay/modules/flow.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/laravel/public/lay/modules/form.js" afterPath="$PROJECT_DIR$/laravel/public/lay/modules/form.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/laravel/public/lay/modules/jquery.js" afterPath="$PROJECT_DIR$/laravel/public/lay/modules/jquery.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/laravel/public/lay/modules/laydate.js" afterPath="$PROJECT_DIR$/laravel/public/lay/modules/laydate.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/laravel/public/lay/modules/layedit.js" afterPath="$PROJECT_DIR$/laravel/public/lay/modules/layedit.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/laravel/public/lay/modules/layer.js" afterPath="$PROJECT_DIR$/laravel/public/lay/modules/layer.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/laravel/public/lay/modules/laypage.js" afterPath="$PROJECT_DIR$/laravel/public/lay/modules/laypage.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/laravel/public/lay/modules/laytpl.js" afterPath="$PROJECT_DIR$/laravel/public/lay/modules/laytpl.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/laravel/public/lay/modules/mobile.js" afterPath="$PROJECT_DIR$/laravel/public/lay/modules/mobile.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/laravel/public/lay/modules/table.js" afterPath="$PROJECT_DIR$/laravel/public/lay/modules/table.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/laravel/public/lay/modules/tree.js" afterPath="$PROJECT_DIR$/laravel/public/lay/modules/tree.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/laravel/public/lay/modules/upload.js" afterPath="$PROJECT_DIR$/laravel/public/lay/modules/upload.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/laravel/public/lay/modules/util.js" afterPath="$PROJECT_DIR$/laravel/public/lay/modules/util.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/laravel/public/layui.all.js" afterPath="$PROJECT_DIR$/laravel/public/layui.all.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/laravel/public/layui.js" afterPath="$PROJECT_DIR$/laravel/public/layui.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/laravel/public/robots.txt" afterPath="$PROJECT_DIR$/laravel/public/robots.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/laravel/public/scss/style.scss" afterPath="$PROJECT_DIR$/laravel/public/scss/style.scss" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/laravel/public/web.config" afterPath="$PROJECT_DIR$/laravel/public/web.config" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/laravel/readme.md" afterPath="$PROJECT_DIR$/laravel/readme.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/laravel/resources/assets/js/app.js" afterPath="$PROJECT_DIR$/laravel/resources/assets/js/app.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/laravel/resources/assets/js/bootstrap.js" afterPath="$PROJECT_DIR$/laravel/resources/assets/js/bootstrap.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/laravel/resources/assets/js/components/Example.vue" afterPath="$PROJECT_DIR$/laravel/resources/assets/js/components/Example.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/laravel/resources/assets/sass/_variables.scss" afterPath="$PROJECT_DIR$/laravel/resources/assets/sass/_variables.scss" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/laravel/resources/assets/sass/app.scss" afterPath="$PROJECT_DIR$/laravel/resources/assets/sass/app.scss" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/laravel/resources/lang/en/auth.php" afterPath="$PROJECT_DIR$/laravel/resources/lang/en/auth.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/laravel/resources/lang/en/pagination.php" afterPath="$PROJECT_DIR$/laravel/resources/lang/en/pagination.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/laravel/resources/lang/en/passwords.php" afterPath="$PROJECT_DIR$/laravel/resources/lang/en/passwords.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/laravel/resources/lang/en/validation.php" afterPath="$PROJECT_DIR$/laravel/resources/lang/en/validation.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/laravel/resources/views/Home/home.blade.php" afterPath="$PROJECT_DIR$/laravel/resources/views/Home/home.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/laravel/resources/views/Index/index.blade.php" afterPath="$PROJECT_DIR$/laravel/resources/views/Index/index.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/laravel/resources/views/Index/login.blade.php" afterPath="$PROJECT_DIR$/laravel/resources/views/Index/login.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/laravel/resources/views/Index/register.blade.php" afterPath="$PROJECT_DIR$/laravel/resources/views/Index/register.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/laravel/resources/views/Team/displayAdd.blade.php" afterPath="$PROJECT_DIR$/laravel/resources/views/Team/displayAdd.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/laravel/resources/views/Team/displayAll.blade.php" afterPath="$PROJECT_DIR$/laravel/resources/views/Team/displayAll.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/laravel/resources/views/Team/displayMine.blade.php" afterPath="$PROJECT_DIR$/laravel/resources/views/Team/displayMine.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/laravel/resources/views/Team/displayOne.blade.php" afterPath="$PROJECT_DIR$/laravel/resources/views/Team/displayOne.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/laravel/resources/views/User/displayAll.blade.php" afterPath="$PROJECT_DIR$/laravel/resources/views/User/displayAll.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/laravel/resources/views/User/displayFollow.blade.php" afterPath="$PROJECT_DIR$/laravel/resources/views/User/displayFollow.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/laravel/resources/views/User/displayInfo.blade.php" afterPath="$PROJECT_DIR$/laravel/resources/views/User/displayInfo.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/laravel/resources/views/auth/login.blade.php" afterPath="$PROJECT_DIR$/laravel/resources/views/auth/login.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/laravel/resources/views/auth/passwords/email.blade.php" afterPath="$PROJECT_DIR$/laravel/resources/views/auth/passwords/email.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/laravel/resources/views/auth/passwords/reset.blade.php" afterPath="$PROJECT_DIR$/laravel/resources/views/auth/passwords/reset.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/laravel/resources/views/home.blade.php" afterPath="$PROJECT_DIR$/laravel/resources/views/home.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/laravel/resources/views/layouts/home.blade.php" afterPath="$PROJECT_DIR$/laravel/resources/views/layouts/home.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/laravel/resources/views/layouts/index.blade.php" afterPath="$PROJECT_DIR$/laravel/resources/views/layouts/index.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/laravel/resources/views/layouts/team.blade.php" afterPath="$PROJECT_DIR$/laravel/resources/views/layouts/team.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/laravel/routes/api.php" afterPath="$PROJECT_DIR$/laravel/routes/api.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/laravel/routes/channels.php" afterPath="$PROJECT_DIR$/laravel/routes/channels.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/laravel/routes/console.php" afterPath="$PROJECT_DIR$/laravel/routes/console.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/laravel/routes/web.php" afterPath="$PROJECT_DIR$/laravel/routes/web.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/laravel/server.php" afterPath="$PROJECT_DIR$/laravel/server.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/laravel/storage/app/.gitignore" afterPath="$PROJECT_DIR$/laravel/storage/app/.gitignore" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/laravel/storage/app/public/.gitignore" afterPath="$PROJECT_DIR$/laravel/storage/app/public/.gitignore" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/laravel/storage/debugbar/.gitignore" afterPath="$PROJECT_DIR$/laravel/storage/debugbar/.gitignore" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/laravel/storage/framework/.gitignore" afterPath="$PROJECT_DIR$/laravel/storage/framework/.gitignore" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/laravel/storage/framework/cache/.gitignore" afterPath="$PROJECT_DIR$/laravel/storage/framework/cache/.gitignore" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/laravel/storage/framework/sessions/.gitignore" afterPath="$PROJECT_DIR$/laravel/storage/framework/sessions/.gitignore" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/laravel/storage/framework/testing/.gitignore" afterPath="$PROJECT_DIR$/laravel/storage/framework/testing/.gitignore" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/laravel/storage/framework/views/.gitignore" afterPath="$PROJECT_DIR$/laravel/storage/framework/views/.gitignore" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/laravel/storage/logs/.gitignore" afterPath="$PROJECT_DIR$/laravel/storage/logs/.gitignore" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/laravel/tests/CreatesApplication.php" afterPath="$PROJECT_DIR$/laravel/tests/CreatesApplication.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/laravel/tests/Feature/ExampleTest.php" afterPath="$PROJECT_DIR$/laravel/tests/Feature/ExampleTest.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/laravel/tests/TestCase.php" afterPath="$PROJECT_DIR$/laravel/tests/TestCase.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/laravel/tests/Unit/ExampleTest.php" afterPath="$PROJECT_DIR$/laravel/tests/Unit/ExampleTest.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/laravel/webpack.mix.js" afterPath="$PROJECT_DIR$/laravel/webpack.mix.js" />
+    </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="TRACKING_ENABLED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/laravel/resources/views/Index/login.blade.php" />
+      </list>
+    </option>
+  </component>
+  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsGulpfileManager">
+    <detection-done>true</detection-done>
+    <sorting>DEFINITION_ORDER</sorting>
+  </component>
+  <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" />
+  <component name="ProjectFrameBounds" extendedState="7">
+    <option name="x" value="-8" />
+    <option name="y" value="-8" />
+    <option name="width" value="1368" />
+    <option name="height" value="744" />
+  </component>
+  <component name="ProjectView">
+    <navigator currentView="ProjectPane" proportions="" version="1">
+      <flattenPackages />
+      <showMembers />
+      <showModules />
+      <showLibraryContents />
+      <hideEmptyPackages />
+      <abbreviatePackageNames />
+      <autoscrollToSource />
+      <autoscrollFromSource />
+      <sortByType />
+      <manualOrder />
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="Scratches" />
+      <pane id="Scope" />
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="gwtask" type="b2602c69:ProjectViewProjectNode" />
+              <item name="gwtask" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="gwtask" type="b2602c69:ProjectViewProjectNode" />
+              <item name="gwtask" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="laravel" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="gwtask" type="b2602c69:ProjectViewProjectNode" />
+              <item name="gwtask" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="laravel" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="resources" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="gwtask" type="b2602c69:ProjectViewProjectNode" />
+              <item name="gwtask" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="laravel" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="resources" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="views" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="gwtask" type="b2602c69:ProjectViewProjectNode" />
+              <item name="gwtask" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="laravel" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="resources" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="views" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="Index" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="WebServerToolWindowFactoryState" value="false" />
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="ShelveChangesManager" show_recycled="false">
+    <option name="remove_strategy" value="false" />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="03c77c43-de62-47b9-8a66-f413799d84dc" name="Default" comment="" />
+      <created>1515764366752</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1515764366752</updated>
+      <workItem from="1515764373211" duration="164000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="164000" />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="7" />
+    <layout>
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24963397" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+    </layout>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager />
+    <watches-manager />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/laravel/resources/views/Index/login.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="442">
+          <caret line="102" column="39" lean-forward="false" selection-start-line="102" selection-start-column="39" selection-end-line="102" selection-end-column="39" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>

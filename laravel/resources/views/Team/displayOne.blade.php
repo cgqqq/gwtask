@@ -1,6 +1,7 @@
-@extends('layouts.team')
+@extends('layouts.home')
 
 @section('content')
+
 <script type="text/javascript">
 	$(function(){
 		layui.use('layer',function(){

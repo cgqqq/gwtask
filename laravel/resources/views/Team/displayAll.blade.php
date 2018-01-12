@@ -1,4 +1,4 @@
-@extends('layouts.team')
+@extends('layouts.home')
 
 @section('content')
 

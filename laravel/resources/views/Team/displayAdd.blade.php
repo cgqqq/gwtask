@@ -1,11 +1,12 @@
-@extends('layouts.team')
+{{--用户已创建团队页面--}}
+@extends('layouts.home')
 
 @section('content')
 
 <script type="text/javascript">
 	$(function(){
 		layui.use('layer',function(){
-			$('.layui-table').on('click','#submit',function(event){
+			$('.form-horizontal').on('click','#submit',function(event){
 				event.preventDefault();
 				var team_name = $('#team_name').val();
 				var team_info = $('#team_info').val();
@@ -33,34 +34,30 @@
 		});
 	});
 </script>
+{{--用户创建的团队信息填写表格--}}
+			<p style="font-size: 50px;font-family: 'Source Sans Pro', sans-serif;font-weight: 800;color: #333333;">Create My Team</p>
+			<form class="form-horizontal"  style="color: #333333;font-size: large;margin-top: 100px;" >
+				{{ csrf_field() }}
+				<div class="form-group" style="margin-bottom: 40px;">
+						<label for="team_name" class="col-md-4 control-label" >Team Name</label>
 
-<form class="layui-form" >
-	<table class="layui-table" style="width: 900px;">
-		<thead>
-			<tr>
-				<td>
-					团队名称
-				</td>
-				<td>
-					团队介绍
-				</td>
-				<td>
-					操作
-				</td>
-			</tr>
-		</thead>
-		<tr>
-			<td>
-				<input type="text" id="team_name" required="">
-			</td>
-			<td>
-				<input type="text" id="team_info" required="">
-			</td>
-			<td>
-				<button id="submit" class="layui-btn layui-btn-small layui-btn-normal">提交</button>
-			</td>
-		</tr>
-	</table>
-</form>
+						<div class="col-md-6">
+							<input type="text" id="team_name" required="" class="form-control" >
+						</div>
+				</div>
+				<div class="form-group" style="margin-bottom: 40px;">
+					<label for="team_info" class="col-md-4 control-label">Brief Introduction</label>
+
+					<div class="col-md-6"  id="a_input">
+						<textarea rows="4" cols="50" class="form-control" id="team_info"></textarea>
+
+					</div>
+				</div>
+				<div class="col-md-6 col-md-offset-4">
+					<button id="submit" type="submit" class="layui-btn layui-btn-radius shadow" >
+						CREATE
+					</button>
+				</div>
+			</form>
 
 @endsection
