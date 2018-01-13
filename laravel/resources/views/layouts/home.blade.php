@@ -55,7 +55,7 @@
             <div class="main-panel2" style="display:flex;min-height: 630px;height:auto;width: 100%;padding-left:0;background-color: transparent;">
                 {{--Layui的导航--}}
                 <ul class="layui-nav"  style="width: 100%;height: 100%;background-color:#34bf49;">
-                    <li class="layui-nav-item"><a href="{{url('Home/home')}}">Home</a></li>
+                    <li class="layui-nav-item"><a href="{{url('home')}}">Home</a></li>
                     <li class="layui-nav-item">
                         <a href="#">Teams</a>
                         <dl class="layui-nav-child">

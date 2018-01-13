@@ -13,7 +13,7 @@
 						<div class="item-info-overlay">
 
 							<a href="#" class="overlay-link"></a>
-							<h3 class="text-white semi-bold p-t-60 project-title ">
+							<h3 class="text-white semi-bold p-t-60 project-title " style="color: #fff200;font-weight: 900;">
 								Team Name:{{ $team['team_name'] }}</h3>
 							<P> </P>
 							<p class="project-description">
