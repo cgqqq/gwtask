@@ -56,8 +56,8 @@
 
                     <div class="form-group">
                         <div class="col-md-8 col-md-offset-4">
-                            <button id="submit" type="submit" class="layui-btn layui-btn-radius shadow" >
-                                <a> LOGIN</a>
+                            <button id="submit" type="submit" class="layui-btn shadow" style="border: 2px solid #0C0C0C;">
+                                <a style="color: #0C0C0C"> LOGIN</a>
                             </button>
                             <a class="link"  href="{{ route('password.request') }}">
                                 Forgot Your Password?

@@ -14,12 +14,10 @@
     <link href="{{ asset('css/layui.css') }}" rel="stylesheet">
     <link href="{{ asset('css/style.css') }}" rel="stylesheet" type="text/css" media="all" >
     <link href="{{ asset('css/bootstrap.css') }}" rel="stylesheet" type="text/css" media="all" >
- {{--   <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" media="all" >--}}
-    <link href="{{ asset('https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800') }}" rel="stylesheet" type="text/css" media="all" >
-    <link href="{{ asset('https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900,200italic,300italic,400italic,600italic,700italic,900italic') }}" rel="stylesheet" type="text/css" media="all" >
     <script src="{{ asset('js/jquery-3.2.1.min.js') }}" type="text/javascript"></script>
     <script src="{{ asset('layui.js') }}" charset="utf-8"></script>
     <script type="text/javascript" src="{{ asset('js/bootstrap.min.js') }}"></script>
+
     <script>
         $.ajaxSetup({
             headers: {
@@ -27,6 +25,9 @@
             }
         });
     </script>
+    <style>
+        body .a-class .layui-layer-btn .layui-layer-btn0{background:#34bf49;border: 1px solid #34bf49}
+    </style>
 
 
 </head>
@@ -42,14 +43,23 @@
                 @section('icon')
                     <ul>
                         <li><a href="{{ url('user/displayInfo') }}" class="center_icon"> </a></li>
-                        <li><a href="{{url('user/logout')}}" class="logout_icon"> </a></li>
+                        <li><a href="javascript:void(0)" class="logout_icon"> </a></li>
+
 
                     </ul>
                 @show
             </div>
             {{--网页LOGO--}}
-            <div class="logo" style="margin-bottom:0;margin-left: auto;">
-                <a href="{{ url('/') }}"><img src="{{URL::asset('/images/logo.png')}}" alt=" " >DINO</a>
+            <div class="logo" style="margin-bottom: 0;margin-left:420px;">
+
+            @if (session('user_name')==null)
+
+                <a href="{{ url('/') }}" style="font-weight: 900; "><img src="{{URL::asset('/images/logo.png')}}" alt=" " >DINO</a>
+
+            @else
+                <a href="{{ url('home') }}" style="font-weight: 900; "><img src="{{URL::asset('/images/logo.png')}}" alt=" " >DINO</a>
+
+            @endif
             </div>
 
             <div class="main-panel2" style="display:flex;min-height: 630px;height:auto;width: 100%;padding-left:0;background-color: transparent;">
@@ -71,6 +81,17 @@
                         <a href="{{url('user/displayAll')}}">All Users</a>
                     </li>
                     <li class="layui-nav-item"><a href="#">Others</a></li>
+
+                    <div class="search_input" style="width: 450px;float: right;margin-top: 15px">
+                        <form style="background-color: #34bf49;border-radius:40px;margin-right: 0;">
+                            <button type="button" class="dropdown-toggle search2" data-toggle="dropdown">
+                            </button>
+                            <input type="text" placeholder="Search With ID……" style="border: 1px #000;background-color: #fcfcfc;color: #0C0C0C;height: 25px;" >
+
+
+                        </form>
+                    </div>
+
                     {{--主要内容区域--}}
                     <div style="background-color:#fcfcfc;width:1100px;min-height:800px;height:auto;margin-left: 0px;margin-right: 0px; padding-top:35px;padding-left:30px;  " class="shadow">
                         @section('content')
@@ -108,6 +129,29 @@
         element.on('nav(demo)', function(elem){
             alert(elem.text());
             layer.msg(elem.text());
+        });
+    });
+
+    $(function(){
+        layui.use('layer',function(){
+            $('.icons').on('click','.logout_icon',function(){
+                    //配置一个透明的询问框
+                    layer.msg('<span style="font-weight: 700">Are you sure to log out ?</span>', {
+                        anim:6
+                        ,time: 0 //不自动关闭
+                        ,btn: ['yes', 'no']
+                        ,skin:'a-class'
+                        ,btnAlign: 'c'
+                        ,btn1:function(index,layero){
+                           window.location.href="{{url('user/logout')}}";
+                        }
+                        ,btn2:function(index){
+                            layer.close(index);
+                        }
+                    });
+
+
+            });
         });
     });
 </script>

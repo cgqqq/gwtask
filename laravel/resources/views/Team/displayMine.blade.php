@@ -4,10 +4,40 @@
 		{{--展示Team--}}
 		<div class="portfolio-grid portfolioContainer "  STYLE="width: 100%;height: 100%;">
 			<ul id="thumbs" class="col3"  style="width: 100%;height: 100%; ">
+				{{--搜索框--}}
+
+				<div class="search_input">
+
+					<form style="background-color: #34bf49;border-radius: 42px;padding: 4px">
+						<div class="btn-group" >
+							<button type="button" class="dropdown-toggle search" data-toggle="dropdown">
+							</button>
+							<ul class="dropdown-menu" role="menu" style="z-index: 9999;margin-top: 5px;">
+								<li><a href="#">By Team Name</a></li>
+								<li><a href="#">By Team ID</a></li>
+
+							</ul>
+						</div>
+						<input type="text" placeholder="Search For Teams……" >
+
+						<div class="btn-group" style="margin-left: 630px;">
+							<button type="button" class="dropdown-toggle sort" data-toggle="dropdown">
+							</button>
+							<ul class="dropdown-menu" role="menu" style="z-index: 9999;margin-top: 5px;">
+								<li><a href="#">All</a></li>
+								<li><a href="#">Sorted By Time</a></li>
+								<li><a href="#">Sorted By Name</a></li>
+								<li><a href="#">Sorted By Founder ID</a></li>
+
+							</ul>
+						</div>
+
+					</form>
+				</div>
 
 				@foreach($pageout as $team)
 				{{--每一个Team都放在一个li中，包括信息与图片--}}
-				<li style="width: 350px;height: 265px;margin-left: 120px;margin-bottom: 80px;margin-top: 20px;">
+				<li style="width: 350px;height: 265px;margin-left: 120px;margin-bottom: 60px;margin-top: 50px;">
 					<div class="portfolio-image-wrapper">
 						<img src="{{URL::asset('/images/team.png')}}" alt=""  style="border:3px dashed #000"/>
 						<div class="item-info-overlay">
@@ -37,7 +67,7 @@
 							<button type="button" class="dropdown-toggle team_func" data-toggle="dropdown">
 							</button>
 							<input type="hidden" name="team_id" value="{{ $team['team_id'] }}">
-							<ul class="dropdown-menu" role="menu">
+							<ul class="dropdown-menu" role="menu" style="z-index: 9999">
 								<li><a href="#">Change Team Name</a></li>
 								<li id="quit-team"><a href="#">Quit/Dismiss</a></li>
 								<li><a href="#">others</a></li>
@@ -47,14 +77,6 @@
 					</div>
 				</li>
 				@endforeach
-			{{--	<li style="position: relative;width: 350px;height: 265px;margin-left: 120px;margin-top: 20px;">
-					<div class="portfolio-image-wrapper" style="border:3px dashed #000">
-
-
-
-					</div>
-				</li>--}}
-
 			</ul>
 
 		</div>

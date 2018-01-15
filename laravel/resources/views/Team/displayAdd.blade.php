@@ -20,7 +20,9 @@
 					layer.msg(data.msg,{
 						icon:data.icon
 					});
-				})
+                    window.location.href="{{url('team/displayMine')}}";
+
+                })
 				.fail(function() {
 					layer.msg('服务器未响应!',{
 						icon:5
@@ -29,7 +31,7 @@
 				.always(function() {
 					console.log("complete");
 				});
-				
+
 			});
 		});
 	});
@@ -54,7 +56,7 @@
 					</div>
 				</div>
 				<div class="col-md-6 col-md-offset-4">
-					<button id="submit" type="submit" class="layui-btn layui-btn-radius shadow" >
+					<button id="submit" type="submit" class="layui-btn shadow" style="border: 2px solid #0C0C0C;color: #0C0C0C">
 						CREATE
 					</button>
 				</div>

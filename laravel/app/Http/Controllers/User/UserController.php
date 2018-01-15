@@ -260,7 +260,7 @@ class UserController extends Controller
         }
         // pd($page);
         //设定一页行数
-        $pageSize=2;
+        $pageSize=6;
         //总共行数
         $total=count($pageData);
         //实例化分页类啊

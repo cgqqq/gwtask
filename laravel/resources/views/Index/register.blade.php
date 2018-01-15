@@ -100,8 +100,8 @@
 
                     <div class="form-group">
                 <div class="col-md-6 col-md-offset-4">
-                    <button id="submit" type="submit" class="layui-btn layui-btn-radius shadow" >
-                        <a> REGISTER</a>
+                    <button id="submit" type="submit" class="layui-btn shadow" style="border: 2px solid #0C0C0C;">
+                        <a style="color: #0C0C0C;"> REGISTER</a>
                     </button>
                 </div>
             </div>

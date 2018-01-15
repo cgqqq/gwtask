@@ -40,9 +40,19 @@
                 @show
             </div>
             @section("logo")
+
                 <div class="logo" style="margin-bottom: 0;margin-left:420px;">
+                   @if (session('user_name')==null)
+
 
                     <a href="{{ url('/') }}" style="font-weight: 900; "><img src="{{URL::asset('/images/logo.png')}}" alt=" " >DINO</a>
+
+                       @else
+                    <a href="{{ url('home') }}" style="font-weight: 900; "><img src="{{URL::asset('/images/logo.png')}}" alt=" " >DINO</a>
+
+                       @endif
+
+
                 </div>
             @show
             @section('content')
