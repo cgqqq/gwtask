@@ -816,3 +816,29 @@ input[type=checkbox]:not(:disabled).tabbed:focus ~ .lever::before {
 	transform: scale(2.4);
 	background-color: rgba(0, 0, 0, 0.08);
 }
+
+.Big_Font{
+	font-size: 30px;
+	font-family: 'Source Sans Pro', sans-serif;
+	font-weight: 800;
+	text-decoration: none;
+	color: #0C0C0C;
+	text-align: center;
+}
+.Big_Font a{
+	font-size: 30px;
+	font-family: 'Source Sans Pro', sans-serif;
+	font-weight: 800;
+	text-decoration: none;
+	color: #0C0C0C;
+	text-align: center;
+}
+.Big_Font a:hover{
+	font-size: 30px;
+	text-decoration: none;
+	border: 3px solid #0C0C0C;
+	color: #0C0C0C;
+	background-color: #fff200;
+	padding: 2px;
+}
+
