@@ -70,71 +70,96 @@ class TeamController extends Controller
     }
     //加入团队
     public function join(Request $request,Membership $membership){
+        //对前端传参检查
         $request->validate([
             'team_id'=>'required',
             'member_id'=>'required'
         ]);
+        //据此检查该团队是否已存在
         $map = [
             'team_id'=>$request->input('team_id'),
             'member_id'=>session('user_id')
         ];
+        //要增加的团队信息
         $data = [
             'membership_id'=>md5(uniqid(mt_rand(),true)),
             'team_id'=>$request->input('team_id'),
             'member_id'=>$request->input('member_id')
-        ];
+        ];        
         if(!$membership->get($map)->isEmpty()){
+            //该团队已存在
             return response()->json(['msg'=>'已加入!','icon'=>'7']);
         }else if($membership->add($data)){
+            //增加团队成功
             return response()->json(['msg'=>'加入成功!','icon'=>'1']);
         }else{
+            //增加团队失败
             return response()->json(['msg'=>'加入失败!','icon'=>'2']);
         }
     }
     //离开团队
     public function quit(Request $request,Membership $membership,Team $team){
+        //对前端传参检查
         $request->validate([
             'team_id'=>'required'
         ]);
+        //要查找是否存在的数据
         $map = [
             'team_id' => $request->input('team_id'),
             'team_funder_id'=>session('user_id')
         ];
         //暂定队长不能退出团队
         if(!$team->get($map)->isEmpty()){
+            //队长请求退出，退出失败
             return response()->json(['msg'=>'队长不能退出!','icon'=>'2']);
         }else if($membership->del(['team_id'=>$request->input('team_id')])){
+            //组员请求退出，退出成功
             return response()->json(['msg'=>'退出成功!','icon'=>'1']);
         }else{
+            //组员请求退出，退出失败
             return response()->json(['msg'=>'退出失败!','icon'=>'2']);
         }
     }
     //显示单个团队信息、成员
     public function displayOne(User $user,Membership $membership,Team $team,Request $request,$team_name){
+        //获取该团队信息
         $teamInfo = $team->get(['team_name'=>$team_name])->toarray();
+        //获取该团队创建者信息
         $funderInfo = $user->where(['user_id'=>$teamInfo[0]['team_funder_id']])->value('user_name');
+        //团队信息加入该团队创建者信息
         $teamInfo[0] = array_merge($teamInfo[0],['user_name'=>$funderInfo]);
+        //获取组员列表
         $teamMember = $membership->get(['team_id'=>$teamInfo[0]['team_id']])->toarray();
+        //对组员列表添加每个组员详细信息
         foreach ($teamMember as $key => &$value) {
+            //获取单个组员信息
             $userInfo = $user->get(['user_id'=>$value['member_id']])->toArray();
+            //组员列表添加该组员信息
             $value = array_merge($value,$userInfo[0]);
         }
-
+        //页码
         $page = $request->input('page')?$request->input('page'):1;
+        //每页记录数
         $pageSize = 2;
+        //总数
         $total = count($teamMember);
+        //实例化分页类
         $paged = new LengthAwarePaginator($teamMember,$total,$pageSize);
+        //分页url
         $paged = $paged->setPath(route('displayOneTeam',['team_name'=>$teamInfo[0]['team_name']]));
+        //要显示页的内容
         $pageOut = array_slice($teamMember,($page-1)*$pageSize,$pageSize);
-
+        //要显示的页面；传给前端的分页信息：团队介绍、队员信息、分页；
         return view('Team/displayOne',['team_info'=>$teamInfo[0],'pageOut'=>$pageOut,'paged'=>$paged]);
     }
     //移除团队成员
     public function removeMember(Request $request,Membership $membership,Team $team){
+        //对前端传参检查
         $request->validate([
             'team_name'=>'required',
             'user_list'=>'requied'
         ]);
+        //初始化返回前端的信息
         $data = [
             'msg'=>null,
             'icon'=>null
@@ -145,6 +170,7 @@ class TeamController extends Controller
         $teamInfo = $team->get(['team_name'=>$team_name])->toArray;
         //获取团队id
         $team_id = $teamInfo[0]['team_id'];
+        //
         $usr_list = $request->input('user_list');
         $user_list = json_decode(user_list);
         foreach ($user_list as $key ) {
