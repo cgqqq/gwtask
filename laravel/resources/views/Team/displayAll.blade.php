@@ -45,7 +45,7 @@
 	@foreach($teams as $team)
 		<tr>
 			<input type="hidden" name="team_id" value="{{ $team->team_id }}">
-			<td id="team_name">{{ $team->team_name }}</td>
+			<td id="team_name"><a href="{{url('team/displayOne',['team_name'=>$team->team_name])}}" style="color: black;">{{ $team->team_name }}</a></td>
 			<td>{{ $team->team_funder_id }}</td>
 			<td>{{ date('Y-m-d H:i:s',$team->created_at) }}</td>
 			<td>{{ $team->team_info }}</td>
