@@ -13,10 +13,12 @@ class TeamController extends Controller
 {
     //创建团队
     public function add(Request $request,Team $team,Membership $membership){
+        //对前端传参检查
     	$request->validate([
     		'team_name'=>'required',
     		'team_info'=>'required|max:1000'
     	]);
+        //团队信息
     	$data_team = [
     		'team_id'=>md5(uniqid(mt_rand(),true)),
     		'team_name'=>$request->input('team_name'),
@@ -24,28 +26,36 @@ class TeamController extends Controller
     		'team_funder_id'=>session('user_id'),
     		'team_info'=>$request->input('team_info')
     	];
+        //添加队长的团队-组员关系记录
         $data_membership = [
             'membership_id'=>md5(uniqid(mt_rand(),true)),
             'team_id'=>$data_team['team_id'],            
             'member_id'=>session('user_id'),
         ];
     	if($team->add($data_team)&&$membership->add($data_membership)){
+            //添加成功
     		return response()->json(['msg'=>'添加成功!','icon'=>'1']);
     	}else{
+            //添加失败
     		return response()->json(['msg'=>'添加失败!','icon'=>'2']);
     	}
     }
     //显示为我的团队
     public function displayMine(Team $team,Membership $membership,Request $request){
+        //我的所有团队记录
         $pagedata = $membership->where(['member_id'=>session('user_id')])->get()->toarray();
         foreach ($pagedata as $key => &$value) {
+            //单个团队的详细信息
             $team_info = $team->get(['team_id'=>$value['team_id']])->toarray();
+            //团队记录添加团队详细信息
             $value = array_merge($value,reset($team_info)?$team_info['0']:array());
         }
         // pd($pagedata);
+        // 默认页码
         $page=1;
         if($request->input('page'))
         {
+            //指定页码
             $page=$request->input('page');
         }
         // pd($page);
@@ -156,25 +166,34 @@ class TeamController extends Controller
     public function removeMember(Request $request,Membership $membership,Team $team){
         //对前端传参检查
         $request->validate([
-            'team_name'=>'required',
-            'user_list'=>'requied'
+            'team_id'=>'required',
+            'userId_list'=>'required'
         ]);
         //初始化返回前端的信息
         $data = [
-            'msg'=>null,
-            'icon'=>null
-        ];
-        //团队名称
-        $team_name = $request->input('team_name');
-        //根据团队名称获取团队信息
-        $teamInfo = $team->get(['team_name'=>$team_name])->toArray;
-        //获取团队id
-        $team_id = $teamInfo[0]['team_id'];
-        //
-        $usr_list = $request->input('user_list');
-        $user_list = json_decode(user_list);
-        foreach ($user_list as $key ) {
-            
+            'msg'=>'删除组员成功!',
+            'icon'=>1
+        ];        
+        $fail_users_idList = [];
+        //团队id
+        $team_id = $request->input('team_id');
+        $map = ['team_id'=>$team_id,'member_id'=>null];
+        //组员id列表
+        $userId_list = $request->input('userId_list');
+        //删除组员
+        foreach ($userId_list as $key ) {
+            //某组员id
+            $map['member_id'] = $key;
+            //删除失败，返回的失败信息
+            if(!$membership->del($map)){
+                $fail_users_idList.push($key);
+                $data['icon'] = 2;
+            }            
         }
+        //如果有删除失败的情况，返回的失败信息
+        if($data['icon']==2){
+            $data['msg'] = '删除组员存在失败！';
+        }
+        return response()->json(['msg'=>$data['msg'],'icon'=>$data['icon'],'idList'=>$fail_users_idList]);
     }
 }
