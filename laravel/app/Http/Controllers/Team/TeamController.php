@@ -203,6 +203,7 @@ class TeamController extends Controller
     }
     //显示用户搜索已加入团队的结果信息
     public function displaySearchMine(Membership $membership,Team $team,Request $request,User $user){
+        //
         $map=['member_id','=',session('user_id')];
         $map1=['team_name','like','%'.$request->input('search-key').'%'];
         $map2=['team_info','like','%'.$request->input('search-key').'%'];
