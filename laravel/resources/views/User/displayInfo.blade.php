@@ -21,17 +21,15 @@
 	Name ：{{ $assign['user_name']}}
 	<hr class="layui-bg-black">
 	Email Address：{{ $assign['user_email']}}
-	<hr id="password-field" class="layui-bg-black">
-	Passcode ：<input type="password" name="" value="{{ $assign['user_password']}}" readonly="" style="border: 0px;width: 100%;">
-		<button id="edit" class="layui-btn layui-btn-small">修改密码</button>
-
-	</div>
+	<hr class="layui-bg-black">
+	<div id="password-field"></div>
+	<button id="edit" class="layui-btn layui-btn-small">Change Passcode</button></div>
 	<script type="text/javascript">
 	$(function() {
 		layui.use('layer',function(){
 			$('#edit').on('click', function(event) {
 				if($(this).text()==='Change Passcode'){
-					$('#password-field').html("<input type='password' name='password' value={{ $assign['user_password']}}>");
+					$('#password-field').html("Passcode ：<input type='password' name='password' value={{ $assign['user_password']}}>");
 					$('#edit').text('Confirm');
 					return false;
 				}else{
@@ -43,7 +41,7 @@
 							tips:1
 						});
 					}else if(oldPass===newPass){
-						$('#password-field').html('<input type="password" name="" value="{{ $assign['user_password']}}" readonly="" style="border: 0px;">');
+						$('#password-field').html('');
 						layer.msg('修改成功!',{
 							icon:1
 						});
@@ -56,7 +54,7 @@
 						})
 						.done(function(data) {
 							if(data.flag==='1'){
-								$('#password-field').html('<input type="password" name="" value='+data.newHash+' readonly="" style="border: 0px;">');
+								$('#password-field').html('');	
 								layer.msg('修改成功!',{
 									icon:1
 								})
@@ -76,7 +74,7 @@
 						});
 						
 					}
-					$('#edit').text('修改密码');
+					$('#edit').text('Change Passcode');
 				}
 			
 			});	
