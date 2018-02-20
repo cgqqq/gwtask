@@ -43,7 +43,12 @@ class TeamController extends Controller
     //显示为我的团队
     public function displayMine(Team $team,Membership $membership,Request $request){
         //我的所有团队记录
-        $pagedata = $membership->where(['member_id'=>session('user_id')])->get()->toarray();
+        $pagedata = $membership
+        ->where(['member_id'=>session('user_id')])
+        ->join('team','membership.team_id','=','team.team_id')
+        ->join('user','user.user_id','=','team.team_funder_id')
+        ->get()
+        ->toarray();
         foreach ($pagedata as $key => &$value) {
             //单个团队的详细信息
             $team_info = $team->get(['team_id'=>$value['team_id']])->toarray();
@@ -52,12 +57,7 @@ class TeamController extends Controller
         }
         // pd($pagedata);
         // 默认页码
-        $page=1;
-        if($request->input('page'))
-        {
-            //指定页码
-            $page=$request->input('page');
-        }
+        $page = $request->input('page')?$request->input('page'):1;
         // pd($page);
         //设定一页行数
         $pagesize=4;
@@ -135,9 +135,9 @@ class TeamController extends Controller
         //获取该团队信息
         $teamInfo = $team->get(['team_name'=>$team_name])->toarray();
         //获取该团队创建者信息
-        $funderInfo = $user->where(['user_id'=>$teamInfo[0]['team_funder_id']])->value('user_name');
+        $funderName = $user->where(['user_id'=>$teamInfo[0]['team_funder_id']])->value('user_name');
         //团队信息加入该团队创建者信息
-        $teamInfo[0] = array_merge($teamInfo[0],['user_name'=>$funderInfo]);
+        $teamInfo[0] = array_merge($teamInfo[0],['user_name'=>$funderName]);
         //获取组员列表
         $teamMember = $membership->get(['team_id'=>$teamInfo[0]['team_id']])->toarray();
         //对组员列表添加每个组员详细信息
@@ -160,7 +160,12 @@ class TeamController extends Controller
         //要显示页的内容
         $pageOut = array_slice($teamMember,($page-1)*$pageSize,$pageSize);
         //要显示的页面；传给前端的分页信息：团队介绍、队员信息、分页；
-        return view('Team/displayOne',['team_info'=>$teamInfo[0],'pageOut'=>$pageOut,'paged'=>$paged]);
+        if($funderName==session('user_name')){
+            return view('Team/displayOneAuth',['team_info'=>$teamInfo[0],'pageOut'=>$pageOut,'paged'=>$paged]);
+        }else{
+            return view('Team/displayOne',['team_info'=>$teamInfo[0],'pageOut'=>$pageOut,'paged'=>$paged]);
+        }
+        
     }
     //移除团队成员
     public function removeMember(Request $request,Membership $membership,Team $team){
@@ -195,5 +200,42 @@ class TeamController extends Controller
             $data['msg'] = '删除组员存在失败！';
         }
         return response()->json(['msg'=>$data['msg'],'icon'=>$data['icon'],'idList'=>$fail_users_idList]);
+    }
+    //显示用户搜索已加入团队的结果信息
+    public function displaySearchMine(Membership $membership,Team $team,Request $request,User $user){
+        $map=['member_id','=',session('user_id')];
+        $map1=['team_name','like','%'.$request->input('search-key').'%'];
+        $map2=['team_info','like','%'.$request->input('search-key').'%'];
+        $map3=['team_'];
+        //我的所有团队记录
+        $pagedata = $membership
+        ->where([$map,$map1])
+        ->orWhere([$map,$map2])
+        ->join('team','membership.team_id','=','team.team_id')
+        ->join('user','user.user_id','=','team.team_funder_id')
+        ->get()->toarray();
+        foreach ($pagedata as $key => &$value) {
+            //单个团队的详细信息
+            $team_info = $team->get(['team_id'=>$value['team_id']])->toarray();
+            //团队记录添加团队详细信息
+            $value = array_merge($value,reset($team_info)?$team_info['0']:array());
+        }
+        // pd($pagedata);
+        // 默认页码
+        $page = $request->input('page')?$request->input('page'):1;
+        // pd($page);
+        //设定一页行数
+        $pagesize=4;
+        //总共行数
+        $total=count($pagedata);
+        //实例化分页类
+        $paged=new LengthAwarePaginator($pagedata,$total,$pagesize);
+        //设置分页跳转路由
+        $paged=$paged->setPath(route('displayMyTeam'));
+        //截取指定页数据
+        $pageout=array_slice($pagedata, ($page-1)*$pagesize,$pagesize);
+        // pd($pageout);
+        return view('Team/displayMine',['pageout'=>$pageout,'paged'=>$paged]);   
+        
     }
 }

@@ -78,17 +78,30 @@
 <table class="layui-table table-member" style="width: 900px;">
 		<thead>
 			<tr>
-				<td >成员</td>
-				<td >邮箱</td>				
+				<td ><input type="checkbox" id='checkAll'><label for="checkAll" style="cursor: pointer;">成员</label></td>
+				<td >邮箱</td>
+				<td><button class="layui-btn layui-btn-danger layui-btn-sm removeAll">批量移除</button></td>
 			</tr>
 		</thead>
 		@foreach($pageOut as $member)
 			<tr>
 				<input type="hidden" class="user-id" value="{{ $member['user_id'] }}">
 				<td class="user-name">
-					{{ $member['user_name'] }}
+					<script type="text/javascript">
+						if({{ $team_info['user_name'] }}!={{ $member['user_name'] }}){
+							window.document.write("<input type='checkbox' class='checkOne'>");
+						}
+					</script>{{ $member['user_name'] }}
 				</td>
 				<td>{{ $member['user_email'] }}</td>
+				<td>
+				<script type="text/javascript">
+						if({{ $team_info['user_name'] }}!={{ $member['user_name'] }}){
+							window.document.write("<button class='layui-btn  layui-btn-sm remove'>移除</button>");
+						}
+					</script>
+				
+				</td>
 			</tr>
 		@endforeach
 </table>

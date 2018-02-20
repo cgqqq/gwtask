@@ -37,12 +37,13 @@ Route::get('home', function() {
 
 //用户相关路由
 Route::group(['middleware'=>'auth','namespace'=>'User','prefix'=>'user'],function(){
+	//显示添加页面
 	Route::get('displayAdd',function(){
 		return view('User/displayAdd');
 	});
-
+	//显示所有团队
 	Route::get('displayAll','UserController@displayAll');
-
+	
 	Route::get('get','UserController@get');
 
 	Route::get('del','UserController@del');
@@ -59,7 +60,7 @@ Route::group(['middleware'=>'auth','namespace'=>'User','prefix'=>'user'],functio
 
 	Route::get('follow', 'UserController@follow');
 });
-
+//团队相关路由
 Route::group(['middleware'=>'auth','namespace'=>'Team','prefix'=>'team'],function(){
 	Route::get('displayManage','TeamController@displayMine');
 
@@ -80,6 +81,8 @@ Route::group(['middleware'=>'auth','namespace'=>'Team','prefix'=>'team'],functio
 	Route::get('join','TeamController@join');
 
 	Route::get('removeMember','TeamController@removeMember');
+
+	Route::post('displaySearchMine','TeamController@displaySearchMine');
 });
 
 Auth::routes();
