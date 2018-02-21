@@ -10,7 +10,7 @@
 	<div class="icons" style="float: none;padding-top:10px;margin-left: 408px">
 		<ul>
 			<li style="margin-right: 25px;"><a href="{{  url('user/displayFollow')  }}" class="following_icon"> </a></li>
-			<li><a href="#" class="follower_icon"> </a></li>
+			<li><a href="{{ url('user/displayFollower') }}" class="follower_icon"> </a></li>
 
 		</ul>
 	</div>

@@ -5,7 +5,7 @@
 
 		<div class="following" style="margin-bottom: 25px;">
 			<div style="float: left;margin-bottom: 40px">
-				<p style="font-size: 50px;font-family: 'Source Sans Pro', sans-serif;font-weight: 800;color: #333333;width: 500px;">MY FOLLOWINGS</p>
+				<p style="font-size: 50px;font-family: 'Source Sans Pro', sans-serif;font-weight: 800;color: #333333;width: 500px;">MY FOLLOWERS</p>
 			</div>
 
 			{{--搜索框--}}

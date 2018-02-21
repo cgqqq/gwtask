@@ -272,5 +272,37 @@ class UserController extends Controller
         // pd($pageOut);
         return view('User/displayFollow',['pageOut'=>$pageOut,'paged'=>$paged]);
     }
-
+    //显示粉丝列表
+    public function displayFollower(Friend $friend,User $user,Request $request){
+        $map = [
+            'followed_id'=>session('user_id')
+        ];
+        $pageData = $friend->where($map)->get()->toArray();
+        // pd($pageData);
+        foreach ($pageData as $key => &$value) {
+            $followed_info = $user->get(['user_id'=>$value['follow_id']])->toArray();
+            $value = array_merge($value,$followed_info[0]);
+        }
+        // $follows = $this->arrayToObject($follows);
+        // pd($pageData);
+        // 设定当前页号
+        $page=1;
+        if($request->input('page'))
+        {
+            $page=$request->input('page');
+        }
+        // pd($page);
+        //设定一页行数
+        $pageSize=6;
+        //总共行数
+        $total=count($pageData);
+        //实例化分页类啊
+        $paged=new LengthAwarePaginator($pageData,$total,$pageSize);
+        //设置分页跳转路由
+        $paged=$paged->setPath(route('displayFollow'));
+        //截取指定页数据
+        $pageOut=array_slice($pageData, ($page-1)*$pageSize,$pageSize);
+        // pd($pageOut);
+        return view('User/displayFollower',['pageOut'=>$pageOut,'paged'=>$paged]);
+    }
 }

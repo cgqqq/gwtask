@@ -58,7 +58,10 @@ Route::group(['middleware'=>'auth','namespace'=>'User','prefix'=>'user'],functio
 
 	Route::get('displayFollow', 'UserController@displayFollow')->name('displayFollow');
 
+	Route::get('displayFollower', 'UserController@displayFollower')->name('displayFollower');
+
 	Route::get('follow', 'UserController@follow');
+	
 });
 //团队相关路由
 Route::group(['middleware'=>'auth','namespace'=>'Team','prefix'=>'team'],function(){
