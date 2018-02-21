@@ -8,7 +8,7 @@
             <div style="width: 90%;height:80%;margin-left: 50px;">
                 {{--用户登录信息填写表格--}}
                 <p style="font-size: 50px;font-family: 'Source Sans Pro', sans-serif;font-weight: 800;text-decoration: none;">LOGIN</p>
-                <form class="form-horizontal" method="POST" action="{{ url('user/login') }}" style="margin-top: 70px;">
+                <form class="form-horizontal" style="margin-top: 70px;">
                     {{ csrf_field() }}
 
                     <div class="form-group{{ $errors->has('user_id') ? ' has-error' : '' }}">
@@ -101,6 +101,7 @@
                     btn.onmousedown = null;
                     btn.onmousemove = null;
                     text.innerHTML = 'Succeeded';
+                    $('#submit').click();
                 }
             };
 
@@ -119,16 +120,34 @@
         }
 
         // dom文档完成加载后
-        /*jQuery(document).ready(function($) {
+        jQuery(document).ready(function($) {
             $('#submit').on('click',function(event){
                 event.preventDefault();
-                if($('p').text()==='通过验证'){
-                    $('#submit').off('click');
-                    $('#submit').click();
+                if($('.text').text()=='Succeeded'){
+                    $.ajax({
+                        url: "{{ url('user/login') }}",
+                        type: 'post',
+                        dataType: 'json',
+                        data: {'user_id':$('#user_id').val(),'user_password':$('#user_password').val(),"_token":"{{csrf_token()}}"},
+                    })
+                    .done(function(data) {
+                        if(data.flag){
+                            window.location.href="{{ url('home') }}";
+                        }else{
+                            alert('login failed');
+                        }
+                    })
+                    .fail(function() {
+                        console.log("error");
+                    })
+                    .always(function() {
+                        console.log("complete");
+                    });
+                    
                 }else{
                     alert('请先通过验证');
                 }
             });
-        });*/
+        });
     </script>
 @stop

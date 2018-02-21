@@ -58,9 +58,9 @@ class UserController extends Controller
                 'user_profile'=>'uploads/user_profile/'.$info[0]['user_profile']
                 ]);
             //显示页面
-            return redirect('home');
+            return response()->json(['flag'=>true]);
         }else{
-            return 'login failed';
+            return response()->json(['flag'=>false]);
         }
     }
 
