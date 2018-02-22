@@ -18,7 +18,7 @@
     <link href="{{ asset('https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800') }}" rel="stylesheet" type="text/css" media="all" >
     <link href="{{ asset('https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900,200italic,300italic,400italic,600italic,700italic,900italic') }}" rel="stylesheet" type="text/css" media="all" >
     <script type="text/javascript" src="{{ asset('js/jquery-3.2.1.min.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('js/layui.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('layui.js') }}"></script>
     <script type="text/javascript" dsrc="{{ asset('js/app.js') }}"></script>
     <script type="text/javascript" dsrc="{{ asset('js/index.js') }}"></script>
 
