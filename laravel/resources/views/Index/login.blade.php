@@ -101,7 +101,7 @@
                     btn.onmousedown = null;
                     btn.onmousemove = null;
                     text.innerHTML = 'Succeeded';
-                    $('#submit').click();
+                    setTimeout("$('#submit').click()",750);
                 }
             };
 
@@ -135,6 +135,7 @@
                             window.location.href="{{ url('home') }}";
                         }else{
                             alert('login failed');
+                            setTimeout("location.reload()");
                         }
                     })
                     .fail(function() {
