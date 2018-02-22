@@ -123,30 +123,38 @@
         jQuery(document).ready(function($) {
             $('#submit').on('click',function(event){
                 event.preventDefault();
+                var user_id=$('#user_id').val();
+                var user_password=$('#user_password').val();
                 if($('.text').text()=='Succeeded'){
-                    $.ajax({
-                        url: "{{ url('user/login') }}",
-                        type: 'post',
-                        dataType: 'json',
-                        data: {'user_id':$('#user_id').val(),'user_password':$('#user_password').val(),"_token":"{{csrf_token()}}"},
-                    })
-                    .done(function(data) {
-                        if(data.flag){
-                            window.location.href="{{ url('home') }}";
-                        }else{
-                            alert('login failed');
-                            setTimeout("location.reload()");
-                        }
-                    })
-                    .fail(function() {
-                        console.log("error");
-                    })
-                    .always(function() {
-                        console.log("complete");
-                    });
+                    if(user_id&&user_password){
+                        $.ajax({
+                            url: "{{ url('user/login') }}",
+                            type: 'post',
+                            dataType: 'json',
+                            data: {'user_id':user_id,'user_password':user_password,"_token":"{{csrf_token()}}"},
+                        })
+                        .done(function(data) {
+                            if(data.flag){
+                                window.location.href="{{ url('home') }}";
+                            }else{
+                                alert('login failed');
+                                setTimeout("location.reload()");
+                            }
+                        })
+                        .fail(function() {
+                            console.log("error");
+                        })
+                        .always(function() {
+                            console.log("complete");
+                        });
+                    }else{
+                        alert('请输入用户名和密码！');
+                        location.reload();
+                    }
+                    
                     
                 }else{
-                    alert('请先通过验证');
+                    alert('请先通过验证！');
                 }
             });
         });
