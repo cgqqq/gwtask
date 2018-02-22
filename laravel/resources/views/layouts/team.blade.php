@@ -14,7 +14,7 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('css/Mycss.css') }}">
 
     <script src="{{ asset('js/jquery-3.2.1.min.js') }}" type="text/javascript"></script>
-    <script src="{{ asset('layui.js') }}" charset="utf-8"></script>
+    <script src="{{ asset('js/layui.js') }}" charset="utf-8"></script>
     <script type="text/javascript">
         $.ajaxSetup({
              headers: {

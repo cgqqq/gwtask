@@ -78,7 +78,7 @@
 <table class="layui-table table-member" style="width: 900px;">
 		<thead>
 			<tr>
-				<td ><input type="checkbox" id='checkAll'><label for="checkAll" style="cursor: pointer;">成员</label></td>
+				<td ><input type="checkbox" id='checkAll' style="position: absolute;top: 12px;"><label for="checkAll" style="position: absolute;top: 15px;left: 35px;cursor: pointer;">成员</label></td>
 				<td >邮箱</td>
 				<td><button class="layui-btn layui-btn-danger layui-btn-sm removeAll">批量移除</button></td>
 			</tr>
@@ -89,9 +89,10 @@
 				<td class="user-name">
 					<script type="text/javascript">
 						if({{ $team_info['user_name'] }}!={{ $member['user_name'] }}){
-							window.document.write("<input type='checkbox' class='checkOne'>");
+							window.document.write("<input type='checkbox' class='checkOne' style='display:inline-block;position :absolute ; top:12px;'>");
 						}
-					</script>{{ $member['user_name'] }}
+					</script>
+					<div style="position: absolute;top: 15px;left: 35px;display: inline-block;">{{ $member['user_name'] }}</div>
 				</td>
 				<td>{{ $member['user_email'] }}</td>
 				<td>
