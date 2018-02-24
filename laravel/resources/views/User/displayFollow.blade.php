@@ -52,12 +52,12 @@
 			$('.switch').on('click','.fo_checkbox',function(){
 				var followed_id = $(this).parent().siblings([name='td-id']).val();
 				var action = null;
-				var isFollow = $(this).siblings('.isFollow').val();
+				var isFollow = $(this).prev().val();
 				if(isFollow=='1'){
-					$('.isFollow').val('0');
+					$(this).prev().val('0');
 					action = 'unfollow';
 				}else{
-					$('.isFollow').val('1');
+					$(this).prev().val('1');
 					action = 'follow';
 				}
                 $.ajax({
