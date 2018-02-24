@@ -69,7 +69,8 @@
                     <li class="layui-nav-item">
                         <a href="#">Teams</a>
                         <dl class="layui-nav-child">
-                            <dd><a href="{{url('team/displayMine/default')}}">Mine Teams</a></dd>
+                            <dd><a href="{{url('team/displayMine/default')}}">The team I am in</a></dd>
+                            <dd><a href="{{url('team/displayMineCre/default')}}">The team I created</a></dd>
                             <dd><a href="{{url('team/displayAdd')}}">Create One</a></dd>
                         </dl>
                     </li>

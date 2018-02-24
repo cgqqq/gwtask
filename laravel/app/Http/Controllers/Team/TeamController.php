@@ -40,7 +40,7 @@ class TeamController extends Controller
     		return response()->json(['msg'=>'添加失败!','icon'=>'2']);
     	}
     }
-    //显示为我的团队
+    //显示为我所在的团队
     public function displayMine(Team $team,Membership $membership,Request $request,$sort_key=null){
         $sort_key=$sort_key=='default'?'team.team_id':(string)$sort_key;
         //我的所有团队记录
@@ -73,6 +73,39 @@ class TeamController extends Controller
         $pageout=array_slice($pagedata, ($page-1)*$pagesize,$pagesize);
         // pd($pageout);
         return view('Team/displayMine',['pageout'=>$pageout,'paged'=>$paged]);        
+    }
+    //显示为我创建团队
+    public function displayMineCre(Team $team,Membership $membership,Request $request,$sort_key=null){
+        $sort_key=$sort_key=='default'?'team.team_id':(string)$sort_key;
+        //我的所有团队记录
+        $pagedata = $team
+        ->where(['team.team_funder_id'=>session('user_id')])        
+        ->join('user','user.user_id','=','team.team_funder_id')
+        ->orderBy($sort_key,'asc')
+        ->get()
+        ->toarray();
+        foreach ($pagedata as $key => &$value) {
+            //单个团队的详细信息
+            $team_info = $team->get(['team_id'=>$value['team_id']])->toarray();
+            //团队记录添加团队详细信息
+            $value = array_merge($value,reset($team_info)?$team_info['0']:array());
+        }
+        // pd($pagedata);
+        // 默认页码
+        $page = $request->input('page')?$request->input('page'):1;
+        // pd($page);
+        //设定一页行数
+        $pagesize=4;
+        //总共行数
+        $total=count($pagedata);
+        //实例化分页类
+        $paged=new LengthAwarePaginator($pagedata,$total,$pagesize);
+        //设置分页跳转路由
+        $paged=$paged->setPath(route('displayMyTeamCre',$sort_key));
+        //截取指定页数据
+        $pageout=array_slice($pagedata, ($page-1)*$pagesize,$pagesize);
+        // pd($pageout);
+        return view('Team/displayMineCre',['pageout'=>$pageout,'paged'=>$paged]);        
     }
     //显示所有团队
     public function displayAll(Team $team){

@@ -86,6 +86,8 @@ Route::group(['middleware'=>'auth','namespace'=>'Team','prefix'=>'team'],functio
 	Route::get('removeMember','TeamController@removeMember');
 
 	Route::post('displaySearchMine','TeamController@displaySearchMine');
+
+	Route::get('displayMineCre/{sort_key}','TeamController@displayMineCre')->name('displayMyTeamCre');
 	
 });
 
