@@ -67,7 +67,7 @@ Route::group(['middleware'=>'auth','namespace'=>'User','prefix'=>'user'],functio
 Route::group(['middleware'=>'auth','namespace'=>'Team','prefix'=>'team'],function(){
 	Route::get('displayManage','TeamController@displayMine');
 
-	Route::get('displayMine','TeamController@displayMine')->name('displayMyTeam');
+	Route::get('displayMine/{sort_key}','TeamController@displayMine')->name('displayMyTeam');
 
 	Route::get('displayAll','TeamController@displayAll');
 
@@ -86,6 +86,7 @@ Route::group(['middleware'=>'auth','namespace'=>'Team','prefix'=>'team'],functio
 	Route::get('removeMember','TeamController@removeMember');
 
 	Route::post('displaySearchMine','TeamController@displaySearchMine');
+	
 });
 
 Auth::routes();

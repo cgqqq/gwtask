@@ -41,12 +41,14 @@ class TeamController extends Controller
     	}
     }
     //显示为我的团队
-    public function displayMine(Team $team,Membership $membership,Request $request){
+    public function displayMine(Team $team,Membership $membership,Request $request,$sort_key=null){
+        $sort_key=$sort_key=='default'?'team.team_id':(string)$sort_key;
         //我的所有团队记录
         $pagedata = $membership
         ->where(['member_id'=>session('user_id')])
         ->join('team','membership.team_id','=','team.team_id')
         ->join('user','user.user_id','=','team.team_funder_id')
+        ->orderBy($sort_key,'asc')
         ->get()
         ->toarray();
         foreach ($pagedata as $key => &$value) {
@@ -66,7 +68,7 @@ class TeamController extends Controller
         //实例化分页类
         $paged=new LengthAwarePaginator($pagedata,$total,$pagesize);
         //设置分页跳转路由
-        $paged=$paged->setPath(route('displayMyTeam'));
+        $paged=$paged->setPath(route('displayMyTeam',$sort_key));
         //截取指定页数据
         $pageout=array_slice($pagedata, ($page-1)*$pagesize,$pagesize);
         // pd($pageout);

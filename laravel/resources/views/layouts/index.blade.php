@@ -61,7 +61,7 @@
                     <h3>Easier Task Division and Management</h3>
                     <p>If you want to be happy,set a goal that commands your thoughts,liberates your energy, and inspires your hopes.</p>
                     <div class="get">
-                        <a id="good"class="hvr-shutter-in-horizontal">GET START</a>
+                        <a id="good"class="hvr-shutter-in-horizontal" style="cursor: pointer;" href="{{ url('login1') }}">GET START</a>
                     </div>
 
                 </div>

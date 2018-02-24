@@ -25,10 +25,10 @@
 							<button type="button" class="dropdown-toggle sort" data-toggle="dropdown">
 							</button>
 							<ul class="dropdown-menu" role="menu" style="z-index: 9999;margin-top: 5px;">
-								<li><a href="#">All</a></li>
-								<li><a href="#">Sorted By Time</a></li>
-								<li><a href="#">Sorted By Name</a></li>
-								<li><a href="#">Sorted By Founder ID</a></li>
+								<!-- <li><a href="#">All</a></li> -->
+								<li><a href="{{ url('team/displayMine/team.created_at') }}">Sorted By Time</a></li>
+								<li><a href="{{ url('team/displayMine/team.team_name') }}">Sorted By Name</a></li>
+								<li><a href="{{ url('team/displayMine/team.team_funder_id') }}">Sorted By Founder ID</a></li>
 
 							</ul>
 						</div>
