@@ -1,3 +1,4 @@
+{{--所有团队页面--}}
 @extends('layouts.home')
 
 @section('content')

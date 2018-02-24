@@ -1,3 +1,4 @@
+{{--非队长查看队员页面--}}
 @extends('layouts.home')
 
 @section('content')

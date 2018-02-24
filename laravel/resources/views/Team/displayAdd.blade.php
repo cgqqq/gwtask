@@ -1,4 +1,4 @@
-{{--用户已创建团队页面--}}
+{{--创建团队页面--}}
 @extends('layouts.home')
 
 @section('content')
