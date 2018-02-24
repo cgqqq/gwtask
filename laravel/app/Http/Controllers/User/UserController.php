@@ -214,7 +214,7 @@ class UserController extends Controller
         ];
         //判断数据在表中是否存在
         $exist = count($friend->get($data))?true:false;
-        //关注或取关操作
+        //关注
         if($request->input('type')==='follow'){
             if($exist){
                 $msg = '已关注!';$icon='7';
@@ -225,7 +225,7 @@ class UserController extends Controller
                     $msg = '关注失败!';$icon='2';
                 }
             }
-        }else{
+        }else{//取关
             if(!$exist){
                 $msg = '未关注!';$icon='7';
             }else{

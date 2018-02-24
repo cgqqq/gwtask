@@ -34,6 +34,7 @@
 						<input type="hidden" value="{{ $user['user_id'] }}" name="td-id">
 						<label>
 							Unfollow
+							<input class="isFollow" type="hidden" value="1">
 							<input type="checkbox" checked="checked" class="fo_checkbox">
 							<span class="lever"></span>
 							Follow
@@ -50,11 +51,20 @@
 		layui.use('layer',function(){
 			$('.switch').on('click','.fo_checkbox',function(){
 				var followed_id = $(this).parent().siblings([name='td-id']).val();
+				var action = null;
+				var isFollow = $(this).siblings('.isFollow').val();
+				if(isFollow=='1'){
+					$('.isFollow').val('0');
+					action = 'unfollow';
+				}else{
+					$('.isFollow').val('1');
+					action = 'follow';
+				}
                 $.ajax({
                     url: '{{ url('user/follow') }}',
                     type:'get',
                     dataType: 'json',
-                    data: {'type': 'unfollow','followed_id':followed_id,"_token":"{{csrf_token()}}"},
+                    data: {'type': action,'followed_id':followed_id,"_token":"{{csrf_token()}}"},
                 })
                     .done(function(data) {
                         layer.msg(data.msg,{

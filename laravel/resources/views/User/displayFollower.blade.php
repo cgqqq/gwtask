@@ -28,7 +28,7 @@
 			<div class="chip">
 					<img src="{{URL::asset('/uploads/user_profile/'.$user['user_profile'])}}" alt="IMG" style="margin-right: 20px"/>
 					{{ $user['user_name'] }}
-					{{--关注与取关操作--}}
+					<!-- {{--关注与取关操作--}}
 
 					<div class="switch" style="float: right;margin-right: 10px;">
 						<input type="hidden" value="{{ $user['user_id'] }}" name="td-id">
@@ -38,7 +38,7 @@
 							<span class="lever"></span>
 							Follow
 						</label>
-					</div>
+					</div> -->
 			</div>
 			@endforeach
 		</div>
