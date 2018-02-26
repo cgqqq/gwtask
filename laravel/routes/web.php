@@ -61,6 +61,9 @@ Route::group(['middleware'=>'auth','namespace'=>'User','prefix'=>'user'],functio
 	Route::get('displayFollower', 'UserController@displayFollower')->name('displayFollower');
 
 	Route::get('follow', 'UserController@follow');
+
+	Route::get('displayAllForAdd/{team_name}','UserController@displayAllForAdd');
+
 	
 });
 //团队相关路由
@@ -85,10 +88,11 @@ Route::group(['middleware'=>'auth','namespace'=>'Team','prefix'=>'team'],functio
 
 	Route::get('removeMember','TeamController@removeMember');
 
-	Route::post('displaySearchMine','TeamController@displaySearchMine');
+	Route::post('displaySearchMine','TeamController@displaySearchMine')->name('SearchMyTeam');
 
 	Route::get('displayMineCre/{sort_key}','TeamController@displayMineCre')->name('displayMyTeamCre');
-	
+
+
 });
 
 Auth::routes();

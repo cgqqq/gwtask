@@ -182,7 +182,17 @@ class UserController extends Controller
             return 0;
         }
     }
-
+    //显示增加组员界面
+    public function displayAllForAdd(User $user,$team_name){
+        //简单分页
+        $users = $user->paginate(2);
+        // pd($users);
+        if($users){
+            return view('User/displayAllForAdd',['users'=>$users,'team_name'=>$team_name]);
+        }else{
+            return 0;
+        }
+    }
     //修改密码
     public function editPass(User $user,Request $request){
         $map = ['user_id'=>$request->input('user_id')];

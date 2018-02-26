@@ -79,7 +79,9 @@
 <table class="layui-table table-member" style="width: 900px;">
 		<thead>
 			<tr>
-				<td ><input type="checkbox" id='checkAll' style="position: absolute;top: 12px;"><label for="checkAll" style="position: absolute;top: 15px;left: 35px;cursor: pointer;">成员</label></td>
+				<td >
+					<input type="checkbox" id='checkAll' style="position: absolute;top: 12px;"><label for="checkAll" style="position: absolute;top: 15px;left: 35px;cursor: pointer;">成员</label>
+				</td>
 				<td >邮箱</td>
 				<td><button class="layui-btn layui-btn-danger layui-btn-sm removeAll">批量移除</button></td>
 			</tr>

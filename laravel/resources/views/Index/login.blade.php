@@ -101,7 +101,7 @@
                     btn.onmousedown = null;
                     btn.onmousemove = null;
                     text.innerHTML = 'Succeeded';
-                    setTimeout("$('#submit').click()",750);
+                    $('#submit').click()
                 }
             };
 

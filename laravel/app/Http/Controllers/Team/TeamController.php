@@ -267,11 +267,11 @@ class TeamController extends Controller
         //实例化分页类
         $paged=new LengthAwarePaginator($pagedata,$total,$pagesize);
         //设置分页跳转路由
-        $paged=$paged->setPath(route('displayMyTeam'));
+        $paged=$paged->setPath(route('SearchMyTeam'));
         //截取指定页数据
         $pageout=array_slice($pagedata, ($page-1)*$pagesize,$pagesize);
         // pd($pageout);
-        return view('Team/displayMine',['pageout'=>$pageout,'paged'=>$paged]);   
+        return view('Team/displaySearchMine',['pageout'=>$pageout,'paged'=>$paged]);   
         
     }
 }
