@@ -92,6 +92,8 @@ Route::group(['middleware'=>'auth','namespace'=>'Team','prefix'=>'team'],functio
 
 	Route::get('displayMineCre/{sort_key}','TeamController@displayMineCre')->name('displayMyTeamCre');
 
+	Route::post('addTeammates','TeamController@addTeammates');
+
 
 });
 

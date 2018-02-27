@@ -113,7 +113,7 @@ class TeamController extends Controller
 
     	return view('Team/displayAll',['teams'=>$data]);
     }
-    //加入团队
+    //当前用户加入团队
     public function join(Request $request,Membership $membership){
         //对前端传参检查
         $request->validate([
@@ -179,6 +179,7 @@ class TeamController extends Controller
         foreach ($teamMember as $key => &$value) {
             //获取单个组员信息
             $userInfo = $user->get(['user_id'=>$value['member_id']])->toArray();
+            // pd($userInfo[0]);
             //组员列表添加该组员信息
             $value = array_merge($value,$userInfo[0]);
         }
@@ -254,7 +255,7 @@ class TeamController extends Controller
             //单个团队的详细信息
             $team_info = $team->get(['team_id'=>$value['team_id']])->toarray();
             //团队记录添加团队详细信息
-            $value = array_merge($value,reset($team_info)?$team_info['0']:array());
+            $value = array_merge($value,reset($team_info)?$team_info[0]:array());
         }
         // pd($pagedata);
         // 默认页码
@@ -272,6 +273,38 @@ class TeamController extends Controller
         $pageout=array_slice($pagedata, ($page-1)*$pagesize,$pagesize);
         // pd($pageout);
         return view('Team/displaySearchMine',['pageout'=>$pageout,'paged'=>$paged]);   
+        
+    }
+    //队长添加队员
+    public function addTeammates(Request $request,Membership $membership,Team $team){
+        $request->validate([
+            'team_name'=>'required',
+            'user_list'=>'required'
+        ]);
+        $flag = 1;
+        $fail_list = [];
+        $teamInfo =$team->get(['team_name'=>$request->input('team_name')])->toArray();
+        $teamInfo = current($teamInfo);
+        $team_id = $teamInfo['team_id'];
+        foreach ($request->input('user_list') as $key ) {
+            $map = [
+                'membership_id'=>md5(uniqid(mt_rand(),true)),
+                'team_id'=>$team_id,
+                'member_id'=>$key
+            ];
+            if(!$membership->add($map)){
+                $flag = 0;
+                array_push($fail_list,$member_id);
+            }
+        }
+        //暂定队长不能退出团队
+        if($flag==1){
+            //队长添加组员成功
+            return response()->json(['msg'=>'添加成功!','icon'=>'1']);
+        }else{
+            //队长添加组员存在失败
+            return response()->json(['msg'=>'添加队员存在失败!','icon'=>'2','fail_list'=>$fail_list]);
+        }
         
     }
 }
