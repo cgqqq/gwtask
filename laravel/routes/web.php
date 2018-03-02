@@ -62,7 +62,7 @@ Route::group(['middleware'=>'auth','namespace'=>'User','prefix'=>'user'],functio
 
 	Route::get('follow', 'UserController@follow');
 
-	Route::get('displayAllForAdd/{team_name}','UserController@displayAllForAdd');
+	Route::get('displayAllForAdd/{team_name}','UserController@displayAllForAdd')->name('displayAllForAdd');
 
 	
 });

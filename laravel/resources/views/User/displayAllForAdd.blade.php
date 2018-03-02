@@ -21,7 +21,7 @@
 					layer.msg(data.msg,{
 						icon:data.icon
 					});
-					if(data.icon==2){
+					if(data.icon==1||data.icon==2){
 						console.log('添加组员失败列表：'+data.fail_list)
 					}
 				})
@@ -71,11 +71,11 @@
 		<tr>
 			<td class="td-id">
 			<input type='checkbox' class='checkOne' style='display:inline-block;position :absolute ; top:12px;'>"
-			<div class="user_id" style="position: absolute;top: 15px;left: 35px;display: inline-block;">{{ $user->user_id }}</div>
+			<div class="user_id" style="position: absolute;top: 15px;left: 35px;display: inline-block;">{{ $user['user_id'] }}</div>
 				
 			</td>
 			<td class="user_name">
-				{{ $user->user_name }}
+				{{ $user['user_name'] }}
 			</td>
 			<td>
 				<button class="add_one" >增加</button>
@@ -84,5 +84,5 @@
 		</tr>
 	@endforeach
 </table>
-{{ $users->links() }}
+{{ $paged->links() }}
 @endsection

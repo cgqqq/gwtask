@@ -3,10 +3,11 @@
 namespace App\Http\Controllers\Team;
 
 use Illuminate\Http\Request;
+use Illuminate\Pagination\LengthAwarePaginator;
 use App\Models\Team;
 use App\Models\User;
 use App\Models\Membership;
-use Illuminate\Pagination\LengthAwarePaginator;
+
 use App\Http\Controllers\Controller;
 
 class TeamController extends Controller
@@ -74,9 +75,10 @@ class TeamController extends Controller
         // pd($pageout);
         return view('Team/displayMine',['pageout'=>$pageout,'paged'=>$paged]);        
     }
-    //显示为我创建团队
+    //显示我创建团队
     public function displayMineCre(Team $team,Membership $membership,Request $request,$sort_key=null){
-        $sort_key=$sort_key=='default'?'team.team_id':(string)$sort_key;
+        // 排序规则,默认或按要求
+        $sort_key = $sort_key=='default'?'team.team_id':(string)$sort_key;
         //我的所有团队记录
         $pagedata = $team
         ->where(['team.team_funder_id'=>session('user_id')])        
@@ -109,6 +111,7 @@ class TeamController extends Controller
     }
     //显示所有团队
     public function displayAll(Team $team){
+        // 每页显示2行的团队数据
     	$data = $team->paginate(2);
 
     	return view('Team/displayAll',['teams'=>$data]);
@@ -277,33 +280,51 @@ class TeamController extends Controller
     }
     //队长添加队员
     public function addTeammates(Request $request,Membership $membership,Team $team){
+        //对前端传参检查
         $request->validate([
             'team_name'=>'required',
+            // 记录user_id的数组
             'user_list'=>'required'
         ]);
-        $flag = 1;
+        // flag 值为0表示添加队员没有错，1表示用户已加入该队伍,2表示添加队员出错
+        $flag = 0;
+        // 添加失败的用户列表
         $fail_list = [];
+        // 根据前端传参： 团队名 查询团队信息
         $teamInfo =$team->get(['team_name'=>$request->input('team_name')])->toArray();
         $teamInfo = current($teamInfo);
+        // 获取团队信息中的team_id
         $team_id = $teamInfo['team_id'];
+        // 前端传过来的用户列表中的用户依次加入队伍操作
         foreach ($request->input('user_list') as $key ) {
-            $map = [
-                'membership_id'=>md5(uniqid(mt_rand(),true)),
-                'team_id'=>$team_id,
-                'member_id'=>$key
-            ];
-            if(!$membership->add($map)){
-                $flag = 0;
-                array_push($fail_list,$member_id);
+            // 判断用户是否已加入团队
+            $userExist = $membership->get(['team_id'=>$team_id,'member_id'=>$key])->isEmpty() ? false : true;
+            if($userExist){
+                $flag = 1;
+                array_push($fail_list,$key);
+            }else{
+                $map = [
+                    'membership_id'=>md5(uniqid(mt_rand(),true)),
+                    'team_id'=>$team_id,
+                    'member_id'=>$key
+                 ];
+                if(!$membership->add($map)){
+                    $flag = 2;
+                    array_push($fail_list,$member_id);
+                }
             }
+            
         }
         //暂定队长不能退出团队
-        if($flag==1){
+        if($flag==0){
             //队长添加组员成功
             return response()->json(['msg'=>'添加成功!','icon'=>'1']);
-        }else{
+        }else if($flag == 1){
+            //组员已存在，添加失败
+            return response()->json(['msg'=>'组员已存在，添加失败!','icon'=>'3','fail_list'=>$fail_list]);
+        }else {
             //队长添加组员存在失败
-            return response()->json(['msg'=>'添加队员存在失败!','icon'=>'2','fail_list'=>$fail_list]);
+            return response()->json(['msg'=>'添加队员失败!','icon'=>'2','fail_list'=>$fail_list]);
         }
         
     }

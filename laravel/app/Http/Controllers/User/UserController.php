@@ -7,6 +7,8 @@ use Storage;
 use App\Models\User;
 use Illuminate\Validation\Rule;
 use App\Models\Friend;
+use App\Models\Membership;
+use App\Models\Team;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
@@ -67,6 +69,7 @@ class UserController extends Controller
     public function logout(){
         //清空session
         session()->flush();
+        //回到起始页
         return redirect('/');
     }
 
@@ -183,15 +186,48 @@ class UserController extends Controller
         }
     }
     //显示增加组员界面
-    public function displayAllForAdd(User $user,$team_name){
-        //简单分页
-        $users = $user->paginate(2);
-        // pd($users);
-        if($users){
-            return view('User/displayAllForAdd',['users'=>$users,'team_name'=>$team_name]);
-        }else{
-            return 0;
+    public function displayAllForAdd(User $user,Membership $membership,Team $team,Request $request,$team_name){
+        $teamInfo = $team->get(['team_name'=>$team_name])->toArray();
+        $team_id = $teamInfo[0]['team_id'];
+        $current_team_users_primary = $membership->get(['team_id'=>$team_id])->toArray();
+        $current_team_users = [];
+        foreach ($current_team_users_primary as $key => $value) {
+            array_push($current_team_users,$value['member_id']);
         }
+        // pd($current_team_users);
+        $pageData = $user
+        ->whereNotin('user_id',$current_team_users)
+        ->get()
+        ->toArray();
+        // pd($pageData);
+        // 设定当前页号
+        $page=1;
+        if($request->input('page'))
+        {
+            $page=$request->input('page');
+        }
+        // pd($page);
+        //设定一页行数
+        $pageSize=2;
+        //总共行数
+        $total=count($pageData);
+        //实例化分页类啊
+        $paged=new LengthAwarePaginator($pageData,$total,$pageSize);
+        //设置分页跳转路由
+        $paged=$paged->setPath(route('displayAllForAdd',$team_name));
+        //截取指定页数据
+        $pageOut=array_slice($pageData, ($page-1)*$pageSize,$pageSize);
+        // pd($pageOut);
+        return view('User/displayAllForAdd',['users'=>$pageOut,'paged'=>$paged,'team_name'=>$team_name]);
+
+        // //简单分页
+        // $users = $user->paginate(2);
+        // // pd($users);
+        // if($users){
+        //     return view('User/displayAllForAdd',['users'=>$users,'team_name'=>$team_name]);
+        // }else{
+        //     return 0;
+        // }
     }
     //修改密码
     public function editPass(User $user,Request $request){
@@ -249,7 +285,7 @@ class UserController extends Controller
         //返回处理结果
         return response()->json(['msg'=>$msg,'icon'=>$icon]);
     }
-    //显示关注列表
+    //显示当前用户所关注用户的列表
     public function displayFollow(Friend $friend,User $user,Request $request){
         $map = [
             'follow_id'=>session('user_id')
