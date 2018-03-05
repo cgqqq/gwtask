@@ -83,14 +83,28 @@
                     </li>
                     <li class="layui-nav-item"><a href="#">Others</a></li>
 
-                    <div class="search_input" style="width: 450px;float: right;margin-top: 15px">
-                        <form style="background-color: #34bf49;border-radius:40px;margin-right: 0;">
-                            <button type="button" class="dropdown-toggle search2" data-toggle="dropdown">
+
+                    <div class="search_input2" style="width: 450px;float: right;margin-top: 15px">
+                     @if(empty($_COOKIE['flag']) or ($_COOKIE['flag'])==1)
+                            <button type="button" id="search_user" class="search_btn">
                             </button>
-                            <input type="text" placeholder="Search With ID……" style="border: 1px #000;background-color: #fcfcfc;color: #0C0C0C;height: 25px;" >
+                        <form style="background-color: #34bf49;border-radius:40px;margin-right: 0;" method="post" action="{{url('user/displaySearchResult')}}">
+                            {{ csrf_field() }}
+
+                           <input name='key' id="key" type="text" placeholder="Search For User With ID......" id="placeholder" >
 
 
                         </form>
+                        @else
+                            <button type="button" id="search_team" class="search_btn">
+                            </button>
+                        <form style="background-color: #34bf49;border-radius:40px;margin-right: 0;" method="post" action="{{url('team/displaySearchResult')}}">
+                            {{ csrf_field() }}
+                           <input name='key' id="key" type="text" placeholder="Search For Team With Team Name......" id="placeholder" >
+
+
+                        </form>
+                        @endif
                     </div>
 
                     {{--主要内容区域--}}
@@ -155,4 +169,44 @@
             });
         });
     });
+    $(".search_btn").mousedown(function(){
+        var id = document.getElementById('search_team');
+        if(id!=null){
+            setCookie('flag',1);
+            setCookie('url',"{{url('user/displaySearchResult')}}");
+            setCookie('target',"search_user");
+            setCookie('placeholder',"Search For User With ID......");
+            location.reload();
+
+        }
+        else{
+            setCookie('flag',2);
+            setCookie('url',"{{url('team/displaySearchResult')}}");
+            setCookie('target',"search_team");
+            setCookie('placeholder',"Search For Team With Team Name or Info......");
+            location.reload();
+        }
+    });
+
+    /*对cookie的操作*/
+    /*修改cookie*/
+    function setCookie(name,value)
+    {
+        var Days = 30;
+        var exp = new Date();
+        exp.setTime(exp.getTime() + Days*24*60*60*1000);
+        document.cookie = name + "="+ escape (value) + ";expires=" + exp.toGMTString();
+    }
+
+    //读取cookies
+    function getCookie(name)
+    {
+        var arr,reg=new RegExp("(^| )"+name+"=([^;]*)(;|$)");
+
+        if(arr=document.cookie.match(reg))
+
+            return unescape(arr[2]);
+        else
+            return null;
+    }
 </script>

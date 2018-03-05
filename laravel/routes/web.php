@@ -64,6 +64,8 @@ Route::group(['middleware'=>'auth','namespace'=>'User','prefix'=>'user'],functio
 
 	Route::get('displayAllForAdd/{team_name}','UserController@displayAllForAdd')->name('displayAllForAdd');
 
+    Route::any('displaySearchResult', 'UserController@displaySearchResult');
+
 	
 });
 //团队相关路由
@@ -93,6 +95,8 @@ Route::group(['middleware'=>'auth','namespace'=>'Team','prefix'=>'team'],functio
 	Route::get('displayMineCre/{sort_key}','TeamController@displayMineCre')->name('displayMyTeamCre');
 
 	Route::post('addTeammates','TeamController@addTeammates');
+
+    Route::any('displaySearchResult', 'TeamController@displaySearchResult')->name('SearchAllTeam');
 
 
 });

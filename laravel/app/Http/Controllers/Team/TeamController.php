@@ -328,4 +328,68 @@ class TeamController extends Controller
         }
         
     }
+    public function displaySearchResult(Request $request,Team $team,Membership $membership){
+        //拿到从view传过来的需查找的Team Name/Team info
+        /* $this->validate($request,[
+             'key'=>'required'
+         ]);*/
+        $userid=[
+            session('user_id')
+        ];
+        if($request->input('key')){
+
+            $s_key=$request->input('key');
+            session_start();
+            session()->put('key',$request->input('key'));
+        }
+        else{
+
+            $s_key=session('key');
+
+        }
+        $data1=['team_name','like','%'.$s_key.'%'];
+        $data2=['team_info','like','%'.$s_key.'%'];
+
+
+        /*1.首先判断是否存在搜索目标*/
+        $pagedata=$team->where([$data1])->orWhere([$data2])->get()->toArray();
+        /*2.若存在，判断user与该team的关系*/
+
+        /*3.判断查找行为的用户本身是否为改团队的成员*/
+        foreach ($pagedata as $key => &$value) {
+            /*4.若user创建该team*/
+            $funderOrNot=$team->where(['team.team_id'=>$value['team_id']])->join('membership','membership.team_id','=','team.team_id')->get()->toArray();
+            if ($funderOrNot[0]['team_funder_id']==$userid) {
+                $flag[0]=1;
+                $value['flag']=1;
+            } else if ($funderOrNot[0]['member_id']==$userid) {
+                $flag[0]=2;
+                /*5.若user已加入该team*/
+                $value['flag']=2;
+            } else {
+                $flag[0]=3;
+                $value['flag']=3;
+                /*6.若user并未加入该team*/
+
+            }
+            $value = array_merge($value,$flag);
+
+        }
+
+
+        $page = $request->input('page')?$request->input('page'):1;
+        // pd($page);
+        //设定一页行数
+        $pagesize=4;
+        //总共行数
+        $total=count($pagedata);
+        //实例化分页类
+        $paged=new LengthAwarePaginator($pagedata,$total,$pagesize);
+        //设置分页跳转路由
+        $paged=$paged->setPath(route('SearchAllTeam'));
+        //截取指定页数据
+        $pageout=array_slice($pagedata, ($page-1)*$pagesize,$pagesize);
+
+        return view('Team/displaySearchResult',['pageout'=>$pageout,'paged'=>$paged])->withCookie('love');
+    }
 }
