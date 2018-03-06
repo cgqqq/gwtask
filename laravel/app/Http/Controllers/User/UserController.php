@@ -351,4 +351,32 @@ class UserController extends Controller
         // pd($pageOut);
         return view('User/displayFollower',['pageOut'=>$pageOut,'paged'=>$paged]);
     }
+
+    public function displaySearchResult(User $user,Request $request,Friend $friend){
+        //拿到从view传过来的需查找的user ID
+        $request->validate([
+            'key'=>'required',
+        ]);
+        //查询语句返回一个user
+        //将结果返回到view页面
+        $data = [
+            'user_id'=>$request->input('key')
+        ];
+        $result=$user->get($data)->toArray();
+        $map = [
+            'follow_id'=>session('user_id')
+        ];
+        $friendship=$friend->where('followed_id',$data)->where('follow_id',$map)->get()->toArray();
+        if($friendship==null){
+           /*未关注该查找目标用户*/
+            $friendship=false;
+        }
+        else{
+           /*已关注该查找目标用户*/
+            $friendship=true;
+
+        }
+
+        return view('User/displaySearchResult',['friendship'=>$friendship,'result'=>$result]);
+    }
 }

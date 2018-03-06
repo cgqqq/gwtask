@@ -11,13 +11,8 @@
 					<form method="post" style="background-color: #34bf49;border-radius: 42px;padding: 4px" action="{{ url('team/displaySearchMine') }}">
 					 <input type="hidden" name="_token" value="{{csrf_token()}}">
 						<div class="btn-group" >
-							<button type="button" class="dropdown-toggle search" data-toggle="dropdown">
+							<button type="button" class="search" >
 							</button>
-							<ul class="dropdown-menu" role="menu" style="z-index: 9999;margin-top: 5px;">
-								<li><a href="#">By Team Name</a></li>
-								<li><a href="#">By Team ID</a></li>
-
-							</ul>
 						</div>
 						<input name='search-key' type="text" placeholder="Search For Teams……" >
 

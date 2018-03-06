@@ -2,8 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="03c77c43-de62-47b9-8a66-f413799d84dc" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/laravel/resources/views/Team/displaySearchResult.blade.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/laravel/resources/views/User/displaySearchResult.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/laravel/app/Http/Controllers/Team/TeamController.php" afterPath="$PROJECT_DIR$/laravel/app/Http/Controllers/Team/TeamController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/laravel/app/Http/Controllers/User/UserController.php" afterPath="$PROJECT_DIR$/laravel/app/Http/Controllers/User/UserController.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/laravel/public/css/style.css" afterPath="$PROJECT_DIR$/laravel/public/css/style.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/laravel/resources/views/Team/displayMine.blade.php" afterPath="$PROJECT_DIR$/laravel/resources/views/Team/displayMine.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/laravel/resources/views/Team/displaySearchMine.blade.php" afterPath="$PROJECT_DIR$/laravel/resources/views/Team/displaySearchMine.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/laravel/resources/views/layouts/home.blade.php" afterPath="$PROJECT_DIR$/laravel/resources/views/layouts/home.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/laravel/routes/web.php" afterPath="$PROJECT_DIR$/laravel/routes/web.php" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -14,44 +22,17 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="home.blade.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/laravel/resources/views/Home/home.blade.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="114">
-              <caret line="6" column="19" lean-forward="true" selection-start-line="6" selection-start-column="19" selection-end-line="6" selection-end-column="19" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="index.blade.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/laravel/resources/views/layouts/index.blade.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="817">
-              <caret line="43" column="78" lean-forward="false" selection-start-line="43" selection-start-column="11" selection-end-line="43" selection-end-column="78" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="home.blade.php" pinned="false" current-in-tab="false">
+      <file leaf-file-name="home.blade.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/laravel/resources/views/layouts/home.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="239">
-              <caret line="72" column="67" lean-forward="false" selection-start-line="72" selection-start-column="41" selection-end-line="72" selection-end-column="67" />
+            <state relative-caret-position="92">
+              <caret line="171" column="42" lean-forward="false" selection-start-line="171" selection-start-column="42" selection-end-line="171" selection-end-column="42" />
               <folding>
-                <marker date="1516007490578" expanded="true" signature="5284:5300" ph="..." />
+                <element signature="n#style#0;n#div#0;n#ul#0;n#div#2;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#form#0;n#div#0;n#ul#0;n#div#2;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#form#1;n#div#0;n#ul#0;n#div#2;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <marker date="1520265197847" expanded="true" signature="6104:6120" ph="..." />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="bootstrap.css" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/laravel/public/css/bootstrap.css">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="203">
-              <caret line="1701" column="0" lean-forward="false" selection-start-line="1701" selection-start-column="0" selection-end-line="1702" selection-end-column="85" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -59,34 +40,71 @@
       <file leaf-file-name="web.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/laravel/routes/web.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="394">
-              <caret line="49" column="47" lean-forward="false" selection-start-line="49" selection-start-column="26" selection-end-line="49" selection-end-column="47" />
+            <state relative-caret-position="1596">
+              <caret line="93" column="0" lean-forward="true" selection-start-line="93" selection-start-column="0" selection-end-line="93" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="login.blade.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/laravel/resources/views/Index/login.blade.php">
+      <file leaf-file-name="style.css" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/laravel/public/css/style.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="171">
-              <caret line="9" column="126" lean-forward="false" selection-start-line="9" selection-start-column="16" selection-end-line="9" selection-end-column="126" />
+            <state relative-caret-position="98">
+              <caret line="706" column="20" lean-forward="false" selection-start-line="706" selection-start-column="20" selection-end-line="706" selection-end-column="20" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="displaySearchResult.blade.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/laravel/resources/views/Team/displaySearchResult.blade.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="456">
+              <caret line="24" column="15" lean-forward="true" selection-start-line="24" selection-start-column="15" selection-end-line="24" selection-end-column="15" />
               <folding>
-                <element signature="e#266#372#0#HTML" expanded="true" />
-                <element signature="e#476#501#0#HTML" expanded="true" />
+                <element signature="e#79#114#0#HTML" expanded="true" />
+                <element signature="e#170#194#0#HTML" expanded="true" />
+                <element signature="e#696#720#0#HTML" expanded="true" />
+                <element signature="e#795#839#0#HTML" expanded="true" />
+                <element signature="e#859#898#0#HTML" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="displayAdd.blade.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/laravel/resources/views/Team/displayAdd.blade.php">
+      <file leaf-file-name="TeamController.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/laravel/app/Http/Controllers/Team/TeamController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="764">
-              <caret line="49" column="47" lean-forward="false" selection-start-line="49" selection-start-column="47" selection-end-line="49" selection-end-column="47" />
+            <state relative-caret-position="-3894">
+              <caret line="149" column="17" lean-forward="true" selection-start-line="149" selection-start-column="17" selection-end-line="149" selection-end-column="17" />
               <folding>
-                <element signature="e#1143#1171#0#HTML" expanded="true" />
-                <element signature="e#1410#1438#0#HTML" expanded="true" />
+                <element signature="e#12690#13395#0#PHP" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="UserController.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/laravel/app/Http/Controllers/User/UserController.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="124">
+              <caret line="364" column="45" lean-forward="false" selection-start-line="364" selection-start-column="45" selection-end-line="364" selection-end-column="45" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="displaySearchResult.blade.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/laravel/resources/views/User/displaySearchResult.blade.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="133">
+              <caret line="7" column="18" lean-forward="true" selection-start-line="6" selection-start-column="7" selection-end-line="7" selection-end-column="18" />
+              <folding>
+                <element signature="e#79#114#0#HTML" expanded="true" />
+                <element signature="e#177#233#0#HTML" expanded="true" />
+                <element signature="e#1684#1728#0#HTML" expanded="true" />
+                <element signature="e#1748#1787#0#HTML" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -95,30 +113,18 @@
       <file leaf-file-name="displayMine.blade.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/laravel/resources/views/Team/displayMine.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="483">
-              <caret line="38" column="137" lean-forward="false" selection-start-line="38" selection-start-column="137" selection-end-line="38" selection-end-column="137" />
-              <folding>
-                <element signature="e#1279#1303#0#HTML" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="displayFollow.blade.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/laravel/resources/views/User/displayFollow.blade.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="314">
-              <caret line="72" column="48" lean-forward="false" selection-start-line="72" selection-start-column="48" selection-end-line="72" selection-end-column="48" />
+            <state relative-caret-position="184">
+              <caret line="49" column="92" lean-forward="false" selection-start-line="49" selection-start-column="92" selection-end-line="49" selection-end-column="92" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="style.css" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/laravel/public/css/style.css">
+      <file leaf-file-name="displaySearchMine.blade.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/laravel/resources/views/Team/displaySearchMine.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="448">
-              <caret line="841" column="17" lean-forward="true" selection-start-line="841" selection-start-column="17" selection-end-line="841" selection-end-column="17" />
+            <state relative-caret-position="6">
+              <caret line="91" column="38" lean-forward="true" selection-start-line="91" selection-start-column="38" selection-end-line="91" selection-end-column="38" />
               <folding />
             </state>
           </provider>
@@ -139,6 +145,9 @@
       <find>#5bc0de</find>
       <find>form-control</find>
       <find>logout</find>
+      <find>search_box</find>
+      <find>search_input</find>
+      <find>search_user</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -149,10 +158,16 @@
       <list>
         <option value="$PROJECT_DIR$/laravel/resources/views/Index/login.blade.php" />
         <option value="$PROJECT_DIR$/laravel/resources/views/layouts/index.blade.php" />
-        <option value="$PROJECT_DIR$/laravel/resources/views/layouts/home.blade.php" />
         <option value="$PROJECT_DIR$/laravel/public/css/bootstrap.css" />
-        <option value="$PROJECT_DIR$/laravel/resources/views/Team/displayMine.blade.php" />
+        <option value="$PROJECT_DIR$/laravel/routes/web.php" />
         <option value="$PROJECT_DIR$/laravel/public/css/style.css" />
+        <option value="$PROJECT_DIR$/laravel/app/Http/Controllers/Team/TeamController.php" />
+        <option value="$PROJECT_DIR$/laravel/resources/views/User/displaySearchResult.blade.php" />
+        <option value="$PROJECT_DIR$/laravel/resources/views/Team/displaySearchResult.blade.php" />
+        <option value="$PROJECT_DIR$/laravel/app/Http/Controllers/User/UserController.php" />
+        <option value="$PROJECT_DIR$/laravel/resources/views/Team/displayMine.blade.php" />
+        <option value="$PROJECT_DIR$/laravel/resources/views/Team/displaySearchMine.blade.php" />
+        <option value="$PROJECT_DIR$/laravel/resources/views/layouts/home.blade.php" />
       </list>
     </option>
   </component>
@@ -163,7 +178,7 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" />
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="-8" />
     <option name="y" value="-8" />
     <option name="width" value="1368" />
@@ -184,57 +199,103 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
             <path>
-              <item name="gwtask" type="b2602c69:ProjectViewProjectNode" />
-              <item name="gwtask" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="gwtask1" type="b2602c69:ProjectViewProjectNode" />
+              <item name="gwtask1" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
             <path>
-              <item name="gwtask" type="b2602c69:ProjectViewProjectNode" />
-              <item name="gwtask" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="gwtask1" type="b2602c69:ProjectViewProjectNode" />
+              <item name="gwtask1" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="laravel" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
             <path>
-              <item name="gwtask" type="b2602c69:ProjectViewProjectNode" />
-              <item name="gwtask" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="gwtask1" type="b2602c69:ProjectViewProjectNode" />
+              <item name="gwtask1" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="laravel" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="app" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="gwtask1" type="b2602c69:ProjectViewProjectNode" />
+              <item name="gwtask1" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="laravel" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="app" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="Http" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="gwtask1" type="b2602c69:ProjectViewProjectNode" />
+              <item name="gwtask1" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="laravel" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="app" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="Http" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="Controllers" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="gwtask1" type="b2602c69:ProjectViewProjectNode" />
+              <item name="gwtask1" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="laravel" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="app" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="Http" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="Controllers" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="Team" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="gwtask1" type="b2602c69:ProjectViewProjectNode" />
+              <item name="gwtask1" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="laravel" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="app" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="Http" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="Controllers" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="User" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="gwtask1" type="b2602c69:ProjectViewProjectNode" />
+              <item name="gwtask1" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="laravel" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="resources" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
             <path>
-              <item name="gwtask" type="b2602c69:ProjectViewProjectNode" />
-              <item name="gwtask" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="gwtask1" type="b2602c69:ProjectViewProjectNode" />
+              <item name="gwtask1" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="laravel" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="resources" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="views" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
             <path>
-              <item name="gwtask" type="b2602c69:ProjectViewProjectNode" />
-              <item name="gwtask" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="laravel" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="resources" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="views" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="layouts" type="2a2b976b:PhpTreeStructureProvider$1" />
-            </path>
-            <path>
-              <item name="gwtask" type="b2602c69:ProjectViewProjectNode" />
-              <item name="gwtask" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="gwtask1" type="b2602c69:ProjectViewProjectNode" />
+              <item name="gwtask1" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="laravel" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="resources" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="views" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="Team" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
+            <path>
+              <item name="gwtask1" type="b2602c69:ProjectViewProjectNode" />
+              <item name="gwtask1" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="laravel" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="resources" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="views" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="User" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
-      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../gwtask - 副本" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\PHPWAMP_IN1\PHPWAMP_IN1\wwwroot\gwtask1\laravel\resources\views\User" />
+      <recent name="E:\PHPWAMP_IN1\PHPWAMP_IN1\wwwroot\gwtask1\laravel\resources\views\Team" />
+    </key>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -261,32 +322,33 @@
       <workItem from="1515764373211" duration="164000" />
       <workItem from="1515942787419" duration="2423000" />
       <workItem from="1515994071608" duration="9256000" />
+      <workItem from="1520261001983" duration="4175000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="11843000" />
+    <option name="totallyTimeSpent" value="16018000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="7" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24450952" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.328594" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.328594" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
@@ -301,11 +363,95 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/laravel/resources/views/Home/home.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="114">
+          <caret line="6" column="19" lean-forward="false" selection-start-line="6" selection-start-column="19" selection-end-line="6" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/laravel/resources/views/layouts/index.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="817">
+          <caret line="43" column="78" lean-forward="false" selection-start-line="43" selection-start-column="11" selection-end-line="43" selection-end-column="78" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/laravel/resources/views/layouts/home.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1368">
+          <caret line="72" column="67" lean-forward="false" selection-start-line="72" selection-start-column="41" selection-end-line="72" selection-end-column="67" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#ul#0;n#div#2;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#form#0;n#div#0;n#ul#0;n#div#2;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#form#1;n#div#0;n#ul#0;n#div#2;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <marker date="1520265197847" expanded="true" signature="6104:6120" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/laravel/public/css/bootstrap.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="32319">
+          <caret line="1701" column="0" lean-forward="false" selection-start-line="1701" selection-start-column="0" selection-end-line="1702" selection-end-column="85" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/laravel/routes/web.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="931">
+          <caret line="49" column="0" lean-forward="true" selection-start-line="49" selection-start-column="0" selection-end-line="49" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/laravel/resources/views/Index/login.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="171">
+          <caret line="9" column="126" lean-forward="false" selection-start-line="9" selection-start-column="16" selection-end-line="9" selection-end-column="126" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/laravel/resources/views/Team/displayAdd.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="931">
+          <caret line="49" column="47" lean-forward="false" selection-start-line="49" selection-start-column="47" selection-end-line="49" selection-end-column="47" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/laravel/resources/views/Team/displayMine.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="722">
+          <caret line="38" column="50" lean-forward="true" selection-start-line="38" selection-start-column="50" selection-end-line="38" selection-end-column="50" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/laravel/resources/views/User/displayFollow.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1368">
+          <caret line="72" column="47" lean-forward="true" selection-start-line="72" selection-start-column="47" selection-end-line="72" selection-end-column="47" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/laravel/public/css/style.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15979">
+          <caret line="841" column="17" lean-forward="true" selection-start-line="841" selection-start-column="17" selection-end-line="841" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/laravel/resources/views/Index/index.blade.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -329,9 +475,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="114">
           <caret line="6" column="106" lean-forward="false" selection-start-line="6" selection-start-column="83" selection-end-line="6" selection-end-column="106" />
-          <folding>
-            <marker date="1515674401929" expanded="true" signature="2184:2196" ph="..." />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -340,7 +483,10 @@
         <state relative-caret-position="1121">
           <caret line="59" column="18" lean-forward="false" selection-start-line="59" selection-start-column="18" selection-end-line="59" selection-end-column="18" />
           <folding>
-            <marker date="1516007490578" expanded="true" signature="5284:5300" ph="..." />
+            <element signature="n#style#0;n#div#0;n#ul#0;n#div#2;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#form#0;n#div#0;n#ul#0;n#div#2;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#form#1;n#div#0;n#ul#0;n#div#2;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <marker date="1520265197847" expanded="true" signature="6104:6120" ph="..." />
           </folding>
         </state>
       </provider>
@@ -349,10 +495,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1938">
           <caret line="102" column="39" lean-forward="false" selection-start-line="102" selection-start-column="39" selection-end-line="102" selection-end-column="39" />
-          <folding>
-            <element signature="e#266#372#0#HTML" expanded="true" />
-            <element signature="e#476#501#0#HTML" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -360,7 +503,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -395,21 +537,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/laravel/app/Http/Controllers/User/UserController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/laravel/resources/views/User/displayInfo.blade.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="114">
           <caret line="6" column="106" lean-forward="false" selection-start-line="6" selection-start-column="83" selection-end-line="6" selection-end-column="106" />
-          <folding>
-            <marker date="1515674401929" expanded="true" signature="2184:2196" ph="..." />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -424,7 +555,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -432,22 +562,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/laravel/resources/views/layouts/index.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="817">
-          <caret line="43" column="78" lean-forward="false" selection-start-line="43" selection-start-column="11" selection-end-line="43" selection-end-column="78" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/laravel/resources/views/User/displayFollow.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="314">
-          <caret line="72" column="48" lean-forward="false" selection-start-line="72" selection-start-column="48" selection-end-line="72" selection-end-column="48" />
+        <state relative-caret-position="1368">
+          <caret line="72" column="47" lean-forward="false" selection-start-line="72" selection-start-column="47" selection-end-line="72" selection-end-column="47" />
           <folding />
         </state>
       </provider>
@@ -456,22 +577,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="174">
           <caret line="1" column="21185" lean-forward="false" selection-start-line="1" selection-start-column="21182" selection-end-line="1" selection-end-column="21185" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/laravel/public/css/bootstrap.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="203">
+        <state relative-caret-position="32319">
           <caret line="1701" column="0" lean-forward="false" selection-start-line="1701" selection-start-column="0" selection-end-line="1702" selection-end-column="85" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/laravel/routes/web.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="394">
-          <caret line="49" column="47" lean-forward="false" selection-start-line="49" selection-start-column="26" selection-end-line="49" selection-end-column="47" />
           <folding />
         </state>
       </provider>
@@ -480,57 +592,137 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="171">
           <caret line="9" column="126" lean-forward="false" selection-start-line="9" selection-start-column="16" selection-end-line="9" selection-end-column="126" />
-          <folding>
-            <element signature="e#266#372#0#HTML" expanded="true" />
-            <element signature="e#476#501#0#HTML" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/laravel/resources/views/Home/home.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="114">
-          <caret line="6" column="19" lean-forward="true" selection-start-line="6" selection-start-column="19" selection-end-line="6" selection-end-column="19" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/laravel/resources/views/Team/displayAdd.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="764">
+        <state relative-caret-position="931">
           <caret line="49" column="47" lean-forward="false" selection-start-line="49" selection-start-column="47" selection-end-line="49" selection-end-column="47" />
-          <folding>
-            <element signature="e#1143#1171#0#HTML" expanded="true" />
-            <element signature="e#1410#1438#0#HTML" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/laravel/resources/views/layouts/home.blade.php">
+    <entry file="file://$PROJECT_DIR$/laravel/resources/views/layouts/index.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="239">
-          <caret line="72" column="67" lean-forward="false" selection-start-line="72" selection-start-column="41" selection-end-line="72" selection-end-column="67" />
-          <folding>
-            <marker date="1516007490578" expanded="true" signature="5284:5300" ph="..." />
-          </folding>
+        <state relative-caret-position="19">
+          <caret line="43" column="78" lean-forward="false" selection-start-line="43" selection-start-column="11" selection-end-line="43" selection-end-column="78" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/laravel/resources/views/Team/displayMine.blade.php">
+    <entry file="file://$PROJECT_DIR$/laravel/resources/views/Home/home.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="483">
-          <caret line="38" column="137" lean-forward="false" selection-start-line="38" selection-start-column="137" selection-end-line="38" selection-end-column="137" />
-          <folding>
-            <element signature="e#1279#1303#0#HTML" expanded="true" />
-          </folding>
+        <state relative-caret-position="114">
+          <caret line="6" column="19" lean-forward="false" selection-start-line="6" selection-start-column="19" selection-end-line="6" selection-end-column="19" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/laravel/public/css/style.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="448">
-          <caret line="841" column="17" lean-forward="true" selection-start-line="841" selection-start-column="17" selection-end-line="841" selection-end-column="17" />
+        <state relative-caret-position="98">
+          <caret line="706" column="20" lean-forward="false" selection-start-line="706" selection-start-column="20" selection-end-line="706" selection-end-column="20" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/laravel/app/Http/Controllers/Controller.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/laravel/app/Http/Controllers/HomeController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/laravel/resources/views/User/displaySearchResult.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="133">
+          <caret line="7" column="18" lean-forward="true" selection-start-line="6" selection-start-column="7" selection-end-line="7" selection-end-column="18" />
+          <folding>
+            <element signature="e#79#114#0#HTML" expanded="true" />
+            <element signature="e#177#233#0#HTML" expanded="true" />
+            <element signature="e#1684#1728#0#HTML" expanded="true" />
+            <element signature="e#1748#1787#0#HTML" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/laravel/resources/views/Team/displaySearchResult.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="456">
+          <caret line="24" column="15" lean-forward="true" selection-start-line="24" selection-start-column="15" selection-end-line="24" selection-end-column="15" />
+          <folding>
+            <element signature="e#79#114#0#HTML" expanded="true" />
+            <element signature="e#170#194#0#HTML" expanded="true" />
+            <element signature="e#696#720#0#HTML" expanded="true" />
+            <element signature="e#795#839#0#HTML" expanded="true" />
+            <element signature="e#859#898#0#HTML" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/laravel/app/Http/Controllers/User/UserController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="124">
+          <caret line="364" column="45" lean-forward="false" selection-start-line="364" selection-start-column="45" selection-end-line="364" selection-end-column="45" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/laravel/app/Http/Controllers/Team/TeamController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-3894">
+          <caret line="149" column="17" lean-forward="true" selection-start-line="149" selection-start-column="17" selection-end-line="149" selection-end-column="17" />
+          <folding>
+            <element signature="e#12690#13395#0#PHP" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/laravel/routes/web.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1596">
+          <caret line="93" column="0" lean-forward="true" selection-start-line="93" selection-start-column="0" selection-end-line="93" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/laravel/resources/views/Team/displayMine.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="184">
+          <caret line="49" column="92" lean-forward="false" selection-start-line="49" selection-start-column="92" selection-end-line="49" selection-end-column="92" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/laravel/resources/views/Team/displaySearchMine.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="6">
+          <caret line="91" column="38" lean-forward="true" selection-start-line="91" selection-start-column="38" selection-end-line="91" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/laravel/resources/views/layouts/home.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="92">
+          <caret line="171" column="42" lean-forward="false" selection-start-line="171" selection-start-column="42" selection-end-line="171" selection-end-column="42" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#ul#0;n#div#2;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#form#0;n#div#0;n#ul#0;n#div#2;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#form#1;n#div#0;n#ul#0;n#div#2;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <marker date="1520265197847" expanded="true" signature="6104:6120" ph="..." />
+          </folding>
         </state>
       </provider>
     </entry>
