@@ -20,6 +20,7 @@ class CreateUserTable extends Migration
             $table->string('user_password',50);
             $table->string('user_profile',100);
             $table->primary('user_id');
+            $table->unique('user_email');
         });
     }
 

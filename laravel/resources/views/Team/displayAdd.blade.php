@@ -18,9 +18,9 @@
 				})
 				.done(function(data) {
 					layer.msg(data.msg,{
-						icon:data.icon
+						icon:data.icon,
+						time:1500
 					});
-                    window.location.href="{{url('team/displayMine')}}";
 
                 })
 				.fail(function() {

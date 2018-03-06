@@ -20,6 +20,7 @@ class CreateTeamTable extends Migration
             $table->string('team_funder_id',32);
             $table->string('team_info',1000);
             $table->primary('team_id');
+            $table->unique('team_name');
         });
     }
 

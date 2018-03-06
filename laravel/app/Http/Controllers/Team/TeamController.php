@@ -4,9 +4,11 @@ namespace App\Http\Controllers\Team;
 
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Database\QueryException;
 use App\Models\Team;
 use App\Models\User;
 use App\Models\Membership;
+use DB;
 
 use App\Http\Controllers\Controller;
 
@@ -33,13 +35,20 @@ class TeamController extends Controller
             'team_id'=>$data_team['team_id'],            
             'member_id'=>session('user_id'),
         ];
-    	if($team->add($data_team)&&$membership->add($data_membership)){
-            //添加成功
-    		return response()->json(['msg'=>'添加成功!','icon'=>'1']);
-    	}else{
-            //添加失败
-    		return response()->json(['msg'=>'添加失败!','icon'=>'2']);
-    	}
+        try {
+            //开始事务
+            DB::beginTransaction();
+            $team->add($data_team)&&$membership->add($data_membership);
+            //提交事务
+            DB::commit();
+            //返回前端添加成功结果
+            return response()->json(['msg'=>'添加成功!','icon'=>'1']);
+        } catch(QueryException $ex) {
+            //回滚事务
+            DB::rollback();
+            //返回前端添加失败结果
+            return response()->json(['msg'=>'该团队已存在！','icon'=>'2']);
+        }
     }
     //显示为我所在的团队
     public function displayMine(Team $team,Membership $membership,Request $request,$sort_key=null){

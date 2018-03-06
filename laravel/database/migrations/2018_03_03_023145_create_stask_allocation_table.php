@@ -14,8 +14,11 @@ class CreateStaskAllocationTable extends Migration
     public function up()
     {
         Schema::create('stask_allocation', function (Blueprint $table) {
+            //唯一ID
             $table->string('a_id',32);
+            //子任务ID
             $table->string('stask_id',32);
+            //负责人ID
             $table->string('res_id',32);
             $table->primary('a_id');
         });
