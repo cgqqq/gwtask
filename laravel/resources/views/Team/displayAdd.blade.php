@@ -10,28 +10,34 @@
 				event.preventDefault();
 				var team_name = $('#team_name').val();
 				var team_info = $('#team_info').val();
-				$.ajax({
-					url: "{{ url('team/add') }}",
-					type: 'post',
-					dataType: 'json',
-					data: {"team_name": team_name,"team_info":team_info,"_token":"{{csrf_token()}}"}
-				})
-				.done(function(data) {
-					layer.msg(data.msg,{
-						icon:data.icon,
-						time:1500
-					});
+				if(team_name!=null&team_name!=''&&team_info!=null&&team_info!=''){
+					$.ajax({
+						url: "{{ url('team/add') }}",
+						type: 'post',
+						dataType: 'json',
+						data: {"team_name": team_name,"team_info":team_info,"_token":"{{csrf_token()}}"}
+					})
+					.done(function(data) {
+						layer.msg(data.msg,{
+							icon:data.icon,
+							time:2500
+						});
 
-                })
-				.fail(function() {
-					layer.msg('服务器未响应!',{
-						icon:5
+	                })
+					.fail(function() {
+						layer.msg('服务器未响应!',{
+							icon:5
+						});
+					})
+					.always(function() {
+						console.log("complete");
 					});
-				})
-				.always(function() {
-					console.log("complete");
-				});
-
+				}else{
+					layer.msg('团队名和团结介绍不能为空',{
+							icon:7,
+							time:2500
+						});
+				}
 			});
 		});
 	});

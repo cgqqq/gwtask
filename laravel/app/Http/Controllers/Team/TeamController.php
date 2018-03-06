@@ -187,13 +187,17 @@ class TeamController extends Controller
         $teamInfo[0] = array_merge($teamInfo[0],['user_name'=>$funderName]);
         //获取组员列表
         $teamMember = $membership->get(['team_id'=>$teamInfo[0]['team_id']])->toarray();
-        //对组员列表添加每个组员详细信息
-        foreach ($teamMember as $key => &$value) {
-            //获取单个组员信息
-            $userInfo = $user->get(['user_id'=>$value['member_id']])->toArray();
-            // pd($userInfo[0]);
-            //组员列表添加该组员信息
-            $value = array_merge($value,$userInfo[0]);
+        // pd($teamMember);
+        //该团队有组员，搜索成员信息
+        if(!empty($teamMember)){
+            //对组员列表添加每个组员详细信息
+            foreach ($teamMember as $key => &$value) {
+                //获取单个组员信息
+                $userInfo = $user->get(['user_id'=>$value['member_id']])->toArray();
+                // pd($userInfo[0]);
+                //组员列表添加该组员信息
+                $value = array_merge($value,$userInfo[0]);
+            }
         }
         //页码
         $page = $request->input('page')?$request->input('page'):1;
