@@ -249,7 +249,7 @@ class TeamController extends Controller
         }
         return response()->json(['msg'=>$data['msg'],'icon'=>$data['icon'],'idList'=>$fail_users_idList]);
     }
-    //显示用户搜索已加入团队的结果信息
+    //显示当前用户根据关键字搜索已加入团队
     public function displaySearchMine(Membership $membership,Team $team,Request $request,User $user){
         //
         $map=['member_id','=',session('user_id')];
@@ -338,13 +338,12 @@ class TeamController extends Controller
         
     }
     public function displaySearchResult(Request $request,Team $team,Membership $membership){
+
         //拿到从view传过来的需查找的Team Name/Team info
         /* $this->validate($request,[
              'key'=>'required'
          ]);*/
-        $userid=[
-            session('user_id')
-        ];
+        $userid=session('user_id');
         if($request->input('key')){
 
             $s_key=$request->input('key');
@@ -363,27 +362,38 @@ class TeamController extends Controller
         /*1.首先判断是否存在搜索目标*/
         $pagedata=$team->where([$data1])->orWhere([$data2])->get()->toArray();
         /*2.若存在，判断user与该team的关系*/
+        if(!empty($pagedata)){
+            // /*3.判断查找行为的用户本身是否为改团队的成员*/
+            // foreach ($pagedata as $key => &$value) {
+            //     /*4.若user创建该team*/
+            //     $funderOrNot=$team->where(['team.team_id'=>$value['team_id']])->join('membership','membership.team_id','=','team.team_id')->get()->toArray();
+            //     pd($funderOrNot);
+            //     if ($funderOrNot[0]['team_funder_id']==$userid) {
+            //         $flag[0]=1;
+            //         $value['flag']=1;
+            //     } else if ($funderOrNot[0]['member_id']==$userid) {
+            //         $flag[0]=2;
+            //         /*5.若user已加入该team*/
+            //         $value['flag']=2;
+            //     } else {
+            //         $flag[0]=3;
+            //         $value['flag']=3;
+            //         /*6.若user并未加入该team*/
 
-        /*3.判断查找行为的用户本身是否为改团队的成员*/
-        foreach ($pagedata as $key => &$value) {
-            /*4.若user创建该team*/
-            $funderOrNot=$team->where(['team.team_id'=>$value['team_id']])->join('membership','membership.team_id','=','team.team_id')->get()->toArray();
-            if ($funderOrNot[0]['team_funder_id']==$userid) {
-                $flag[0]=1;
-                $value['flag']=1;
-            } else if ($funderOrNot[0]['member_id']==$userid) {
-                $flag[0]=2;
-                /*5.若user已加入该team*/
-                $value['flag']=2;
-            } else {
-                $flag[0]=3;
-                $value['flag']=3;
-                /*6.若user并未加入该team*/
+            //     }
+            //     $value = array_merge($value,$flag);
 
+            // }
+            foreach ($pagedata as &$key ) {
+                $team_id = $key['team_id'];
+                $user_list = $membership->get(['team_id'=>$team_id])->toArray();
+                // pd($user_list);
+                //与关键字匹配团队的成员数量
+                $count = !empty($user_list)?count($user_list):0;
+                array_push($key,['count'=>$count]);
             }
-            $value = array_merge($value,$flag);
-
         }
+        // pd($pagedata);
 
 
         $page = $request->input('page')?$request->input('page'):1;

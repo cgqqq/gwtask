@@ -59,7 +59,7 @@ class UserController extends Controller
                 'user_name'=>$info[0]['user_name'],
                 'user_profile'=>'uploads/user_profile/'.$info[0]['user_profile']
                 ]);
-            //显示页面
+            //结果返回前端
             return response()->json(['flag'=>true]);
         }else{
             return response()->json(['flag'=>false]);
@@ -67,7 +67,7 @@ class UserController extends Controller
     }
 
     public function logout(){
-        //清空session
+        //清空当前用户session
         session()->flush();
         //回到起始页
         return redirect('/');
@@ -294,7 +294,8 @@ class UserController extends Controller
         // pd($pageData);
         foreach ($pageData as $key => &$value) {
             $followed_info = $user->get(['user_id'=>$value['followed_id']])->toArray();
-            $value = array_merge($value,$followed_info[0]);
+            // pd($followed_info);
+            $value = $followed_info!=null?array_merge($value,$followed_info[0]):null;
         }
         // $follows = $this->arrayToObject($follows);
         // pd($pageData);

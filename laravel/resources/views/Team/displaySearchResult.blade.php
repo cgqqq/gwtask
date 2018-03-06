@@ -9,7 +9,7 @@
 
             @foreach($pageout as $team)
 
-            <a href="#!" class="collection-item"><span class="new badge" style="margin-top: 25px">未计算</span>
+            <a href="#!" class="collection-item"><span class="new badge" style="margin-top: 25px">{{ $team[0]['count'] }}</span>
                 {{ $team['team_name'] }}
                 <span style="color: #8D8D8D">
                     Team Founder:{{ $team['team_funder_id'] }}

@@ -75,7 +75,7 @@
                         // }
                     })
                     .fail(function() {
-                        layer.msg('服务器wei响应!',{
+                        layer.msg('服务器未响应!',{
                             icon:5
                         });
                     })
