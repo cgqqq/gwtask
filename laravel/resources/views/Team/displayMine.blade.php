@@ -108,7 +108,7 @@
 							icon:data.icon
 					});
 					if(data.icon==='1'){
-						setTimeout("displayMine()",1500);
+						setTimeout("window.location.reload()",1000);
 						
 					}
 				})
@@ -124,9 +124,6 @@
 			});
 		});
 	});
-	function displayMine(){
-		location.href="{{ url('team/displayMine') }}";
-	}
 </script>
 		<div >
 			{{ $paged->links() }}

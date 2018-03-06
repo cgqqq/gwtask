@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateMembershipTable extends Migration
+class CreateStaskAllocationTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,11 @@ class CreateMembershipTable extends Migration
      */
     public function up()
     {
-        Schema::create('membership', function (Blueprint $table) {
-            $table->string('membership_id',32);
-            $table->string('team_id',32);
-            $table->string('member_id',20);
-            $table->primary('membership_id');
+        Schema::create('stask_allocation', function (Blueprint $table) {
+            $table->string('a_id',32);
+            $table->string('stask_id',32);
+            $table->string('res_id',32);
+            $table->primary('a_id');
         });
     }
 
@@ -28,6 +28,6 @@ class CreateMembershipTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('membership');
+        Schema::dropIfExists('stask_allocation');
     }
 }

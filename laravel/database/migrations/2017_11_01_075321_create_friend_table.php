@@ -16,7 +16,7 @@ class CreateFriendTable extends Migration
         Schema::create('friend', function (Blueprint $table) {
             $table->increments('id');
             $table->string('follow_id');
-            $table->string('followed_id');
+            $table->string('followed_id');            
         });
     }
 
