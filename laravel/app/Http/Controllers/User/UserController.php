@@ -73,7 +73,7 @@ class UserController extends Controller
         return redirect('/');
     }
 
-    //添加用户
+    //注册用户
     public function add(User $user,Request $request){
         //验证输入数据是否合法
         $this->validate($request,[
@@ -90,7 +90,7 @@ class UserController extends Controller
         //要添加的数据
         $map = [
         'user_id'=>$input['user_id'],
-        'user_name'=>$input['user_name'],
+        'user_name'=>(string)str_replace(" ","",$input['user_name']),
         'user_password'=>password_hash($input['user_password'],PASSWORD_DEFAULT),
         'user_email'=>$input['user_email'],
         ];

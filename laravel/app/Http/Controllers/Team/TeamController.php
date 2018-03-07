@@ -245,7 +245,7 @@ class TeamController extends Controller
 
 
         //要显示的页面；传给前端的分页信息：团队介绍、队员信息、分页；
-
+        // pd($pageOut);
         if($funderName==session('user_name')){
             return view('Team/displayOneAuth',['team_info'=>$teamInfo[0],'pageOut'=>$pageOut,'paged'=>$paged,'data'=>$data]);
         }else{

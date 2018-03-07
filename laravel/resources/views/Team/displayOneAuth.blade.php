@@ -91,7 +91,7 @@
 				<input type="hidden" class="user-id" value="{{ $member['user_id'] }}">
 				<td class="user-name">
 					<script type="text/javascript">
-						if({{ $team_info['user_name'] }}!={{ $member['user_name'] }}){
+						if(String({{$team_info['user_name']}}) != String({{$member['user_name']}})){
 							window.document.write("<input type='checkbox' class='checkOne' style='display:inline-block;position :absolute ; top:12px;'>");
 						}
 					</script>

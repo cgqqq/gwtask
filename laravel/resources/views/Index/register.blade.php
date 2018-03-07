@@ -30,7 +30,8 @@
                         <label for="user_name" class="col-md-4 control-label">User Name</label>
 
                         <div class="col-md-6">
-                            <input id="user_name" type="text" class="form-control" name="user_name" value="{{ old('user_name') }}" required >
+                        <!-- 姓名不允许输入空格 -->
+                            <input id="user_name" type="text" class="form-control" name="user_name" value="{{ old('user_name') }}" required onkeyup="this.value=this.value.replace(/[^\w]/g,'');">
 
                             @if ($errors->has('user_name'))
                                 <span class="help-block">
@@ -44,7 +45,7 @@
                         <label for="user_email" class="col-md-4 control-label">E-mail Address</label>
 
                         <div class="col-md-6">
-                            <input id="user_email" type="email" class="form-control" name="user_email" value="{{ old('user_email') }}" required>
+                            <input id="user_email" type="email" class="form-control" name="user_email" value="{{ old('user_email') }}" required >
 
                             @if ($errors->has('user_email'))
                                 <span class="help-block">
