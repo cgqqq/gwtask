@@ -7,6 +7,7 @@ use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Database\QueryException;
 use App\Models\Team;
 use App\Models\User;
+use App\Models\Friend;
 use App\Models\Membership;
 use DB;
 
@@ -178,44 +179,77 @@ class TeamController extends Controller
         }
     }
     //显示单个团队信息、成员
-    public function displayOne(User $user,Membership $membership,Team $team,Request $request,$team_name){
+    public function displayOne(User $user,Membership $membership,Team $team,Request $request,$team_name,Friend $friend){
         //获取该团队信息
         $teamInfo = $team->get(['team_name'=>$team_name])->toarray();
         //获取该团队创建者信息
         $funderName = $user->where(['user_id'=>$teamInfo[0]['team_funder_id']])->value('user_name');
+        $funderProfile = $user->where(['user_id'=>$teamInfo[0]['team_funder_id']])->value('user_profile');
+
         //团队信息加入该团队创建者信息
         $teamInfo[0] = array_merge($teamInfo[0],['user_name'=>$funderName]);
+        $teamInfo[0] = array_merge($teamInfo[0],['user_profile'=>$funderProfile]);
         //获取组员列表
         $teamMember = $membership->get(['team_id'=>$teamInfo[0]['team_id']])->toarray();
         // pd($teamMember);
         //该团队有组员，搜索成员信息
+        $data['belong2team']=false;/*该属性用于判断当前用户是否属于该团队，false代表不属于该团队*/
         if(!empty($teamMember)){
             //对组员列表添加每个组员详细信息
+
             foreach ($teamMember as $key => &$value) {
                 //获取单个组员信息
                 $userInfo = $user->get(['user_id'=>$value['member_id']])->toArray();
                 // pd($userInfo[0]);
                 //组员列表添加该组员信息
                 $value = array_merge($value,$userInfo[0]);
+
+                /*判断用户是否属于该团队*/
+                if($value['member_id']==session('user_id')){
+                    $data['belong2team']=true;
+                }
             }
         }
         //页码
         $page = $request->input('page')?$request->input('page'):1;
-        //每页记录数
-        $pageSize = 2;
+
         //总数
-        $total = count($teamMember);
+        $total = count($teamMember)+1;/*算上一个add icon*/
+        //每页记录数
+        $pageSize = 9;
         //实例化分页类
         $paged = new LengthAwarePaginator($teamMember,$total,$pageSize);
         //分页url
         $paged = $paged->setPath(route('displayOneTeam',['team_name'=>$teamInfo[0]['team_name']]));
         //要显示页的内容
         $pageOut = array_slice($teamMember,($page-1)*$pageSize,$pageSize);
+        /*判断是否为最后一页*/
+        if($page*$pageSize>=$total){
+            $data['finalPage']=true;
+        }
+        else{
+            $data['finalPage']=false;
+        }
+
+        /*用户的关注数量 与被关注数量*/
+        $map1=[
+            'followed_id'=>session('user_id')
+        ];
+        $map2 = [
+            'follow_id'=>session('user_id')
+        ];
+
+        $data['followNum']=count($friend->get($map2)->toArray());
+        $data['followerNum']=count($friend->get($map1)->toArray());
+
+
+
         //要显示的页面；传给前端的分页信息：团队介绍、队员信息、分页；
+
         if($funderName==session('user_name')){
-            return view('Team/displayOneAuth',['team_info'=>$teamInfo[0],'pageOut'=>$pageOut,'paged'=>$paged]);
+            return view('Team/displayOneAuth',['team_info'=>$teamInfo[0],'pageOut'=>$pageOut,'paged'=>$paged,'data'=>$data]);
         }else{
-            return view('Team/displayOne',['team_info'=>$teamInfo[0],'pageOut'=>$pageOut,'paged'=>$paged]);
+            return view('Team/displayOne',['team_info'=>$teamInfo[0],'pageOut'=>$pageOut,'paged'=>$paged,'data'=>$data]);
         }
         
     }

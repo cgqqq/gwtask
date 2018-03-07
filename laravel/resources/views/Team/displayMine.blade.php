@@ -54,6 +54,9 @@
 								Team Founder:{{ $team['user_name'] }}</p>
 							<p class="project-description">
 								Team Intro:{{ $team['team_info'] }}</p>
+							<div style="width: 300px;	" class="project-description">
+								<button class="view_icon" onclick='javascrtpt:window.location.href="{{url('team/displayOne',['team_name'=> $team['team_name']])}}"'> </button>
+							</div>
 
 						</div>
 

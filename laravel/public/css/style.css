@@ -3,6 +3,11 @@ body,html{
 	margin:0px;
 	font-family: 'Open Sans', sans-serif;
 	}
+body .demo-class .layui-btn{
+	border-top:1px solid #E9E7E7;
+	border-radius: 100%;
+	background-color: #34bf49;
+}
 
 /*-- banner --*/
 .banner{
@@ -1110,7 +1115,8 @@ search team结果显示样式*/
 
 .collection .collection-item {
 	background-color: #fff;
-	line-height: 70px;
+	line-height: 100px;
+	height: 120px;
 	padding: 10px 20px;
 	margin: 0;
 	border-bottom: 1px solid #e0e0e0;
@@ -1153,6 +1159,20 @@ span.badge {
 	box-sizing: border-box;
 }
 
+span.badge2 {
+	min-width: 3rem;
+	padding: 0 6px;
+	margin-left: 14px;
+	text-align: center;
+	font-size: 1rem;
+	line-height: 22px;
+	height: 22px;
+	color: #757575;
+	float: right;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
 span.badge.new {
 	font-weight: 300;
 	font-size: 15px;
@@ -1168,4 +1188,39 @@ span.badge.new:after {
 }
 .collection-item span.badge {
 	margin-top: calc(0.75rem - 11px);
+}
+span.badge2.new {
+	font-weight: 300;
+	font-size: 15px;
+	color: #fff;
+	background-color: #D50000;
+	border-radius: 2px;
+
+
+}
+/*
+span.badge2.new:after {
+	content: " new(s)";
+}*/
+.collection-item span.badge2 {
+	margin-top: 3px;
+}
+.view_icon{
+	width: 45px;
+	height: 45px;
+	border-radius: 100%;
+	background: url(../images/6.png) -4px -4px;
+	margin-top: 10px;
+	margin-right: 19px;
+	border: solid 2px #000000;
+}
+
+.newA a{
+	color: #0C0C0C;
+}
+.newA a:hover{
+	text-decoration: none;
+	color: #0C0C0C;
+	font-weight: 600;
+	font-size: larger;
 }

@@ -9,14 +9,13 @@
 
             @foreach($pageout as $team)
 
-            <a href="#!" class="collection-item"><span class="new badge" style="margin-top: 25px">{{ $team[0]['count'] }}</span>
+            <a href="{{url('team/displayOne',['team_name'=> $team['team_name']])}}" class="collection-item"><span class="new badge" style="margin-top: 25px">{{ $team[0]['count'] }}</span>
                 {{ $team['team_name'] }}
                 <span style="color: #8D8D8D">
                     Team Founder:{{ $team['team_funder_id'] }}
-                </span>
-                <p>
                     BIO:{{$team['team_info']}}
-                </p>
+                </span>
+
             </a>
 
             @endforeach

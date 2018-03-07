@@ -16,7 +16,7 @@ use App\Http\Controllers\Controller;
 class UserController extends Controller
 {
     //显示个人管理界面
-    public function displayInfo(User $user){
+    public function displayInfo(User $user,Friend $friend){
         //sql查询条件
         $map = [
         'user_id' => session('user_id')
