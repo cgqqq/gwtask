@@ -19,10 +19,13 @@
 				})
 				.done(function(data) {
 					layer.msg(data.msg,{
-						icon:data.icon
+						icon:data.icon,
 					});
-					if(data.icon==1||data.icon==2){
+					if(data.icon==2||data.icon==3){
 						console.log('添加组员失败列表：'+data.fail_list)
+					}
+					if(data.icon==1){
+						setTimeout('location.reload()',1500);
 					}
 				})
 				.fail(function() {
