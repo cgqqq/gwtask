@@ -19,18 +19,18 @@ class UserController extends Controller
     public function displayInfo(User $user,Friend $friend){
         //sql查询条件
         $map = [
-        'user_id' => session('user_id')
+            'user_id' => session('user_id')
         ];
         //从数据库获得结果集以数组形式返回
         $info = $user->get($map)->toArray();
         // pd($info);
         //若有该用户数据，显示页面
         if($info){
-            $assign = $info[0];            
+            $assign = $info[0];
             return view('User/displayInfo',['assign'=>$assign]);
         }
 
-        
+
     }
     //登录操作
     public function login(User $user,Request $request){
@@ -38,7 +38,7 @@ class UserController extends Controller
         $this->validate($request,[
             'user_id'=>'required',
             'user_password'=>'required'
-            ]);
+        ]);
 
         //获取所有请求数据
         $input = $request->all();
@@ -58,7 +58,7 @@ class UserController extends Controller
                 'user_id'=>$input['user_id'],
                 'user_name'=>$info[0]['user_name'],
                 'user_profile'=>'uploads/user_profile/'.$info[0]['user_profile']
-                ]);
+            ]);
             //结果返回前端
             return response()->json(['flag'=>true]);
         }else{
@@ -81,18 +81,18 @@ class UserController extends Controller
             'user_name'=>'required',
             'user_password'=>'required',
             'user_email'=>'required|email'
-            ]);    
+        ]);
 
         //获取所有请求数据
         $input = $request->all();
         //获取指定请求数据
-        $file = $request->user_profile;    
+        $file = $request->user_profile;
         //要添加的数据
         $map = [
-        'user_id'=>$input['user_id'],
-        'user_name'=>(string)str_replace(" ","",$input['user_name']),
-        'user_password'=>password_hash($input['user_password'],PASSWORD_DEFAULT),
-        'user_email'=>$input['user_email'],
+            'user_id'=>$input['user_id'],
+            'user_name'=>(string)str_replace(" ","",$input['user_name']),
+            'user_password'=>password_hash($input['user_password'],PASSWORD_DEFAULT),
+            'user_email'=>$input['user_email'],
         ];
         // 判断头像是否上传成功
         if($request->hasFile('user_profile') && $file->isValid()){
@@ -106,19 +106,19 @@ class UserController extends Controller
             $map['user_profile'] = $file_name;
         }
         //添加操作
-        $re = $user->add($map);                
+        $re = $user->add($map);
         //判断是否添加成功
         if($re){
             //存储用户信息
             session([
-                'user_id'=>$input['user_id'], 
+                'user_id'=>$input['user_id'],
                 'user_profile'=>'uploads/user_profile/'.$file_name
-                ]);
+            ]);
 
             return view('Home/home');
         }else{
             return "add user fail";
-        }        
+        }
     }
 
     //删除用户
@@ -147,7 +147,7 @@ class UserController extends Controller
     public function get(User $user){
         $input = Request::all();
         $map = [
-        $map['user_id'] = $input['user_id']
+            $map['user_id'] = $input['user_id']
         ];
         $re = $user->get($map);
         if($re){
@@ -161,11 +161,11 @@ class UserController extends Controller
     public function edit(User $user){
         $input = Request::all();
         $map = [
-        $map['user_id'] = $input['user_id']
+            $map['user_id'] = $input['user_id']
         ];
         $data = [
-        'user_name'=>$name,
-        'user_password'=>password_hash($passwd,PASSWORD_DEFAULT)
+            'user_name'=>$name,
+            'user_password'=>password_hash($passwd,PASSWORD_DEFAULT)
         ];
         $re = $user->edit($map,$data);
         if($re){
@@ -186,9 +186,9 @@ class UserController extends Controller
         }
     }
     //显示增加组员界面
-    public function displayAllForAdd(User $user,Membership $membership,Team $team,Request $request,$team_name){
-        $teamInfo = $team->get(['team_name'=>$team_name])->toArray();
-        $team_id = $teamInfo[0]['team_id'];
+    public function displayAllForAdd(User $user,Membership $membership,Team $team,Request $request,$team_id){
+        $teamInfo = $team->get(['team_name'=>$team_id])->toArray();
+        /*   $team_id = $teamInfo[0]['team_id'];*/
         $current_team_users_primary = $membership->get(['team_id'=>$team_id])->toArray();
         $current_team_users = [];
         foreach ($current_team_users_primary as $key => $value) {
@@ -196,9 +196,9 @@ class UserController extends Controller
         }
         // pd($current_team_users);
         $pageData = $user
-        ->whereNotin('user_id',$current_team_users)
-        ->get()
-        ->toArray();
+            ->whereNotin('user_id',$current_team_users)
+            ->get()
+            ->toArray();
         // pd($pageData);
         // 设定当前页号
         $page=1;
@@ -214,11 +214,11 @@ class UserController extends Controller
         //实例化分页类啊
         $paged=new LengthAwarePaginator($pageData,$total,$pageSize);
         //设置分页跳转路由
-        $paged=$paged->setPath(route('displayAllForAdd',$team_name));
+        $paged=$paged->setPath(route('displayAllForAdd',$team_id));
         //截取指定页数据
         $pageOut=array_slice($pageData, ($page-1)*$pageSize,$pageSize);
         // pd($pageOut);
-        return view('User/displayAllForAdd',['users'=>$pageOut,'paged'=>$paged,'team_name'=>$team_name]);
+        return view('User/displayAllForAdd',['users'=>$pageOut,'paged'=>$paged,'teamInfo'=>$teamInfo]);
 
         // //简单分页
         // $users = $user->paginate(2);
@@ -248,8 +248,8 @@ class UserController extends Controller
         //对输入数据的验证
         $this->validate($request,[
             'type'=>[
-            'required',
-            Rule::in(['follow','unfollow'])
+                'required',
+                Rule::in(['follow','unfollow'])
             ],
             'followed_id'=>'required'
         ]);
@@ -369,15 +369,16 @@ class UserController extends Controller
         ];
         $friendship=$friend->where('followed_id',$data)->where('follow_id',$map)->get()->toArray();
         if($friendship==null){
-           /*未关注该查找目标用户*/
+            /*未关注该查找目标用户*/
             $friendship=false;
         }
         else{
-           /*已关注该查找目标用户*/
+            /*已关注该查找目标用户*/
             $friendship=true;
 
         }
 
         return view('User/displaySearchResult',['friendship'=>$friendship,'result'=>$result]);
     }
+
 }

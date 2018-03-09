@@ -66,6 +66,12 @@ Route::group(['middleware'=>'auth','namespace'=>'User','prefix'=>'user'],functio
 
     Route::any('displaySearchResult', 'UserController@displaySearchResult');
 
+    Route::any('manageTeamMember','TeamController@manageTeamMember')->name('ManageTeamMember');
+
+    Route::any('manageTeamMemberAdd','TeamController@manageTeamMemberAdd')->name('ManageTeamMemberAdd');
+
+    Route::any('sendInvitation','TeamController@sendInvitation');
+
 	
 });
 //团队相关路由

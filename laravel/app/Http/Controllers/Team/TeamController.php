@@ -18,22 +18,22 @@ class TeamController extends Controller
     //创建团队
     public function add(Request $request,Team $team,Membership $membership){
         //对前端传参检查
-    	$request->validate([
-    		'team_name'=>'required',
-    		'team_info'=>'required|max:1000'
-    	]);
+        $request->validate([
+            'team_name'=>'required',
+            'team_info'=>'required|max:1000'
+        ]);
         //团队信息
-    	$data_team = [
-    		'team_id'=>md5(uniqid(mt_rand(),true)),
-    		'team_name'=>$request->input('team_name'),
-    		'created_at'=>strtotime(date("Y-m-d H:i:s")),
-    		'team_funder_id'=>session('user_id'),
-    		'team_info'=>$request->input('team_info')
-    	];
+        $data_team = [
+            'team_id'=>md5(uniqid(mt_rand(),true)),
+            'team_name'=>$request->input('team_name'),
+            'created_at'=>strtotime(date("Y-m-d H:i:s")),
+            'team_funder_id'=>session('user_id'),
+            'team_info'=>$request->input('team_info')
+        ];
         //添加队长的团队-组员关系记录
         $data_membership = [
             'membership_id'=>md5(uniqid(mt_rand(),true)),
-            'team_id'=>$data_team['team_id'],            
+            'team_id'=>$data_team['team_id'],
             'member_id'=>session('user_id'),
         ];
         try {
@@ -56,12 +56,12 @@ class TeamController extends Controller
         $sort_key=$sort_key=='default'?'team.team_id':(string)$sort_key;
         //我的所有团队记录
         $pagedata = $membership
-        ->where(['member_id'=>session('user_id')])
-        ->join('team','membership.team_id','=','team.team_id')
-        ->join('user','user.user_id','=','team.team_funder_id')
-        ->orderBy($sort_key,'asc')
-        ->get()
-        ->toarray();
+            ->where(['member_id'=>session('user_id')])
+            ->join('team','membership.team_id','=','team.team_id')
+            ->join('user','user.user_id','=','team.team_funder_id')
+            ->orderBy($sort_key,'asc')
+            ->get()
+            ->toarray();
         foreach ($pagedata as $key => &$value) {
             //单个团队的详细信息
             $team_info = $team->get(['team_id'=>$value['team_id']])->toarray();
@@ -83,7 +83,7 @@ class TeamController extends Controller
         //截取指定页数据
         $pageout=array_slice($pagedata, ($page-1)*$pagesize,$pagesize);
         // pd($pageout);
-        return view('Team/displayMine',['pageout'=>$pageout,'paged'=>$paged]);        
+        return view('Team/displayMine',['pageout'=>$pageout,'paged'=>$paged]);
     }
     //显示我创建团队
     public function displayMineCre(Team $team,Membership $membership,Request $request,$sort_key=null){
@@ -91,11 +91,11 @@ class TeamController extends Controller
         $sort_key = $sort_key=='default'?'team.team_id':(string)$sort_key;
         //我的所有团队记录
         $pagedata = $team
-        ->where(['team.team_funder_id'=>session('user_id')])        
-        ->join('user','user.user_id','=','team.team_funder_id')
-        ->orderBy($sort_key,'asc')
-        ->get()
-        ->toarray();
+            ->where(['team.team_funder_id'=>session('user_id')])
+            ->join('user','user.user_id','=','team.team_funder_id')
+            ->orderBy($sort_key,'asc')
+            ->get()
+            ->toarray();
         foreach ($pagedata as $key => &$value) {
             //单个团队的详细信息
             $team_info = $team->get(['team_id'=>$value['team_id']])->toarray();
@@ -117,14 +117,14 @@ class TeamController extends Controller
         //截取指定页数据
         $pageout=array_slice($pagedata, ($page-1)*$pagesize,$pagesize);
         // pd($pageout);
-        return view('Team/displayMineCre',['pageout'=>$pageout,'paged'=>$paged]);        
+        return view('Team/displayMineCre',['pageout'=>$pageout,'paged'=>$paged]);
     }
     //显示所有团队
     public function displayAll(Team $team){
         // 每页显示2行的团队数据
-    	$data = $team->paginate(2);
+        $data = $team->paginate(2);
 
-    	return view('Team/displayAll',['teams'=>$data]);
+        return view('Team/displayAll',['teams'=>$data]);
     }
     //当前用户加入团队
     public function join(Request $request,Membership $membership){
@@ -143,7 +143,7 @@ class TeamController extends Controller
             'membership_id'=>md5(uniqid(mt_rand(),true)),
             'team_id'=>$request->input('team_id'),
             'member_id'=>$request->input('member_id')
-        ];        
+        ];
         if(!$membership->get($map)->isEmpty()){
             //该团队已存在
             return response()->json(['msg'=>'已加入!','icon'=>'7']);
@@ -214,7 +214,7 @@ class TeamController extends Controller
         $page = $request->input('page')?$request->input('page'):1;
 
         //总数
-        $total = count($teamMember)+1;/*算上一个add icon*/
+        $total = count($teamMember);/*算上一个add icon*/
         //每页记录数
         $pageSize = 9;
         //实例化分页类
@@ -251,7 +251,7 @@ class TeamController extends Controller
         }else{
             return view('Team/displayOne',['team_info'=>$teamInfo[0],'pageOut'=>$pageOut,'paged'=>$paged,'data'=>$data]);
         }
-        
+
     }
     //移除团队成员
     public function removeMember(Request $request,Membership $membership,Team $team){
@@ -264,7 +264,7 @@ class TeamController extends Controller
         $data = [
             'msg'=>'删除组员成功!',
             'icon'=>1
-        ];        
+        ];
         $fail_users_idList = [];
         //团队id
         $team_id = $request->input('team_id');
@@ -279,7 +279,7 @@ class TeamController extends Controller
             if(!$membership->del($map)){
                 $fail_users_idList.push($key);
                 $data['icon'] = 2;
-            }            
+            }
         }
         //如果有删除失败的情况，返回的失败信息
         if($data['icon']==2){
@@ -296,11 +296,11 @@ class TeamController extends Controller
         $map3=['team_'];
         //我的所有团队记录
         $pagedata = $membership
-        ->where([$map,$map1])
-        ->orWhere([$map,$map2])
-        ->join('team','membership.team_id','=','team.team_id')
-        ->join('user','user.user_id','=','team.team_funder_id')
-        ->get()->toarray();
+            ->where([$map,$map1])
+            ->orWhere([$map,$map2])
+            ->join('team','membership.team_id','=','team.team_id')
+            ->join('user','user.user_id','=','team.team_funder_id')
+            ->get()->toarray();
         foreach ($pagedata as $key => &$value) {
             //单个团队的详细信息
             $team_info = $team->get(['team_id'=>$value['team_id']])->toarray();
@@ -322,14 +322,14 @@ class TeamController extends Controller
         //截取指定页数据
         $pageout=array_slice($pagedata, ($page-1)*$pagesize,$pagesize);
         // pd($pageout);
-        return view('Team/displaySearchMine',['pageout'=>$pageout,'paged'=>$paged]);   
-        
+        return view('Team/displaySearchMine',['pageout'=>$pageout,'paged'=>$paged]);
+
     }
     //队长添加队员
     public function addTeammates(Request $request,Membership $membership,Team $team){
         //对前端传参检查
         $request->validate([
-            'team_name'=>'required',
+            'team_id'=>'required',
             // 记录user_id的数组
             'user_list'=>'required'
         ]);
@@ -338,10 +338,10 @@ class TeamController extends Controller
         // 添加失败的用户列表
         $fail_list = [];
         // 根据前端传参： 团队名 查询团队信息
-        $teamInfo =$team->get(['team_name'=>$request->input('team_name')])->toArray();
+        $teamInfo =$team->get(['team_id'=>$request->input('team_id')])->toArray();
         $teamInfo = current($teamInfo);
         // 获取团队信息中的team_id
-        $team_id = $teamInfo['team_id'];
+        $team_id = $request->input('team_id');
         // 前端传过来的用户列表中的用户依次加入队伍操作
         foreach ($request->input('user_list') as $key ) {
             // 判断用户是否已加入团队
@@ -354,13 +354,13 @@ class TeamController extends Controller
                     'membership_id'=>md5(uniqid(mt_rand(),true)),
                     'team_id'=>$team_id,
                     'member_id'=>$key
-                 ];
+                ];
                 if(!$membership->add($map)){
                     $flag = 2;
-                    array_push($fail_list,$member_id);
+                    array_push($fail_list,$key);
                 }
             }
-            
+
         }
         //暂定队长不能退出团队
         if($flag==0){
@@ -373,7 +373,7 @@ class TeamController extends Controller
             //队长添加组员存在失败
             return response()->json(['msg'=>'添加队员失败!','icon'=>'2','fail_list'=>$fail_list]);
         }
-        
+
     }
     public function displaySearchResult(Request $request,Team $team,Membership $membership){
 
@@ -449,4 +449,62 @@ class TeamController extends Controller
 
         return view('Team/displaySearchResult',['pageout'=>$pageout,'paged'=>$paged])->withCookie('love');
     }
+
+    public function manageTeamMember(Request $request,Membership $membership,User $user,Team $team){
+        $team_name=$request->input('team_name');
+        $teamInfo=$team->get(['team_name'=>$team_name])->toArray();
+        $teamMember=$membership->get(['team_id'=>$teamInfo[0]['team_id']])->toArray();
+        $funderName = $user->where(['user_id'=>$teamInfo[0]['team_funder_id']])->value('user_name');
+        $funderProfile = $user->where(['user_id'=>$teamInfo[0]['team_funder_id']])->value('user_profile');
+
+        //团队信息加入该团队创建者信息
+        $teamInfo[0] = array_merge($teamInfo[0],['user_name'=>$funderName]);
+        $teamInfo[0] = array_merge($teamInfo[0],['user_profile'=>$funderProfile]);
+        if(!empty($teamMember)){
+            //对组员列表添加每个组员详细信息
+
+            foreach ($teamMember as $key => &$value) {
+                //获取单个组员信息
+                $userInfo = $user->get(['user_id'=>$value['member_id']])->toArray();
+                // pd($userInfo[0]);
+                //组员列表添加该组员信息
+                $value = array_merge($value,$userInfo[0]);
+            }
+        }
+        //页码
+        $page = $request->input('page')?$request->input('page'):1;
+
+        //总数
+        $total = count($teamMember);/*算上一个add icon*/
+        //每页记录数
+        $pageSize = 15;
+        //实例化分页类
+        $paged = new LengthAwarePaginator($teamMember,$total,$pageSize);
+        //分页url
+        $paged = $paged->setPath(route('ManageTeamMember',['team_name'=>$team_name]));
+        //要显示页的内容
+        $pageOut = array_slice($teamMember,($page-1)*$pageSize,$pageSize);
+        /*判断是否为最后一页*/
+        //要显示的页面；传给前端的分页信息：团队介绍、队员信息、分页；
+
+
+        return view('Team/manageTeamMember',['team_info'=>$teamInfo[0],'pageOut'=>$pageOut,'paged'=>$paged]);
+
+    }
+    public function manageTeamMemberAdd(Request $request,User $user,Team $team){
+        $team_name=$request->input('team_name');
+        $teamInfo=$team->get(['team_name'=>$team_name])->toArray();
+
+        $user_id=$request->input('key');
+        $result_user=$user->get(['user_id'=>$user_id])->toArray();
+
+        return view('Team/manageTeamMemberAdd',['team_info'=>$teamInfo[0],'result'=>$result_user]);
+    }
+
+    public function sendInvitation(Request $request,User $user,Team $team){
+        $team_id=$request->input('team_id');
+        $user_id=$request->input('user_id');
+        /*需要设计一个数据表存储msg*/
+    }
+
 }

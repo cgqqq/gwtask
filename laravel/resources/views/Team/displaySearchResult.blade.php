@@ -9,13 +9,16 @@
 
             @foreach($pageout as $team)
 
-            <a href="{{url('team/displayOne',['team_name'=> $team['team_name']])}}" class="collection-item"><span class="new badge" style="margin-top: 25px">{{ $team[0]['count'] }}</span>
-                {{ $team['team_name'] }}
-                <span style="color: #8D8D8D">
+                <a href="{{url('team/displayOne',['team_name'=> $team['team_name']])}}" class="collection-item"  ><span class="new badge" style="margin-top: 35px" >{{ $team[0]['count'] }}</span>
+                    {{ $team['team_name'] }}
+                    <span style="color: #8D8D8D">
                     Team Founder:{{ $team['team_funder_id'] }}
-                    BIO:{{$team['team_info']}}
                 </span>
-
+                    {{--    <p>
+                            <div style="height: 20px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;color: #8D8D8D">
+                            BIO:{{$team['team_info']}}
+                            </div>
+                        </p>--}}
             </a>
 
             @endforeach
@@ -36,8 +39,11 @@
     @endif
 
 
-<div>
+    <div>
 
 
-</div>
+    </div>
 @endsection
+<script>
+
+</script>
