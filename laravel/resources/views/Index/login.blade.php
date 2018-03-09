@@ -136,7 +136,9 @@
                             })
                             .done(function(data) {
                                 if(data.flag){
-                                    layer.load();
+                                    layer.load(1, {
+                                        shade: [0.1,'#fff'] //0.1透明度的白色背景
+                                    });
                                     setTimeout(function(){
                                         layer.closeAll('loading');
                                         window.location.href="{{ url('home') }}";

@@ -23,7 +23,7 @@
             @else
 
                 <div class="layui-inline" style="margin-left:200px;margin-top: 30px;" id="profile" >
-                    <img class="layui-circle" style="height: 100px;width:100px;" src="{{ asset('/uploads/user_profile/'.$result[0]['user_profile']) }}" onclick='javascrtpt:window.location.href="{{ url('user/displayInfo') }}"'>
+                    <img class="layui-circle" style="height: 100px;width:100px;" src="{{ asset('/uploads/user_profile/'.$result[0]['user_profile']) }}" onclick='javascrtpt:window.location.href="#"'>
                     <p style="text-align: center;margin-top: 10px;color: #0C0C0C">
                        Name: {{$result[0]['user_name']}}
                     </p>

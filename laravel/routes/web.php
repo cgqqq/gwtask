@@ -66,11 +66,7 @@ Route::group(['middleware'=>'auth','namespace'=>'User','prefix'=>'user'],functio
 
     Route::any('displaySearchResult', 'UserController@displaySearchResult');
 
-    Route::any('manageTeamMember','TeamController@manageTeamMember')->name('ManageTeamMember');
 
-    Route::any('manageTeamMemberAdd','TeamController@manageTeamMemberAdd')->name('ManageTeamMemberAdd');
-
-    Route::any('sendInvitation','TeamController@sendInvitation');
 
 	
 });
@@ -103,6 +99,12 @@ Route::group(['middleware'=>'auth','namespace'=>'Team','prefix'=>'team'],functio
 	Route::post('addTeammates','TeamController@addTeammates');
 
     Route::any('displaySearchResult', 'TeamController@displaySearchResult')->name('SearchAllTeam');
+
+    Route::any('manageTeamMember','TeamController@manageTeamMember')->name('ManageTeamMember');
+
+    Route::any('manageTeamMemberAdd','TeamController@manageTeamMemberAdd')->name('ManageTeamMemberAdd');
+
+    Route::any('sendInvitation','TeamController@sendInvitation');
 
 
 });
