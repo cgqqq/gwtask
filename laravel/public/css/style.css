@@ -1222,3 +1222,7 @@ span.badge2.new:after {
 	font-weight: 600;
 	font-size: larger;
 }
+.scroll_team{
+	overflow: auto;
+	overflow-x: hidden;
+}

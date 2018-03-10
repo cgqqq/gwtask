@@ -11,13 +11,8 @@
 					<form method="post" style="background-color: #34bf49;border-radius: 42px;padding: 4px" action="{{ url('team/displaySearchMineCre') }}">
 					 <input type="hidden" name="_token" value="{{csrf_token()}}">
 						<div class="btn-group" >
-							<button type="button" class="dropdown-toggle search" data-toggle="dropdown">
+							<button type="button" class="search">
 							</button>
-							<ul class="dropdown-menu" role="menu" style="z-index: 9999;margin-top: 5px;">
-								<li><a href="#">By Team Name</a></li>
-								<li><a href="#">By Team ID</a></li>
-
-							</ul>
 						</div>
 						<input name='search-key' type="text" placeholder="Search For Teams……" >
 
@@ -51,14 +46,22 @@
 						<img src="{{URL::asset('/images/team.png')}}" alt=""  style="border:3px dashed #000"/>
 						<div class="item-info-overlay">
 
-							<a href="#" class="overlay-link"></a>
-							<h3 class="text-white semi-bold p-t-60 project-title " style="color: #fff200;font-weight: 900;">
-								Team Name:{{ $team['team_name'] }}</h3>
+							<div style="width: 280px;height: 40px;white-space:nowrap;overflow: hidden;text-overflow: ellipsis;">
+								<h3 class="text-white semi-bold p-t-60 project-title " style="color: #fff200;font-weight: 900;">
+									Team Name:{{ $team['team_name'] }}</h3>
+							</div>
 							<P> </P>
-							<p class="project-description">
-								Team Founder:{{ $team['user_name'] }}</p>
-							<p class="project-description">
-								Team Intro:{{ $team['team_info'] }}</p>
+							<div style="width: 280px;height: 30px;white-space:nowrap;overflow: hidden;text-overflow: ellipsis;">
+								<p class="project-description">
+									Team Founder:{{ $team['user_name'] }}</p>
+							</div>
+							<div style="width: 280px;height: 20px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap">
+								<p class="project-description">
+									Team Intro:{{ $team['team_info'] }}</p>
+							</div>
+							<div style="width: 300px;	" class="project-description">
+								<button class="view_icon" onclick='javascrtpt:window.location.href="{{url('team/displayOne',['team_name'=> $team['team_name']])}}"'> </button>
+							</div>
 
 						</div>
 

@@ -85,7 +85,8 @@
 
 
                     <div class="search_input2" style="width: 450px;float: right;margin-top: 15px">
-                     @if(empty($_COOKIE['flag']) or ($_COOKIE['flag'])==1)
+
+                     @if(empty($_COOKIE['flag']) or $_COOKIE['flag']==1)
                             <button type="button" id="search_user" class="search_btn">
                             </button>
                         <form style="background-color: #34bf49;border-radius:40px;margin-right: 0;" method="post" action="{{url('user/displaySearchResult')}}">
@@ -104,11 +105,12 @@
 
 
                         </form>
+
                         @endif
                     </div>
 
                     {{--主要内容区域--}}
-                    <div style="background-color:#fcfcfc;width:1100px;min-height:800px;height:auto;margin-left: 0px;margin-right: 0px; padding-top:35px;padding-left:30px;  " class="shadow">
+                    <div style="background-color:#fcfcfc;width:1100px;min-height:900px;height:auto;margin-left: 0px;margin-right: 0px; padding-top:35px;padding-left:30px;  " class="shadow">
                         @section('content')
 
                           首页未设计
@@ -173,20 +175,15 @@
         var id = document.getElementById('search_team');
         if(id!=null){
             setCookie('flag',1);
-            setCookie('url',"{{url('user/displaySearchResult')}}");
-            setCookie('target',"search_user");
-            setCookie('placeholder',"Search For User With ID......");
             location.reload();
 
         }
         else{
             setCookie('flag',2);
-            setCookie('url',"{{url('team/displaySearchResult')}}");
-            setCookie('target',"search_team");
-            setCookie('placeholder',"Search For Team With Team Name or Info......");
             location.reload();
         }
     });
+
 
     /*对cookie的操作*/
     /*修改cookie*/

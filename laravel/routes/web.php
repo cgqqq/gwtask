@@ -66,9 +66,10 @@ Route::group(['middleware'=>'auth','namespace'=>'User','prefix'=>'user'],functio
 
     Route::any('displaySearchResult', 'UserController@displaySearchResult');
 
+    Route::get('displayOthersInfo/{user_id}','UserController@displayOthersInfo');
 
+    Route::get('displayOthersInfoTeams','UserController@displayOthersInfoTeams')->name('displayOthersInfoTeams');
 
-	
 });
 //团队相关路由
 Route::group(['middleware'=>'auth','namespace'=>'Team','prefix'=>'team'],function(){

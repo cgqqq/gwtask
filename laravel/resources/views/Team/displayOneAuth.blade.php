@@ -18,7 +18,7 @@
 
 			<p STYLE="color: #8D8D8D;font-size: 15px;margin-left: 40px;margin-bottom: 6px" style="width: 500px	;float: left">
 				Funder :
-				<img class="activator" src="{{URL::asset('/uploads/user_profile/'.$team_info['user_profile'])}}"  style="width: 30px;height: 30px;border-radius: 100%">
+				<img class="activator" src="{{URL::asset('/uploads/user_profile/'.$team_info['user_profile'])}}"  style="width: 30px;height: 30px;border-radius: 100%" onclick='javascrtpt:window.location.href="{{ url('user/displayInfo') }}"'>
 
 			</p>
 
@@ -83,10 +83,17 @@
 				<div style="width: 245px;height: 520px;margin-left: 5px;margin-top: 24px;">
 					@foreach($pageOut as $member)
 						<div class="layui-inline" style="margin-left:30px;margin-top: 15px;width: 40px;float:left;" id="profile" >
-							<img class="layui-circle" style="height: 50px;width:50px;" src="{{URL::asset('/uploads/user_profile/'.$member['user_profile'])}}" onclick='javascrtpt:window.location.href="#"'>
+                            @if($member['user_id']==session('user_id'))
+							<img class="layui-circle" style="height: 50px;width:50px;" src="{{URL::asset('/uploads/user_profile/'.$member['user_profile'])}}" onclick='javascrtpt:window.location.href="{{url('user/displayInfo')}}"'>
 							<p style="margin-top: 5px;color: #8D8D8D;font-weight: 500;font-size: 12px;text-align: center;margin-left: 5px;width:50px;height:20px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;  ">
 								{{$member['user_name']}}
 							</p>
+                            @else
+                                <img class="layui-circle" style="height: 50px;width:50px;" src="{{URL::asset('/uploads/user_profile/'.$member['user_profile'])}}" onclick='javascrtpt:window.location.href="{{url('user/displayOthersInfo/'.$member['user_id'])}}"'>
+                                <p style="margin-top: 5px;color: #8D8D8D;font-weight: 500;font-size: 12px;text-align: center;margin-left: 5px;width:50px;height:20px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;  ">
+                                    {{$member['user_name']}}
+                                </p>
+                            @endif
 						</div>
 
 					@endforeach

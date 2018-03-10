@@ -381,4 +381,33 @@ class UserController extends Controller
         return view('User/displaySearchResult',['friendship'=>$friendship,'result'=>$result]);
     }
 
+    public function displayOthersInfo(Request $request,$user_id,User $user,Team $team,Membership $membership,Friend $friend){
+        /*查询用户信息*/
+        $user_info=$user->get(['user_id'=>$user_id])->toArray();
+
+     /*   $team_mine_info=$team->get(['team_funder_id'=>$user_id])->toArray();
+        $team_in_info=$membership->where(['member_id'=>$user_id])->join('team','membership.team_id','=','team.team_id')->get()->toArray();
+        $following=$friend->get(['follow_id'=>$user_id])->toArray();
+        $followingNum=count($following);
+        $follower=$friend->get(['followed_id'=>$user_id])->toArray();
+        $followerNum=count($follower);*/
+
+        return view('User/displayOthersInfo',['user_info'=>$user_info[0]]);
+    }
+    public function displayOthersInfoTeams(Request $request,Membership $membership,Team $team,User $user){
+        $user_id=$request->input('user_id');
+        $user_info=$user->get(['user_id'=>$user_id])->toArray();
+        $team_mine_info=$team->where(['team_funder_id'=>$user_id])->join('user','user.user_id','=','team.team_funder_id')->get()->toArray();
+        $team_in_info=$membership->where(['member_id'=>$user_id])
+                                 ->join('team','membership.team_id','=','team.team_id')
+                                 ->join('user','user.user_id','=','team.team_funder_id')->get()->toArray();
+
+
+        return view('User/displayOthersInfoTeams',['teams'=>$team_in_info,'user_info'=>$user_info[0],'myTeams'=>$team_mine_info]);
+
+    }
+
+
+
+
 }

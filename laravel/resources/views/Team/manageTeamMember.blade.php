@@ -7,10 +7,10 @@
     <div style="float: left;width: 120px;height:800px;margin-left: 30px;">
         <div style="margin-left: 20px;margin-top:50px;width: 40px;display: block" id='profile'>
             <a href="{{url('team/manageTeamMember?team_name='.$team_info['team_name'])}}">
-            <img class="layui-circle" src="{{URL::asset('/images/delete.png')}}" onclick='javascrtpt:window.location.href="#"'>
+            <img class="layui-circle" src="{{URL::asset('/images/delete.png')}}" >
             </a>
             <a href="{{url('team/manageTeamMemberAdd?team_name='.$team_info['team_name'])}}">
-            <img id="add" class="layui-circle" style="height: 50px;width:50px;margin-top: 60px;border: 2px solid black" src="{{URL::asset('/images/add.png')}}" onclick='javascrtpt:window.location.href="#"'>
+            <img id="add" class="layui-circle" style="height: 50px;width:50px;margin-top: 60px;border: 2px solid black" src="{{URL::asset('/images/add.png')}}">
             </a>
         </div>
     </div>
@@ -46,7 +46,7 @@
                    <input type="hidden" class="user-id" value="{{ $member['user_id'] }}">
                    <td class="user-name" style="border-style: none">
                        <script type="text/javascript">
-                           if({{ $team_info['user_name'] }}!={{ $member['user_name'] }}){
+                           if(String({{$team_info['user_name']}}) != String({{$member['user_name']}})){
                                window.document.write("<input type='checkbox' class='checkOne' style='display:inline-block;position :absolute ; top:12px;'>");
                            }
                            else{
@@ -55,7 +55,13 @@
                                    "</div>");
                            }
                        </script>
-                       <div style="position: absolute;top: 15px;left: 35px;display: inline-block;">{{ $member['user_name'] }}</div>
+                       <div style="position: absolute;top: 15px;left: 35px;display: inline-block;" class="newA">
+                           @if($member['user_id']!=session('user_id')){{--因为funder才能delete team mate--}}
+                           <a href="{{url('user/displayOthersInfo/'.$member['user_id'])}}">{{ $member['user_name'] }}</a>
+                       @else
+                           <a href="{{url('user/displayInfo')}}">{{ $member['user_name'] }}</a>
+                           @endif
+                       </div>
                    </td>
                    <td style="border-style: none">{{ $member['user_email'] }}</td>
                    <td style="border-style: none">

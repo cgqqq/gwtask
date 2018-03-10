@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Team;
 
+use App\Models\Invitation;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Database\QueryException;
@@ -185,7 +186,6 @@ class TeamController extends Controller
         //获取该团队创建者信息
         $funderName = $user->where(['user_id'=>$teamInfo[0]['team_funder_id']])->value('user_name');
         $funderProfile = $user->where(['user_id'=>$teamInfo[0]['team_funder_id']])->value('user_profile');
-
         //团队信息加入该团队创建者信息
         $teamInfo[0] = array_merge($teamInfo[0],['user_name'=>$funderName]);
         $teamInfo[0] = array_merge($teamInfo[0],['user_profile'=>$funderProfile]);
@@ -491,20 +491,56 @@ class TeamController extends Controller
         return view('Team/manageTeamMember',['team_info'=>$teamInfo[0],'pageOut'=>$pageOut,'paged'=>$paged]);
 
     }
-    public function manageTeamMemberAdd(Request $request,User $user,Team $team){
+    public function manageTeamMemberAdd(Request $request,User $user,Team $team,Membership $membership){
         $team_name=$request->input('team_name');
         $teamInfo=$team->get(['team_name'=>$team_name])->toArray();
 
         $user_id=$request->input('key');
         $result_user=$user->get(['user_id'=>$user_id])->toArray();
+        $result=$membership->get(['member_id'=>$user_id])->toArray();
+        $isMember=false;
+        if(!empty($result)){
+            $isMember=true;
+        }
 
-        return view('Team/manageTeamMemberAdd',['team_info'=>$teamInfo[0],'result'=>$result_user]);
+        return view('Team/manageTeamMemberAdd',['team_info'=>$teamInfo[0],'result'=>$result_user,'isMember'=>$isMember]);
     }
 
-    public function sendInvitation(Request $request,User $user,Team $team){
+    public function sendInvitation(Request $request,Invitation $invitation){
+        /*验证数据*/
+     /*   $request->validate([
+            'team_id'=>'required',
+            'user_id'=>'required',
+           /* 'title'=>'max:100',
+            'content'=>'max:10000'*/
+    /*    ]);*/
         $team_id=$request->input('team_id');
         $user_id=$request->input('user_id');
         /*需要设计一个数据表存储msg*/
+        $invitation_data= [
+            'invitation_id'=>md5(uniqid(mt_rand(),true)),
+            'team_id'=>$team_id,
+            'user_id'=>$user_id,
+            'title'=>$request->input('title'),
+            'content'=>$request->input('content'),
+            'time'=>strtotime(date("Y-m-d H:i:s")),
+        ];
+
+        try {
+            //开始事务
+            DB::beginTransaction();
+            $invitation->add($invitation_data);
+            //提交事务
+            DB::commit();
+            //返回前端添加成功结果
+            return response()->json(['msg'=>'Your invitation has been successfully sent!!','icon'=>'1']);
+       } catch(QueryException $ex) {
+            //回滚事务
+            DB::rollback();
+            //返回前端添加失败结果
+            return response()->json(['msg'=>'Network is busy now,try again later！','icon'=>'2']);
+        }
+
     }
 
 }

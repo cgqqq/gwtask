@@ -31,7 +31,9 @@
                 </div>
                 <div style="width:50px;float: right;margin-top: 70px;margin-right: 250px">
                     @if($result[0]['user_id']==session('user_id'))
-                        <button class="layui-btn layui-btn-small" style="background-color: #999999;border: 1px solid #0C0C0C; color: #0C0C0C;">Invite</button>
+                        <button class="layui-btn layui-btn-small" style="background-color: #34bf49;border: 1px solid #0C0C0C; color: #0C0C0C;">Me</button>
+                    @elseif($isMember)
+                        <button class="layui-btn layui-btn-small" style="background-color: #34bf49;border: 1px solid #0C0C0C; color: #0C0C0C">Member</button>
                     @else
                         <button class="layui-btn layui-btn-small invite" style="background-color: #fcfcfc;border: 1px solid #0C0C0C; color: #0C0C0C">Invite</button>
                     @endif
@@ -51,29 +53,26 @@
                         layer.close(index);
                         layer.prompt({title: 'Invitation',  btn:['Confirm','Cancle'],formType: 2}, function(text2, index){
                             layer.close(index);
-                            layer.msg('Invitaion Dilivered!');
                             var team_id = $(this).parent().siblings("[name='team_id']").val();
                             var user_id=$(this).parent().siblings("[name='user_id']").val();
+                            var title=text1;
+                            var content=text2;
                             $.ajax({
                                 url: "{{ url('team/sendInvitation') }}",
                                 type: 'post',
                                 dataType: 'json',
-                                data: {'team_id': team_id,'user_id':user_id,"_token":"{{csrf_token()}}"}
+                                data: {'team_id': team_id,'user_id':user_id,'title':title,'content':content,"_token":"{{csrf_token()}}"}
                             })
                                 .done(function(data) {
-                                    layer.msg(data.msg,{
-                                        icon:data.icon
-                                    });
-                                    if(data.icon==='1'){
+                                    layer.msg(data.msg);
+                                    /*if(data.icon==='1'){
                                         setTimeout("window.location.reload()",1000);
 
-                                    }
+                                    }*/
 
                                 })
                                 .fail(function() {
-                                    layer.msg('服务器未响应!',{
-                                        icon:5
-                                    });
+                                    layer.msg(data.msg);
                                 })
                                 .always(function() {
                                     console.log("complete");

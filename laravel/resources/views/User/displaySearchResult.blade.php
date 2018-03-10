@@ -11,11 +11,14 @@
             <div class="layui-field-box">
                 <div class="card" style="width: 200px;height: 100px;">
                     <div class="card-image">
-                        <img class="activator" src="{{URL::asset('/uploads/user_profile/'.$result[0]['user_profile'])}}"  style="width: 200px;height: 200px;">
+                        @if($result[0]['user_id']==session('user_id'))
+                        <img class="activator" src="{{URL::asset('/uploads/user_profile/'.$result[0]['user_profile'])}}"  style="width: 200px;height: 200px;"  onclick='javascrtpt:window.location.href="{{url('user/displayInfo')}}"'>
+                        @else
+                        <img class="activator" src="{{URL::asset('/uploads/user_profile/'.$result[0]['user_profile'])}}"  style="width: 200px;height: 200px;"  onclick='javascrtpt:window.location.href="{{url('user/displayOthersInfo/'.$result[0]['user_id'])}}"'>
+                        @endif
                     </div>
                     <div class="card-content">
                         <span class="card-title activator grey-text text-darken-4">{{$result[0]['user_name']}}</span>
-                        <p><a href="#">This is a link</a></p>
                     </div>
                 </div>
                 <div class="switch" style="float: right;">
