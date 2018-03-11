@@ -111,6 +111,11 @@ Route::group(['middleware'=>'auth','namespace'=>'Team','prefix'=>'team'],functio
 
 
 });
+//任务路由
+Route::group(['middleware'=>'auth','namespace'=>'Task','prefix'=>'task'],function(){
+	Route::get('displayAdd/{team_name}','TaskController@displayAdd');
+
+});
 
 Auth::routes();
 

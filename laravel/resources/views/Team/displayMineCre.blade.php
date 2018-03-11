@@ -83,6 +83,7 @@
 								<!-- <li><a href="#">Change Team Name</a></li> -->
 								<li><a href="{{url('team/displayOne',$team['team_name'])}}">Show teammates</a></li>
 								<li><a href="{{url('user/displayAllForAdd',$team['team_name'])}}">Add teammates</a></li>
+								<li><a href="{{url('task/displayAdd',$team['team_name'])}}">Create task</a></li>
 								<!-- <li id="quit-team"><a href="#">Quit/Dismiss</a></li> -->
 								<li><a href="#">others</a></li>
 
