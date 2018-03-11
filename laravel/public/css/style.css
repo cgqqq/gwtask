@@ -624,7 +624,7 @@ User_Profile*/
 	font-weight: 800;
 	font-size: large;
 	color: #0C0C0C;
-	margin-left: 350px;
+	margin:100px;
 }
 /*
 -----------------------------------search input----------------------------------------------------
@@ -787,7 +787,8 @@ button.sort{
 
 /*
 Follow Action Switch*/
-.switch,
+.switch
+
 .switch * {
 	-webkit-tap-highlight-color: transparent;
 	-webkit-user-select: none;
@@ -1222,7 +1223,7 @@ span.badge2.new:after {
 	font-weight: 600;
 	font-size: larger;
 }
-.scroll_team{
+.scroll{
 	overflow: auto;
 	overflow-x: hidden;
 }

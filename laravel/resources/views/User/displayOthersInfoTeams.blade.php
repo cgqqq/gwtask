@@ -38,7 +38,7 @@
             </ul>
             <div class="layui-tab-content" style="color: #0C0C0C">
                 <div class="layui-tab-item layui-show" >
-                    <div class="portfolio-grid portfolioContainer scroll_team"  STYLE="width: 100%;height: 750px;">
+                    <div class="portfolio-grid portfolioContainer scroll"  STYLE="width: 100%;height: 750px;">
                         <ul id="thumbs" class="col3"  style="width: 100%;height: 100%; ">
                             @foreach($teams as $teams)
                                 <li style="width: 350px;height: 265px;margin-left:10px;margin-bottom: 60px;margin-top: 30px;">
@@ -80,7 +80,7 @@
                     </div>
                 </div>
                 <div class="layui-tab-item" >
-                    <div class="portfolio-grid portfolioContainer scroll_team"  STYLE="width: 100%;height: 750px;">
+                    <div class="portfolio-grid portfolioContainer scroll"  STYLE="width: 100%;height: 750px;">
                         <ul id="thumbs" class="col3"  style="width: 100%;height: 100%; ">
                     @foreach($myTeams as $myTeams)
                     <li style="width: 350px;height: 265px;margin-left:10px;margin-bottom: 60px;margin-top: 30px;">

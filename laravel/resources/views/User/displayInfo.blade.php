@@ -2,8 +2,48 @@
 
 
 @section('content')
+<div style="width: 1030px;height: 800px">
+	<div style="background-color: #4aaf51;width: 1030px;height: 300px;float: left;color: #0C0C0C" class="shadow">
+		<img class="layui-circle" style="height: 150px;width:150px;margin-top: 5%;margin-left:43%" src="{{ asset(session('user_profile')) }}" >
+		<p style=" background-color:#fcfcfc;margin-top: 10px;font-weight: 800;font-size: 16px;text-align:center; width:1030px;height:33px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;  ">
+			{{ $assign['user_name']}}
+		</p>
 
-	<div class="layui-inline" style="margin-left:430px;" id="profile" >
+		</div>
+	<div style="width: 1030px;height: 500px;float: left">
+		<div style="background-color: #0C0C0C;width: 350px;height: 500px;float: left">
+			<div class="collection" style="margin-top: 20px;width: 350px;padding: 5px;">
+				<a href="{{url('user/displayInfo')}}" class="collection-item" style="font-size: 20px;line-height: 30px;">
+					<img class="layui-circle" style="height: 35px;width:35px;" src="{{URL::asset('/images/personal_info.png')}}" >
+					Pesonal Information
+				</a>
+				<a href="{{url('user/displayInfoOptions')}}" class="collection-item" style="font-size: 20px;line-height: 30px">
+					<img class="layui-circle" style="height: 35px;width:35px;" src="{{URL::asset('/images/option.png')}}" >
+					Options
+				</a>
+				<a href="" class="collection-item" style="font-size: 20px;line-height: 30px">
+					<img class="layui-circle" style="height: 35px;width:35px;" src="{{URL::asset('/images/mail_box.png')}}" >
+					Mail Box
+				</a>
+
+			</div>
+		</div>
+		<div style="width: 680px;height: 500px;float: left">
+			<div class="personal_info">
+				<hr class="layui-bg-black">
+				User ID ：{{ $assign['user_id']}}
+				<hr class="layui-bg-black">
+				Name ：{{ $assign['user_name']}}
+				<hr class="layui-bg-black">
+				Email Address：{{ $assign['user_email']}}
+				<hr class="layui-bg-black">
+				<div id="password-field"></div>
+				<button id="edit" class="layui-btn layui-btn-small" style="background-color: #fff200;border: 2px solid black;color: black">Change Passcode</button></div>
+		</div>
+	</div>
+
+</div>
+	{{--<div class="layui-inline" style="margin-left:430px;" id="profile" >
 		<img class="layui-circle" style="height: 150px;width:150px;" src="{{ asset(session('user_profile')) }}">
 
 	</div>
@@ -23,7 +63,7 @@
 	Email Address：{{ $assign['user_email']}}
 	<hr class="layui-bg-black">
 	<div id="password-field"></div>
-	<button id="edit" class="layui-btn layui-btn-small">Change Passcode</button></div>
+	<button id="edit" class="layui-btn layui-btn-small">Change Passcode</button></div>--}}
 	<script type="text/javascript">
 	$(function() {
 		layui.use('layer',function(){

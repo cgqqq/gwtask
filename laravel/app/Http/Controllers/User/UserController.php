@@ -407,6 +407,10 @@ class UserController extends Controller
 
     }
 
+    public function displayInfoOptions(){
+        return view('User/displayInfoOptions');
+    }
+
 
 
 

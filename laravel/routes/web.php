@@ -70,6 +70,8 @@ Route::group(['middleware'=>'auth','namespace'=>'User','prefix'=>'user'],functio
 
     Route::get('displayOthersInfoTeams','UserController@displayOthersInfoTeams')->name('displayOthersInfoTeams');
 
+    Route::any('displayInfoOptions','UserController@displayInfoOptions');
+
 });
 //团队相关路由
 Route::group(['middleware'=>'auth','namespace'=>'Team','prefix'=>'team'],function(){
