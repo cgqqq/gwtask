@@ -29,17 +29,18 @@
                     </p>
 
                 </div>
-                <div style="width:50px;float: right;margin-top: 70px;margin-right: 250px">
+                <div style="width:50px;float: right;margin-top: 70px;margin-right: 250px;color: #0C0C0C">
                     @if($result[0]['user_id']==session('user_id'))
                         <button class="layui-btn layui-btn-small" style="background-color: #34bf49;border: 1px solid #0C0C0C; color: #0C0C0C;">Me</button>
                     @elseif($isMember)
                         <button class="layui-btn layui-btn-small" style="background-color: #34bf49;border: 1px solid #0C0C0C; color: #0C0C0C">Member</button>
                     @else
                         <button class="layui-btn layui-btn-small invite" style="background-color: #fcfcfc;border: 1px solid #0C0C0C; color: #0C0C0C">Invite</button>
+                        <input type="hidden" name="team_id" value="{{ $team_info['team_id'] }}">
+                        <input type="hidden" name="user_id" value="{{ $result[0]['user_id'] }}">
                     @endif
                 </div>
-                <input type="hidden" name="team_id" value="{{ $team_info['team_id'] }}">
-                <input type="hidden" name="user_id" value="{{ $result[0]['user_id'] }}">
+
             @endif
         </div>
     </div>
@@ -49,12 +50,11 @@
         $(function() {
             layui.use('layer', function () {
                 $('.result').on('click','.invite',function(){
-                    layer.prompt({title: 'Please Input Message Title!', closeBtn:2, btn:['Next','Cancle'],formType: 0}, function(text1, index){
+                    var team_id = $(this).siblings("[name='team_id']").val();
+                    var user_id=$(this).siblings("[name='user_id']").val();
+                    layer.prompt({title: 'Please Input Message Title!', closeBtn:2, btn:['Next','Cancle'],formType: 0}, function(text1,index){
                         layer.close(index);
-                        layer.prompt({title: 'Invitation',  btn:['Confirm','Cancle'],formType: 2}, function(text2, index){
-                            layer.close(index);
-                            var team_id = $(this).parent().siblings("[name='team_id']").val();
-                            var user_id=$(this).parent().siblings("[name='user_id']").val();
+                        layer.prompt({title: 'Invitation',btn:['Confirm','Cancle'],formType: 2}, function(text2,index){
                             var title=text1;
                             var content=text2;
                             $.ajax({
@@ -69,7 +69,6 @@
                                         setTimeout("window.location.reload()",1000);
 
                                     }*/
-
                                 })
                                 .fail(function() {
                                     layer.msg(data.msg);
@@ -77,6 +76,7 @@
                                 .always(function() {
                                     console.log("complete");
                                 });
+                            layer.close(index);
                         });
                     });
 

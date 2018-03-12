@@ -9,6 +9,7 @@ use Illuminate\Validation\Rule;
 use App\Models\Friend;
 use App\Models\Membership;
 use App\Models\Team;
+use App\Models\App_join;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
@@ -409,6 +410,35 @@ class UserController extends Controller
 
     public function displayInfoOptions(){
         return view('User/displayInfoOptions');
+    }
+    public function applyJoinTeam(Request $request,App_join $app_join){
+        $request->validate([
+            'team_id'=>'required',
+            'applicant_id'=>'required'
+        ]);
+        $team_id=$request->input('team_id');
+        $applicant_id=$request->input('applicant_id');
+        /*需要设计一个数据表存储msg*/
+        $app_join_data= [
+            'app_team_id'=>md5(uniqid(mt_rand(),true)),
+            'team_id'=>$team_id,
+            'applicant_id'=>$applicant_id,
+            'status'=>'0',
+        ];
+        try {
+            //开始事务
+            DB::beginTransaction();
+            $app_join->add($app_join_data);
+            //提交事务
+            DB::commit();
+            //返回前端添加成功结果
+            return response()->json(['msg'=>'Your invitation has been successfully sent!!','icon'=>'1']);
+        } catch(QueryException $ex) {
+            //回滚事务
+            DB::rollback();
+            //返回前端添加失败结果
+            return response()->json(['msg'=>'Network is busy now,try again later！','icon'=>'2']);
+        }
     }
 
 

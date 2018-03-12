@@ -27,18 +27,20 @@
 		<div style="float: left;width: 800px;height: 630px; ">
 			<div style="border-right: double 4px #8D8D8D;float: left;width:250px;height: 630px; color: #0C0C0C">
 				<div class="collection" style="margin-top: 20px;width: 230px;margin-right: 20px;padding: 5px;">
-
+                    <a href="{{url('task/displayAdd',$team_info['team_name'])}}" class="collection-item" style="font-size: 12px;line-height: 30px">
+                        Create Tasks
+                    </a>
 					<a href="#!" class="collection-item" style="font-size: 12px;line-height: 30px"><span class="new badge2" style="margin-top: 10px;font-size: 10px">99</span>
-						All Tasks（所有）
+						All Tasks
 					</a>
 					<a href="#!" class="collection-item" style="font-size: 12px;line-height: 30px"><span class="new badge2" style="margin-top: 10px;font-size: 10px">99</span>
-						Completed Tasks(已完成)
+						Completed Tasks
 					</a>
 					<a href="#!" class="collection-item" style="font-size: 12px;line-height: 30px"><span class="new badge2" style="margin-top: 10px;font-size: 10px">99</span>
-						Uncompleted Tasks（未完成）
+						Uncompleted Tasks
 					</a>
 					<a href="#!" class="collection-item" style="font-size: 12px;line-height: 30px"><span class="new badge2" style="margin-top: 10px;font-size: 10px">99</span>
-						Resource Sharing
+						Resource Sharings
 					</a>
 
 				</div>

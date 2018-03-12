@@ -508,12 +508,12 @@ class TeamController extends Controller
 
     public function sendInvitation(Request $request,Invitation $invitation){
         /*验证数据*/
-     /*   $request->validate([
+        $request->validate([
             'team_id'=>'required',
             'user_id'=>'required',
-           /* 'title'=>'max:100',
-            'content'=>'max:10000'*/
-    /*    ]);*/
+           'title'=>'max:100',
+            'content'=>'max:10000'
+        ]);
         $team_id=$request->input('team_id');
         $user_id=$request->input('user_id');
         /*需要设计一个数据表存储msg*/
@@ -542,5 +542,6 @@ class TeamController extends Controller
         }
 
     }
+
 
 }

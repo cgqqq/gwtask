@@ -72,6 +72,8 @@ Route::group(['middleware'=>'auth','namespace'=>'User','prefix'=>'user'],functio
 
     Route::any('displayInfoOptions','UserController@displayInfoOptions');
 
+    Route::any('applyJoinTeam','UserController@applyJoinTeam');
+
 });
 //团队相关路由
 Route::group(['middleware'=>'auth','namespace'=>'Team','prefix'=>'team'],function(){
@@ -108,7 +110,6 @@ Route::group(['middleware'=>'auth','namespace'=>'Team','prefix'=>'team'],functio
     Route::any('manageTeamMemberAdd','TeamController@manageTeamMemberAdd')->name('ManageTeamMemberAdd');
 
     Route::any('sendInvitation','TeamController@sendInvitation');
-
 
 });
 //任务路由

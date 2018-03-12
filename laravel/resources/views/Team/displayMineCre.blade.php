@@ -32,7 +32,7 @@
 				</div>
 				@if($pageout==null)
 					<div style="margin-top: 20%;">
-						<p class="Big_Font">You Haven't Join In Any Team Yet!<br>Go <a href="{{url('team/displayAdd')}}" class="Big_Font">Create</a> One!</p>
+						<p class="Big_Font">You Haven't Create Any Team Yet!<br>Go <a href="{{url('team/displayAdd')}}" class="Big_Font">Create</a> One!</p>
 					</div>
 
 

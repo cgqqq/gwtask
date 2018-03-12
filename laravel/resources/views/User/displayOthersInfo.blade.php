@@ -15,7 +15,7 @@
     <div style="width: 280px;height:520px;float: left">
         <div class="collection" style="margin-top: 20px;width: 280px;padding: 5px;">
             <a href="" class="collection-item" style="font-size: 20px;line-height: 30px">
-                Dynamics
+                Resource Sharings
             </a>
             <a href="{{url('user/displayOthersInfoTeams?user_id=2')}}" class="collection-item" style="font-size: 20px;line-height: 30px">
                 Teams

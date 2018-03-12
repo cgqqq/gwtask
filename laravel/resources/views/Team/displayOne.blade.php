@@ -10,6 +10,7 @@
 		<span style="font-size: 50px;font-weight: 800;color: #0C0C0C;font-family: Arial;margin-left: 40px;margin-top: 60px">
 		{{ $team_info['team_name'] }}
 			<input type="hidden" name="team_id" value="{{ $team_info['team_id'] }}">
+            <input type="hidden" name="user_id" value="{{ session('user_id')}}">
 			<div style="float:right;margin-right: 20px;margin-top: 20px;background-color: transparent;width: 100px;height: 100px">
 				@if(!$data['belong2team'])
 					<button class="layui-btn layui-btn-small join-team" style="background-color: #fcfcfc;border: 1px solid #0C0C0C; color: #0C0C0C">Join</button>
@@ -154,15 +155,15 @@
                 $('.checkOne').prop('checked', $(this).prop('checked'))
             });
         });
-        $(function(){
+   /*     $(function(){
             layui.use('layer',function(){
                 $('.team').on('click','.join-team',function(){
                     var team_id = $(this).parent().siblings("[name='team_id']").val();
                     $.ajax({
-                        url: "{{ url('team/join') }}",
+                        url: "{{--{{ /*url('team/join')*/ }}--}}",
                         type: 'get',
                         dataType: 'json',
-                        data: {'team_id': team_id,'member_id':"{{ session('user_id') }}","_token":"{{csrf_token()}}"}
+                        data: {'team_id': team_id,'member_id':"{{--{{ /*session('user_id') */}}--}}","_token":"{{--{{csrf_token()}}--}}"}
                     })
                         .done(function(data) {
                             layer.msg(data.msg,{
@@ -186,7 +187,7 @@
             });
         });
 
-        $(function(){
+*/        $(function(){
             layui.use('layer',function(){
                 $('.team').on('click','.quit-team',function(){
                     var team_id = $(this).parent().siblings("[name='team_id']").val();
@@ -222,86 +223,33 @@
 
         $(function() {
             layui.use('layer', function () {
-                $('.layui-inline').on('click','#add',function(){
-                    layer.prompt({title: 'Please Input User ID or User Name', formType: 1}, function(text1, index){
-                        var team_id = $(this).parent().siblings("[name='team_id']").val();
-                        var user_list = [];
-                        user_list.push(text1);
-                        $.ajax({
-                            url: "{{ url('team/addTeammates') }}",
-                            type: 'post',
-                            dataType: 'json',
-                            data: {'team_id':team_id,'user_list':user_list},
+                $('.team').on('click','.join-team',function(){
+                    var team_id = $(this).parent().siblings("[name='team_id']").val();
+                    var applicant_id = $(this).parent().siblings("[name='user_id']").val();;
+                    $.ajax({
+                        url: "{{ url('user/applyJoinTeam') }}",
+                        type: 'post',
+                        dataType: 'json',
+                        data: {'team_id':team_id,'applicant_id':applicant_id},
+                    })
+                        .done(function(data) {
+                            layer.msg(data.msg)});
+                            /*if(data.icon==1||data.icon==2){
+                                console.log('添加组员失败列表：'+data.fail_list)
+                            }*/
                         })
-                            .done(function(data) {
-                                layer.msg(data.msg,{
-                                    icon:data.icon
-                                });
-                                if(data.icon==1||data.icon==2){
-                                    console.log('添加组员失败列表：'+data.fail_list)
-                                }
-                            })
-                            .fail(function() {
-                                console.log("error");
-                            })
-                            .always(function() {
-                                console.log("complete");
-                            });
-                        layer.close(index);
-                        layer.prompt({title: 'Send Invitation', formType: 2}, function(text2, index){
-                            layer.close(index);
-                            layer.msg('Invitaion has been sent to:'+ text1);
+                        .fail(function() {
+                            console.log("error");
+                        })
+                        .always(function() {
+                            console.log("complete");
                         });
-                    });
-                });
+
+
+
+
             });
         });
-
 	</script>
-	{{--
 
-    @if($pageOut)
-
-    <table class="layui-table" style="width: 900px;">
-    <thead>
-    <tr>
-        <td>团队名称</td>
-        <td>创始人</td>
-        <td>团队介绍</td>
-    </tr>
-    </thead>
-        <tr>
-            <input type="hidden" id="team-id" value="{{ $team_info['team_id'] }}">
-            <td id='team-name'>{{ $team_info['team_name'] }}</td>
-            <td >{{ $team_info['user_name'] }}</td>
-            <td>{{ $team_info['team_info'] }}</td>
-        </tr>
-    </table>
-    <table class="layui-table table-member" style="width: 900px;">
-        <thead>
-            <tr>
-                <td >成员</td>
-                <td >邮箱</td>
-            </tr>
-        </thead>
-        @foreach($pageOut as $member)
-            <tr>
-                <input type="hidden" class="user-id" value="{{ $member['user_id'] }}">
-                <td class="user-name">
-                    {{ $member['user_name'] }}
-                </td>
-                <td>{{ $member['user_email'] }}</td>
-            </tr>
-        @endforeach
-    </table>
-    {{ $paged->links() }}
-
-    @else
-        <div style="margin-top: 150px;margin-left: 450px">
-            <span style="color: #8D8D8D;font-size: 20px;">NO RESULT</span>
-
-
-        </div>
-
-    @endif--}}
 @endsection
