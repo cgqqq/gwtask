@@ -6,7 +6,7 @@
 	<div style="background-color: #4aaf51;width: 1030px;height: 300px;float: left;color: #0C0C0C" class="shadow">
 		<img class="layui-circle" style="height: 150px;width:150px;margin-top: 5%;margin-left:43%" src="{{ asset(session('user_profile')) }}" >
 		<p style=" background-color:#fcfcfc;margin-top: 10px;font-weight: 800;font-size: 16px;text-align:center; width:1030px;height:33px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;  ">
-			{{ $assign['user_name']}}
+			{{ session('user_name')}}
 		</p>
 
 		</div>
@@ -21,60 +21,50 @@
 					<img class="layui-circle" style="height: 35px;width:35px;" src="{{URL::asset('/images/option.png')}}" >
 					Options
 				</a>
-				<a href="" class="collection-item" style="font-size: 20px;line-height: 30px">
+				@if($newsNum=='0')
+				<a href="{{url('user/displayInfoMailBox')}}" class="collection-item" style="font-size: 20px;line-height: 30px">
 					<img class="layui-circle" style="height: 35px;width:35px;" src="{{URL::asset('/images/mail_box.png')}}" >
 					Mail Box
 				</a>
+					@else
+					<a href="{{url('user/displayInfoMailBox')}}" class="collection-item" style="font-size: 20px;line-height: 30px"><span class="new badge2">{{$newsNum}}</span>
+						<img class="layui-circle" style="height: 35px;width:35px;" src="{{URL::asset('/images/mail_box.png')}}" >
+						Mail Box
+					</a>
+				@endif
 
 			</div>
 		</div>
 		<div style="width: 680px;height: 500px;float: left">
+			@section('displayInfo_content')
 			<div class="personal_info">
 				<hr class="layui-bg-black">
-				User ID ：{{ $assign['user_id']}}
+				User ID ：{{ session('user_id')}}
 				<hr class="layui-bg-black">
-				Name ：{{ $assign['user_name']}}
+				Name ：{{ session('user_name')}}
 				<hr class="layui-bg-black">
-				Email Address：{{ $assign['user_email']}}
+				Email Address：{{ session('user_email')}}
 				<hr class="layui-bg-black">
 				<div id="password-field"></div>
-				<button id="edit" class="layui-btn layui-btn-small" style="background-color: #fff200;border: 2px solid black;color: black">Change Passcode</button></div>
+				<button id="edit" class="layui-btn layui-btn-small" style="background-color: #fff200;border: 2px solid black;color: black">Change Passcode</button>
+			</div>
+				@show
+
 		</div>
 	</div>
 
 </div>
-	{{--<div class="layui-inline" style="margin-left:430px;" id="profile" >
-		<img class="layui-circle" style="height: 150px;width:150px;" src="{{ asset(session('user_profile')) }}">
-
-	</div>
-	<div class="icons" style="float: none;padding-top:10px;margin-left: 408px;color: #0C0C0C">
-		<ul>
-			<li style="margin-right: 25px;"><a href="{{  url('user/displayFollow')  }}" class="following_icon"> </a></li>
-			<li><a href="{{ url('user/displayFollower') }}" class="follower_icon"> </a></li>
-
-		</ul>
-	</div>
-	<div class="personal_info">
-	<hr class="layui-bg-black">
-	User ID ：{{ $assign['user_id']}}
-	<hr class="layui-bg-black">
-	Name ：{{ $assign['user_name']}}
-	<hr class="layui-bg-black">
-	Email Address：{{ $assign['user_email']}}
-	<hr class="layui-bg-black">
-	<div id="password-field"></div>
-	<button id="edit" class="layui-btn layui-btn-small">Change Passcode</button></div>--}}
 	<script type="text/javascript">
 	$(function() {
 		layui.use('layer',function(){
 			$('#edit').on('click', function(event) {
 				if($(this).text()==='Change Passcode'){
-					$('#password-field').html("Passcode ：<input type='password' name='password' value={{ $assign['user_password']}}>");
+					$('#password-field').html("Passcode ：<input type='password' name='password' value={{ session('user_password')}}>");
 					$('#edit').text('Confirm');
 					return false;
 				}else{
 					event.preventDefault();
-					var oldPass = "{{ $assign['user_password'] }}";
+					var oldPass = "{{ session('user_password') }}";
 					var newPass = $("input[name='password']").val();
 					if(newPass==='' || newPass===null){
 						layer.tips('密码不能为空!','#password-field',{

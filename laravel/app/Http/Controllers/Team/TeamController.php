@@ -497,10 +497,10 @@ class TeamController extends Controller
 
         $user_id=$request->input('key');
         $result_user=$user->get(['user_id'=>$user_id])->toArray();
-        $result=$membership->get(['member_id'=>$user_id])->toArray();
-        $isMember=false;
-        if(!empty($result)){
-            $isMember=true;
+        $result=count($membership->where(['team_id'=>$teamInfo[0]['team_id'],'member_id'=>$user_id])->get()->toArray());
+        $isMember=0;
+        if($result!=0){
+            $isMember=1;
         }
 
         return view('Team/manageTeamMemberAdd',['team_info'=>$teamInfo[0],'result'=>$result_user,'isMember'=>$isMember]);
@@ -524,6 +524,7 @@ class TeamController extends Controller
             'title'=>$request->input('title'),
             'content'=>$request->input('content'),
             'time'=>strtotime(date("Y-m-d H:i:s")),
+            'status'=>'0'
         ];
 
         try {

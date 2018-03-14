@@ -23,7 +23,7 @@
             @else
 
                 <div class="layui-inline" style="margin-left:200px;margin-top: 30px;" id="profile" >
-                    <img class="layui-circle" style="height: 100px;width:100px;" src="{{ asset('/uploads/user_profile/'.$result[0]['user_profile']) }}" onclick='javascrtpt:window.location.href="#"'>
+                    <img class="layui-circle" style="height: 100px;width:100px;" src="{{ asset('/uploads/user_profile/'.$result[0]['user_profile']) }}" onclick='javascrtpt:window.location.href="{{url('user/displayOthersInfo/'.$result['0']['user_id'])}}"'>
                     <p style="text-align: center;margin-top: 10px;color: #0C0C0C">
                        Name: {{$result[0]['user_name']}}
                     </p>
@@ -32,7 +32,7 @@
                 <div style="width:50px;float: right;margin-top: 70px;margin-right: 250px;color: #0C0C0C">
                     @if($result[0]['user_id']==session('user_id'))
                         <button class="layui-btn layui-btn-small" style="background-color: #34bf49;border: 1px solid #0C0C0C; color: #0C0C0C;">Me</button>
-                    @elseif($isMember)
+                    @elseif($isMember==1)
                         <button class="layui-btn layui-btn-small" style="background-color: #34bf49;border: 1px solid #0C0C0C; color: #0C0C0C">Member</button>
                     @else
                         <button class="layui-btn layui-btn-small invite" style="background-color: #fcfcfc;border: 1px solid #0C0C0C; color: #0C0C0C">Invite</button>
@@ -65,10 +65,6 @@
                             })
                                 .done(function(data) {
                                     layer.msg(data.msg);
-                                    /*if(data.icon==='1'){
-                                        setTimeout("window.location.reload()",1000);
-
-                                    }*/
                                 })
                                 .fail(function() {
                                     layer.msg(data.msg);

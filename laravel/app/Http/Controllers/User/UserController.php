@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\User;
 
+use App\Models\Invitation;
+use App\Models\Mail;
 use Illuminate\Http\Request;
 use Storage;
 use App\Models\User;
@@ -17,7 +19,7 @@ use App\Http\Controllers\Controller;
 class UserController extends Controller
 {
     //显示个人管理界面
-    public function displayInfo(User $user,Friend $friend){
+    public function displayInfo(User $user,Mail $mail,Invitation $invitation){
         //sql查询条件
         $map = [
             'user_id' => session('user_id')
@@ -26,9 +28,12 @@ class UserController extends Controller
         $info = $user->get($map)->toArray();
         // pd($info);
         //若有该用户数据，显示页面
+
+        /*查询是否有未读邮件*/
+        $newsNum=count($mail->where(['mail_status'=>'0','mail_to_id'=>session('user_id')])->get()->toArray())+count($invitation->where(['user_id'=>session('user_id'),'status'=>'0'])->get()->toArray());
         if($info){
             $assign = $info[0];
-            return view('User/displayInfo',['assign'=>$assign]);
+            return view('User/displayInfo',['assign'=>$assign,'newsNum'=>$newsNum]);
         }
 
 
@@ -441,7 +446,250 @@ class UserController extends Controller
         }
     }
 
+    /**
+     * @param Request $request
+     * @param Mail $mail
+     * @param User $user
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function displayInfoMailBox(Mail $mail, User $user,Invitation $invitation,Team $team){
+        /*1.获得user id,查询是否存在邮箱新消息*/
+        $newsNum=count($mail->where(['mail_status'=>'0','mail_to_id'=>session('user_id')])->get()->toArray())+count($invitation->where(['user_id'=>session('user_id'),'status'=>'0'])->get()->toArray());
+        $mailsNum=count($mail->where(['mail_to_id'=>session('user_id')])->get()->toArray());
+        $invitationNum=count($invitation->where(['user_id'=>session('user_id'),'status'=>'0'])->get()->toArray());
+        /*2.如果存在查询消息*/
+        $mailsRecieved=$mail->where(['mail_to_id'=>session('user_id')])->orderBy('mail_sent_time','desc')->get()->toArray();
+
+        foreach ($mailsRecieved as $key=>&$value){
+            /*将发送用户的用户名加入到返回数据当中*/
+            $mail_from_names=$user->get(['user_id'=>$value['mail_from_id']])->toArray();
+            $value['mail_from_name']=$mail_from_names[0]['user_name'];
+            /*计算邮件发送时间与系统时间的间隔*/
+            $now=date("Y-m-d H:i:s");
+            if(floor(strtotime($now)-$value['mail_sent_time'])>86400){
+                $value['mail_time_gap']=(floor((strtotime($now)-$value['mail_sent_time'])/86400)).'day(s) ago';
+                $value['mail_time_gap']=" just now";
+            }elseif (floor(strtotime($now)-$value['mail_sent_time'])>3600){
+                $value['mail_time_gap']=(floor((strtotime($now)-$value['mail_sent_time'])/3600)).'hour(s) ago';
+
+            }
+            elseif(floor(strtotime($now)-$value['mail_sent_time'])>60){
+                $value['mail_time_gap']=(floor((strtotime($now)-$value['mail_sent_time'])/60))." minute(s) ago";
+
+            }
+            else{
+                $value['mail_time_gap']='just now';
+            }
 
 
+        }
 
+/*查询是否有新的未读邀请*/
+        $invite=$invitation->where(['user_id'=>session('user_id'),'status'=>'0'])->get()->toArray();
+        /*查询当前已发送的邮件*/
+        $sentMails=$mail->get(['mail_from_id'=>session('user_id')])->toArray();
+        foreach($sentMails as $key => &$value){
+            $mail_to_name=$user->get(['user_id'=>$value['mail_to_id']])->toArray();
+            $value['mail_to_name']=$mail_to_name[0]['user_name'];
+
+            if(floor(strtotime($now)-$value['mail_sent_time'])>86400){
+                $value['mail_time_gap']=(floor((strtotime($now)-$value['mail_sent_time'])/86400)).'day(s) ago';
+                $value['mail_time_gap']=" just now";
+            }elseif (floor(strtotime($now)-$value['mail_sent_time'])>3600){
+                $value['mail_time_gap']=(floor((strtotime($now)-$value['mail_sent_time'])/3600)).'hour(s) ago';
+
+            }
+            elseif(floor(strtotime($now)-$value['mail_sent_time'])>60){
+                $value['mail_time_gap']=(floor((strtotime($now)-$value['mail_sent_time'])/60))." minute(s) ago";
+
+            }
+            else{
+                $value['mail_time_gap']='just now';
+            }
+        }
+        if(!empty($invite)){
+            foreach($invite as $key=>&$value){
+                $info=$team->get(['team_id'=>$value['team_id']])->toArray();
+                $value['invitation_team_name']=$info[0]['team_name'];
+            }
+            return view('User/displayInfoMailBox',['newsNum'=>$newsNum,'mailsNum'=>$mailsNum,'invitationNum'=>$invitationNum,'mailsRecieved'=>$mailsRecieved,'sentMails'=>$sentMails,'invitations'=>$invite]);
+        }
+        else{
+            return view('User/displayInfoMailBox',['newsNum'=>$newsNum,'mailsNum'=>$mailsNum,'mailsRecieved'=>$mailsRecieved,'sentMails'=>$sentMails]);
+        }
+
+    }
+    public function acceptInvitation(Request $request,Invitation $invitation,Team $team,Membership $membership){
+        $request->validate([
+            'team_id'=>'required',
+            'user_id'=>'required'
+        ]);
+        $team_id=$request->input('team_id');
+        $user_id=$request->input('user_id');
+        $map=[
+            'team_id'=>$team_id,
+            'user_id'=>$user_id
+        ];
+        $update_data=[
+            'status'=>'1'
+        ];
+        $map_team = [
+            'membership_id'=>md5(uniqid(mt_rand(),true)),
+            'team_id'=>$team_id,
+            'member_id'=>$user_id
+        ];
+        $team_info=$team->get(['team_id'=>$team_id])->toArray();
+        try {
+            //开始事务
+            DB::beginTransaction();
+            $invitation->edit($map,$update_data);
+            $membership->add($map_team);
+            //提交事务
+            DB::commit();
+            //返回前端添加成功结果
+            return response()->json(['msg'=>'Welcome to team : '.$team_info[0]['team_name'],'icon'=>'1']);
+        } catch(QueryException $ex) {
+            //回滚事务
+            DB::rollback();
+            //返回前端添加失败结果
+            return response()->json(['msg'=>'Network is busy now,try again later！','icon'=>'2']);
+        }
+    }
+    public function refuseInvitation(Request $request,Invitation $invitation){
+        $request->validate([
+            'team_id'=>'required',
+            'user_id'=>'required'
+        ]);
+        $team_id=$request->input('team_id');
+        $user_id=$request->input('user_id');
+
+        $map=[
+            'team_id'=>$team_id,
+            'user_id'=>$user_id
+        ];
+        $update_data=[
+          'status'=>'2'
+        ];
+        try {
+            //开始事务
+            DB::beginTransaction();
+            $invitation->edit($map,$update_data);
+            //提交事务
+            DB::commit();
+            //返回前端添加成功结果
+            return response()->json(['msg'=>'Operation succeeded','icon'=>'1']);
+        } catch(QueryException $ex) {
+            //回滚事务
+            DB::rollback();
+            //返回前端添加失败结果
+            return response()->json(['msg'=>'Network is busy now,try again later！','icon'=>'2']);
+        }
+    }
+    public function sendMail(Request $request,Mail $mail,User $user){
+        $request->validate([
+            'mail_to_id'=>'required',
+            'mail_from_id'=>'required',
+        ]);
+        $mail_to_id=$request->input('mail_to_id');
+        $mail_from_id=$request->input('mail_from_id');
+        $mail_title=$request->input('mail_title');
+        $mail_content=$request->input('mail_content');
+       /* $existID=$user->where(['user_id'=>$mail_to_id])->get();*/
+        $data = [
+            'user_id'=>$mail_to_id
+        ];
+        //判断数据在表中是否存在
+        $exist = count($user->get($data))?true:false;
+        if($exist){
+            $map=[
+                'mail_id'=>md5(uniqid(mt_rand(),true)),
+                'mail_to_id'=>$mail_to_id,
+                'mail_from_id'=>$mail_from_id,
+                'mail_title'=>$mail_title,
+                'mail_content'=>$mail_content,
+                'mail_type'=>'1',/*Sent by user:1 Sent by system:2*/
+                'mail_status'=>'0',/*Unread:0 Read:1*/
+                'mail_sent_time'=>strtotime(date("Y-m-d H:i:s"))
+            ];
+            try {
+                //开始事务
+                DB::beginTransaction();
+                $mail->add($map);
+                //提交事务
+                DB::commit();
+                //返回前端添加成功结果
+                return response()->json(['msg'=>'Mail has been sent successfully!']);
+            } catch(QueryException $ex) {
+                //回滚事务
+                DB::rollback();
+                //返回前端添加失败结果
+                return response()->json(['msg'=>'Network is busy now,try again later!']);
+            }
+        }
+        else{
+            return response()->json(['msg'=>'Sorry!User id does not exist!']);
+        }
+    }
+
+    public function dumpMail(Request $request,Mail $mail){
+        $request->validate([
+            'mail_id'=>'required'
+        ]);
+        $mailId=$request->input('mail_id');
+        $map=[
+            'mail_id'=>$mailId
+            ];
+        try {
+            //开始事务
+            DB::beginTransaction();
+            $mail->del($map);
+            //提交事务
+            DB::commit();
+            //返回前端添加成功结果
+            return response()->json(['msg'=>'Mail has been deleted successfully!']);
+        } catch(QueryException $ex) {
+            //回滚事务
+            DB::rollback();
+            //返回前端添加失败结果
+            return response()->json(['msg'=>'Network is busy now,try again later!']);
+        }
+
+
+    }
+    public function displayInfoMailContent(Request $request, $mail_id,Mail $mail,Invitation $invitation,User $user){
+        $newsNum=count($mail->where(['mail_status'=>'0','mail_to_id'=>session('user_id')])->get()->toArray())+count($invitation->where(['user_id'=>session('user_id'),'status'=>'0'])->get()->toArray());
+        $mail_content=$mail->get(['mail_id'=>$mail_id])->toArray();
+        $mail_from_info=$user->get(['user_id'=>$mail_content[0]['mail_from_id']])->toArray();
+        if($mail_content[0]['mail_status']==0){
+            $map=['mail_id'=>$mail_id];
+            $update_data=['mail_status'=>"1"];
+            try {
+                //开始事务
+                DB::beginTransaction();
+                $mail->edit($map,$update_data);
+                //提交事务
+                DB::commit();
+
+            } catch(QueryException $ex) {
+                //回滚事务
+                DB::rollback();
+            }
+
+        }
+        return view('User/displayInfoMailContent',['newsNum'=>$newsNum,'mail_content'=>$mail_content[0],'mail_from_info'=>$mail_from_info[0]]);
+    }
+
+    public function displayInfoMyMailContent(Request $request, $mail_id,Mail $mail,Invitation $invitation,User $user)
+    {
+        $newsNum = count($mail->where(['mail_status' => '0', 'mail_to_id' => session('user_id')])->get()->toArray()) + count($invitation->where(['user_id' => session('user_id'), 'status' => '0'])->get()->toArray());
+        $mail_content = $mail->get(['mail_id' => $mail_id])->toArray();
+        $mail_to_info = $user->get(['user_id' => $mail_content[0]['mail_to_id']])->toArray();
+        return view('User/displayInfoMyMailContent', ['newsNum' => $newsNum, 'mail_content' => $mail_content[0], 'mail_to_info' => $mail_to_info[0]]);
+    }
 }
+
+
+
+
+
+

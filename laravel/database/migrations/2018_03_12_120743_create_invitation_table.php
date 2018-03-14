@@ -20,6 +20,7 @@ class CreateInvitationTable extends Migration
             $table->integer('time',false);
             $table->string('title',100);
             $table->string('content',10000);
+            $table->enum('status',['0','1','2']);
             $table->primary('invitation_id');
 
         });

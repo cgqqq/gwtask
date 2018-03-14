@@ -15,6 +15,7 @@
     <link href="{{ asset('css/style.css') }}" rel="stylesheet" type="text/css" media="all" >
     <link href="{{ asset('css/bootstrap.css') }}" rel="stylesheet" type="text/css" media="all" >
     <script src="{{ asset('js/jquery-3.2.1.min.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('js/') }}" type="text/javascript"></script>
     <script src="{{ asset('layui.js') }}" charset="utf-8"></script>
     <script type="text/javascript" src="{{ asset('js/bootstrap.min.js') }}"></script>
 
@@ -148,7 +149,6 @@
             layer.msg(elem.text());
         });
     });
-
     $(function(){
         layui.use('layer',function(){
             $('.icons').on('click','.logout_icon',function(){

@@ -74,6 +74,20 @@ Route::group(['middleware'=>'auth','namespace'=>'User','prefix'=>'user'],functio
 
     Route::any('applyJoinTeam','UserController@applyJoinTeam');
 
+    Route::get('displayInfoMailBox','UserController@displayInfoMailBox');
+
+    Route::any('acceptInvitation','UserController@acceptInvitation');
+
+    Route::any('refuseInvitation','UserController@refuseInvitation');
+
+    Route::any('sendMail','UserController@sendMail');
+
+    Route::post('dumpMail','UserController@dumpMail');
+
+    Route::any('displayInfoMailContent/{mail_id}','UserController@displayInfoMailContent');
+
+    Route::any('displayInfoMyMailContent/{mail_id}','UserController@displayInfoMyMailContent');
+
 });
 //团队相关路由
 Route::group(['middleware'=>'auth','namespace'=>'Team','prefix'=>'team'],function(){
