@@ -440,9 +440,11 @@ class UserController extends Controller
 
     }
 
-    public function displayInfoOptions()
+    public function displayInfoOptions(App_join $app_join,Invitation $invitation,Mail $mail)
     {
-        return view('User/displayInfoOptions');
+        $applications=$app_join->where(['status' =>"0"])->join('team','team.team_id','=','app_join.team_id')->where(['team.team_funder_id' => session('user_id')])->get()->toArray();
+        $newsNum = count($mail->where(['mail_status' =>"0", 'mail_to_id' => session('user_id')])->get()->toArray()) + count($invitation->where(['user_id' => session('user_id'), 'status' => '0'])->get()->toArray())+count($applications);
+        return view('User/displayInfoOptions',['newsNum'=>$newsNum]);
     }
 
     public function applyJoinTeam(Request $request, App_join $app_join,Team $team)
