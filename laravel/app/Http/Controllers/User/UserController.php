@@ -554,7 +554,7 @@ class UserController extends Controller
         }
 
     }
-    public function acceptInvitation(Request $request,Invitation $invitation,Team $team,Membership $membership){
+    public function acceptInvitation(Request $request,Invitation $invitation,Team $team,Membership $membership,Mail $mail,User $user){
         $request->validate([
             'team_id'=>'required',
             'user_id'=>'required'
@@ -574,11 +574,24 @@ class UserController extends Controller
             'member_id'=>$user_id
         ];
         $team_info=$team->get(['team_id'=>$team_id])->toArray();
+        $funder_name=$user->where(['user_id'=>$team_info[0]['team_funder_id']])->value('user_name');
+        $invited_name=$user->where(['user_id'=>$user_id])->value('user_name');
+        $map_mail=[
+            'mail_id'=>md5(uniqid(mt_rand(),true)),
+            'mail_to_id'=>$team_info[0]['team_funder_id'],
+            'mail_from_id'=>$user_id,
+            'mail_title'=>"System Inform",
+            'mail_content'=>"Dear user ".$funder_name.",Good day ! Your invitation to user ".$invited_name." for joining in ".$team_info[0]['team_name']." has been accepted !",
+            'mail_type'=>"0",/*Sent by user:1 Sent by system:0*/
+            'mail_status'=>"0",/*Unread:0 Read:1*/
+            'mail_sent_time'=>strtotime(date("Y-m-d H:i:s"))
+        ];
         try {
             //开始事务
             DB::beginTransaction();
             $invitation->edit($map,$update_data);
             $membership->add($map_team);
+            $mail->add($map_mail);
             //提交事务
             DB::commit();
             //返回前端添加成功结果
@@ -590,7 +603,7 @@ class UserController extends Controller
             return response()->json(['msg'=>'Network is busy now,try again later！','icon'=>'2']);
         }
     }
-    public function refuseInvitation(Request $request,Invitation $invitation){
+    public function refuseInvitation(Request $request,Invitation $invitation,User $user,Mail $mail,Team $team){
         $request->validate([
             'team_id'=>'required',
             'user_id'=>'required'
@@ -605,10 +618,24 @@ class UserController extends Controller
         $update_data=[
           'status'=>'2'
         ];
+        $team_info=$team->get(['team_id'=>$team_id])->toArray();
+        $funder_name=$user->where(['user_id'=>$team_info[0]['team_funder_id']])->value('user_name');
+        $invited_name=$user->where(['user_id'=>$user_id])->value('user_name');
+        $map_mail=[
+            'mail_id'=>md5(uniqid(mt_rand(),true)),
+            'mail_to_id'=>$team_info[0]['team_funder_id'],
+            'mail_from_id'=>$user_id,
+            'mail_title'=>"System Inform",
+            'mail_content'=>"Dear user ".$funder_name.",good day ! Your invitation to user ".$invited_name." for joining in ".$team_info[0]['team_name']." has been refused !",
+            'mail_type'=>"0",/*Sent by user:1 Sent by system:0*/
+            'mail_status'=>"0",/*Unread:0 Read:1*/
+            'mail_sent_time'=>strtotime(date("Y-m-d H:i:s"))
+        ];
         try {
             //开始事务
             DB::beginTransaction();
             $invitation->edit($map,$update_data);
+            $mail->add($map_mail);
             //提交事务
             DB::commit();
             //返回前端添加成功结果
