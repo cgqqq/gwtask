@@ -36,7 +36,7 @@
                             <legend>Mails({{$mailsNum}})</legend>
                             @if($newsNum!=0)
                             @foreach($mailsRecieved as $mail)
-                                @if($mail['mail_status']=='1')
+                                @if($mail['mail_status']=="1")
                             <div class="card" >
                                 <div class="card-content" style="margin-left:10px;padding:5px;width: 600px;height: 100px;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;border: 2px solid #0C0C0C">
 
@@ -45,7 +45,11 @@
                                     </div>
                                     <input type="hidden" name="mail_id" value="{{$mail['mail_id']}}">
                                     <span STYLE="font-size: 20px;font-weight: 600;">
+                                        @if($mail['mail_type']=='1')
                                 <img src="{{URL::asset('/images/read.png')}}">
+                                        @else
+                                <img src="{{URL::asset('/images/alert.png')}}">
+                                        @endif
                                   You got a mail from {{$mail['mail_from_name']}}
                                   <p style="color: #8D8D8D;font-size: 12px;width: 150px;">
                                       {{$mail['mail_time_gap']}}
@@ -63,7 +67,11 @@
                                     </div>
                                     <input type="hidden" name="mail_id" value="{{$mail['mail_id']}}">
                               <span STYLE="font-size: 20px;font-weight: 600;">
-                                <img src="{{URL::asset('/images/unread.png')}}">
+                                @if($mail['mail_type']=='1')
+                                      <img src="{{URL::asset('/images/unread.png')}}">
+                                  @else
+                                      <img src="{{URL::asset('/images/alert_unread.png')}}">
+                                  @endif
                                    You got a mail from {{$mail['mail_from_name']}}
                                   <p style="color: #8D8D8D;font-size: 12px;width: 150px;">
                                       {{$mail['mail_time_gap']}}

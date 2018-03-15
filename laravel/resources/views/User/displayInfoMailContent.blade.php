@@ -16,11 +16,14 @@
             <div style="margin-left: 16px;margin-top: 10px;width: 580px;height: 30px;" class="scroll"><span style="color:#8D8D8D;">Subject : </span>{{$mail_content['mail_title']}}</div>
             <div style="margin-left:16px;margin-top: 10px;width: 580px;height: 280px; word-wrap:break-word;" class="scroll"><span style="color:#8D8D8D;">Content : </span>{{$mail_content['mail_content']}}</div>
         </div>
+        @if($mail_content['mail_type']=="1")
         <div style="width: 130px;height: 25px;margin-top: 0px;font-size: 16px;font-weight: 600;color: black;float: right;margin-top: 10px" class="newA">
             <a class="quick-reply" >
             Quick Reply<img style="float:right;margin-right: 10px" src="{{URL::asset('/images/reply.png')}}" ></a>
             <input type="hidden" name="mail_to_id" value="{{$mail_content['mail_from_id']}}">
         </div>
+            @else
+        @endif
     </div>
     <script>
         $(function() {

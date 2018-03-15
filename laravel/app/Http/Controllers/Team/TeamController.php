@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Team;
 
 use App\Models\Invitation;
+use App\Models\Mail;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Database\QueryException;
@@ -254,7 +255,7 @@ class TeamController extends Controller
 
     }
     //移除团队成员
-    public function removeMember(Request $request,Membership $membership,Team $team){
+    public function removeMember(Request $request,Membership $membership,Mail $mail,Team $team,User $user){
         //对前端传参检查
         $request->validate([
             'team_id'=>'required',
@@ -268,6 +269,7 @@ class TeamController extends Controller
         $fail_users_idList = [];
         //团队id
         $team_id = $request->input('team_id');
+        $team_name=$team->where(['team_id'=>$team_id])->value('team_name');
         $map = ['team_id'=>$team_id,'member_id'=>null];
         //组员id列表
         $userId_list = $request->input('userId_list');
@@ -279,6 +281,20 @@ class TeamController extends Controller
             if(!$membership->del($map)){
                 $fail_users_idList.push($key);
                 $data['icon'] = 2;
+            }
+            else{
+                $user_name=$user->where(['user_id'=>$key])->value('user_name');
+                $map=[
+                    'mail_id'=>md5(uniqid(mt_rand(),true)),
+                    'mail_to_id'=>$key,
+                    'mail_from_id'=>'admin',
+                    'mail_title'=>"System Inform",
+                    'mail_content'=>"Dear user ".$user_name.",good day! Team manager has removed you from team : ".$team_name,
+                    'mail_type'=> "0",/*Sent by user:1 Sent by system:0*/
+                    'mail_status'=> "0",/*Unread:0 Read:1*/
+                    'mail_sent_time'=>strtotime(date("Y-m-d H:i:s"))
+                ];
+                $mail->add($map);
             }
         }
         //如果有删除失败的情况，返回的失败信息
