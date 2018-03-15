@@ -487,7 +487,7 @@ class UserController extends Controller
 /*查询是否有新的未读邀请*/
         $invite=$invitation->where(['user_id'=>session('user_id'),'status'=>'0'])->get()->toArray();
         /*查询当前已发送的邮件*/
-        $sentMails=$mail->get(['mail_from_id'=>session('user_id')])->toArray();
+        $sentMails=$mail->where(['mail_from_id'=>session('user_id')])->orderBy('mail_sent_time','desc')->get()->toArray();
         foreach($sentMails as $key => &$value){
             $mail_to_name=$user->get(['user_id'=>$value['mail_to_id']])->toArray();
             $value['mail_to_name']=$mail_to_name[0]['user_name'];

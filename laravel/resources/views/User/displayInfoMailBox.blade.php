@@ -25,6 +25,8 @@
                             </span>
                                 <button class="layui-btn view_invite" style="background-color: #fcfcfc;float: right;color: #0C0C0C;border: solid 2px black;">view</button>
                                 <input type="hidden" name="team_id" value="{{$invitation['team_id']}}">
+                                <input type="hidden" name="invitation_title" value="{{$invitation['title']}}">
+                                <input type="hidden" name="invitation_content" value="{{$invitation['content']}}">
                             </div>
                         </div>
                         </fieldset>
@@ -156,6 +158,8 @@
             layui.use('layer',function(){
                 $('.card').on('click','.view_invite',function(){
                     //配置一个透明的询问框
+                    var invitation_title=$(this).siblings("[name='invitation_title']").val();
+                    var invitation_content=$(this).siblings("[name='invitation_content']").val();
                     var team_id = $(this).siblings("[name='team_id']").val();
                     layer.open({
                         type: 1
@@ -169,7 +173,7 @@
                         ,btnAlign: 'c'
                         ,skin:'a-class'
                         ,moveType: 1 //拖拽模式，0或者1
-                        ,content: '<div style="padding: 20px; line-height: 22px;color: #0C0C0C; font-weight: 300;height: 200px;width: 300px">内容<br>内容</div>'
+                        ,content: '<div class="scroll" style="padding: 20px; line-height: 22px;color: #0C0C0C; font-weight: 300;height: 200px;width: 300px;word-wrap: break-word;font-size: 15px;font-weight: 700;color: #0C0C0C"><span style="font-size: 15px;font-weight: 700;color: #8D8D8D">Title : </span>'+invitation_title+'<br><span style="font-size: 15px;font-weight: 700;color: #8D8D8D">Content : </span>'+invitation_content+'</div>'
                         ,btn1: function(index){
                             $.ajax({
                                 url: "{{ url('user/acceptInvitation') }}",

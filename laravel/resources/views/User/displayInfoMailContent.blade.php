@@ -14,7 +14,7 @@
              From :
             </span>{{$mail_from_info['user_name']}}</div>
             <div style="margin-left: 16px;margin-top: 10px;width: 580px;height: 30px;" class="scroll"><span style="color:#8D8D8D;">Subject : </span>{{$mail_content['mail_title']}}</div>
-            <div style="margin-left:16px;margin-top: 10px;width: 580px;height: 300px;" class="scroll"><span style="color:#8D8D8D;">Content : </span>{{$mail_content['mail_content']}}</div>
+            <div style="margin-left:16px;margin-top: 10px;width: 580px;height: 280px; word-wrap:break-word;" class="scroll"><span style="color:#8D8D8D;">Content : </span>{{$mail_content['mail_content']}}</div>
         </div>
         <div style="width: 130px;height: 25px;margin-top: 0px;font-size: 16px;font-weight: 600;color: black;float: right;margin-top: 10px" class="newA">
             <a class="quick-reply" >

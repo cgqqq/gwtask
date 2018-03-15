@@ -5,27 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="03c77c43-de62-47b9-8a66-f413799d84dc" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/laravel/app/Models/Invitation.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/laravel/app/Models/Mail.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/laravel/database/migrations/2018_03_13_113543_create_mail_table.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/laravel/resources/views/User/displayInfoMailBox.blade.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/laravel/resources/views/User/displayInfoMailContent.blade.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/laravel/resources/views/User/displayInfoMyMailContent.blade.php" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/laravel/public/images/12.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/laravel/public/images/12.png" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/gwtask.iml" afterPath="$PROJECT_DIR$/.idea/gwtask.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/laravel/app/Http/Controllers/Team/TeamController.php" afterPath="$PROJECT_DIR$/laravel/app/Http/Controllers/Team/TeamController.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/laravel/app/Http/Controllers/User/UserController.php" afterPath="$PROJECT_DIR$/laravel/app/Http/Controllers/User/UserController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/laravel/composer.json" afterPath="$PROJECT_DIR$/laravel/composer.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/laravel/public/css/style.css" afterPath="$PROJECT_DIR$/laravel/public/css/style.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/laravel/resources/views/Team/manageTeamMemberAdd.blade.php" afterPath="$PROJECT_DIR$/laravel/resources/views/Team/manageTeamMemberAdd.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/laravel/resources/views/User/displayInfo.blade.php" afterPath="$PROJECT_DIR$/laravel/resources/views/User/displayInfo.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/laravel/resources/views/User/displayInfoOptions.blade.php" afterPath="$PROJECT_DIR$/laravel/resources/views/User/displayInfoOptions.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/laravel/resources/views/User/displayOthersInfoTeams.blade.php" afterPath="$PROJECT_DIR$/laravel/resources/views/User/displayOthersInfoTeams.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/laravel/resources/views/layouts/home.blade.php" afterPath="$PROJECT_DIR$/laravel/resources/views/layouts/home.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/laravel/routes/web.php" afterPath="$PROJECT_DIR$/laravel/routes/web.php" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/laravel/database/migrations/2018_03_12_105625_create_invitation_table.php" afterPath="$PROJECT_DIR$/laravel/database/migrations/2018_03_12_120743_create_invitation_table.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/laravel/resources/views/User/displayInfoMailBox.blade.php" afterPath="$PROJECT_DIR$/laravel/resources/views/User/displayInfoMailBox.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/laravel/resources/views/User/displayInfoMailContent.blade.php" afterPath="$PROJECT_DIR$/laravel/resources/views/User/displayInfoMailContent.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/laravel/resources/views/User/displayInfoMyMailContent.blade.php" afterPath="$PROJECT_DIR$/laravel/resources/views/User/displayInfoMyMailContent.blade.php" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -39,64 +23,19 @@
       <file leaf-file-name="displayInfoMailBox.blade.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/laravel/resources/views/User/displayInfoMailBox.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="391">
-              <caret line="142" column="120" lean-forward="false" selection-start-line="142" selection-start-column="120" selection-end-line="142" selection-end-column="120" />
+            <state relative-caret-position="321">
+              <caret line="175" column="296" lean-forward="false" selection-start-line="175" selection-start-column="296" selection-end-line="175" selection-end-column="296" />
               <folding>
-                <element signature="e#166#200#0#HTML" expanded="true" />
-                <element signature="e#545#567#0#HTML" expanded="true" />
-                <element signature="e#643#707#0#HTML" expanded="true" />
-                <element signature="e#749#769#0#HTML" expanded="true" />
-                <element signature="e#993#1046#0#HTML" expanded="true" />
-                <element signature="e#1224#1373#0#HTML" expanded="true" />
-                <element signature="e#1411#1452#0#HTML" expanded="true" />
-                <element signature="e#2206#2259#0#HTML" expanded="true" />
-                <element signature="e#2603#2753#0#HTML" expanded="true" />
-                <element signature="e#2797#2837#0#HTML" expanded="true" />
-                <element signature="e#3131#3172#0#HTML" expanded="true" />
-                <element signature="e#3372#3424#0#HTML" expanded="true" />
-                <element signature="e#3629#3715#0#HTML" expanded="true" />
-                <element signature="e#4047#4197#0#HTML" expanded="true" />
-                <element signature="e#4240#4280#0#HTML" expanded="true" />
-                <element signature="e#4568#4609#0#HTML" expanded="true" />
-                <element signature="e#4812#4864#0#HTML" expanded="true" />
-                <element signature="e#5068#5154#0#HTML" expanded="true" />
-                <element signature="e#5518#5610#0#HTML" expanded="true" />
-                <element signature="e#7620#7684#0#HTML" expanded="true" />
-                <element signature="e#7726#7746#0#HTML" expanded="true" />
-                <element signature="e#7916#8066#0#HTML" expanded="true" />
-                <element signature="e#8097#8137#0#HTML" expanded="true" />
-                <element signature="e#8383#8424#0#HTML" expanded="true" />
-                <element signature="e#8621#8673#0#HTML" expanded="true" />
-                <element signature="e#8865#8951#0#HTML" expanded="true" />
-                <marker date="1521034807385" expanded="true" signature="9548:12430" ph="..." />
-                <marker date="1521034807385" expanded="true" signature="9559:12429" ph="..." />
-                <marker date="1521034807385" expanded="true" signature="9601:12417" ph="..." />
-                <marker date="1521034807385" expanded="true" signature="9632:12402" ph="..." />
-                <marker date="1521034807385" expanded="true" signature="9666:12379" ph="..." />
-                <marker date="1521034807385" expanded="true" signature="10330:10396" ph="..." />
-                <marker date="1521034807385" expanded="true" signature="10330:10422" ph="..." />
-                <marker date="1521034807385" expanded="true" signature="10487:10847" ph="..." />
-                <marker date="1521034807385" expanded="true" signature="11470:11831" ph="..." />
-                <marker date="1521034807385" expanded="true" signature="12444:14011" ph="..." />
-                <marker date="1521034807385" expanded="true" signature="12455:14010" ph="..." />
-                <marker date="1521034807385" expanded="true" signature="12497:13998" ph="..." />
-                <marker date="1521034807385" expanded="true" signature="12539:13983" ph="..." />
-                <marker date="1521034807385" expanded="true" signature="12573:13982" ph="..." />
-                <marker date="1521034807385" expanded="true" signature="12953:13376" ph="..." />
-                <marker date="1521034807385" expanded="true" signature="13413:13567" ph="..." />
-                <marker date="1521034807385" expanded="true" signature="13429:13566" ph="..." />
-                <marker date="1521034807385" expanded="true" signature="13603:13702" ph="..." />
-                <marker date="1521034807385" expanded="true" signature="13619:13701" ph="..." />
-                <marker date="1521034807385" expanded="true" signature="13740:13839" ph="..." />
-                <marker date="1521034807385" expanded="true" signature="13752:13838" ph="..." />
-                <marker date="1521034807385" expanded="true" signature="13868:13964" ph="..." />
-                <marker date="1521034807385" expanded="true" signature="14025:15002" ph="..." />
-                <marker date="1521034807385" expanded="true" signature="14036:15001" ph="..." />
-                <marker date="1521034807385" expanded="true" signature="14078:14989" ph="..." />
-                <marker date="1521034807385" expanded="true" signature="14109:14968" ph="..." />
-                <marker date="1521034807385" expanded="true" signature="14561:14703" ph="..." />
-                <marker date="1521034807385" expanded="true" signature="14735:14822" ph="..." />
-                <marker date="1521034807385" expanded="true" signature="14856:14947" ph="..." />
+                <element signature="e#9435#9527#0#HTML" expanded="true" />
+                <marker date="1521080580714" expanded="true" signature="9774:13127" ph="..." />
+                <marker date="1521080580714" expanded="true" signature="9785:13126" ph="..." />
+                <marker date="1521080580714" expanded="true" signature="9827:13114" ph="..." />
+                <marker date="1521080580714" expanded="true" signature="9858:13099" ph="..." />
+                <marker date="1521080580714" expanded="true" signature="10763:10855" ph="..." />
+                <marker date="1521080580714" expanded="true" signature="10763:10878" ph="..." />
+                <marker date="1521080580714" expanded="true" signature="10763:10925" ph="..." />
+                <marker date="1521080580714" expanded="true" signature="10940:10987" ph="..." />
+                <marker date="1521080580714" expanded="true" signature="11041:11088" ph="..." />
               </folding>
             </state>
           </provider>
@@ -105,21 +44,11 @@
       <file leaf-file-name="displayInfoMailContent.blade.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/laravel/resources/views/User/displayInfoMailContent.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="266">
-              <caret line="14" column="31" lean-forward="false" selection-start-line="14" selection-start-column="31" selection-end-line="14" selection-end-column="31" />
+            <state relative-caret-position="38">
+              <caret line="15" column="143" lean-forward="false" selection-start-line="15" selection-start-column="102" selection-end-line="15" selection-end-column="148" />
               <folding>
-                <element signature="e#72#106#0#HTML" expanded="true" />
-                <element signature="e#224#290#0#HTML" expanded="true" />
-                <element signature="e#367#415#0#HTML" expanded="true" />
-                <element signature="e#448#553#0#HTML" expanded="true" />
-                <element signature="e#572#593#0#HTML" expanded="true" />
-                <element signature="e#613#635#0#HTML" expanded="true" />
-                <element signature="e#732#801#0#HTML" expanded="true" />
-                <element signature="e#823#845#0#HTML" expanded="true" />
-                <element signature="e#918#987#0#HTML" expanded="true" />
-                <element signature="e#1009#1031#0#HTML" expanded="true" />
-                <element signature="e#1117#1242#0#HTML" expanded="true" />
-                <element signature="e#1322#1360#0#HTML" expanded="true" />
+                <element signature="e#918#1009#0#HTML" expanded="true" />
+                <element signature="e#1031#1053#0#HTML" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -128,7 +57,7 @@
       <file leaf-file-name="displayInfo.blade.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/laravel/resources/views/User/displayInfo.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="219">
+            <state relative-caret-position="437">
               <caret line="23" column="25" lean-forward="false" selection-start-line="23" selection-start-column="25" selection-end-line="23" selection-end-column="25" />
               <folding />
             </state>
@@ -138,8 +67,8 @@
       <file leaf-file-name="style.css" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/laravel/public/css/style.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="95">
-              <caret line="5" column="0" lean-forward="false" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="27" />
+            <state relative-caret-position="184">
+              <caret line="1226" column="7" lean-forward="false" selection-start-line="1226" selection-start-column="1" selection-end-line="1226" selection-end-column="7" />
               <folding />
             </state>
           </provider>
@@ -148,7 +77,7 @@
       <file leaf-file-name="home.blade.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/laravel/resources/views/layouts/home.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="475">
+            <state relative-caret-position="551">
               <caret line="29" column="102" lean-forward="false" selection-start-line="29" selection-start-column="5" selection-end-line="29" selection-end-column="102" />
               <folding>
                 <marker date="1521031224160" expanded="true" signature="6173:6189" ph="..." />
@@ -160,7 +89,7 @@
       <file leaf-file-name="web.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/laravel/routes/web.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="180">
+            <state relative-caret-position="1501">
               <caret line="88" column="81" lean-forward="false" selection-start-line="88" selection-start-column="81" selection-end-line="88" selection-end-column="81" />
               <folding />
             </state>
@@ -170,7 +99,7 @@
       <file leaf-file-name="manageTeamMemberAdd.blade.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/laravel/resources/views/Team/manageTeamMemberAdd.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="437">
+            <state relative-caret-position="969">
               <caret line="51" column="30" lean-forward="false" selection-start-line="49" selection-start-column="8" selection-end-line="80" selection-end-column="11" />
               <folding />
             </state>
@@ -180,8 +109,8 @@
       <file leaf-file-name="UserController.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/laravel/app/Http/Controllers/User/UserController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="405">
-              <caret line="694" column="0" lean-forward="false" selection-start-line="694" selection-start-column="0" selection-end-line="694" selection-end-column="0" />
+            <state relative-caret-position="89">
+              <caret line="489" column="68" lean-forward="false" selection-start-line="489" selection-start-column="68" selection-end-line="489" selection-end-column="68" />
               <folding>
                 <element signature="e#45#71#0#PHP" expanded="true" />
               </folding>
@@ -192,27 +121,12 @@
       <file leaf-file-name="displayInfoMyMailContent.blade.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/laravel/resources/views/User/displayInfoMyMailContent.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="228">
-              <caret line="12" column="41" lean-forward="false" selection-start-line="10" selection-start-column="7" selection-end-line="17" selection-end-column="14" />
+            <state relative-caret-position="304">
+              <caret line="16" column="207" lean-forward="true" selection-start-line="16" selection-start-column="12" selection-end-line="16" selection-end-column="207" />
               <folding>
-                <element signature="e#448#553#0#HTML" expanded="true" />
-                <element signature="e#572#593#0#HTML" expanded="true" />
-                <element signature="e#613#635#0#HTML" expanded="true" />
-                <element signature="e#732#801#0#HTML" expanded="true" />
-                <element signature="e#823#845#0#HTML" expanded="true" />
-                <element signature="e#918#987#0#HTML" expanded="true" />
-                <element signature="e#1009#1031#0#HTML" expanded="true" />
+                <element signature="e#918#1009#0#HTML" expanded="true" />
+                <element signature="e#1030#1052#0#HTML" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="TeamController.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/laravel/app/Http/Controllers/Team/TeamController.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="336">
-              <caret line="97" column="19" lean-forward="false" selection-start-line="97" selection-start-column="19" selection-end-line="97" selection-end-column="19" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -223,7 +137,6 @@
     <findStrings>
       <find>exist</find>
       <find>displayinfp</find>
-      <find>displayInfoMailBox</find>
       <find>order</find>
       <find>merge</find>
       <find>value</find>
@@ -249,8 +162,9 @@
       <find>a-class</find>
       <find>hidd</find>
       <find>displayInfoMailB</find>
-      <find>scroll</find>
       <find>{</find>
+      <find>displayInfoMailBox</find>
+      <find>scroll</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -297,11 +211,11 @@
         <option value="$PROJECT_DIR$/laravel/app/Http/Controllers/Team/TeamController.php" />
         <option value="$PROJECT_DIR$/laravel/public/css/style.css" />
         <option value="$PROJECT_DIR$/laravel/resources/views/layouts/home.blade.php" />
-        <option value="$PROJECT_DIR$/laravel/app/Http/Controllers/User/UserController.php" />
         <option value="$PROJECT_DIR$/laravel/routes/web.php" />
+        <option value="$PROJECT_DIR$/laravel/resources/views/User/displayInfo.blade.php" />
+        <option value="$PROJECT_DIR$/laravel/app/Http/Controllers/User/UserController.php" />
         <option value="$PROJECT_DIR$/laravel/resources/views/User/displayInfoMyMailContent.blade.php" />
         <option value="$PROJECT_DIR$/laravel/resources/views/User/displayInfoMailContent.blade.php" />
-        <option value="$PROJECT_DIR$/laravel/resources/views/User/displayInfo.blade.php" />
         <option value="$PROJECT_DIR$/laravel/resources/views/User/displayInfoMailBox.blade.php" />
       </list>
     </option>
@@ -334,7 +248,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -346,6 +259,19 @@
               <item name="gwtask1" type="b2602c69:ProjectViewProjectNode" />
               <item name="gwtask1" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="laravel" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="gwtask1" type="b2602c69:ProjectViewProjectNode" />
+              <item name="gwtask1" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="laravel" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="database" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="gwtask1" type="b2602c69:ProjectViewProjectNode" />
+              <item name="gwtask1" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="laravel" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="database" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="migrations" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
             <path>
               <item name="gwtask1" type="b2602c69:ProjectViewProjectNode" />
@@ -378,6 +304,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
       <pane id="Scratches" />
     </panes>
   </component>
@@ -432,12 +359,13 @@
       <workItem from="1520906424878" duration="6112000" />
       <workItem from="1520929538907" duration="14102000" />
       <workItem from="1521003407669" duration="599000" />
-      <workItem from="1521006005852" duration="25501000" />
+      <workItem from="1521006005852" duration="25960000" />
+      <workItem from="1521078332118" duration="2315000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="128769000" />
+    <option name="totallyTimeSpent" value="131543000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -560,13 +488,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/laravel/database/migrations/2018_03_12_120743_create_invitation_table.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="219">
-          <caret line="20" column="34" lean-forward="true" selection-start-line="16" selection-start-column="10" selection-end-line="24" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/laravel/resources/views/User/displayOthersInfoTeams.blade.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="95">
@@ -627,7 +548,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1045">
           <caret line="55" column="69" lean-forward="false" selection-start-line="55" selection-start-column="69" selection-end-line="55" selection-end-column="69" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -642,7 +562,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="19">
           <caret line="100" column="76" lean-forward="false" selection-start-line="100" selection-start-column="18" selection-end-line="100" selection-end-column="86" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -650,7 +569,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="231">
           <caret line="172" column="76" lean-forward="true" selection-start-line="172" selection-start-column="30" selection-end-line="172" selection-end-column="76" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -674,7 +592,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-28">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -682,7 +599,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="51">
           <caret line="3" column="44" lean-forward="false" selection-start-line="3" selection-start-column="44" selection-end-line="3" selection-end-column="44" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -690,13 +606,12 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="38">
           <caret line="61" column="167" lean-forward="false" selection-start-line="61" selection-start-column="61" selection-end-line="61" selection-end-column="167" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/laravel/app/Http/Controllers/Team/TeamController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="336">
+        <state relative-caret-position="1653">
           <caret line="97" column="19" lean-forward="false" selection-start-line="97" selection-start-column="19" selection-end-line="97" selection-end-column="19" />
           <folding />
         </state>
@@ -704,16 +619,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/laravel/resources/views/Team/manageTeamMemberAdd.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="437">
+        <state relative-caret-position="969">
           <caret line="51" column="30" lean-forward="false" selection-start-line="49" selection-start-column="8" selection-end-line="80" selection-end-column="11" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/laravel/public/css/style.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="95">
-          <caret line="5" column="0" lean-forward="false" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="27" />
           <folding />
         </state>
       </provider>
@@ -730,13 +637,12 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="5" lean-forward="false" selection-start-line="0" selection-start-column="4" selection-end-line="0" selection-end-column="5" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/laravel/resources/views/layouts/home.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="475">
+        <state relative-caret-position="551">
           <caret line="29" column="102" lean-forward="false" selection-start-line="29" selection-start-column="5" selection-end-line="29" selection-end-column="102" />
           <folding>
             <marker date="1521031224160" expanded="true" signature="6173:6189" ph="..." />
@@ -744,129 +650,85 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/laravel/routes/web.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1501">
+          <caret line="88" column="81" lean-forward="false" selection-start-line="88" selection-start-column="81" selection-end-line="88" selection-end-column="81" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/laravel/resources/views/User/displayInfo.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="437">
+          <caret line="23" column="25" lean-forward="false" selection-start-line="23" selection-start-column="25" selection-end-line="23" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/laravel/app/Http/Controllers/User/UserController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="405">
-          <caret line="694" column="0" lean-forward="false" selection-start-line="694" selection-start-column="0" selection-end-line="694" selection-end-column="0" />
+        <state relative-caret-position="89">
+          <caret line="489" column="68" lean-forward="false" selection-start-line="489" selection-start-column="68" selection-end-line="489" selection-end-column="68" />
           <folding>
             <element signature="e#45#71#0#PHP" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/laravel/routes/web.php">
+    <entry file="file://$PROJECT_DIR$/laravel/public/css/style.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="88" column="81" lean-forward="false" selection-start-line="88" selection-start-column="81" selection-end-line="88" selection-end-column="81" />
+        <state relative-caret-position="184">
+          <caret line="1226" column="7" lean-forward="false" selection-start-line="1226" selection-start-column="1" selection-end-line="1226" selection-end-column="7" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/laravel/resources/views/User/displayInfoMyMailContent.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="228">
-          <caret line="12" column="41" lean-forward="false" selection-start-line="10" selection-start-column="7" selection-end-line="17" selection-end-column="14" />
+        <state relative-caret-position="304">
+          <caret line="16" column="207" lean-forward="true" selection-start-line="16" selection-start-column="12" selection-end-line="16" selection-end-column="207" />
           <folding>
-            <element signature="e#448#553#0#HTML" expanded="true" />
-            <element signature="e#572#593#0#HTML" expanded="true" />
-            <element signature="e#613#635#0#HTML" expanded="true" />
-            <element signature="e#732#801#0#HTML" expanded="true" />
-            <element signature="e#823#845#0#HTML" expanded="true" />
-            <element signature="e#918#987#0#HTML" expanded="true" />
-            <element signature="e#1009#1031#0#HTML" expanded="true" />
+            <element signature="e#918#1009#0#HTML" expanded="true" />
+            <element signature="e#1030#1052#0#HTML" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/laravel/database/migrations/2018_03_12_120743_create_invitation_table.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="219">
+          <caret line="20" column="34" lean-forward="true" selection-start-line="16" selection-start-column="10" selection-end-line="24" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/laravel/resources/views/User/displayInfoMailContent.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="266">
-          <caret line="14" column="31" lean-forward="false" selection-start-line="14" selection-start-column="31" selection-end-line="14" selection-end-column="31" />
+        <state relative-caret-position="38">
+          <caret line="15" column="143" lean-forward="false" selection-start-line="15" selection-start-column="102" selection-end-line="15" selection-end-column="148" />
           <folding>
-            <element signature="e#72#106#0#HTML" expanded="true" />
-            <element signature="e#224#290#0#HTML" expanded="true" />
-            <element signature="e#367#415#0#HTML" expanded="true" />
-            <element signature="e#448#553#0#HTML" expanded="true" />
-            <element signature="e#572#593#0#HTML" expanded="true" />
-            <element signature="e#613#635#0#HTML" expanded="true" />
-            <element signature="e#732#801#0#HTML" expanded="true" />
-            <element signature="e#823#845#0#HTML" expanded="true" />
-            <element signature="e#918#987#0#HTML" expanded="true" />
-            <element signature="e#1009#1031#0#HTML" expanded="true" />
-            <element signature="e#1117#1242#0#HTML" expanded="true" />
-            <element signature="e#1322#1360#0#HTML" expanded="true" />
+            <element signature="e#918#1009#0#HTML" expanded="true" />
+            <element signature="e#1031#1053#0#HTML" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/laravel/resources/views/User/displayInfo.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="219">
-          <caret line="23" column="25" lean-forward="false" selection-start-line="23" selection-start-column="25" selection-end-line="23" selection-end-column="25" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/laravel/resources/views/User/displayInfoMailBox.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="142" column="120" lean-forward="false" selection-start-line="142" selection-start-column="120" selection-end-line="142" selection-end-column="120" />
+        <state relative-caret-position="321">
+          <caret line="175" column="296" lean-forward="false" selection-start-line="175" selection-start-column="296" selection-end-line="175" selection-end-column="296" />
           <folding>
-            <element signature="e#166#200#0#HTML" expanded="true" />
-            <element signature="e#545#567#0#HTML" expanded="true" />
-            <element signature="e#643#707#0#HTML" expanded="true" />
-            <element signature="e#749#769#0#HTML" expanded="true" />
-            <element signature="e#993#1046#0#HTML" expanded="true" />
-            <element signature="e#1224#1373#0#HTML" expanded="true" />
-            <element signature="e#1411#1452#0#HTML" expanded="true" />
-            <element signature="e#2206#2259#0#HTML" expanded="true" />
-            <element signature="e#2603#2753#0#HTML" expanded="true" />
-            <element signature="e#2797#2837#0#HTML" expanded="true" />
-            <element signature="e#3131#3172#0#HTML" expanded="true" />
-            <element signature="e#3372#3424#0#HTML" expanded="true" />
-            <element signature="e#3629#3715#0#HTML" expanded="true" />
-            <element signature="e#4047#4197#0#HTML" expanded="true" />
-            <element signature="e#4240#4280#0#HTML" expanded="true" />
-            <element signature="e#4568#4609#0#HTML" expanded="true" />
-            <element signature="e#4812#4864#0#HTML" expanded="true" />
-            <element signature="e#5068#5154#0#HTML" expanded="true" />
-            <element signature="e#5518#5610#0#HTML" expanded="true" />
-            <element signature="e#7620#7684#0#HTML" expanded="true" />
-            <element signature="e#7726#7746#0#HTML" expanded="true" />
-            <element signature="e#7916#8066#0#HTML" expanded="true" />
-            <element signature="e#8097#8137#0#HTML" expanded="true" />
-            <element signature="e#8383#8424#0#HTML" expanded="true" />
-            <element signature="e#8621#8673#0#HTML" expanded="true" />
-            <element signature="e#8865#8951#0#HTML" expanded="true" />
-            <marker date="1521034807385" expanded="true" signature="9548:12430" ph="..." />
-            <marker date="1521034807385" expanded="true" signature="9559:12429" ph="..." />
-            <marker date="1521034807385" expanded="true" signature="9601:12417" ph="..." />
-            <marker date="1521034807385" expanded="true" signature="9632:12402" ph="..." />
-            <marker date="1521034807385" expanded="true" signature="9666:12379" ph="..." />
-            <marker date="1521034807385" expanded="true" signature="10330:10396" ph="..." />
-            <marker date="1521034807385" expanded="true" signature="10330:10422" ph="..." />
-            <marker date="1521034807385" expanded="true" signature="10487:10847" ph="..." />
-            <marker date="1521034807385" expanded="true" signature="11470:11831" ph="..." />
-            <marker date="1521034807385" expanded="true" signature="12444:14011" ph="..." />
-            <marker date="1521034807385" expanded="true" signature="12455:14010" ph="..." />
-            <marker date="1521034807385" expanded="true" signature="12497:13998" ph="..." />
-            <marker date="1521034807385" expanded="true" signature="12539:13983" ph="..." />
-            <marker date="1521034807385" expanded="true" signature="12573:13982" ph="..." />
-            <marker date="1521034807385" expanded="true" signature="12953:13376" ph="..." />
-            <marker date="1521034807385" expanded="true" signature="13413:13567" ph="..." />
-            <marker date="1521034807385" expanded="true" signature="13429:13566" ph="..." />
-            <marker date="1521034807385" expanded="true" signature="13603:13702" ph="..." />
-            <marker date="1521034807385" expanded="true" signature="13619:13701" ph="..." />
-            <marker date="1521034807385" expanded="true" signature="13740:13839" ph="..." />
-            <marker date="1521034807385" expanded="true" signature="13752:13838" ph="..." />
-            <marker date="1521034807385" expanded="true" signature="13868:13964" ph="..." />
-            <marker date="1521034807385" expanded="true" signature="14025:15002" ph="..." />
-            <marker date="1521034807385" expanded="true" signature="14036:15001" ph="..." />
-            <marker date="1521034807385" expanded="true" signature="14078:14989" ph="..." />
-            <marker date="1521034807385" expanded="true" signature="14109:14968" ph="..." />
-            <marker date="1521034807385" expanded="true" signature="14561:14703" ph="..." />
-            <marker date="1521034807385" expanded="true" signature="14735:14822" ph="..." />
-            <marker date="1521034807385" expanded="true" signature="14856:14947" ph="..." />
+            <element signature="e#9435#9527#0#HTML" expanded="true" />
+            <marker date="1521080580714" expanded="true" signature="9774:13127" ph="..." />
+            <marker date="1521080580714" expanded="true" signature="9785:13126" ph="..." />
+            <marker date="1521080580714" expanded="true" signature="9827:13114" ph="..." />
+            <marker date="1521080580714" expanded="true" signature="9858:13099" ph="..." />
+            <marker date="1521080580714" expanded="true" signature="10763:10855" ph="..." />
+            <marker date="1521080580714" expanded="true" signature="10763:10878" ph="..." />
+            <marker date="1521080580714" expanded="true" signature="10763:10925" ph="..." />
+            <marker date="1521080580714" expanded="true" signature="10940:10987" ph="..." />
+            <marker date="1521080580714" expanded="true" signature="11041:11088" ph="..." />
           </folding>
         </state>
       </provider>
