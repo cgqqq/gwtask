@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Team;
 
 use App\Models\Invitation;
+use App\Models\App_join;
 use App\Models\Mail;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
@@ -558,6 +559,44 @@ class TeamController extends Controller
             return response()->json(['msg'=>'Network is busy now,try again later！','icon'=>'2']);
         }
 
+    }
+
+    public function applicationManage(Request $request,App_join $app_join,Membership $membership){
+        $request->validate([
+            'app_team_id'=>'required',
+            'type'=>'required'
+        ]);
+        $app_team_id=$request->input('app_team_id');
+        $application=$app_join->where(['app_team_id'=>$app_team_id])->get()->toArray();
+        $map=['app_team_id'=>$app_team_id];
+        if($request->input('type')=="approve"){
+            $update_data=['status'=>"1"];
+            $data = [
+                'membership_id'=>md5(uniqid(mt_rand(),true)),
+                'team_id'=>$application[0]['team_id'],
+                'member_id'=>$application[0]['applicant_id']
+            ];
+        }
+        else{
+            $update_data=['status'=>"2"];
+        }
+        try {
+            //开始事务
+            DB::beginTransaction();
+            //提交事务
+            $membership->add($data);
+            if(isset($data)){
+            $app_join->edit($map,$update_data);}
+            DB::commit();
+            //返回前端添加成功结果
+            return response()->json(['msg'=>'Operation Succeed.']);
+
+        } catch(QueryException $ex) {
+            //回滚事务
+            DB::rollback();
+            //返回前端添加失败结果
+            return response()->json(['msg'=>'Network is busy now,try again later！']);
+        }
     }
 
 

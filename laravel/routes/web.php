@@ -125,6 +125,8 @@ Route::group(['middleware'=>'auth','namespace'=>'Team','prefix'=>'team'],functio
 
     Route::any('sendInvitation','TeamController@sendInvitation');
 
+    Route::any('applicationManage','TeamController@applicationManage');
+
 });
 //任务路由
 Route::group(['middleware'=>'auth','namespace'=>'Task','prefix'=>'task'],function(){

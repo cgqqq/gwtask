@@ -12,6 +12,26 @@
             <div class="layui-tab-item layui-show" >
                 <div style="width: 680px;height: 440px;color: black;font-size: 15px;" class="scroll">
                     <div style="float: left;">
+                        @if(empty($applications))
+                        @else
+                            @foreach($applications as $application)
+                                <fieldset class="layui-elem-field layui-field-title" style="width: 650px;color: #0C0C0C;font-weight: 600;">
+                                    <legend>Application({{($applicationNum)}})</legend>
+                                    <div class="card" >
+                                        <div class="card-content scroll" style="margin-left:10px;padding:5px;width: 600px;max-height: 120px;height:auto;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;border: 2px solid #0C0C0C" >
+                              <span STYLE="font-size: 20px;font-weight: 600;">
+                                <img src="{{URL::asset('/images/invitation.png')}}">
+                                  You got an Team Application for {{$application['team_name']}} from user : {{$application['application_name']}}
+                            </span>
+                                 <button class="layui-btn app_approve" style="background-color: #fcfcfc;float: right;color: #0C0C0C;border: solid 2px black;">Approve</button>
+                                 <button class="layui-btn app_disapprove" style="background-color: #fcfcfc;float: right;color: #0C0C0C;border: solid 2px black;margin-right: 5px">Disapprove</button>
+                                 <input type="hidden" name="app_team_id" value="{{$application['app_team_id']}}">
+
+                                        </div>
+                                    </div>
+                                </fieldset>
+                            @endforeach
+                        @endif
                         @if(empty($invitations))
                         @else
                             @foreach($invitations as $invitation)
@@ -286,6 +306,62 @@
 
                 });
         });
+
+        $(function(){
+            layui.use('layer',function(){
+                $('.card').on('click','.app_approve',function(){
+                    //配置一个透明的询问框
+                    var app_team_id = $(this).siblings("[name='app_team_id']").val();
+                    $.ajax({
+                        url: "{{ url('team/applicationManage') }}",
+                        type: 'post',
+                        dataType:'json',
+                        data: {'app_team_id': app_team_id,"type":"approve","_token":"{{csrf_token()}}"}
+                    })
+                        .done(function(data) {
+                            layer.msg(data.msg);
+                            location.reload(true);
+                        })
+                        .fail(function() {
+                            layer.msg(data.msg);
+                        })
+                        .always(function() {
+                            console.log("complete");
+                        });
+
+                });
+
+
+            });
+        });
+        $(function(){
+            layui.use('layer',function(){
+                $('.card').on('click','.app_disapprove',function(){
+                    //配置一个透明的询问框
+                    var app_team_id = $(this).siblings("[name='app_team_id']").val();
+                    $.ajax({
+                        url: "{{ url('team/applicationManage') }}",
+                        type: 'post',
+                        dataType:'json',
+                        data: {'app_team_id': app_team_id,"type":"disapprove","_token":"{{csrf_token()}}"}
+                    })
+                        .done(function(data) {
+                            layer.msg(data.msg);
+                            location.reload(true);
+                        })
+                        .fail(function() {
+                            layer.msg(data.msg);
+                        })
+                        .always(function() {
+                            console.log("complete");
+                        });
+
+                });
+
+
+            });
+        });
+
 
 
     </script>

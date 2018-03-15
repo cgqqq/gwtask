@@ -445,7 +445,7 @@ class UserController extends Controller
         return view('User/displayInfoOptions');
     }
 
-    public function applyJoinTeam(Request $request, App_join $app_join)
+    public function applyJoinTeam(Request $request, App_join $app_join,Team $team)
     {
         $request->validate([
             'team_id' => 'required',
@@ -467,12 +467,12 @@ class UserController extends Controller
             //提交事务
             DB::commit();
             //返回前端添加成功结果
-            return response()->json(['msg' => 'Your invitation has been successfully sent!!', 'icon' => '1']);
+            return response()->json(['msg' => 'Your application has been successfully sent!!']);
         } catch (QueryException $ex) {
             //回滚事务
             DB::rollback();
             //返回前端添加失败结果
-            return response()->json(['msg' => 'Network is busy now,try again later！', 'icon' => '2']);
+            return response()->json(['msg' => 'Network is busy now,try again later！']);
         }
     }
 
@@ -482,12 +482,14 @@ class UserController extends Controller
      * @param User $user
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function displayInfoMailBox(Mail $mail, User $user, Invitation $invitation, Team $team)
+    public function displayInfoMailBox(Mail $mail, User $user, Invitation $invitation, Team $team,App_join $app_join)
     {
         /*1.获得user id,查询是否存在邮箱新消息*/
-        $newsNum = count($mail->where(['mail_status' =>"0", 'mail_to_id' => session('user_id')])->get()->toArray()) + count($invitation->where(['user_id' => session('user_id'), 'status' => '0'])->get()->toArray());
+        $applications=$app_join->where(['status' =>"0"])->join('team','team.team_id','=','app_join.team_id')->where(['team.team_funder_id' => session('user_id')])->get()->toArray();
+        $newsNum = count($mail->where(['mail_status' =>"0", 'mail_to_id' => session('user_id')])->get()->toArray()) + count($invitation->where(['user_id' => session('user_id'), 'status' => '0'])->get()->toArray())+count($applications);
         $mailsNum = count($mail->where(['mail_to_id' => session('user_id')])->get()->toArray());
         $invitationNum = count($invitation->where(['user_id' => session('user_id'), 'status' => '0'])->get()->toArray());
+        $applicationNum=count($applications);
         /*2.如果存在查询消息*/
         $mailsRecieved = $mail->where(['mail_to_id' => session('user_id')])->orderBy('mail_sent_time', 'desc')->get()->toArray();
 
@@ -547,11 +549,15 @@ class UserController extends Controller
                 $info=$team->get(['team_id'=>$value['team_id']])->toArray();
                 $value['invitation_team_name']=$info[0]['team_name'];
             }
-            return view('User/displayInfoMailBox',['newsNum'=>$newsNum,'mailsNum'=>$mailsNum,'invitationNum'=>$invitationNum,'mailsRecieved'=>$mailsRecieved,'sentMails'=>$sentMails,'invitations'=>$invite]);
         }
-        else{
-            return view('User/displayInfoMailBox',['newsNum'=>$newsNum,'mailsNum'=>$mailsNum,'mailsRecieved'=>$mailsRecieved,'sentMails'=>$sentMails]);
+        if(!empty($applications)){
+            foreach ($applications as $key=>&$value){
+                $value['application_name']=$user->where(['user_id'=>$value['applicant_id']])->value('user_name');
+                $value['team_name']=$team->where(['team_id'=>$value['team_id']])->value('team_name');
+            }
         }
+
+        return view('User/displayInfoMailBox',['newsNum'=>$newsNum,'mailsNum'=>$mailsNum,'invitationNum'=>$invitationNum,'mailsRecieved'=>$mailsRecieved,'sentMails'=>$sentMails,'invitations'=>$invite,'applications'=>$applications,'applicationNum'=>$applicationNum ]);
 
     }
     public function acceptInvitation(Request $request,Invitation $invitation,Team $team,Membership $membership,Mail $mail,User $user){
@@ -579,7 +585,7 @@ class UserController extends Controller
         $map_mail=[
             'mail_id'=>md5(uniqid(mt_rand(),true)),
             'mail_to_id'=>$team_info[0]['team_funder_id'],
-            'mail_from_id'=>$user_id,
+            'mail_from_id'=>"admin",
             'mail_title'=>"System Inform",
             'mail_content'=>"Dear user ".$funder_name.",Good day ! Your invitation to user ".$invited_name." for joining in ".$team_info[0]['team_name']." has been accepted !",
             'mail_type'=>"0",/*Sent by user:1 Sent by system:0*/
@@ -624,7 +630,7 @@ class UserController extends Controller
         $map_mail=[
             'mail_id'=>md5(uniqid(mt_rand(),true)),
             'mail_to_id'=>$team_info[0]['team_funder_id'],
-            'mail_from_id'=>$user_id,
+            'mail_from_id'=>"admin",
             'mail_title'=>"System Inform",
             'mail_content'=>"Dear user ".$funder_name.",good day ! Your invitation to user ".$invited_name." for joining in ".$team_info[0]['team_name']." has been refused !",
             'mail_type'=>"0",/*Sent by user:1 Sent by system:0*/
@@ -718,8 +724,9 @@ class UserController extends Controller
 
 
     }
-    public function displayInfoMailContent(Request $request, $mail_id,Mail $mail,Invitation $invitation,User $user){
-        $newsNum=count($mail->where(['mail_status'=>"0",'mail_to_id'=>session('user_id')])->get()->toArray())+count($invitation->where(['user_id'=>session('user_id'),'status'=>'0'])->get()->toArray());
+    public function displayInfoMailContent(Request $request, $mail_id,Mail $mail,Invitation $invitation,User $user,App_join $app_join){
+        $applications=$app_join->where(['status' =>"0", 'team.team_id' => session('user_id')])->join('team','app_join.team_id','=','team.team_funder_id')->get()->toArray();
+        $newsNum = count($mail->where(['mail_status' =>"0", 'mail_to_id' => session('user_id')])->get()->toArray()) + count($invitation->where(['user_id' => session('user_id'), 'status' => '0'])->get()->toArray())+count($applications);
         $mail_content=$mail->get(['mail_id'=>$mail_id])->toArray();
         $mail_type=$mail->where(['mail_id'=>$mail_id])->value('mail_type');
         if($mail_type=='0'){
@@ -748,9 +755,10 @@ class UserController extends Controller
         return view('User/displayInfoMailContent',['newsNum'=>$newsNum,'mail_content'=>$mail_content[0],'mail_from_info'=>$mail_from_info[0]]);
     }
 
-    public function displayInfoMyMailContent(Request $request, $mail_id,Mail $mail,Invitation $invitation,User $user)
+    public function displayInfoMyMailContent(Request $request, $mail_id,Mail $mail,Invitation $invitation,User $user,App_join $app_join)
     {
-        $newsNum = count($mail->where(['mail_status' =>"0", 'mail_to_id' => session('user_id')])->get()->toArray()) + count($invitation->where(['user_id' => session('user_id'), 'status' => '0'])->get()->toArray());
+        $applications=$app_join->where(['status' =>"0", 'team.team_funder_id' => session('user_id')])->join('team','app_join.team_id','=','team.team_funder_id')->get()->toArray();
+        $newsNum = count($mail->where(['mail_status' =>"0", 'mail_to_id' => session('user_id')])->get()->toArray()) + count($invitation->where(['user_id' => session('user_id'), 'status' => '0'])->get()->toArray())+count($applications);
         $mail_content = $mail->get(['mail_id' => $mail_id])->toArray();
         $mail_to_info = $user->get(['user_id' => $mail_content[0]['mail_to_id']])->toArray();
         return view('User/displayInfoMyMailContent', ['newsNum' => $newsNum, 'mail_content' => $mail_content[0], 'mail_to_info' => $mail_to_info[0]]);
