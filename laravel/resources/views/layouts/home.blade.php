@@ -74,7 +74,7 @@
                             <dd><a href="{{url('team/displayAdd')}}">Create One</a></dd>
                         </dl>
                     </li>
-                    <li class="layui-nav-item"><a href="#">Tasks</a></li>
+                    <li class="layui-nav-item"><a href="{{url('task/displayAll')}}">Tasks</a></li>
                     <li class="layui-nav-item">
                         <a href="{{url('team/displayAll')}}">All Teams</a>
                     </li>

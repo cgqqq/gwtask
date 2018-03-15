@@ -116,6 +116,9 @@ Route::group(['middleware'=>'auth','namespace'=>'Team','prefix'=>'team'],functio
 Route::group(['middleware'=>'auth','namespace'=>'Task','prefix'=>'task'],function(){
 	Route::get('displayAdd/{team_name}','TaskController@displayAdd');
 
+	Route::post('add','TaskController@add');
+
+	Route::get('displayAll','TaskController@displayAll')->name('displayAllTask');
 });
 
 Auth::routes();

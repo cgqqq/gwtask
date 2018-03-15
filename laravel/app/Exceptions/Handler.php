@@ -48,6 +48,13 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
+        //使捕捉ValidationException返回200
+        // if ($e instanceof ValidationException) {
+        //     return $e->getResponse()->setStatusCode(200);
+        // }else{
+        //     return parent::render($request, $exception);
+        // }
         return parent::render($request, $exception);
     }
+
 }
