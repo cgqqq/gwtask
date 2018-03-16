@@ -114,6 +114,26 @@ body .demo-class .layui-btn{
 	-o-transition:.5s all;
 	-ms-transition:.5s all;
 }
+.icons ul li a.center_icon2{
+	background:url(../images/2_news.png) no-repeat 0px 0px;
+	display:block;
+	height: 32px;
+	width: 40px;
+	transition:.5s all;
+	-webkit-transition:.5s all;
+	-moz-transition:.5s all;
+	-o-transition:.5s all;
+	-ms-transition:.5s all;
+}
+.icons ul li a.center_icon2:hover{
+	background:url(../images/2_news.png) no-repeat 0px -32px;
+	display:block;
+	transition:.5s all;
+	-webkit-transition:.5s all;
+	-moz-transition:.5s all;
+	-o-transition:.5s all;
+	-ms-transition:.5s all;
+}
 .icons ul li a.logout_icon{
 	background:url(../images/2.png) no-repeat -37px 0px;
 	display:block;

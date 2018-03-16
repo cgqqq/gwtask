@@ -14,7 +14,7 @@ class Base extends Model{
 	}
 	//通用删除操作
 	public function del($map){
-		return $this->where($map)->delete($map);		
+		return $this->where($map)->delete($map);
 	}
 	//通用查找操作
 	public function get($map){

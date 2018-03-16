@@ -509,7 +509,6 @@ class UserController extends Controller
         $now = date("Y-m-d H:i:s");
         if (floor(strtotime($now) - $value['mail_sent_time']) > 86400) {
             $value['mail_time_gap'] = (floor((strtotime($now) - $value['mail_sent_time']) / 86400)) . 'day(s) ago';
-            $value['mail_time_gap'] = " just now";
         } elseif (floor(strtotime($now) - $value['mail_sent_time']) > 3600) {
             $value['mail_time_gap'] = (floor((strtotime($now) - $value['mail_sent_time']) / 3600)) . 'hour(s) ago';
 
@@ -530,10 +529,9 @@ class UserController extends Controller
         foreach($sentMails as $key => &$value){
             $mail_to_name=$user->get(['user_id'=>$value['mail_to_id']])->toArray();
             $value['mail_to_name']=$mail_to_name[0]['user_name'];
-
+            $now = date("Y-m-d H:i:s");
             if(floor(strtotime($now)-$value['mail_sent_time'])>86400){
                 $value['mail_time_gap']=(floor((strtotime($now)-$value['mail_sent_time'])/86400)).'day(s) ago';
-                $value['mail_time_gap']=" just now";
             }elseif (floor(strtotime($now)-$value['mail_sent_time'])>3600){
                 $value['mail_time_gap']=(floor((strtotime($now)-$value['mail_sent_time'])/3600)).'hour(s) ago';
 
@@ -558,7 +556,11 @@ class UserController extends Controller
                 $value['team_name']=$team->where(['team_id'=>$value['team_id']])->value('team_name');
             }
         }
-
+        if($newsNum>0){
+        session()->put('news',true);}
+        else{
+        session()->put('news',false);
+        }
         return view('User/displayInfoMailBox',['newsNum'=>$newsNum,'mailsNum'=>$mailsNum,'invitationNum'=>$invitationNum,'mailsRecieved'=>$mailsRecieved,'sentMails'=>$sentMails,'invitations'=>$invite,'applications'=>$applications,'applicationNum'=>$applicationNum ]);
 
     }
@@ -712,7 +714,7 @@ class UserController extends Controller
         try {
             //开始事务
             DB::beginTransaction();
-            $mail->del($map);
+            $mail->where($map)->delete($map);
             //提交事务
             DB::commit();
             //返回前端添加成功结果

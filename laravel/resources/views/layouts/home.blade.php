@@ -43,7 +43,11 @@
             <div class="icons" style="margin-top: 0; ">
                 @section('icon')
                     <ul>
+                        @if(session('news'))
+                            <li><a href="{{ url('user/displayInfo') }}" class="center_icon2"> </a></li>
+                        @else
                         <li><a href="{{ url('user/displayInfo') }}" class="center_icon"> </a></li>
+                        @endif
                         <li><a href="javascript:void(0)" class="logout_icon"> </a></li>
 
 
