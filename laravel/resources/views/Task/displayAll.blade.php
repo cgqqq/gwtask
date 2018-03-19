@@ -2,7 +2,58 @@
 @extends('layouts.home')
 
 @section('content')
+	<div class="layui-collapse" lay-filter="test">
+		@foreach($tasks as $task)
+		<div class="layui-colla-item" style="width: 1000px;">
+			<h2 class="layui-colla-title" style="color: #0C0C0C;font-weight: 800;font-size: 15px;width: 1030px;background-color: #34bf49">{{ $task['task_name'] }}
+				<span  style="color: #fcfcfc">Published By : </span> {{ $task['1'] }} <span  style="color: #fcfcfc"> From </span> {{$task['0']}}
+				<span style="float: right;">
+				@if( $task['task_status'] =='0')
+						<img class="layui-circle" style="height: 30px;width:30px;" src="{{URL::asset('/images/pending.png')}}" >
+					@elseif($task['task_status']=='1')
+						<img class="layui-circle" style="height: 30px;width:30px;" src="{{URL::asset('/images/ongoing.png')}}" >
+					@else
+						<img class="layui-circle" style="height: 30px;width:30px;" src="{{URL::asset('/images/finishing.png')}}" >
+					@endif
+			</span>
 
+			</h2>
+
+			<div class="layui-colla-content">
+				<p style="max-height: 500px;height: auto;" class="scroll">
+					<ul class="layui-timeline">
+						<li class="layui-timeline-item">
+							<i class="layui-icon layui-timeline-axis"></i>
+							<div class="layui-timeline-content layui-text">
+								<h3 class="layui-timeline-title">{{ date('Y-m-d H:i:s',$task['task_kickoff_date']) }}</h3>
+				<p> <span style="color: #0C0C0C;font-size: 15px;font-weight: 800;">Created Task</span><br>
+					<span style="color: #0C0C0C;font-size: 13px;">Task Description :</span><br>
+					{{ $task['task_description'] }}
+					<br>
+					<br>XX hours XX mins XX seconds left</i>
+				</p>
+			</div>
+			</li>
+			<li class="layui-timeline-item">
+				<i class="layui-icon layui-timeline-axis"></i>
+				<div class="layui-timeline-content layui-text">
+					<h3 class="layui-timeline-title">+</h3>
+
+				</div>
+			</li>
+			</ul>
+
+				</p>
+			</div>
+
+		</div>
+	<div class="layui-colla-item" style="width: 1000px;line-height:50px;">
+
+			<img class="layui-circle" style="height: 30px;width:30px;margin-left: 500px;" src="{{URL::asset('/images/add.png')}}" onclick='javascrtpt:window.location.href="#"	' >
+
+	</div>
+			@endforeach
+	</div>
 <script type="text/javascript">
 	$(function(){
 		layui.use('layer',function(){
@@ -32,6 +83,7 @@
 		});
 	});
 </script>
+{{--
 
 <table class="layui-table" style="width: 900px;">
 <thead>
@@ -54,13 +106,15 @@
 			<td>{{ date('Y-m-d H:i:s',$task['task_kickoff_date']) }}</td>
 			<td>{{ date('Y-m-d H:i:s',$task['task_deadline']) }}</td>
 			<td><script type="text/javascript">
-				if({{ $task['task_status'] }}=='0'){
+				@if( $task['task_status'] =='0'){
 					document.write("未开始");
-				}else if({{ $task['task_status'] }}=='1'){
+				}
+				@elseif($task['task_status']=='1')
 					document.write("进行中");
-				}else{
+				@else{
 					document.write("已结束");
 				}
+				@endif
 			</script>
 			
 			</td>
@@ -68,5 +122,6 @@
 		@endforeach
 </table>
 {{ $paged->links() }}
+--}}
 
 @endsection
