@@ -14,14 +14,14 @@ class CreateTaskTransactionTable extends Migration
     public function up()
     {
         Schema::create('taskTransaction', function (Blueprint $table) {
-            $table->string('id',32);
+            $table->string('tran_id',32);
             $table->string('task_id',32);
             $table->string('trans_brief',100);
             $table->string('trans_description',10000);
             $table->string('trans_Resource_path',100)->default(null)->nullable();
             $table->string('trans_Resource_intro',1000)->default(null)->nullable();
             $table->integer('time',false);
-            $table->primary('id');
+            $table->primary('tran_id');
         });
     }
 

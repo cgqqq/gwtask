@@ -49,7 +49,7 @@ class TaskController extends Controller
         	'task_kickoff_date'=>strtotime(date($request->input('sDate')))
         ];
         $map_trans = [
-            'id'=>md5(uniqid(mt_rand(),true)),
+            'tran_id'=>md5(uniqid(mt_rand(),true)),
             'trans_brief'=>"Task Created",
             'trans_description'=>$request->input('task_descri'),
             'task_id'=>$task_id,
@@ -158,7 +158,7 @@ class TaskController extends Controller
         }*/
 
         $map_trans = [
-            'id'=>md5(uniqid(mt_rand(),true)),
+            'tran_id'=>md5(uniqid(mt_rand(),true)),
             'trans_brief'=>$request->input('trans_brief'),
             'trans_description'=>$request->input('trans_description'),
             'task_id'=>$request->input('task_id'),
@@ -182,6 +182,31 @@ class TaskController extends Controller
             //返回前端添加失败结果
             return response()->json(['msg' => 'fail!']);
         }
+    }
+    
+    public function deleteTransaction(TaskTransaction $taskTransaction,Request $request){
+        $request->validate([
+            'tran_id'=>'required'
+        ]);
+        $map=[
+            'tran_id'=>$request->input('tran_id')
+        ];
+        try {
+            //开始事务
+            DB::beginTransaction();
+            $taskTransaction->where($map)->delete($map);
+            //提交事务
+            DB::commit();
+            //返回前端添加成功结果
+            return response()->json(['msg' => 'Delete Successfully!']);
+
+        } catch(QueryException $ex) {
+            //回滚事务
+            DB::rollback();
+            //返回前端添加失败结果
+            return response()->json(['msg' => 'Busy Network!Try Again!']);
+        }
+
     }
 
 }

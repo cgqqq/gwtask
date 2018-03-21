@@ -3,6 +3,7 @@
 
 @section('content')
 	<div class="layui-collapse" lay-filter="test">
+
 		@foreach($tasks as $task)
 		<li class="layui-colla-item" style="width: 1000px;">
 			<h2 class="layui-colla-title" style="color: #0C0C0C;font-weight: 800;font-size: 15px;width: 1030px;background-color: #34bf49">{{ $task['task_name'] }}
@@ -19,10 +20,12 @@
 
 			</h2>
 
-			<div class="layui-colla-content">
+			<div class="layui-colla-content" id="tran_box">
 				<p style="max-height: 500px;height: auto;" class="scroll">
 					<ul class="layui-timeline">
+
 						@foreach($task['trans'] as $tran)
+							{{dump($tran)}}
 						<li class="layui-timeline-item">
 							<i class="layui-icon layui-timeline-axis"></i>
 							<div class="layui-timeline-content layui-text">
@@ -32,6 +35,10 @@
 					<span style="color: #0C0C0C;font-size: 13px;">Task Description :</span>
 					{{ $tran['trans_description'] }}
 				</p>
+				<p>
+					<img src="{{URL::asset('/images/delete2.png')}}" class="delete_tran">
+				</p>
+				<input type="hidden" name="tran_id" value="{{$tran['tran_id']}}">
 			</div>
 		</li>
 			@endforeach
@@ -148,11 +155,38 @@
                     data: {"task_id":task_id,"trans_brief": trans_brief,"trans_description":trans_description,'trans_Resource_intro':trans_Resource_intro,"_token":"{{csrf_token()}}"}
                 })
                     .success(function(data) {
-                        layer.msg(data);
+                        layer.msg(data.msg);
 
                     })
                     .fail(function(data) {
-                        layer.msg(data);
+                        layer.msg(data.msg);
+                    })
+                    .always(function() {
+                        console.log("complete");
+                    });
+            });
+
+        });
+    });
+
+    $(function(){
+        layui.use('layer', function(){
+            $('#tran_box').on('click','.delete_tran',function(event){
+                event.preventDefault();
+                var id = $(this).parent().siblings("[name='tran_id']").val();
+                $.ajax({
+                    url: "{{ url('task/deleteTransaction') }}",
+                    type: 'post',
+                    dataType: 'json',
+                    data: {"tran_id":id,"_token":"{{csrf_token()}}"}
+                })
+                    .done(function(data) {
+                        layer.msg(data.msg);
+                        location.reload();
+
+                    })
+                    .fail(function(data) {
+                        layer.msg(data.msg);
                     })
                     .always(function() {
                         console.log("complete");

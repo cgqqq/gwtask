@@ -5,12 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="03c77c43-de62-47b9-8a66-f413799d84dc" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/laravel/app/Models/TaskTransaction.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/laravel/database/migrations/2018_03_20_075123_create_taskTransaction_table.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/laravel/app/Http/Controllers/Task/TaskController.php" afterPath="$PROJECT_DIR$/laravel/app/Http/Controllers/Task/TaskController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/laravel/public/css/style.css" afterPath="$PROJECT_DIR$/laravel/public/css/style.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/laravel/resources/views/Task/displayAdd.blade.php" afterPath="$PROJECT_DIR$/laravel/resources/views/Task/displayAdd.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/laravel/database/migrations/2018_03_20_075123_create_taskTransaction_table.php" afterPath="$PROJECT_DIR$/laravel/database/migrations/2018_03_20_075123_create_taskTransaction_table.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/laravel/resources/views/Task/displayAll.blade.php" afterPath="$PROJECT_DIR$/laravel/resources/views/Task/displayAll.blade.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/laravel/routes/web.php" afterPath="$PROJECT_DIR$/laravel/routes/web.php" />
     </list>
@@ -23,6 +20,27 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="displayInfoMailBox.blade.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/laravel/resources/views/User/displayInfoMailBox.blade.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="469">
+              <caret line="85" column="40" lean-forward="false" selection-start-line="85" selection-start-column="40" selection-end-line="85" selection-end-column="104" />
+              <folding>
+                <element signature="e#6420#6460#0#HTML" expanded="true" />
+                <marker date="1521098932060" expanded="true" signature="11969:15322" ph="..." />
+                <marker date="1521098932060" expanded="true" signature="11980:15321" ph="..." />
+                <marker date="1521098932060" expanded="true" signature="12022:15309" ph="..." />
+                <marker date="1521098932060" expanded="true" signature="12053:15294" ph="..." />
+                <marker date="1521098932060" expanded="true" signature="12958:13050" ph="..." />
+                <marker date="1521098932060" expanded="true" signature="12958:13073" ph="..." />
+                <marker date="1521098932060" expanded="true" signature="12958:13120" ph="..." />
+                <marker date="1521098932060" expanded="true" signature="13135:13182" ph="..." />
+                <marker date="1521098932060" expanded="true" signature="13236:13283" ph="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="style.css" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/laravel/public/css/style.css">
           <provider selected="true" editor-type-id="text-editor">
@@ -36,12 +54,12 @@
       <file leaf-file-name="displayAll.blade.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/laravel/resources/views/Task/displayAll.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2080">
-              <caret line="147" column="27" lean-forward="false" selection-start-line="147" selection-start-column="27" selection-end-line="147" selection-end-column="27" />
+            <state relative-caret-position="491">
+              <caret line="169" column="7" lean-forward="true" selection-start-line="169" selection-start-column="7" selection-end-line="169" selection-end-column="7" />
               <folding>
-                <marker date="1521613292901" expanded="false" signature="2942:2992" ph="..." />
-                <marker date="1521613292901" expanded="false" signature="3050:3066" ph="..." />
-                <marker date="1521613292901" expanded="false" signature="3201:3244" ph="..." />
+                <marker date="1521615766496" expanded="false" signature="3143:3193" ph="..." />
+                <marker date="1521615766496" expanded="false" signature="3251:3267" ph="..." />
+                <marker date="1521615766496" expanded="false" signature="3402:3445" ph="..." />
               </folding>
             </state>
           </provider>
@@ -50,8 +68,8 @@
       <file leaf-file-name="web.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/laravel/routes/web.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="371">
-              <caret line="139" column="0" lean-forward="false" selection-start-line="139" selection-start-column="0" selection-end-line="139" selection-end-column="0" />
+            <state relative-caret-position="390">
+              <caret line="140" column="34" lean-forward="false" selection-start-line="140" selection-start-column="17" selection-end-line="140" selection-end-column="34" />
               <folding />
             </state>
           </provider>
@@ -60,8 +78,8 @@
       <file leaf-file-name="displayAdd.blade.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/laravel/resources/views/Task/displayAdd.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="314">
-              <caret line="82" column="21" lean-forward="false" selection-start-line="82" selection-start-column="21" selection-end-line="82" selection-end-column="21" />
+            <state relative-caret-position="163">
+              <caret line="40" column="39" lean-forward="false" selection-start-line="40" selection-start-column="38" selection-end-line="40" selection-end-column="46" />
               <folding>
                 <marker date="1521535194674" expanded="true" signature="107:121" ph="{...}" />
                 <marker date="1521535194674" expanded="true" signature="3952:3958" ph="..." />
@@ -70,21 +88,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="login.blade.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/laravel/resources/views/Index/login.blade.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="66">
-              <caret line="125" column="43" lean-forward="false" selection-start-line="125" selection-start-column="43" selection-end-line="125" selection-end-column="43" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="TaskController.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/laravel/app/Http/Controllers/Task/TaskController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="253">
-              <caret line="165" column="39" lean-forward="false" selection-start-line="165" selection-start-column="39" selection-end-line="165" selection-end-column="39" />
+            <state relative-caret-position="-40">
+              <caret line="191" column="47" lean-forward="false" selection-start-line="191" selection-start-column="47" selection-end-line="191" selection-end-column="47" />
               <folding>
                 <element signature="e#46#74#0#PHP" expanded="true" />
               </folding>
@@ -104,16 +112,6 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="displayMine.blade.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/laravel/resources/views/Team/displayMine.blade.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2033">
-              <caret line="107" column="46" lean-forward="false" selection-start-line="107" selection-start-column="46" selection-end-line="107" selection-end-column="46" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="register.blade.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/laravel/resources/views/Index/register.blade.php">
           <provider selected="true" editor-type-id="text-editor">
@@ -128,8 +126,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>join(</find>
-      <find>application</find>
       <find>application_name</find>
       <find>displayIn</find>
       <find>applyJoinTeam</find>
@@ -142,7 +138,6 @@
       <find>del(</find>
       <find>hour</find>
       <find>$now</find>
-      <find>img</find>
       <find>sent</find>
       <find>sentM</find>
       <find>time()</find>
@@ -158,6 +153,9 @@
       <find>displayAll</find>
       <find>fileinput-button</find>
       <find>file</find>
+      <find>img</find>
+      <find>id</find>
+      <find>dump</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -210,9 +208,9 @@
         <option value="$PROJECT_DIR$/laravel/resources/views/layouts/home.blade.php" />
         <option value="$PROJECT_DIR$/laravel/app/Models/TaskTransaction.php" />
         <option value="$PROJECT_DIR$/laravel/resources/views/Task/displayAdd.blade.php" />
-        <option value="$PROJECT_DIR$/laravel/database/migrations/2018_03_20_075123_create_taskTransaction_table.php" />
-        <option value="$PROJECT_DIR$/laravel/routes/web.php" />
         <option value="$PROJECT_DIR$/laravel/public/css/style.css" />
+        <option value="$PROJECT_DIR$/laravel/routes/web.php" />
+        <option value="$PROJECT_DIR$/laravel/database/migrations/2018_03_20_075123_create_taskTransaction_table.php" />
         <option value="$PROJECT_DIR$/laravel/app/Http/Controllers/Task/TaskController.php" />
         <option value="$PROJECT_DIR$/laravel/resources/views/Task/displayAll.blade.php" />
       </list>
@@ -225,7 +223,7 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" />
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="-8" />
     <option name="y" value="-8" />
     <option name="width" value="1368" />
@@ -348,15 +346,15 @@
       <workItem from="1521525036518" duration="12128000" />
       <workItem from="1521545633890" duration="1502000" />
       <workItem from="1521547349187" duration="12568000" />
-      <workItem from="1521602644760" duration="6349000" />
+      <workItem from="1521602644760" duration="8755000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="191498000" />
+    <option name="totallyTimeSpent" value="193904000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="7" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22327965" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -638,14 +636,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/laravel/database/migrations/2018_03_20_075123_create_taskTransaction_table.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="342">
-          <caret line="20" column="38" lean-forward="false" selection-start-line="20" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/laravel/app/Models/TaskTransaction.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="171">
@@ -660,29 +650,19 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/laravel/resources/views/Team/displayMine.blade.php">
+    <entry file="file://$PROJECT_DIR$/laravel/resources/views/Index/register.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2033">
-          <caret line="107" column="46" lean-forward="false" selection-start-line="107" selection-start-column="46" selection-end-line="107" selection-end-column="46" />
+        <state relative-caret-position="185">
+          <caret line="88" column="26" lean-forward="false" selection-start-line="80" selection-start-column="17" selection-end-line="98" selection-end-column="26" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/laravel/resources/views/User/displayInfoMailBox.blade.php">
+    <entry file="file://$PROJECT_DIR$/laravel/public/css/style.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="19">
-          <caret line="156" column="32" lean-forward="false" selection-start-line="156" selection-start-column="29" selection-end-line="156" selection-end-column="32" />
-          <folding>
-            <marker date="1521098932060" expanded="true" signature="11969:15322" ph="..." />
-            <marker date="1521098932060" expanded="true" signature="11980:15321" ph="..." />
-            <marker date="1521098932060" expanded="true" signature="12022:15309" ph="..." />
-            <marker date="1521098932060" expanded="true" signature="12053:15294" ph="..." />
-            <marker date="1521098932060" expanded="true" signature="12958:13050" ph="..." />
-            <marker date="1521098932060" expanded="true" signature="12958:13073" ph="..." />
-            <marker date="1521098932060" expanded="true" signature="12958:13120" ph="..." />
-            <marker date="1521098932060" expanded="true" signature="13135:13182" ph="..." />
-            <marker date="1521098932060" expanded="true" signature="13236:13283" ph="..." />
-          </folding>
+        <state relative-caret-position="338">
+          <caret line="429" column="19" lean-forward="false" selection-start-line="429" selection-start-column="19" selection-end-line="429" selection-end-column="19" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -694,26 +674,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/laravel/resources/views/Index/register.blade.php">
+    <entry file="file://$PROJECT_DIR$/laravel/resources/views/Team/displayMine.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="185">
-          <caret line="88" column="26" lean-forward="false" selection-start-line="80" selection-start-column="17" selection-end-line="98" selection-end-column="26" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/laravel/routes/web.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="371">
-          <caret line="139" column="0" lean-forward="false" selection-start-line="139" selection-start-column="0" selection-end-line="139" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/laravel/public/css/style.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="338">
-          <caret line="429" column="19" lean-forward="false" selection-start-line="429" selection-start-column="19" selection-end-line="429" selection-end-column="19" />
+        <state relative-caret-position="184">
+          <caret line="45" column="32" lean-forward="false" selection-start-line="45" selection-start-column="29" selection-end-line="45" selection-end-column="32" />
           <folding />
         </state>
       </provider>
@@ -728,10 +692,45 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/laravel/routes/web.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="390">
+          <caret line="140" column="34" lean-forward="false" selection-start-line="140" selection-start-column="17" selection-end-line="140" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/laravel/resources/views/User/displayInfoMailBox.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="469">
+          <caret line="85" column="40" lean-forward="false" selection-start-line="85" selection-start-column="40" selection-end-line="85" selection-end-column="104" />
+          <folding>
+            <element signature="e#6420#6460#0#HTML" expanded="true" />
+            <marker date="1521098932060" expanded="true" signature="11969:15322" ph="..." />
+            <marker date="1521098932060" expanded="true" signature="11980:15321" ph="..." />
+            <marker date="1521098932060" expanded="true" signature="12022:15309" ph="..." />
+            <marker date="1521098932060" expanded="true" signature="12053:15294" ph="..." />
+            <marker date="1521098932060" expanded="true" signature="12958:13050" ph="..." />
+            <marker date="1521098932060" expanded="true" signature="12958:13073" ph="..." />
+            <marker date="1521098932060" expanded="true" signature="12958:13120" ph="..." />
+            <marker date="1521098932060" expanded="true" signature="13135:13182" ph="..." />
+            <marker date="1521098932060" expanded="true" signature="13236:13283" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/laravel/database/migrations/2018_03_20_075123_create_taskTransaction_table.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="399">
+          <caret line="23" column="34" lean-forward="false" selection-start-line="23" selection-start-column="34" selection-end-line="23" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/laravel/app/Http/Controllers/Task/TaskController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="253">
-          <caret line="165" column="39" lean-forward="false" selection-start-line="165" selection-start-column="39" selection-end-line="165" selection-end-column="39" />
+        <state relative-caret-position="-40">
+          <caret line="191" column="47" lean-forward="false" selection-start-line="191" selection-start-column="47" selection-end-line="191" selection-end-column="47" />
           <folding>
             <element signature="e#46#74#0#PHP" expanded="true" />
           </folding>
@@ -740,8 +739,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/laravel/resources/views/Task/displayAdd.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="314">
-          <caret line="82" column="21" lean-forward="false" selection-start-line="82" selection-start-column="21" selection-end-line="82" selection-end-column="21" />
+        <state relative-caret-position="163">
+          <caret line="40" column="39" lean-forward="false" selection-start-line="40" selection-start-column="38" selection-end-line="40" selection-end-column="46" />
           <folding>
             <marker date="1521535194674" expanded="true" signature="107:121" ph="{...}" />
             <marker date="1521535194674" expanded="true" signature="3952:3958" ph="..." />
@@ -751,12 +750,12 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/laravel/resources/views/Task/displayAll.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2080">
-          <caret line="147" column="27" lean-forward="false" selection-start-line="147" selection-start-column="27" selection-end-line="147" selection-end-column="27" />
+        <state relative-caret-position="491">
+          <caret line="169" column="7" lean-forward="true" selection-start-line="169" selection-start-column="7" selection-end-line="169" selection-end-column="7" />
           <folding>
-            <marker date="1521613292901" expanded="false" signature="2942:2992" ph="..." />
-            <marker date="1521613292901" expanded="false" signature="3050:3066" ph="..." />
-            <marker date="1521613292901" expanded="false" signature="3201:3244" ph="..." />
+            <marker date="1521615766496" expanded="false" signature="3143:3193" ph="..." />
+            <marker date="1521615766496" expanded="false" signature="3251:3267" ph="..." />
+            <marker date="1521615766496" expanded="false" signature="3402:3445" ph="..." />
           </folding>
         </state>
       </provider>

@@ -138,6 +138,8 @@ Route::group(['middleware'=>'auth','namespace'=>'Task','prefix'=>'task'],functio
 
     Route::post('createTransaction','TaskController@createTransaction');
 
+    Route::post('deleteTransaction','TaskController@deleteTransaction');
+
 
 });
 
