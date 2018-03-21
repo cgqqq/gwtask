@@ -135,6 +135,10 @@ Route::group(['middleware'=>'auth','namespace'=>'Task','prefix'=>'task'],functio
 	Route::post('add','TaskController@add');
 
 	Route::get('displayAll','TaskController@displayAll')->name('displayAllTask');
+
+    Route::post('createTransaction','TaskController@createTransaction');
+
+
 });
 
 Auth::routes();
