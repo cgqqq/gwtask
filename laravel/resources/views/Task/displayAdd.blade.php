@@ -75,10 +75,14 @@
 			,laydate = layui.laydate;
 			//日期
 			laydate.render({
+                type: 'datetime',
 			  	elem: '#start_date'
+                /*,range: true*/
 			});
 			laydate.render({
-				elem: '#end_date'
+                type: 'datetime',
+				elem: '#end_date',
+                /*range: true*/
 			});
 		});
 	});

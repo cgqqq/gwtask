@@ -74,12 +74,17 @@
                     <li class="layui-nav-item">
                         <a href="#">Teams</a>
                         <dl class="layui-nav-child">
-                            <dd><a href="{{url('team/displayMine/default')}}">The team I am in</a></dd>
-                            <dd><a href="{{url('team/displayMineCre/default')}}">The team I created</a></dd>
+                            <dd><a href="{{url('team/displayMine/default')}}">Teams I Am In</a></dd>
+                            <dd><a href="{{url('team/displayMineCre/default')}}">Teams I Created</a></dd>
                             <dd><a href="{{url('team/displayAdd')}}">Create One</a></dd>
                         </dl>
                     </li>
-                    <li class="layui-nav-item"><a href="{{url('task/displayAll')}}">Tasks</a></li>
+                    <li class="layui-nav-item"><a href="{{url('task/displayAll')}}">Tasks</a>
+                        <dl class="layui-nav-child">
+                            <dd><a href="{{url('')}}">Tasks In Charged</a></dd>
+                            <dd><a href="{{url('')}}">Tasks Published By Me</a></dd>
+                        </dl>
+                    </li>
                     <li class="layui-nav-item">
                         <a href="{{url('team/displayAll')}}">All Teams</a>
                     </li>

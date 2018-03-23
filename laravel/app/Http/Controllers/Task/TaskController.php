@@ -7,6 +7,7 @@ use Illuminate\Pagination\LengthAwarePaginator;
 use App\Models\Team;
 use App\Models\User;
 use App\Models\Task;
+use App\Models\TaskTransaction;
 use DB;
 use App\Http\Controllers\Controller;
 
@@ -19,7 +20,7 @@ class TaskController extends Controller
 	}	
 	
 	//创建任务
-	public function add(Task $task,Request $request){
+	public function add(Task $task,Request $request,TaskTransaction $taskTransaction){
 		//对前端传参检查
 		$request->validate([
 			'team_id'=>'required',
@@ -36,8 +37,9 @@ class TaskController extends Controller
 		}
 		// pd(['s'=>date($request->input('sDate')),'now'=>date(time())]);
         //插入任务表的数据
+		$task_id=md5(uniqid(mt_rand(),true));
         $map = [
-        	'task_id'=>md5(uniqid(mt_rand(),true)),
+        	'task_id'=>$task_id,
         	'task_name'=>$request->input('task_name'),
         	'task_team_id'=>$request->input('team_id'),
         	'task_status'=>$task_status,
@@ -47,10 +49,18 @@ class TaskController extends Controller
         	'task_kickoff_date'=>strtotime(date($request->input('sDate'))), 
         	'task_allocation_status'=>'0'
         ];
+        $map_trans = [
+            'tran_id'=>md5(uniqid(mt_rand(),true)),
+            'trans_brief'=>"Task Created",
+            'trans_description'=>$request->input('task_descri'),
+            'task_id'=>$task_id,
+            'time'=>strtotime(date("Y-m-d H:i:s"))
+        ];
         try {
             //开始事务
             DB::beginTransaction();
             $task->add($map);
+            $taskTransaction->add($map_trans);
             //提交事务
             DB::commit();
             //返回前端添加成功结果
@@ -65,14 +75,17 @@ class TaskController extends Controller
 	}
 
 	//显示所有任务
-    public function displayAll(Task $task,User $user,Team $team,Request $request){
+    public function displayAll(Task $task,User $user,Team $team,Request $request,TaskTransaction $taskTransaction){
+
     	$pagedata = $task->all()->toArray();
+
+
     	// pd($pagedata);
         // 默认页码
         $page = $request->input('page')?$request->input('page'):1;
         // pd($page);
         //设定一页行数
-        $pagesize=2;
+        $pagesize=10;
         //总共行数
         $total=count($pagedata);
         //实例化分页类
@@ -86,10 +99,43 @@ class TaskController extends Controller
     		array_push($key,$teamInfo[0]['team_name']);
     		$userInfo = $user->get(['user_id'=>$key['task_manager_id']])->toArray();
     		array_push($key,$userInfo[0]['user_name']);
+			if($key['status']=='1'){
+                if($key['task_deadline']<time()){
+                    $timeLeft="Task Expried";
+                }
+                else{
+                    $time=$key['task_deadline']-time();
+                    $timeDay=0;
+                    $timeHour=0;
+                    $timeMin=0;
+                    if($time>=86400){
+                        $timeDay=(int)($time/86400);
+                        $time=$time%86400;
+                    }
+                    if($time>=3600){
+                        $timeHour=(int)($time/3600);
+                        $time=$time%3600;
+                    }
+                    $timeMin=(int)($time/60);
+
+                    $timeLeft=$timeDay." day(s) and ".$timeHour." hour(s) ".$timeMin."minute(s) before deadline";
+                }
+                $key['timeLeft']=$timeLeft;
+			}elseif($key['status']=="0"){
+                $key['timeLeft']="Task Will Kick Off At ".date("Y-m-d H:i:s",$key['task_kickoff_date']);
+			}
+			else{
+                $key['timeLeft']="Task Has Finished";
+			}
+            $trans=$taskTransaction->where(['task_id'=>$key['task_id']])->orderBy('time','asc')->get()->toArray();
+			$key['trans']=&$trans;
     	}
         // pd($pageout);
+
+
         return view('Task/displayAll',['tasks'=>$pageout,'paged'=>$paged]);
     }
+<<<<<<< HEAD
     //显示子任务分配界面
     public function displayAllocateSubTask(Request $request,Team $team,Task $task){
     	$teamInfo = $team->get(['team_id'=>$request->input('team_id')])->toArray();
@@ -99,5 +145,86 @@ class TaskController extends Controller
     	return view('Task/displayAllocateSubTask',['team_name'=>$team_name,'task_name'=>$task_name,'task_id'=>$request->input('task_id')]);
 
     }
+=======
+    public function createTransaction(TaskTransaction $taskTransaction,Request $request){
+        $request->validate([
+            'task_id'=>'required',
+            'trans_brief'=>'required',
+            'trans_description'=>'required'
+        ]);
+       /* $file = $request->trans_Resource_Path;
+
+        // 判断文件是否上传成功
+        if ( $file->isValid()) {
+
+            //资源存储文件夹
+            $destinatePath = 'uploads/resources';
+            //获得上传文件的文件名
+            $file_name = $file->getClientOriginalName()."/".time();
+            //从上传临时位置转移到指定位置
+            $file->move($destinatePath, $file_name);
+            $trans_Resource_path=$destinatePath.'/'.$file_name;
+        }
+        else{
+            $trans_Resource_path=null;
+        }*/
+
+        $map_trans = [
+            'tran_id'=>md5(uniqid(mt_rand(),true)),
+            'trans_brief'=>$request->input('trans_brief'),
+            'trans_description'=>$request->input('trans_description'),
+            'task_id'=>$request->input('task_id'),
+            'time'=>strtotime(date("Y-m-d H:i:s")),
+            'trans_Resource_path'=>null,
+            'trans_Resource_intro'=>$request->input('trans_Resource_intro')
+        ];
+
+        try {
+            //开始事务
+            DB::beginTransaction();
+            $taskTransaction->add($map_trans);
+            //提交事务
+            DB::commit();
+            //返回前端添加成功结果
+            return response()->json(['msg' => 'success!']);
+
+        } catch(QueryException $ex) {
+            //回滚事务
+            DB::rollback();
+            //返回前端添加失败结果
+            return response()->json(['msg' => 'fail!']);
+        }
+    }
+    
+    public function deleteTransaction(TaskTransaction $taskTransaction,Request $request){
+        $request->validate([
+            'tran_id'=>'required'
+        ]);
+        $map=[
+            'tran_id'=>$request->input('tran_id')
+        ];
+        try {
+            //开始事务
+            DB::beginTransaction();
+            $taskTransaction->where($map)->delete($map);
+            //提交事务
+            DB::commit();
+            //返回前端添加成功结果
+            return response()->json(['msg' => 'Delete Successfully!']);
+
+        } catch(QueryException $ex) {
+            //回滚事务
+            DB::rollback();
+            //返回前端添加失败结果
+            return response()->json(['msg' => 'Busy Network!Try Again!']);
+        }
+
+    }
+
+>>>>>>> origin/master
 }
-?>
+
+
+
+
+

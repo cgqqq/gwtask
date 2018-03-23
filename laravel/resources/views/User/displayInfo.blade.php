@@ -5,10 +5,18 @@
 <div style="width: 1030px;height: 800px">
 	<div style="background-color: #4aaf51;width: 1030px;height: 300px;float: left;color: #0C0C0C" class="shadow">
 		<img class="layui-circle" style="height: 150px;width:150px;margin-top: 5%;margin-left:43%" src="{{ asset(session('user_profile')) }}" >
-		<p style=" background-color:#fcfcfc;margin-top: 10px;font-weight: 800;font-size: 16px;text-align:center; width:1030px;height:33px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;  ">
+		<p style=" margin-top: 10px;font-weight: 800;font-size: 16px;text-align:center; width:1030px;height:33px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;  ">
 			{{ session('user_name')}}
 		</p>
+		<div style="background-color: #fcfcfc;width: 1030px;height: 45px;">
+		<div class="icons" style="float: none;padding-top:10px;margin-left: 415px;color: #0C0C0C;">
+			<ul>
+				<li style="margin-right: 25px;"><a href="{{  url('user/displayFollow')  }}" class="following_icon"> </a></li>
+				<li><a href="{{ url('user/displayFollower') }}" class="follower_icon"> </a></li>
 
+			</ul>
+		</div>
+		</div>
 		</div>
 	<div style="width: 1030px;height: 500px;float: left">
 		<div style="background-color: #0C0C0C;width: 350px;height: 500px;float: left">
