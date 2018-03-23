@@ -17,6 +17,8 @@
 				var eDate = new Date(Date.parse(end_date));
 				// console.log('sDate:'+start_date+' eDate:'+end_date);
 				// console.log('sDate:'+sDate+' eDate:'+eDate);
+				var return_task_id = null;
+				var return_team_id = null;
 				console.log('team_id:'+team_id);
 				if(task_name!=null&task_name!=''&&task_descri!=null&&task_descri!=''){
 					if( start_date=='' || start_date==null || end_date=='' || end_date==null ){
@@ -37,12 +39,16 @@
 							dataType: 'json',
 							data: {"team_id":team_id,"task_name": task_name,"task_descri":task_descri,"sDate":start_date,"eDate":end_date,"_token":"{{csrf_token()}}"}
 						})
-						.done(function(data) {
+						.done(function(data) {							
+							return_task_id = data.task_id;
+							return_team_id = data.team_id;
 							layer.msg(data.msg,{
-								icon:data.icon,
-								time:2500
+								icon:data.icon
 							});
-
+							console.log(return_task_id,return_team_id);
+							if(return_task_id!=null&&return_team_id!=null){
+								location.href="task/displayAllocateSubTask?task_id="+return_task_id+"&team_id="+return_team_id;
+							}
 						})
 						.fail(function() {
 							layer.msg('服务器未响应!',{
@@ -52,6 +58,7 @@
 						.always(function() {
 							console.log("complete");
 						});
+						
 					}
 					}
 									

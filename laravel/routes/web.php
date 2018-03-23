@@ -135,6 +135,8 @@ Route::group(['middleware'=>'auth','namespace'=>'Task','prefix'=>'task'],functio
 	Route::post('add','TaskController@add');
 
 	Route::get('displayAll','TaskController@displayAll')->name('displayAllTask');
+
+	Route::get('displayAllocateSubTask/{task_id}/{team_id}', 'TaskController@displayAllocateSubTask');
 });
 
 Auth::routes();

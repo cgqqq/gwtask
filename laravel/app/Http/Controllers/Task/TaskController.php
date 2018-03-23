@@ -44,7 +44,8 @@ class TaskController extends Controller
         	'task_description'=>$request->input('task_descri'),
         	'task_manager_id'=>session('user_id'),
         	'task_deadline'=>strtotime(date($request->input('eDate'))),
-        	'task_kickoff_date'=>strtotime(date($request->input('sDate')))
+        	'task_kickoff_date'=>strtotime(date($request->input('sDate'))), 
+        	'task_allocation_status'=>'0'
         ];
         try {
             //开始事务
@@ -53,7 +54,7 @@ class TaskController extends Controller
             //提交事务
             DB::commit();
             //返回前端添加成功结果
-            return response()->json(['msg'=>'创建任务成功!','icon'=>'1']);
+            return response()->json(['msg'=>'创建任务成功!','icon'=>'1','task_id'=>$map['task_id'],'team_id'=>$map['task_team_id']]);
         } catch(QueryException $ex) {
             //回滚事务
             DB::rollback();
@@ -88,6 +89,15 @@ class TaskController extends Controller
     	}
         // pd($pageout);
         return view('Task/displayAll',['tasks'=>$pageout,'paged'=>$paged]);
+    }
+    //显示子任务分配界面
+    public function displayAllocateSubTask(Request $request,Team $team,Task $task){
+    	$teamInfo = $team->get(['team_id'=>$request->input('team_id')])->toArray();
+    	$team_name = $teamInfo[0]['team_name'];
+    	$taskInfo = $task->get(['task_id'=>$request->input('task_id')])->toArray();
+    	$task_name = $taskInfo[0]['teask_name'];
+    	return view('Task/displayAllocateSubTask',['team_name'=>$team_name,'task_name'=>$task_name,'task_id'=>$request->input('task_id')]);
+
     }
 }
 ?>

@@ -1,4 +1,4 @@
-{{--所有任务页面--}}
+{{--子任务增加及分配页面--}}
 @extends('layouts.home')
 
 @section('content')
@@ -46,35 +46,9 @@
 		<td>分配状态</td>
 	</tr>
 </thead>
-	@foreach($tasks as $task)
 		<tr>
-			<td id="team_name"><a href="" style="color: black;">{{ $task['task_name'] }}</a></td>
-			<td>{{ $task['task_description'] }}</td>
-			<td>{{ $task['0'] }}</td>
-			<td>{{ $task['1'] }}</td>
-			<td>{{ date('Y-m-d H:i:s',$task['task_kickoff_date']) }}</td>
-			<td>{{ date('Y-m-d H:i:s',$task['task_deadline']) }}</td>
-			<td><script type="text/javascript">
-				if({{ $task['task_status'] }}=='0'){
-					document.write("未开始");
-				}else if({{ $task['task_status'] }}=='1'){
-					document.write("进行中");
-				}else{
-					document.write("已结束");
-				}
-			</script>
-			</td>
-			<td><script type="text/javascript">
-				if({{ $task['task_allocation_status'] }}=='0'){
-					document.write("未分配");
-				}else if({{ $task['task_status'] }}=='1'){
-					document.write("已分配");
-				}
-			</script>
-			</td>
+			<td>{{$team_name}}</td>
 		</tr>
-		@endforeach
 </table>
-{{ $paged->links() }}
 
 @endsection
