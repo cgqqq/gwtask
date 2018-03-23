@@ -136,15 +136,7 @@ Route::group(['middleware'=>'auth','namespace'=>'Task','prefix'=>'task'],functio
 
 	Route::get('displayAll','TaskController@displayAll')->name('displayAllTask');
 
-<<<<<<< HEAD
 	Route::get('displayAllocateSubTask/{task_id}/{team_id}', 'TaskController@displayAllocateSubTask');
-=======
-    Route::post('createTransaction','TaskController@createTransaction');
-
-    Route::post('deleteTransaction','TaskController@deleteTransaction');
-
-
->>>>>>> origin/master
 });
 
 Auth::routes();

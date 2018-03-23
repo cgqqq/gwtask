@@ -47,7 +47,7 @@
 							});
 							console.log(return_task_id,return_team_id);
 							if(return_task_id!=null&&return_team_id!=null){
-								location.href="task/displayAllocateSubTask?task_id="+return_task_id+"&team_id="+return_team_id;
+								location.href='task/displayAllocateSubTask?task_id='+return_task_id+'&team_id='+return_team_id;
 							}
 						})
 						.fail(function() {

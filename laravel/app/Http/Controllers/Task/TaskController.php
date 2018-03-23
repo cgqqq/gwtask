@@ -99,7 +99,7 @@ class TaskController extends Controller
     		array_push($key,$teamInfo[0]['team_name']);
     		$userInfo = $user->get(['user_id'=>$key['task_manager_id']])->toArray();
     		array_push($key,$userInfo[0]['user_name']);
-			if($key['status']=='1'){
+			if($key['task_status']=='1'){
                 if($key['task_deadline']<time()){
                     $timeLeft="Task Expried";
                 }
@@ -135,7 +135,6 @@ class TaskController extends Controller
 
         return view('Task/displayAll',['tasks'=>$pageout,'paged'=>$paged]);
     }
-<<<<<<< HEAD
     //显示子任务分配界面
     public function displayAllocateSubTask(Request $request,Team $team,Task $task){
     	$teamInfo = $team->get(['team_id'=>$request->input('team_id')])->toArray();
@@ -145,7 +144,6 @@ class TaskController extends Controller
     	return view('Task/displayAllocateSubTask',['team_name'=>$team_name,'task_name'=>$task_name,'task_id'=>$request->input('task_id')]);
 
     }
-=======
     public function createTransaction(TaskTransaction $taskTransaction,Request $request){
         $request->validate([
             'task_id'=>'required',
@@ -221,7 +219,6 @@ class TaskController extends Controller
 
     }
 
->>>>>>> origin/master
 }
 
 
