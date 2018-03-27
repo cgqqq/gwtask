@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Task;
 
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Validation\Rule;
+use Storage;
 use App\Models\Team;
 use App\Models\User;
 use App\Models\Task;
@@ -136,28 +138,28 @@ class TaskController extends Controller
         return view('Task/displayAll',['tasks'=>$pageout,'paged'=>$paged]);
     }
     //显示子任务分配界面
-    public function displayAllocateSubTask(Request $request,Team $team,Task $task){
-    	$teamInfo = $team->get(['team_id'=>$request->input('team_id')])->toArray();
+    public function displayAllocateSubTask(Request $request,Team $team,Task $task,$task_id,$team_id){
+    	$teamInfo = $team->get(['team_id'=>$team_id])->toArray();
     	$team_name = $teamInfo[0]['team_name'];
-    	$taskInfo = $task->get(['task_id'=>$request->input('task_id')])->toArray();
-    	$task_name = $taskInfo[0]['teask_name'];
-    	return view('Task/displayAllocateSubTask',['team_name'=>$team_name,'task_name'=>$task_name,'task_id'=>$request->input('task_id')]);
+    	$taskInfo = $task->get(['task_id'=>$task_id])->toArray();
+    	$task_name = $taskInfo[0]['task_name'];
+    	return view('Task/displayAllocateSubTask',['team_name'=>$team_name,'task_name'=>$task_name,'task_id'=>$task_id]);
 
     }
     public function createTransaction(TaskTransaction $taskTransaction,Request $request){
-        $request->validate([
-            'task_id'=>'required',
-            'trans_brief'=>'required',
-            'trans_description'=>'required'
-        ]);
-       /* $file = $request->trans_Resource_Path;
+        // $request->validate([
+        //     'task_id'=>'required',
+        //     'trans_brief'=>'required',
+        //     'trans_description'=>'required'
+        // ]);
+        $file = $request->trans_Resource_Path;
 
         // 判断文件是否上传成功
-        if ( $file->isValid()) {
+        if ($request->hasFile('trans_Resource_Path') && $file->isValid()) {
 
             //资源存储文件夹
             $destinatePath = 'uploads/resources';
-            //获得上传文件的文件名
+            //指定上传后的文件文件名
             $file_name = $file->getClientOriginalName()."/".time();
             //从上传临时位置转移到指定位置
             $file->move($destinatePath, $file_name);
@@ -165,7 +167,7 @@ class TaskController extends Controller
         }
         else{
             $trans_Resource_path=null;
-        }*/
+        }
 
         $map_trans = [
             'tran_id'=>md5(uniqid(mt_rand(),true)),
@@ -173,7 +175,7 @@ class TaskController extends Controller
             'trans_description'=>$request->input('trans_description'),
             'task_id'=>$request->input('task_id'),
             'time'=>strtotime(date("Y-m-d H:i:s")),
-            'trans_Resource_path'=>null,
+            'trans_Resource_path'=>$trans_Resource_path,
             'trans_Resource_intro'=>$request->input('trans_Resource_intro')
         ];
 

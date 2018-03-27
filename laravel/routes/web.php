@@ -136,7 +136,9 @@ Route::group(['middleware'=>'auth','namespace'=>'Task','prefix'=>'task'],functio
 
 	Route::get('displayAll','TaskController@displayAll')->name('displayAllTask');
 
-	Route::get('displayAllocateSubTask/{task_id}/{team_id}', 'TaskController@displayAllocateSubTask');
+	Route::get('displayAdd/displayAllocateSubTask/{task_id}/{team_id}', 'TaskController@displayAllocateSubTask');
+
+	Route::post('createTransaction','TaskController@createTransaction');
 });
 
 Auth::routes();

@@ -109,7 +109,7 @@ class UserController extends Controller
         if ($request->hasFile('user_profile') && $file->isValid()) {
             //头像存储文件夹
             $destinatePath = 'uploads/user_profile';
-            //获得上传文件的文件名
+            //指定上传后的文件文件名
             $file_name = $input['user_id'] . '&&' . $file->getClientOriginalName();
             //从上传临时位置转移到指定位置
             $file->move($destinatePath, $file_name);
