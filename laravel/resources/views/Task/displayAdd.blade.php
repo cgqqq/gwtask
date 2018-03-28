@@ -43,11 +43,12 @@
 							return_task_id = data.task_id;
 							return_team_id = data.team_id;
 							layer.msg(data.msg,{
-								icon:data.icon
+								icon:data.icon,
+								time:1500
 							});
 							console.log(return_task_id,return_team_id);
 							if(return_task_id!=null&&return_team_id!=null){
-								location.href="displayAllocateSubTask/"+return_task_id+"/"+return_team_id;
+								setTimeout("location.href='displayAllocateSubTask/"+return_task_id+"/"+return_team_id+"'",1500);
 							}
 						})
 						.fail(function() {
