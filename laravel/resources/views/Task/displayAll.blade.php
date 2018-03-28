@@ -25,7 +25,6 @@
 				<ul class="layui-timeline">
 
 					@foreach($task['trans'] as $tran)
-					{{dump($tran)}}
 					<li class="layui-timeline-item">
 						<i class="layui-icon layui-timeline-axis"></i>
 						<div class="layui-timeline-content layui-text">
@@ -35,10 +34,24 @@
 								<span style="color: #0C0C0C;font-size: 13px;">Task Description :</span>
 								{{ $tran['trans_description'] }}
 							</p>
+							@unless($tran['trans_Resource_path']==null)
+								<span style="color: #0C0C0C;font-size: 13px;">Download Resource : </span>
+								<a href={{URL::asset($tran['trans_Resource_path'])}} download={{$tran['trans_Resource_path']}}>
+									<img src="{{URL::asset('/images/download.png')}}" >
+								</a><br>
+							@endunless
+							@unless($tran['trans_Resource_intro']==null)
+								<p>
+									<span style="color: #0C0C0C;font-size: 13px;">Resource Description :</span>
+									{{ $tran['trans_Resource_intro'] }}
+								</p>
+							@endunless
 							<p>
 								<img src="{{URL::asset('/images/delete2.png')}}" class="delete_tran">
 							</p>
 							<input type="hidden" name="tran_id" value="{{$tran['tran_id']}}">
+
+
 						</div>
 					</li>
 					@endforeach
@@ -48,7 +61,7 @@
 							<h3 class="layui-timeline-title">
 								<div class="layui-btn-group">
 									<button class="layui-btn layui-btn-primary layui-btn-sm" id="add_tran"  onclick="isHidden('create_trans_form')"><i class="layui-icon"></i></button>
-									<form id="create_trans_form" style="line-height:20px;margin: 20px;padding:20px;width: 1000px;float:left;color: #0C0C0C;cursor: hand;display: none" class="form-group" enctype="multipart/form-data">
+									<form id="create_trans_form" style="line-height:20px;margin: 20px;padding:20px;width: 1000px;float:left;color: #0C0C0C;cursor: hand;display: none" class="form-group" enctype="multipart/form-data" method="post" action="{{ url('task/displayAll') }}">
 										{{ csrf_field() }}
 										<div class="form-group" style="margin-bottom: 40px;">
 											<label class="col-md-4 control-label" >Transaction Title</label>
@@ -81,7 +94,7 @@
 
 													<span class="btn btn-success fileinput-button" style="background: #34bf49;border-color: #34bf49;border-radius: 0;margin-top: 10px;margin-bottom: 10px" >
 														<span style="font-weight: 700;">Upload</span>
-														<input type="file" id="trans_Resource_Path" class="" name="trans_Resource_Path" required >
+														<input type="file" id="trans_Resource_Path" class="" name="trans_Resource_Path" >
 													</span>
 												</div>
 
@@ -107,6 +120,7 @@
 										</button>
 									</div>
 									<input type="hidden" name="task_id" value="{{$task['task_id']}}">
+									<input type="hidden" name="flag" value='1'>
 									<a class="newA" onclick="isHidden('upload')" style="color: #0C0C0C;float:left;display: block;width: 900px;margin-top: 30px" id="a">I Wanna Upload Resource. </a>
 								</form>
 							</div>
@@ -138,7 +152,7 @@
 	}
 	$(function(){
 		layui.use('layer', function(){
-			$('#create_trans_form').on('click','#submit',function(event){
+			/*$('#create_trans_form').on('click','#submit',function(event){
 				event.preventDefault();
 				var task_id = $(this).parent().siblings("[name='task_id']").val();
 				var trans_brief = $('#trans_brief').val();
@@ -157,7 +171,7 @@
                 // 	return;
                 // }
                $.ajax({
-               	url: "{{ url('task/createTransaction') }}",
+               	url: "",
                	type: 'post',
                	dataType: 'json',
                	// cache: false,//上传文件无需缓存
@@ -175,7 +189,7 @@
                .always(function() {
                	console.log("complete");
                });
-           });
+           });*/
 
 			$('#tran_box').on('click','.delete_tran',function(event){
 				event.preventDefault();

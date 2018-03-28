@@ -78,10 +78,14 @@ class TaskController extends Controller
 
 	//显示所有任务
     public function displayAll(Task $task,User $user,Team $team,Request $request,TaskTransaction $taskTransaction){
+	   if(empty($request->input('flag'))){
+
+       }
+       else{
+         $this->createTransaction($taskTransaction,$request);
+       }
 
     	$pagedata = $task->all()->toArray();
-
-
     	// pd($pagedata);
         // 默认页码
         $page = $request->input('page')?$request->input('page'):1;
@@ -147,11 +151,11 @@ class TaskController extends Controller
 
     }
     public function createTransaction(TaskTransaction $taskTransaction,Request $request){
-        // $request->validate([
-        //     'task_id'=>'required',
-        //     'trans_brief'=>'required',
-        //     'trans_description'=>'required'
-        // ]);
+         $request->validate([
+             'task_id'=>'required',
+             'trans_brief'=>'required',
+             'trans_description'=>'required'
+         ]);
         $file = $request->trans_Resource_Path;
 
         // 判断文件是否上传成功
@@ -160,7 +164,7 @@ class TaskController extends Controller
             //资源存储文件夹
             $destinatePath = 'uploads/resources';
             //指定上传后的文件文件名
-            $file_name = $file->getClientOriginalName()."/".time();
+            $file_name = time()."-".$file->getClientOriginalName();
             //从上传临时位置转移到指定位置
             $file->move($destinatePath, $file_name);
             $trans_Resource_path=$destinatePath.'/'.$file_name;
@@ -178,7 +182,6 @@ class TaskController extends Controller
             'trans_Resource_path'=>$trans_Resource_path,
             'trans_Resource_intro'=>$request->input('trans_Resource_intro')
         ];
-
         try {
             //开始事务
             DB::beginTransaction();
@@ -186,13 +189,10 @@ class TaskController extends Controller
             //提交事务
             DB::commit();
             //返回前端添加成功结果
-            return response()->json(['msg' => 'success!']);
-
         } catch(QueryException $ex) {
             //回滚事务
             DB::rollback();
             //返回前端添加失败结果
-            return response()->json(['msg' => 'fail!']);
         }
     }
     
