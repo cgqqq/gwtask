@@ -25,7 +25,7 @@
                             </span>
                                  <button class="layui-btn app_approve" style="background-color: #fcfcfc;float: right;color: #0C0C0C;border: solid 2px black;">Approve</button>
                                  <button class="layui-btn app_disapprove" style="background-color: #fcfcfc;float: right;color: #0C0C0C;border: solid 2px black;margin-right: 5px">Disapprove</button>
-                                 <input type="hidden" name="app_team_id" value="{{$application['app_team_id']}}">
+                                 <input type="hidden" name="app_id" value="{{$application['app_id']}}">
 
                                         </div>
                                     </div>
@@ -54,7 +54,7 @@
                         @endif
                         <fieldset class="layui-elem-field layui-field-title" style="width: 650px;color: #0C0C0C;font-weight: 600;">
                             <legend>Mails({{$mailsNum}})</legend>
-                            @if($newsNum!=0)
+                            @if($mailsNum!=0)
                             @foreach($mailsRecieved as $mail)
                                 @if($mail['mail_status']=="1")
                             <div class="card" >
@@ -311,12 +311,12 @@
             layui.use('layer',function(){
                 $('.card').on('click','.app_approve',function(){
                     //配置一个透明的询问框
-                    var app_team_id = $(this).siblings("[name='app_team_id']").val();
+                    var app_id = $(this).siblings("[name='app_id']").val();
                     $.ajax({
                         url: "{{ url('team/applicationManage') }}",
                         type: 'post',
                         dataType:'json',
-                        data: {'app_team_id': app_team_id,"type":"approve","_token":"{{csrf_token()}}"}
+                        data: {'app_id': app_id,"type":"approve","_token":"{{csrf_token()}}"}
                     })
                         .done(function(data) {
                             layer.msg(data.msg);
@@ -338,12 +338,12 @@
             layui.use('layer',function(){
                 $('.card').on('click','.app_disapprove',function(){
                     //配置一个透明的询问框
-                    var app_team_id = $(this).siblings("[name='app_team_id']").val();
+                    var app_id = $(this).siblings("[name='app_id']").val();
                     $.ajax({
                         url: "{{ url('team/applicationManage') }}",
                         type: 'post',
                         dataType:'json',
-                        data: {'app_team_id': app_team_id,"type":"disapprove","_token":"{{csrf_token()}}"}
+                        data: {'app_id': app_id,"type":"disapprove","_token":"{{csrf_token()}}"}
                     })
                         .done(function(data) {
                             layer.msg(data.msg);

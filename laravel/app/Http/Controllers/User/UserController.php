@@ -12,6 +12,7 @@ use App\Models\Friend;
 use App\Models\Membership;
 use App\Models\Team;
 use App\Models\App_join;
+use App\Models\TeamUploading;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
@@ -564,7 +565,7 @@ class UserController extends Controller
         return view('User/displayInfoMailBox',['newsNum'=>$newsNum,'mailsNum'=>$mailsNum,'invitationNum'=>$invitationNum,'mailsRecieved'=>$mailsRecieved,'sentMails'=>$sentMails,'invitations'=>$invite,'applications'=>$applications,'applicationNum'=>$applicationNum ]);
 
     }
-    public function acceptInvitation(Request $request,Invitation $invitation,Team $team,Membership $membership,Mail $mail,User $user){
+    public function acceptInvitation(Request $request,Invitation $invitation,Team $team,Membership $membership,Mail $mail,User $user,TeamUploading $teamUploading){
         $request->validate([
             'team_id'=>'required',
             'user_id'=>'required'
@@ -596,12 +597,20 @@ class UserController extends Controller
             'mail_status'=>"0",/*Unread:0 Read:1*/
             'mail_sent_time'=>strtotime(date("Y-m-d H:i:s"))
         ];
+        $map_uploading = [
+            'id'=>md5(uniqid(mt_rand(),true)),
+            'team_id'=>$team_id,
+            'uploader_id'=>$team_info[0]['team_funder_id'],
+            'time'=>strtotime(date("Y-m-d H:i:s")),
+            'content'=>'Welcome new member——'.$funder_name." to join in ".$team_info[0]['team_name']."!"
+        ];
         try {
             //开始事务
             DB::beginTransaction();
             $invitation->edit($map,$update_data);
             $membership->add($map_team);
             $mail->add($map_mail);
+            $teamUploading->add($map_uploading);
             //提交事务
             DB::commit();
             //返回前端添加成功结果
@@ -728,8 +737,8 @@ class UserController extends Controller
 
 
     }
-    public function displayInfoMailContent(Request $request, $mail_id,Mail $mail,Invitation $invitation,User $user,App_join $app_join){
-        $applications=$app_join->where(['status' =>"0", 'team.team_id' => session('user_id')])->join('team','app_join.team_id','=','team.team_funder_id')->get()->toArray();
+    public function displayInfoMailContent(Request $request, $mail_id,Mail $mail,Invitation $invitation,User $user,App_join $app_join,Team $team){
+        $applications=$app_join->where(['status' =>"0", 'team.team_funder_id' => session('user_id')])->join('team','app_join.app_team_id','=','team.team_id')->get()->toArray();
         $newsNum = count($mail->where(['mail_status' =>"0", 'mail_to_id' => session('user_id')])->get()->toArray()) + count($invitation->where(['user_id' => session('user_id'), 'status' => '0'])->get()->toArray())+count($applications);
         $mail_content=$mail->get(['mail_id'=>$mail_id])->toArray();
         $mail_type=$mail->where(['mail_id'=>$mail_id])->value('mail_type');

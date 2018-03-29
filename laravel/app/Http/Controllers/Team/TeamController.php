@@ -12,6 +12,7 @@ use App\Models\Team;
 use App\Models\User;
 use App\Models\Friend;
 use App\Models\Membership;
+use App\Models\TeamUploading;
 use DB;
 
 use App\Http\Controllers\Controller;
@@ -182,7 +183,7 @@ class TeamController extends Controller
         }
     }
     //显示单个团队信息、成员
-    public function displayOne(User $user,Membership $membership,Team $team,Request $request,$team_name,Friend $friend){
+    public function displayOne(User $user,Membership $membership,Team $team,Request $request,$team_name,Friend $friend,TeamUploading $teamUploading){
         //获取该团队信息
         $teamInfo = $team->get(['team_name'=>$team_name])->toarray();
         //获取该团队创建者信息
@@ -245,13 +246,20 @@ class TeamController extends Controller
         $data['followerNum']=count($friend->get($map1)->toArray());
 
 
-
+        //获取该团队动态信息
+        $uploadings=$teamUploading->where(['team_id'=>$teamInfo[0]['team_id']])->orderBy('time','desc')->get()->toArray();
+        //添加上传人的头像信息和姓名
+        foreach ($uploadings as &$key){
+            $uploader_info=$user->where(['user_id'=>$key['uploader_id']])->get()->toArray();
+            $key['uploader_profile']=$uploader_info[0]['user_profile'];
+            $key['uploader_name']=$uploader_info[0]['user_name'];
+        }
         //要显示的页面；传给前端的分页信息：团队介绍、队员信息、分页；
         // pd($pageOut);
         if($funderName==session('user_name')){
-            return view('Team/displayOneAuth',['team_info'=>$teamInfo[0],'pageOut'=>$pageOut,'paged'=>$paged,'data'=>$data]);
+            return view('Team/displayOneAuth',['team_info'=>$teamInfo[0],'pageOut'=>$pageOut,'paged'=>$paged,'data'=>$data,'uploadings'=>$uploadings]);
         }else{
-            return view('Team/displayOne',['team_info'=>$teamInfo[0],'pageOut'=>$pageOut,'paged'=>$paged,'data'=>$data]);
+            return view('Team/displayOne',['team_info'=>$teamInfo[0],'pageOut'=>$pageOut,'paged'=>$paged,'data'=>$data,'uploadings'=>$uploadings]);
         }
 
     }
@@ -561,20 +569,28 @@ class TeamController extends Controller
 
     }
 
-    public function applicationManage(Request $request,App_join $app_join,Membership $membership){
+    public function applicationManage(Request $request,App_join $app_join,Membership $membership,TeamUploading $teamUploading,Team $team,User $user){
         $request->validate([
-            'app_team_id'=>'required',
+            'app_id'=>'required',
             'type'=>'required'
         ]);
-        $app_team_id=$request->input('app_team_id');
-        $application=$app_join->where(['app_team_id'=>$app_team_id])->get()->toArray();
-        $map=['app_team_id'=>$app_team_id];
+        $app_id=$request->input('app_id');
+        $application=$app_join->where(['app_id'=>$app_id])->get()->toArray();
+        $teamFounder=$team->where(['team_id'=>$application[0]['app_team_id']])->join('user','user.user_id','=','team.team_funder_id')->get()->toArray();
+        $map=['app_id'=>$app_id];
         if($request->input('type')=="approve"){
             $update_data=['status'=>"1"];
             $data = [
                 'membership_id'=>md5(uniqid(mt_rand(),true)),
-                'team_id'=>$application[0]['team_id'],
+                'team_id'=>$application[0]['app_team_id'],
                 'member_id'=>$application[0]['applicant_id']
+            ];
+            $map_uploading = [
+               'id'=>md5(uniqid(mt_rand(),true)),
+               'team_id'=>$application[0]['app_team_id'],
+               'uploader_id'=>$teamFounder[0]['team_funder_id'],
+               'time'=>strtotime(date("Y-m-d H:i:s")),
+                'content'=>'Welcome new member——'.$teamFounder[0]['user_name']." to join in ".$teamFounder[0]['team_name']."!"
             ];
         }
         else{
@@ -585,6 +601,7 @@ class TeamController extends Controller
             DB::beginTransaction();
             //提交事务
             $membership->add($data);
+            $teamUploading->add($map_uploading);
             if(isset($data)){
             $app_join->edit($map,$update_data);}
             DB::commit();

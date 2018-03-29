@@ -45,13 +45,30 @@
 
 			<div style="float: left;width: 550px;height: 630px; color: #0C0C0C">
                 <ul class="collection">
-                    <li class="collection-item avatar">
-                        <img src="{{URL::asset('/images/logo.png')}}">
-                        <span class="title">Title</span>
-                        <p>First Line <br>
-                            Second Line
-                        </p>
+                    @foreach($uploadings as $uploading)
+                    <li class="collection-item shadow" style="width:540px;height:auto;min-height:140px;margin-left: 5px;"  >
+                        <div style="height:130px;width: 130px;;float: left;">
+                            @if(session('user_id')==$uploading['uploader_id'])
+                        <img src="{{URL::asset('/uploads/user_profile/'.$uploading['uploader_profile'])}}" class="layui-circle" width="65px" height="65px" style="margin-left: 15px;" onclick='javascrtpt:window.location.href="{{url('user/displayInfo')}}"' >
+                            @else
+                        <img src="{{URL::asset('/uploads/user_profile/'.$uploading['uploader_profile'])}}" class="layui-circle" width="65px" height="65px" style="margin-left: 15px;" onclick='javascrtpt:window.location.href="{{url('user/displayOthersInfo/'.$uploading['uploader_id'])}}"' >
+                            @endif
+                        <span style="font-weight: 800;font-size: 15px;color: #0C0C0C;position: absolute;bottom: 0px;top:130px;left: 70px;">{{$uploading['uploader_name']}}</span>
+                        </div>
+                        <div style="font-weight:600;font-size:18px;color:#0C0C0C;height:auto;min-height:130px;width: 370px;float: left;word-wrap:break-word;line-height: 30px;position:relative ;margin-top: 10px">
+                            {{$uploading['content']}}
+                            <p style="font-size: 10px;color:#8D8D8D;float:right;position:absolute;bottom:0px;padding: 0px;margin-right: 0px; ">
+                                {{ date('Y-m-d H:i:s',$uploading['time']) }}
+                            </p>
+                            @unless($uploading['resource']==null)
+                                <span style="color: #0C0C0C;font-size: 13px;">Download Resource : </span>
+                                <a href={{URL::asset('/uploads/resources/'.$uploading['resource'])}} download={{$uploading['resource']}}>
+                                    <img src="{{URL::asset('/images/download.png')}}" >
+                                </a><br>
+                            @endunless
+                        </div>
                     </li>
+                    @endforeach
                 </ul>
 			</div>
 
