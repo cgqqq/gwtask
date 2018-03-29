@@ -9,6 +9,7 @@ use Storage;
 use App\Models\Team;
 use App\Models\User;
 use App\Models\Task;
+use App\Models\Membership;
 use App\Models\TaskTransaction;
 use DB;
 use App\Http\Controllers\Controller;
@@ -146,8 +147,15 @@ class TaskController extends Controller
     	$teamInfo = $team->get(['team_id'=>$team_id])->toArray();
     	$team_name = $teamInfo[0]['team_name'];
     	$taskInfo = $task->get(['task_id'=>$task_id])->toArray();
-    	$task_name = $taskInfo[0]['task_name'];
-    	return view('Task/displayAllocateSubTask',['team_name'=>$team_name,'task_name'=>$task_name,'task_id'=>$task_id]);
+    	$task_name = $taskInfo[0]['task_name'];    	
+    	// pd($team_user_list);
+    	$return_data = [
+    		'team_name'=>$team_name,
+    		'task_name'=>$task_name,
+    		'task_id'=>$task_id,
+    		'team_id'=>$team_id
+    	];
+    	return view('Task/displayAllocateSubTask',$return_data);
 
     }
     public function createTransaction(TaskTransaction $taskTransaction,Request $request){
@@ -219,6 +227,25 @@ class TaskController extends Controller
             return response()->json(['msg' => 'Busy Network!Try Again!']);
         }
 
+    }
+    //获得该团队的队员
+    public function getTeamUsers(Request $request,Membership $membership,User $user){
+    	$request->validate([
+            'team_id'=>'required'
+        ]);
+        //获取该团队队员user_id
+        $memberships = $membership->get(['team_id'=>$request->input('team_id')])->toArray();
+        //构造该团队队员信息列表
+        $team_user_list = [];
+        foreach ($memberships as $key) {
+            //单个队员信息
+            $userInfo = [];
+            $user_tmp = $user->get(['user_id'=>$key['member_id']])->toArray();
+            array_push($userInfo,['user_id'=>$key['member_id']]);
+            array_push($userInfo,['user_name'=>$user_tmp[0]['user_name']]);
+            array_push($team_user_list,$userInfo);
+        }
+        return response()->json(['team_user_list'=>$team_user_list]);
     }
 
 }

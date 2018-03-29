@@ -125,7 +125,7 @@ Route::group(['middleware'=>'auth','namespace'=>'Team','prefix'=>'team'],functio
 
     Route::any('sendInvitation','TeamController@sendInvitation');
 
-    Route::any('applicationManage','TeamController@applicationManage');
+    Route::any('applicationManage','TeamController@applicationManage');    
 
 });
 //任务路由
@@ -139,6 +139,9 @@ Route::group(['middleware'=>'auth','namespace'=>'Task','prefix'=>'task'],functio
 	Route::get('displayAdd/displayAllocateSubTask/{task_id}/{team_id}', 'TaskController@displayAllocateSubTask');
 
 	Route::post('createTransaction','TaskController@createTransaction');
+
+    Route::get('getTeamUsers','TaskController@getTeamUsers');
+
 });
 
 Auth::routes();

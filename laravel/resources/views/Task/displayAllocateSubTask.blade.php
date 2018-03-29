@@ -6,12 +6,41 @@
 <script type='text/javascript'>
 	$(function(){
 		layui.use('layer',function(){
+			var team_user_list = [];
+			if($('#has-get-users').val()=='0'){
+				$.ajax({
+					url: "{{url('task/getTeamUsers')}}",
+					type: 'get',
+					dataType: 'json',
+					data: {'team_id':$('#team_id').val(),"_token":"{{csrf_token()}}"},
+				})
+				.done(function(data) {
+					console.log("team_user_list:"+data);
+					$('#has-get-users').val('1');
+				})
+				.fail(function() {
+					console.log("error");
+				})
+				.always(function() {
+					console.log("complete");
+				});
+				
+			}
+			//新增子任务
 			$('#addSTask').on('click',function(){
 				$('#STask_table').append("<tr class='sub-task-items'><td><input name='title' lay-verify='title' autocomplete='off' placeholder='请输入子任务名' class='layui-input  task_name' type='text'><input name='title' lay-verify='title' autocomplete='off' placeholder='请输入子任务描述' class='layui-input  task_descri' type='text'></td>' type='text'></td><td><button class='layui-btn layui-btn-primary layui-btn-sm del'><i class='layui-icon'></i></button></td></tr>");
 			});
-			$('.sub-task-form').on('click','.del',function(){
-				$(this).parent().remove();
+			//删除子任务
+			$('#STask_table').on('click','.del',function(event){				
+				$(this).parent().parent().remove();
+				event.preventDefault();
 			});
+			//选择组员
+			$('#STask_table').on('click','.choose-user',function(event){				
+				$(this).parent().parent().remove();
+				event.preventDefault();
+			});
+			//发布子任务
 			$('#submit').on('click',function(){
 				var sub_task_list = [];
 				$('.sub-task-items').each(function(){
@@ -27,7 +56,8 @@
 		});
 	});
 </script>
-
+<input type="hidden" name="" id="team_id" value="{{$team_id}}">
+<input type="hidden" name="" id="has-get-users" value="0">
 <table class='layui-table' style='width: 900px;'>
 	<thead>
 		<tr>
@@ -54,6 +84,7 @@
 				</td>
 				<td>
 					<button class='layui-btn layui-btn-primary layui-btn-sm del'><i class='layui-icon'></i></button>
+					<button class='layui-btn layui-btn-primary layui-btn-sm choose-user'><i class='layui-icon'>选择组员</i></button>
 				</td>
 			</tr>
 		</table>

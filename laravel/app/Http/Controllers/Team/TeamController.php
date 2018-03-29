@@ -615,6 +615,5 @@ class TeamController extends Controller
             return response()->json(['msg'=>'Network is busy now,try again later！']);
         }
     }
-
-
+    
 }
