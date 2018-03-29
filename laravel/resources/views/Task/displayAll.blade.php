@@ -23,7 +23,6 @@
 		<div class="layui-colla-content" id="tran_box">
 			<p style="max-height: 500px;height: auto;" class="scroll">
 				<ul class="layui-timeline">
-
 					@foreach($task['trans'] as $tran)
 					<li class="layui-timeline-item">
 						<i class="layui-icon layui-timeline-axis"></i>
@@ -134,14 +133,9 @@
 
 		</p>
 	</div>
-
-</div>
-<div class="layui-colla-item" style="width: 1000px;line-height:50px;">
-
-	<img class="layui-circle" style="height: 30px;width:30px;margin-left: 500px;" src="{{URL::asset('/images/add.png')}}" onclick='javascrtpt:window.location.href="#"	' >
-
-</div>
 @endforeach
+</div>
+
 </div>
 
 <script type="text/javascript">

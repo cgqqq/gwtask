@@ -6,9 +6,10 @@
         <p style=" background-color:#fcfcfc;margin-top: 10px;font-weight: 800;font-size: 16px;text-align:center; width:280px;height:20px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;  ">
             {{$user_info['user_name']}}
         </p>
-
+        <div style="font-size: 14px;color: #fcfcfc;margin-left: 20px">
             User ID: {{$user_info['user_id']}}</br>
             Emial Address:  {{$user_info['user_email']}}
+        </div>
 
     </div>
 

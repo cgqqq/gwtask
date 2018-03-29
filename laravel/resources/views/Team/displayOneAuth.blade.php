@@ -17,7 +17,7 @@
 		</span>
 
 			<p STYLE="color: #8D8D8D;font-size: 15px;margin-left: 40px;margin-bottom: 6px" style="width: 500px	;float: left">
-				Funder :
+				Founder :
 				<img class="activator" src="{{URL::asset('/uploads/user_profile/'.$team_info['user_profile'])}}"  style="width: 30px;height: 30px;border-radius: 100%" onclick='javascrtpt:window.location.href="{{ url('user/displayInfo') }}"'>
 
 			</p>
@@ -34,10 +34,7 @@
 						All Tasks
 					</a>
 					<a href="#!" class="collection-item" style="font-size: 12px;line-height: 30px"><span class="new badge2" style="margin-top: 10px;font-size: 10px">99</span>
-						Completed Tasks
-					</a>
-					<a href="#!" class="collection-item" style="font-size: 12px;line-height: 30px"><span class="new badge2" style="margin-top: 10px;font-size: 10px">99</span>
-						Uncompleted Tasks
+						Stask
 					</a>
 					<a href="#!" class="collection-item" style="font-size: 12px;line-height: 30px"><span class="new badge2" style="margin-top: 10px;font-size: 10px">99</span>
 						Resource Sharings
@@ -47,7 +44,15 @@
 			</div>
 
 			<div style="float: left;width: 550px;height: 630px; color: #0C0C0C">
-				组员动态
+                <ul class="collection">
+                    <li class="collection-item avatar">
+                        <img src="{{URL::asset('/images/logo.png')}}">
+                        <span class="title">Title</span>
+                        <p>First Line <br>
+                            Second Line
+                        </p>
+                    </li>
+                </ul>
 			</div>
 
 		</div>
