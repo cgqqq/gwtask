@@ -43,29 +43,33 @@
 				</div>
 			</div>
 
-			<div style="float: left;width: 550px;height: 630px; color: #0C0C0C">
+			<div style="float: left;width: 550px;height: 630px; color: #0C0C0C" class="scroll">
                 <ul class="collection">
                     @foreach($uploadings as $uploading)
-                    <li class="collection-item shadow" style="width:540px;height:auto;min-height:140px;margin-left: 5px;"  >
-                        <div style="height:130px;width: 130px;;float: left;">
+                    <li class="collection-item shadow" style="width:510px;height:auto;min-height:180px;margin-left: 5px;margin-top: 10px;"  >
+                        <div style="height:100px;width: 130px;float: left;">
                             @if(session('user_id')==$uploading['uploader_id'])
-                        <img src="{{URL::asset('/uploads/user_profile/'.$uploading['uploader_profile'])}}" class="layui-circle" width="65px" height="65px" style="margin-left: 15px;" onclick='javascrtpt:window.location.href="{{url('user/displayInfo')}}"' >
+                                <img src="{{URL::asset('/uploads/user_profile/'.$uploading['uploader_profile'])}}" class="layui-circle" width="65px" height="65px" style="margin-left: 15px;" onclick='javascrtpt:window.location.href="{{url('user/displayInfo')}}"' >
                             @else
-                        <img src="{{URL::asset('/uploads/user_profile/'.$uploading['uploader_profile'])}}" class="layui-circle" width="65px" height="65px" style="margin-left: 15px;" onclick='javascrtpt:window.location.href="{{url('user/displayOthersInfo/'.$uploading['uploader_id'])}}"' >
+                                <img src="{{URL::asset('/uploads/user_profile/'.$uploading['uploader_profile'])}}" class="layui-circle" width="65px" height="65px" style="margin-left: 15px;" onclick='javascrtpt:window.location.href="{{url('user/displayOthersInfo/'.$uploading['uploader_id'])}}"' >
                             @endif
-                        <span style="font-weight: 800;font-size: 15px;color: #0C0C0C;position: absolute;bottom: 0px;top:130px;left: 70px;">{{$uploading['uploader_name']}}</span>
+
                         </div>
-                        <div style="font-weight:600;font-size:18px;color:#0C0C0C;height:auto;min-height:130px;width: 370px;float: left;word-wrap:break-word;line-height: 30px;position:relative ;margin-top: 10px">
+                        <div style="font-weight:600;font-size:18px;color:#0C0C0C;height:auto;min-height:130px;width: 340px;float: left;word-wrap:break-word;line-height: 30px;position:relative ;margin-top: 10px">
                             {{$uploading['content']}}
-                            <p style="font-size: 10px;color:#8D8D8D;float:right;position:absolute;bottom:0px;padding: 0px;margin-right: 0px; ">
+
+                            @unless($uploading['resource']==null)
+                                <p style=" font-weight:600;font-size:15px;color:#0C0C0C;margin-bottom: 5px; ">
+                                    Resource Download :
+
+                                <a href={{URL::asset($uploading['resource'])}} download={{$uploading['resource']}}>
+                                    <img src="{{URL::asset('/images/click.png')}}" >
+                                </a>
+                                </p>
+                            @endunless
+                            <p style="font-size: 10px;color:#8D8D8D;float:right;position:absolute;top:130px;padding: 0px;margin-right: 0px; ">
                                 {{ date('Y-m-d H:i:s',$uploading['time']) }}
                             </p>
-                            @unless($uploading['resource']==null)
-                                <span style="color: #0C0C0C;font-size: 13px;">Download Resource : </span>
-                                <a href={{URL::asset('/uploads/resources/'.$uploading['resource'])}} download={{$uploading['resource']}}>
-                                    <img src="{{URL::asset('/images/download.png')}}" >
-                                </a><br>
-                            @endunless
                         </div>
                     </li>
                     @endforeach

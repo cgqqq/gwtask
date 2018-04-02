@@ -21,7 +21,7 @@
 		</h2>
 
 		<div class="layui-colla-content" id="tran_box">
-			<p style="max-height: 500px;height: auto;" class="scroll">
+			<div style="max-height: 500px;height: auto;" class="scroll">
 				<ul class="layui-timeline">
 					@foreach($task['trans'] as $tran)
 					<li class="layui-timeline-item">
@@ -49,8 +49,6 @@
 								<img src="{{URL::asset('/images/delete2.png')}}" class="delete_tran">
 							</p>
 							<input type="hidden" name="tran_id" value="{{$tran['tran_id']}}">
-
-
 						</div>
 					</li>
 					@endforeach
@@ -130,8 +128,9 @@
 				</li>
 			</ul>
 
-		</p>
-	</div>
+			</div>
+		</div>
+	</li>
 @endforeach
 </div>
 

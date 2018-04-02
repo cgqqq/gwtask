@@ -11,6 +11,7 @@ use App\Models\User;
 use App\Models\Task;
 use App\Models\Membership;
 use App\Models\TaskTransaction;
+use App\Models\TeamUploading;
 use DB;
 use App\Http\Controllers\Controller;
 
@@ -23,7 +24,7 @@ class TaskController extends Controller
 	}	
 	
 	//创建任务
-	public function add(Task $task,Request $request,TaskTransaction $taskTransaction){
+	public function add(Task $task,Request $request,TaskTransaction $taskTransaction,TeamUploading $teamUploading){
 		//对前端传参检查
 		$request->validate([
 			'team_id'=>'required',
@@ -59,11 +60,19 @@ class TaskController extends Controller
             'task_id'=>$task_id,
             'time'=>strtotime(date("Y-m-d H:i:s"))
         ];
+        $map_uploading = [
+            'id'=>md5(uniqid(mt_rand(),true)),
+            'team_id'=>$request->input('team_id'),
+            'uploader_id'=>session('user_id'),
+            'time'=>strtotime(date("Y-m-d H:i:s")),
+            'content'=>'Hey guys,I have published a task just right now!!Come over and check out the detail!',
+        ];
         try {
             //开始事务
             DB::beginTransaction();
             $task->add($map);
             $taskTransaction->add($map_trans);
+            $teamUploading->add($map_uploading);
             //提交事务
             DB::commit();
             //返回前端添加成功结果
@@ -78,12 +87,12 @@ class TaskController extends Controller
 	}
 
 	//显示所有任务
-    public function displayAll(Task $task,User $user,Team $team,Request $request,TaskTransaction $taskTransaction){
+    public function displayAll(User $user,Team $team,Request $request,TaskTransaction $taskTransaction,TeamUploading $teamUploading,Task $task){
 	   if(empty($request->input('flag'))){
 
        }
        else{
-         $this->createTransaction($taskTransaction,$request);
+           $this->createTransaction($taskTransaction,$request,$teamUploading,$task);
        }
 
     	$pagedata = $task->all()->toArray();
@@ -135,7 +144,12 @@ class TaskController extends Controller
                 $key['timeLeft']="Task Has Finished";
 			}
             $trans=$taskTransaction->where(['task_id'=>$key['task_id']])->orderBy('time','asc')->get()->toArray();
-			$key['trans']=&$trans;
+			$i=0;
+			foreach ($trans as &$tran){
+			    $key['trans'][$i]=&$tran;
+			    $i=$i+1;
+            }
+
     	}
         // pd($pageout);
 
@@ -158,7 +172,9 @@ class TaskController extends Controller
     	return view('Task/displayAllocateSubTask',$return_data);
 
     }
-    public function createTransaction(TaskTransaction $taskTransaction,Request $request){
+    public function createTransaction(TaskTransaction $taskTransaction,Request $request,TeamUploading $teamUploading,Task $task){
+
+
          $request->validate([
              'task_id'=>'required',
              'trans_brief'=>'required',
@@ -180,6 +196,7 @@ class TaskController extends Controller
         else{
             $trans_Resource_path=null;
         }
+        $task_info=$task->where(['task_id'=>$request->input('task_id')])->get()->toArray();
 
         $map_trans = [
             'tran_id'=>md5(uniqid(mt_rand(),true)),
@@ -190,10 +207,19 @@ class TaskController extends Controller
             'trans_Resource_path'=>$trans_Resource_path,
             'trans_Resource_intro'=>$request->input('trans_Resource_intro')
         ];
+        $map_uploading = [
+            'id'=>md5(uniqid(mt_rand(),true)),
+            'team_id'=>$task_info[0]['task_team_id'],
+            'uploader_id'=>$task_info[0]['task_manager_id'],
+            'time'=>strtotime(date("Y-m-d H:i:s")),
+            'content'=>'Hey guys,I have updated progress of task :'.$task_info[0]['task_name']." ! Come over and check out the detail !",
+            'resource'=>$trans_Resource_path,
+        ];
         try {
             //开始事务
             DB::beginTransaction();
             $taskTransaction->add($map_trans);
+            $teamUploading->add($map_uploading);
             //提交事务
             DB::commit();
             //返回前端添加成功结果
