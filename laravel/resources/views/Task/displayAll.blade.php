@@ -59,12 +59,11 @@
 						<div class="layui-timeline-content layui-text" >
 							<h3 class="layui-timeline-title">
 								<div class="layui-btn-group">
-									<button class="layui-btn layui-btn-primary layui-btn-sm" id="add_tran"  onclick="isHidden('create_trans_form')"><i class="layui-icon"></i></button>
-									<form id="create_trans_form" style="line-height:20px;margin: 20px;padding:20px;width: 1000px;float:left;color: #0C0C0C;cursor: hand;display: none" class="form-group" enctype="multipart/form-data" method="post" action="{{ url('task/displayAll') }}">
+									<button class="layui-btn layui-btn-primary layui-btn-sm" id="add_tran"  onclick="isHidden('{{$task['task_id']}}')"><i class="layui-icon"></i></button>
+									<form id="{{$task['task_id']}}" style="line-height:20px;margin: 20px;padding:20px;width: 1000px;float:left;color: #0C0C0C;cursor: hand;display: none" class="form-group" enctype="multipart/form-data" method="post" action="{{ url('task/displayAll') }}">
 										{{ csrf_field() }}
 										<div class="form-group" style="margin-bottom: 40px;">
 											<label class="col-md-4 control-label" >Transaction Title</label>
-
 											<div class="col-md-6">
 												<input type="text" name='trans_brief' id="trans_brief" required="" class="form-control" >
 											</div>
@@ -78,7 +77,7 @@
 											</div>
 										</div>
 
-										<div style="display: none" id="upload">
+										<div style="display: none" id="{{$task['task_id']+$task['task_id']}}">
 											{{--<div class="form-group" style="margin-bottom: 10px;width: 680px;margin-top: 40px	">
 											<label class="col-md-6 control-label"  style="margin-top: 10px" >Upload Resource</label>
 											<button type="button" class="layui-btn" name="trans_Resource_Path" id="trans_Resource_Path" style="background-color: #34bf49;margin-top: 10px;">
@@ -120,7 +119,7 @@
 									</div>
 									<input type="hidden" name="task_id" value="{{$task['task_id']}}">
 									<input type="hidden" name="flag" value='1'>
-									<a class="newA" onclick="isHidden('upload')" style="color: #0C0C0C;float:left;display: block;width: 900px;margin-top: 30px" id="a">I Wanna Upload Resource. </a>
+									<a class="newA" onclick="isHidden('{{$task['task_id']+$task['task_id']}}')" style="color: #0C0C0C;float:left;display: block;width: 900px;margin-top: 30px" id="a">I Wanna Upload Resource. </a>
 								</form>
 							</div>
 						</h3>
