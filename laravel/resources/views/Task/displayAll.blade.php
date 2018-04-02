@@ -2,8 +2,7 @@
 @extends('layouts.home')
 
 @section('content')
-<div class="layui-collapse" lay-filter="test">
-
+<div class="layui-collapse" lay-filter="test" class="scroll">
 	@foreach($tasks as $task)
 	<li class="layui-colla-item" style="width: 1000px;">
 		<h2 class="layui-colla-title" style="color: #0C0C0C;font-weight: 800;font-size: 15px;width: 1030px;background-color: #34bf49">{{ $task['task_name'] }}
@@ -144,45 +143,6 @@
 	}
 	$(function(){
 		layui.use('layer', function(){
-			/*$('#create_trans_form').on('click','#submit',function(event){
-				event.preventDefault();
-				var task_id = $(this).parent().siblings("[name='task_id']").val();
-				var trans_brief = $('#trans_brief').val();
-				var trans_description=$('#trans_description').val();
-				// var trans_Resource_intro=$('#trans_Resource_intro').val();
-    //             var fileObj = document.getElementById("trans_Resource_Path").files[0]; // js 获取文件对象
-                
-    //             var formFile = new FormData();
-    //             formFile.append("action", "UploadVMKImagePath");  
-    //             formFile.append("file", fileObj); //加入文件对象
-                if(trans_Resource_intro==''){
-               		trans_Resource_intro=null;
-                }
-                // if (typeof (fileObj) == "undefined" || fileObj.size <= 0) {
-                // 	alert("请选择图片");
-                // 	return;
-                // }
-               $.ajax({
-               	url: "",
-               	type: 'post',
-               	dataType: 'json',
-               	// cache: false,//上传文件无需缓存
-                // processData: false,//用于对data参数进行序列化处理 这里必须false
-                // contentType: false, //必须 
-               	data: {"task_id":task_id,"trans_brief": trans_brief,"trans_description":trans_description,'trans_Resource_intro':trans_Resource_intro,"_token":"{{csrf_token()}}"}
-               })
-               .success(function(data) {
-               	layer.msg(data.msg);
-
-               })
-               .fail(function(data) {
-               	layer.msg(data.msg);
-               })
-               .always(function() {
-               	console.log("complete");
-               });
-           });*/
-
 			$('#tran_box').on('click','.delete_tran',function(event){
 				event.preventDefault();
 				var id = $(this).parent().siblings("[name='tran_id']").val();

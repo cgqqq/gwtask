@@ -6,14 +6,6 @@
 		<div style="float: left;width: 800px;height: 120px;border-bottom:4px #8D8D8D double;">
 		<span style="font-size: 50px;font-weight: 800;color: #0C0C0C;font-family: Arial;margin-left: 40px;margin-top: 60px">
 		{{ $team_info['team_name'] }}
-			{{--<input type="hidden" name="team_id" value="{{ $team_info['team_id'] }}">
-			<div style="float:right;margin-right: 20px;margin-top: 20px;background-color: transparent;width: 100px;height: 100px">
-				@if(!$data['belong2team'])
-					<button class="layui-btn layui-btn-small join-team" style="background-color: #fcfcfc;border: 1px solid #0C0C0C; color: #0C0C0C">Join</button>
-				@else
-					<button class="layui-btn layui-btn-small quit-team" style="background-color: #fcfcfc;border: 1px solid #0C0C0C; color: #0C0C0C" >Quit</button>
-				@endif
-		</div>--}}
 		</span>
 
 			<p STYLE="color: #8D8D8D;font-size: 15px;margin-left: 40px;margin-bottom: 6px" style="width: 500px	;float: left">
@@ -44,7 +36,26 @@
 			</div>
 
 			<div style="float: left;width: 550px;height: 630px; color: #0C0C0C" class="scroll">
+                @section('team_content')
+                    <div style="float: left;width: 540px;height: 38px" id="profile">
+                        <img src="{{URL::asset('/images/write.png')}}" width="20px" height="20px" style="float: right;margin-right: 30px;margin-top: 8px;"  onclick="isHidden('create_team_uplaoding')">
+                    </div>
                 <ul class="collection">
+                    <li id="create_team_uplaoding" class="collection-item shadow" style="width:510px;height:auto;min-height:160px;margin-left: 5px;margin-top: 10px;display: none;" >
+                        <form id="upload_form" style="line-height:20px;margin: 5px;padding:10px;width: 500px;float:left;color: #0C0C0C;cursor: hand;" class="form-group">
+                            <div class="form-group" >
+                                <div class="col-md-6" >
+                                    <textarea type="text" id='upload_content' required="" class="form-control" style="max-width: 400px;width: 380px;height: 70px;max-height: 70px;"></textarea>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-md-offset-4">
+                                <button id="submit" type="submit" class="layui-btn shadow submit" style="border: 2px solid #0C0C0C;color: #0C0C0C;margin-top: 10px">
+                                    Submit
+                                </button>
+                            </div>
+                            <input type="hidden" value="{{$team_info['team_id']}}" name="team_id">
+                        </form>
+                    </li>
                     @foreach($uploadings as $uploading)
                     <li class="collection-item shadow" style="width:510px;height:auto;min-height:180px;margin-left: 5px;margin-top: 10px;"  >
                         <div style="height:100px;width: 130px;float: left;">
@@ -74,7 +85,8 @@
                     </li>
                     @endforeach
                 </ul>
-			</div>
+			    @show
+            </div>
 
 		</div>
 	</div>
@@ -125,142 +137,16 @@
 						</div>
 
 					@endforeach
-					{{--@if($data['finalPage'])
-					<input type="hidden" name="team_id" value="{{ $team_info['team_id'] }}">
-					<div class="layui-inline" style="margin-top: 20px;float: left;width: 40px;margin-left: 30px" id="profile" >
-						<img id="add" class="layui-circle" style="height: 50px;width:50px;" src="{{URL::asset('/images/add.png')}}" onclick='javascrtpt:window.location.href="#"'>
-						<p style="margin-top: 5px;color: #8D8D8D;font-weight: 500;font-size: 12px;text-align: center;margin-left: 5px">
-							Add
-						</p>
-					</div>
-					@else
-					@endif--}}
-					{{--	<div style="margin-top: 200px"></div>
-                            {{ $paged->links() }}
-                    </div>--}}
-
-				</div>
 			</div>
-		</div>
-
+		    </div>
+        </div>
+    </div>
 		<script type="text/javascript">
-
-            $(function(){
-                layui.use('layer',function(){
-                    $('.team').on('click','.join-team',function(){
-                        var team_id = $(this).parent().siblings("[name='team_id']").val();
-                        $.ajax({
-                            url: "{{ url('team/join') }}",
-                            type: 'get',
-                            dataType: 'json',
-                            data: {'team_id': team_id,'member_id':"{{ session('user_id') }}","_token":"{{csrf_token()}}"}
-                        })
-                            .done(function(data) {
-                                layer.msg(data.msg,{
-                                    icon:data.icon
-                                });
-                                if(data.icon==='1'){
-                                    setTimeout("window.location.reload()",1000);
-
-                                }
-                            })
-                            .fail(function() {
-                                layer.msg('服务器未响应!',{
-                                    icon:5
-                                });
-                            })
-                            .always(function() {
-                                console.log("complete");
-                            });
-
-                    });
-                });
-            });
-
-            $(function(){
-                layui.use('layer',function(){
-                    $('.team').on('click','.quit-team',function(){
-                        var team_id = $(this).parent().siblings("[name='team_id']").val();
-                        $.ajax({
-                            url: "{{ url('team/quit') }}",
-                            type: 'get',
-                            dataType: 'json',
-                            data: {'team_id': team_id,"_token":"{{csrf_token()}}"}
-                        })
-                            .done(function(data) {
-                                layer.msg(data.msg,{
-                                    icon:data.icon
-                                });
-                                if(data.icon==='1'){
-                                    setTimeout("window.location.reload()",1000);
-
-                                }
-
-                            })
-                            .fail(function() {
-                                layer.msg('服务器未响应!',{
-                                    icon:5
-                                });
-                            })
-                            .always(function() {
-                                console.log("complete");
-                            });
-
-                    });
-                });
-            });
-
-
-
-
+            function isHidden(oDiv){
+                var vDiv = document.getElementById(oDiv);
+                vDiv.style.display = (vDiv.style.display == 'none')?'block':'none';
+            }
 		</script>
-		{{--
-
-        @if($pageOut)
-
-        <table class="layui-table" style="width: 900px;">
-        <thead>
-        <tr>
-            <td>团队名称</td>
-            <td>创始人</td>
-            <td>团队介绍</td>
-        </tr>
-        </thead>
-            <tr>
-                <input type="hidden" id="team-id" value="{{ $team_info['team_id'] }}">
-                <td id='team-name'>{{ $team_info['team_name'] }}</td>
-                <td >{{ $team_info['user_name'] }}</td>
-                <td>{{ $team_info['team_info'] }}</td>
-            </tr>
-        </table>
-        <table class="layui-table table-member" style="width: 900px;">
-            <thead>
-                <tr>
-                    <td >成员</td>
-                    <td >邮箱</td>
-                </tr>
-            </thead>
-            @foreach($pageOut as $member)
-                <tr>
-                    <input type="hidden" class="user-id" value="{{ $member['user_id'] }}">
-                    <td class="user-name">
-                        {{ $member['user_name'] }}
-                    </td>
-                    <td>{{ $member['user_email'] }}</td>
-                </tr>
-            @endforeach
-        </table>
-        {{ $paged->links() }}
-
-        @else
-            <div style="margin-top: 150px;margin-left: 450px">
-                <span style="color: #8D8D8D;font-size: 20px;">NO RESULT</span>
-
-
-            </div>
-
-        @endif--}}
-
 		<script type="text/javascript">
             $(function(){
                 layui.use('layer',function(){
@@ -315,6 +201,33 @@
                 //全选or全不选
                 $('#checkAll').change(function(){
                     $('.checkOne').prop('checked', $(this).prop('checked'))
+                });
+            });
+            $(function(){
+                layui.use('layer', function(){
+                    $('#upload_form').on('click','#submit',function(event){
+                        event.preventDefault();
+                        var id = $(this).parent().siblings("[name='team_id']").val();
+                        var content=$('#upload_content').val();
+                        $.ajax({
+                            url: "{{ url('task/createTeamUploading') }}",
+                            type: 'post',
+                            dataType: 'json',
+                            data: {'team_id':id,"content":content,"_token":"{{csrf_token()}}"}
+                        })
+                            .done(function(data) {
+                                layer.msg(data.msg);
+                                location.reload();
+
+                            })
+                            .fail(function(data) {
+                                layer.msg(data.msg);
+                            })
+                            .always(function() {
+                                console.log("complete");
+                            });
+                    });
+
                 });
             });
 		</script>

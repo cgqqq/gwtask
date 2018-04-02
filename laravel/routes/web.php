@@ -142,6 +142,8 @@ Route::group(['middleware'=>'auth','namespace'=>'Task','prefix'=>'task'],functio
 
     Route::get('getTeamUsers','TaskController@getTeamUsers');
 
+    Route::post('createTeamUploading','TaskController@createTeamUploading');
+
 });
 
 Auth::routes();

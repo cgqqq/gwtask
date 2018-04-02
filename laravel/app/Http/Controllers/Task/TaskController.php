@@ -65,7 +65,7 @@ class TaskController extends Controller
             'team_id'=>$request->input('team_id'),
             'uploader_id'=>session('user_id'),
             'time'=>strtotime(date("Y-m-d H:i:s")),
-            'content'=>'Hey guys,I have published a task just right now!!Come over and check out the detail!',
+            'content'=>'Hey guys,I have published a task just right now!!Come over and check out the detail!'
         ];
         try {
             //开始事务
@@ -272,6 +272,35 @@ class TaskController extends Controller
             array_push($team_user_list,$userInfo);
         }
         return response()->json(['team_user_list'=>$team_user_list]);
+    }
+
+    public function createTeamUploading(TeamUploading $teamUploading,Request $request){
+        $request->validate([
+            'content'=>'required',
+            'team_id'=>'required'
+        ]);
+        $map_uploading=[
+            'id'=>md5(uniqid(mt_rand(),true)),
+            'team_id'=>$request->input('team_id'),
+            'uploader_id'=>session('user_id'),
+            'time'=>strtotime(date("Y-m-d H:i:s")),
+            'content'=>$request->input('content')
+        ];
+        try {
+            //开始事务
+            DB::beginTransaction();
+            $teamUploading->add($map_uploading);
+            //提交事务
+            DB::commit();
+            //返回前端添加成功结果
+            return response()->json(['mag'=>'Post Successfully']);
+        } catch(QueryException $ex) {
+            //回滚事务
+            DB::rollback();
+            //返回前端添加失败结果
+            return response()->json(['mag'=>'Something went wrong!Try again later!']);
+        }
+
     }
 
 }
