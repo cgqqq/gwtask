@@ -19,16 +19,19 @@
 		<div style="float: left;width: 800px;height: 630px; ">
 			<div style="border-right: double 4px #8D8D8D;float: left;width:250px;height: 630px; color: #0C0C0C">
 				<div class="collection" style="margin-top: 20px;width: 230px;margin-right: 20px;padding: 5px;">
+                    <a href="{{url('team/displayOne',$team_info['team_name'])}}" class="collection-item" style="font-size: 12px;line-height: 30px">
+                       Team Updatings
+                    </a>
                     <a href="{{url('task/displayAdd',$team_info['team_name'])}}" class="collection-item" style="font-size: 12px;line-height: 30px">
                         Create Tasks
                     </a>
-					<a href="#!" class="collection-item" style="font-size: 12px;line-height: 30px"><span class="new badge2" style="margin-top: 10px;font-size: 10px">99</span>
+					<a href="{{url('team/displayOneAuthTasks',$team_info['team_id'])}}" class="collection-item" style="font-size: 12px;line-height: 30px">
 						All Tasks
 					</a>
-					<a href="#!" class="collection-item" style="font-size: 12px;line-height: 30px"><span class="new badge2" style="margin-top: 10px;font-size: 10px">99</span>
+					<a href="#!" class="collection-item" style="font-size: 12px;line-height: 30px">
 						Stask
 					</a>
-					<a href="#!" class="collection-item" style="font-size: 12px;line-height: 30px"><span class="new badge2" style="margin-top: 10px;font-size: 10px">99</span>
+					<a href="#!" class="collection-item" style="font-size: 12px;line-height: 30px">{{--<span class="new badge2" style="margin-top: 10px;font-size: 10px">99</span>--}}
 						Resource Sharings
 					</a>
 
@@ -37,11 +40,11 @@
 
 			<div style="float: left;width: 550px;height: 630px; color: #0C0C0C" class="scroll">
                 @section('team_content')
-                    <div style="float: left;width: 540px;height: 38px" id="profile">
+                    <div style="float: left;width: 540px;height: 38px;" id="profile">
                         <img src="{{URL::asset('/images/write.png')}}" width="20px" height="20px" style="float: right;margin-right: 30px;margin-top: 8px;"  onclick="isHidden('create_team_uplaoding')">
                     </div>
-                <ul class="collection">
-                    <li id="create_team_uplaoding" class="collection-item shadow" style="width:510px;height:auto;min-height:160px;margin-left: 5px;margin-top: 10px;display: none;" >
+                <ul class="collection" style="width: 510px;float: left">
+                    <li id="create_team_uplaoding" class="collection-item shadow" style="width:510px;height:auto;min-height:180px;margin-left: 5px;margin-top: 10px;display: none;" >
                         <form id="upload_form" style="line-height:20px;margin: 5px;padding:10px;width: 500px;float:left;color: #0C0C0C;cursor: hand;" class="form-group">
                             <div class="form-group" >
                                 <div class="col-md-6" >
@@ -210,7 +213,7 @@
                         var id = $(this).parent().siblings("[name='team_id']").val();
                         var content=$('#upload_content').val();
                         $.ajax({
-                            url: "{{ url('task/createTeamUploading') }}",
+                            url: "{{ url('team/createTeamUploading') }}",
                             type: 'post',
                             dataType: 'json',
                             data: {'team_id':id,"content":content,"_token":"{{csrf_token()}}"}

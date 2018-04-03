@@ -125,7 +125,11 @@ Route::group(['middleware'=>'auth','namespace'=>'Team','prefix'=>'team'],functio
 
     Route::any('sendInvitation','TeamController@sendInvitation');
 
-    Route::any('applicationManage','TeamController@applicationManage');    
+    Route::any('applicationManage','TeamController@applicationManage');
+
+    Route::post('createTeamUploading','TeamController@createTeamUploading');
+
+    Route::any('displayOneAuthTasks/{team_id}','TeamController@displayOneAuthTasks')->name('displayOneAuthTasks');
 
 });
 //任务路由
@@ -140,9 +144,10 @@ Route::group(['middleware'=>'auth','namespace'=>'Task','prefix'=>'task'],functio
 
 	Route::post('createTransaction','TaskController@createTransaction');
 
+    Route::post('deleteTransaction','TaskController@deleteTransaction');
+
     Route::get('getTeamUsers','TaskController@getTeamUsers');
 
-    Route::post('createTeamUploading','TaskController@createTeamUploading');
 
 });
 

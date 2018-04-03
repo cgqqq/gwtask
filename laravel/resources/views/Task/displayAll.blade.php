@@ -2,7 +2,8 @@
 @extends('layouts.home')
 
 @section('content')
-<div class="layui-collapse" lay-filter="test" class="scroll">
+
+<div class="layui-collapse box" lay-filter="test" class="scroll">
 	@foreach($tasks as $task)
 	<li class="layui-colla-item" style="width: 1000px;">
 		<h2 class="layui-colla-title" style="color: #0C0C0C;font-weight: 800;font-size: 15px;width: 1030px;background-color: #34bf49">{{ $task['task_name'] }}
@@ -143,7 +144,7 @@
 	}
 	$(function(){
 		layui.use('layer', function(){
-			$('#tran_box').on('click','.delete_tran',function(event){
+			$('.box').on('click','.delete_tran',function(event){
 				event.preventDefault();
 				var id = $(this).parent().siblings("[name='tran_id']").val();
 				$.ajax({
@@ -168,53 +169,5 @@
 		});
 	});
 </script>
-{{--
-
-	<table class="layui-table" style="width: 900px;">
-		<thead>
-			<tr>
-				<td>任务名称</td>
-				<td>任务描述</td>
-				<td>所属团队</td>
-				<td>发布人</td>
-				<td>开始日期</td>
-				<td>结束日期</td>
-				<td>任务状态</td>
-				<td>分配状态</td>
-			</tr>
-		</thead>
-		@foreach($tasks as $task)
-		<tr>
-			<td id="team_name"><a href="" style="color: black;">{{ $task['task_name'] }}</a></td>
-			<td>{{ $task['task_description'] }}</td>
-			<td>{{ $task['0'] }}</td>
-			<td>{{ $task['1'] }}</td>
-			<td>{{ date('Y-m-d H:i:s',$task['task_kickoff_date']) }}</td>
-			<td>{{ date('Y-m-d H:i:s',$task['task_deadline']) }}</td>
-			<td><script type="text/javascript">
-				@if( $task['task_status'] =='0'){
-					document.write("未开始");
-				}
-				@elseif($task['task_status']=='1')
-				document.write("进行中");
-				@else{
-					document.write("已结束");
-				}
-				@endif
-			</script>
-		</td>
-		<td><script type="text/javascript">
-			if({{ $task['task_allocation_status'] }}=='0'){
-				document.write("未分配");
-			}else if({{ $task['task_status'] }}=='1'){
-				document.write("已分配");
-			}
-		</script>
-	</td>
-</tr>
-@endforeach
-</table>
 {{ $paged->links() }}
---}}
-
 @endsection

@@ -88,7 +88,7 @@ class TaskController extends Controller
 
 	//显示所有任务
     public function displayAll(User $user,Team $team,Request $request,TaskTransaction $taskTransaction,TeamUploading $teamUploading,Task $task){
-	   if(empty($request->input('flag'))){
+	     if(empty($request->input('flag'))){
 
        }
        else{
@@ -117,7 +117,7 @@ class TaskController extends Controller
     		array_push($key,$userInfo[0]['user_name']);
 			if($key['task_status']=='1'){
                 if($key['task_deadline']<time()){
-                    $timeLeft="Task Expried";
+                    $timeLeft="Task Expired";
                 }
                 else{
                     $time=$key['task_deadline']-time();
@@ -274,34 +274,6 @@ class TaskController extends Controller
         return response()->json(['team_user_list'=>$team_user_list]);
     }
 
-    public function createTeamUploading(TeamUploading $teamUploading,Request $request){
-        $request->validate([
-            'content'=>'required',
-            'team_id'=>'required'
-        ]);
-        $map_uploading=[
-            'id'=>md5(uniqid(mt_rand(),true)),
-            'team_id'=>$request->input('team_id'),
-            'uploader_id'=>session('user_id'),
-            'time'=>strtotime(date("Y-m-d H:i:s")),
-            'content'=>$request->input('content')
-        ];
-        try {
-            //开始事务
-            DB::beginTransaction();
-            $teamUploading->add($map_uploading);
-            //提交事务
-            DB::commit();
-            //返回前端添加成功结果
-            return response()->json(['mag'=>'Post Successfully']);
-        } catch(QueryException $ex) {
-            //回滚事务
-            DB::rollback();
-            //返回前端添加失败结果
-            return response()->json(['mag'=>'Something went wrong!Try again later!']);
-        }
-
-    }
 
 }
 

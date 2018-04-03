@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\Team;
 
+use App\Http\Controllers\Task\TaskController;
 use App\Models\Invitation;
 use App\Models\App_join;
 use App\Models\Mail;
+use App\Models\TaskTransaction;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Database\QueryException;
@@ -13,6 +15,7 @@ use App\Models\User;
 use App\Models\Friend;
 use App\Models\Membership;
 use App\Models\TeamUploading;
+use App\Models\Task;
 use DB;
 
 use App\Http\Controllers\Controller;
@@ -614,6 +617,160 @@ class TeamController extends Controller
             //返回前端添加失败结果
             return response()->json(['msg'=>'Network is busy now,try again later！']);
         }
+    }
+    public function createTeamUploading(TeamUploading $teamUploading,Request $request){
+        $request->validate([
+            'content'=>'required',
+            'team_id'=>'required'
+        ]);
+        $map_uploading=[
+            'id'=>md5(uniqid(mt_rand(),true)),
+            'team_id'=>$request->input('team_id'),
+            'uploader_id'=>session('user_id'),
+            'time'=>strtotime(date("Y-m-d H:i:s")),
+            'content'=>$request->input('content')
+        ];
+        try {
+            //开始事务
+            DB::beginTransaction();
+            $teamUploading->add($map_uploading);
+            //提交事务
+            DB::commit();
+            //返回前端添加成功结果
+            return response()->json(['msg'=>'Post Successfully']);
+        } catch(QueryException $ex) {
+            //回滚事务
+            DB::rollback();
+            //返回前端添加失败结果
+            return response()->json(['msg'=>'Something went wrong!Try again later!']);
+        }
+
+    }
+    public function displayOneAuthTasks(Request $request,$team_id,Task $task,Team $team,User $user,Membership $membership,Friend $friend,TeamUploading $teamUploading,TaskTransaction $taskTransaction){
+
+        if(empty($request->input('flag'))){
+        }
+        else{
+            $create_trans=new TaskController();
+            $create_trans->createTransaction($taskTransaction,$request,$teamUploading,$task);
+            session()->remove('code');
+        }
+
+        //获取该团队信息
+        $teamInfo = $team->get(['team_id'=>$team_id])->toarray();
+        //获取该团队创建者信息
+        $funderName = $user->where(['user_id'=>$teamInfo[0]['team_funder_id']])->value('user_name');
+        $funderProfile = $user->where(['user_id'=>$teamInfo[0]['team_funder_id']])->value('user_profile');
+        //团队信息加入该团队创建者信息
+        $teamInfo[0] = array_merge($teamInfo[0],['user_name'=>$funderName]);
+        $teamInfo[0] = array_merge($teamInfo[0],['user_profile'=>$funderProfile]);
+        //获取组员列表
+        $teamMember = $membership->get(['team_id'=>$teamInfo[0]['team_id']])->toarray();
+        // pd($teamMember);
+        //该团队有组员，搜索成员信息
+        $data['belong2team']=false;/*该属性用于判断当前用户是否属于该团队，false代表不属于该团队*/
+        if(!empty($teamMember)){
+            //对组员列表添加每个组员详细信息
+
+            foreach ($teamMember as $key => &$value) {
+                //获取单个组员信息
+                $userInfo = $user->get(['user_id'=>$value['member_id']])->toArray();
+                // pd($userInfo[0]);
+                //组员列表添加该组员信息
+                $value = array_merge($value,$userInfo[0]);
+
+                /*判断用户是否属于该团队*/
+                if($value['member_id']==session('user_id')){
+                    $data['belong2team']=true;
+                }
+            }
+        }
+        //页码
+        $page = $request->input('page')?$request->input('page'):1;
+
+        //总数
+        $total = count($teamMember);/*算上一个add icon*/
+        //每页记录数
+        $pageSize = 9;
+        //实例化分页类
+        $paged = new LengthAwarePaginator($teamMember,$total,$pageSize);
+        //分页url
+        $paged = $paged->setPath(route('displayOneTeam',['team_name'=>$teamInfo[0]['team_name']]));
+        //要显示页的内容
+        $pageOut = array_slice($teamMember,($page-1)*$pageSize,$pageSize);
+        /*判断是否为最后一页*/
+        if($page*$pageSize>=$total){
+            $data['finalPage']=true;
+        }
+        else{
+            $data['finalPage']=false;
+        }
+
+        /*用户的关注数量 与被关注数量*/
+        $map1=[
+            'followed_id'=>session('user_id')
+        ];
+        $map2 = [
+            'follow_id'=>session('user_id')
+        ];
+
+        $data['followNum']=count($friend->get($map2)->toArray());
+        $data['followerNum']=count($friend->get($map1)->toArray());
+
+        //获取该团队动态信息
+        $uploadings=$teamUploading->where(['team_id'=>$teamInfo[0]['team_id']])->orderBy('time','desc')->get()->toArray();
+        //添加上传人的头像信息和姓名
+        foreach ($uploadings as &$key){
+            $uploader_info=$user->where(['user_id'=>$key['uploader_id']])->get()->toArray();
+            $key['uploader_profile']=$uploader_info[0]['user_profile'];
+            $key['uploader_name']=$uploader_info[0]['user_name'];
+        }
+
+        $tasks=$task->where(['task_team_id'=>$team_id])->get()->toArray();
+        foreach ($tasks as &$key ) {
+            $team_Info = $team->get(['team_id'=>$key['task_team_id']])->toArray();
+            array_push($key,$team_Info[0]['team_name']);
+            $userInfo = $user->get(['user_id'=>$key['task_manager_id']])->toArray();
+            array_push($key,$userInfo[0]['user_name']);
+            if($key['task_status']=='1'){
+                if($key['task_deadline']<time()){
+                    $timeLeft="Task Expired";
+                }
+                else{
+                    $time=$key['task_deadline']-time();
+                    $timeDay=0;
+                    $timeHour=0;
+                    $timeMin=0;
+                    if($time>=86400){
+                        $timeDay=(int)($time/86400);
+                        $time=$time%86400;
+                    }
+                    if($time>=3600){
+                        $timeHour=(int)($time/3600);
+                        $time=$time%3600;
+                    }
+                    $timeMin=(int)($time/60);
+
+                    $timeLeft=$timeDay." day(s) and ".$timeHour." hour(s) ".$timeMin."minute(s) before deadline";
+                }
+                $key['timeLeft']=$timeLeft;
+            }elseif($key['status']=="0"){
+                $key['timeLeft']="Task Will Kick Off At ".date("Y-m-d H:i:s",$key['task_kickoff_date']);
+            }
+            else{
+                $key['timeLeft']="Task Has Finished";
+            }
+            $trans=$taskTransaction->where(['task_id'=>$key['task_id']])->orderBy('time','asc')->get()->toArray();
+            $i=0;
+            foreach ($trans as &$tran){
+                $key['trans'][$i]=&$tran;
+                $i=$i+1;
+            }
+
+        }
+        return view('Team/displayOneAuthTasks',['tasks'=>$tasks,'team_info'=>$teamInfo[0],'pageOut'=>$pageOut,'paged'=>$paged,'data'=>$data,'uploadings'=>$uploadings]);
+
+
     }
     
 }
