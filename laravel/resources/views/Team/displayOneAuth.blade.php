@@ -29,7 +29,7 @@
 						All Tasks
 					</a>
 					<a href="#!" class="collection-item" style="font-size: 12px;line-height: 30px">
-						Stask
+						Sub Tasks
 					</a>
 					<a href="{{url('team/displayOneAuthResources',$team_info['team_id'])}}" class="collection-item" style="font-size: 12px;line-height: 30px">{{--<span class="new badge2" style="margin-top: 10px;font-size: 10px">99</span>--}}
 						Resource Sharings

@@ -1,6 +1,7 @@
 {{--非队长查看队员页面--}}
 @extends('layouts.home')
 
+
 @section('content')
 
 
@@ -31,51 +32,73 @@
 		<div style="float: left;width: 800px;height: 630px; ">
 			<div style="border-right: double 4px #8D8D8D;float: left;width:250px;height: 630px; color: #0C0C0C">
 				<div class="collection" style="margin-top: 20px;width: 230px;margin-right: 20px;padding: 5px;">
-
-					<a href="#!" class="collection-item" style="font-size: 12px;line-height: 30px"><span class="new badge2" style="margin-top: 10px;font-size: 10px">99</span>
-						All Tasks（所有）
+                    <a href="{{url('team/displayOne',$team_info['team_name'])}}" class="collection-item" style="font-size: 12px;line-height: 30px">
+                        Team Updatings
+                    </a>
+                    <a href="{{url('team/displayOneAuthTasks',$team_info['team_id'])}}" class="collection-item" style="font-size: 12px;line-height: 30px">
+                        All Tasks
+                    </a>
+					<a href="#!" class="collection-item" style="font-size: 12px;line-height: 30px">
+						Sub Tasks
 					</a>
-					<a href="#!" class="collection-item" style="font-size: 12px;line-height: 30px"><span class="new badge2" style="margin-top: 10px;font-size: 10px">99</span>
-						Completed Tasks(已完成)
-					</a>
-					<a href="#!" class="collection-item" style="font-size: 12px;line-height: 30px"><span class="new badge2" style="margin-top: 10px;font-size: 10px">99</span>
-						Uncompleted Tasks（未完成）
-					</a>
-					<a href="#!" class="collection-item" style="font-size: 12px;line-height: 30px"><span class="new badge2" style="margin-top: 10px;font-size: 10px">99</span>
-						Resource Sharing
-					</a>
-
+                    <a href="{{url('team/displayOneAuthResources',$team_info['team_id'])}}" class="collection-item" style="font-size: 12px;line-height: 30px">{{--<span class="new badge2" style="margin-top: 10px;font-size: 10px">99</span>--}}
+                        Resource Sharings
+                    </a>
 				</div>
 			</div>
 
-			<div style="float: left;width: 550px;height: 630px; color: #0C0C0C">
-                <ul class="collection">
-                    @foreach($uploadings as $uploading)
-                        <li class="collection-item shadow" style="width:540px;height:auto;min-height:140px;margin-left: 5px;"  >
-                            <div style="height:130px;width: 130px;;float: left;">
-                                @if(session('user_id')==$uploading['uploader_id'])
-                                    <img src="{{URL::asset('/uploads/user_profile/'.$uploading['uploader_profile'])}}" class="layui-circle" width="65px" height="65px" style="margin-left: 15px;" onclick='javascrtpt:window.location.href="{{url('user/displayInfo')}}"' >
-                                @else
-                                    <img src="{{URL::asset('/uploads/user_profile/'.$uploading['uploader_profile'])}}" class="layui-circle" width="65px" height="65px" style="margin-left: 15px;" onclick='javascrtpt:window.location.href="{{url('user/displayOthersInfo/'.$uploading['uploader_id'])}}"' >
-                                @endif
-                                <span style="font-weight: 800;font-size: 15px;color: #0C0C0C;position: absolute;bottom: 0px;top:130px;left: 70px;">{{$uploading['uploader_name']}}</span>
-                            </div>
-                            <div style="font-weight:600;font-size:18px;color:#0C0C0C;height:auto;min-height:130px;width: 370px;float: left;word-wrap:break-word;line-height: 30px;position:relative ;margin-top: 10px">
-                                {{$uploading['content']}}
-                                <p style="font-size: 10px;color:#8D8D8D;float:right;position:absolute;bottom:0px;padding: 0px;margin-right: 0px; ">
-                                    {{ date('Y-m-d H:i:s',$uploading['time']) }}
-                                </p>
-                                @unless($uploading['resource']==null)
-                                    <span style="color: #0C0C0C;font-size: 13px;">Download Resource : </span>
-                                    <a href={{URL::asset('/uploads/resources/'.$uploading['resource'])}} download={{$uploading['resource']}}>
-                                        <img src="{{URL::asset('/images/download.png')}}" >
-                                    </a><br>
-                                @endunless
-                            </div>
+            <div style="float: left;width: 550px;height: 630px; color: #0C0C0C" class="scroll">
+                @section('team_content')
+                    <div style="float: left;width: 540px;height: 38px;" id="profile">
+                        <img src="{{URL::asset('/images/write.png')}}" width="20px" height="20px" style="float: right;margin-right: 30px;margin-top: 8px;"  onclick="isHidden('create_team_uplaoding')">
+                    </div>
+                    <ul class="collection" style="width: 510px;float: left">
+                        <li id="create_team_uplaoding" class="collection-item shadow" style="width:510px;height:auto;min-height:180px;margin-left: 5px;margin-top: 10px;display: none;" >
+                            <form id="upload_form" style="line-height:20px;margin: 5px;padding:10px;width: 500px;float:left;color: #0C0C0C;cursor: hand;" class="form-group">
+                                <div class="form-group" >
+                                    <div class="col-md-6" >
+                                        <textarea type="text" id='upload_content' required="" class="form-control" style="max-width: 400px;width: 380px;height: 70px;max-height: 70px;"></textarea>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-md-offset-4">
+                                    <button id="submit" type="submit" class="layui-btn shadow submit" style="border: 2px solid #0C0C0C;color: #0C0C0C;margin-top: 10px">
+                                        Submit
+                                    </button>
+                                </div>
+                                <input type="hidden" value="{{$team_info['team_id']}}" name="team_id">
+                            </form>
                         </li>
-                    @endforeach
-                </ul>
-			</div>
+                        @foreach($uploadings as $uploading)
+                            <li class="collection-item shadow" style="width:510px;height:auto;min-height:180px;margin-left: 5px;margin-top: 10px;"  >
+                                <div style="height:100px;width: 130px;float: left;">
+                                    @if(session('user_id')==$uploading['uploader_id'])
+                                        <img src="{{URL::asset('/uploads/user_profile/'.$uploading['uploader_profile'])}}" class="layui-circle" width="65px" height="65px" style="margin-left: 15px;" onclick='javascrtpt:window.location.href="{{url('user/displayInfo')}}"' >
+                                    @else
+                                        <img src="{{URL::asset('/uploads/user_profile/'.$uploading['uploader_profile'])}}" class="layui-circle" width="65px" height="65px" style="margin-left: 15px;" onclick='javascrtpt:window.location.href="{{url('user/displayOthersInfo/'.$uploading['uploader_id'])}}"' >
+                                    @endif
+
+                                </div>
+                                <div style="font-weight:600;font-size:18px;color:#0C0C0C;height:auto;min-height:130px;width: 340px;float: left;word-wrap:break-word;line-height: 30px;position:relative ;margin-top: 10px">
+                                    {{$uploading['content']}}
+
+                                    @unless($uploading['resource']==null)
+                                        <p style=" font-weight:600;font-size:15px;color:#0C0C0C;margin-bottom: 5px; ">
+                                            Resource Download :
+
+                                            <a href={{URL::asset($uploading['resource'])}} download={{$uploading['resource']}}>
+                                                <img src="{{URL::asset('/images/click.png')}}" >
+                                            </a>
+                                        </p>
+                                    @endunless
+                                    <p style="font-size: 10px;color:#8D8D8D;float:right;position:absolute;top:130px;padding: 0px;margin-right: 0px; ">
+                                        {{ date('Y-m-d H:i:s',$uploading['time']) }}
+                                    </p>
+                                </div>
+                            </li>
+                        @endforeach
+                    </ul>
+                @show
+            </div>
 
 		</div>
 	</div>
@@ -180,39 +203,7 @@
                 $('.checkOne').prop('checked', $(this).prop('checked'))
             });
         });
-   /*     $(function(){
-            layui.use('layer',function(){
-                $('.team').on('click','.join-team',function(){
-                    var team_id = $(this).parent().siblings("[name='team_id']").val();
-                    $.ajax({
-                        url: "{{--{{ /*url('team/join')*/ }}--}}",
-                        type: 'get',
-                        dataType: 'json',
-                        data: {'team_id': team_id,'member_id':"{{--{{ /*session('user_id') */}}--}}","_token":"{{--{{csrf_token()}}--}}"}
-                    })
-                        .done(function(data) {
-                            layer.msg(data.msg,{
-                                icon:data.icon
-                            });
-                            if(data.icon==='1'){
-                                setTimeout("window.location.reload()",1000);
-
-                            }
-                        })
-                        .fail(function() {
-                            layer.msg('服务器未响应!',{
-                                icon:5
-                            });
-                        })
-                        .always(function() {
-                            console.log("complete");
-                        });
-
-                });
-            });
-        });
-
-*/        $(function(){
+        $(function(){
             layui.use('layer',function(){
                 $('.team').on('click','.quit-team',function(){
                     var team_id = $(this).parent().siblings("[name='team_id']").val();
@@ -275,6 +266,38 @@
 
             });
         });
+
+        $(function(){
+            layui.use('layer', function(){
+                $('#upload_form').on('click','#submit',function(event){
+                    event.preventDefault();
+                    var id = $(this).parent().siblings("[name='team_id']").val();
+                    var content=$('#upload_content').val();
+                    $.ajax({
+                        url: "{{ url('team/createTeamUploading') }}",
+                        type: 'post',
+                        dataType: 'json',
+                        data: {'team_id':id,"content":content,"_token":"{{csrf_token()}}"}
+                    })
+                        .done(function(data) {
+                            layer.msg(data.msg);
+                            location.reload();
+
+                        })
+                        .fail(function(data) {
+                            layer.msg(data.msg);
+                        })
+                        .always(function() {
+                            console.log("complete");
+                        });
+                });
+
+            });
+        });
+        function isHidden(oDiv){
+            var vDiv = document.getElementById(oDiv);
+            vDiv.style.display = (vDiv.style.display == 'none')?'block':'none';
+        }
 	</script>
 
 @endsection

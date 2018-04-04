@@ -1,6 +1,9 @@
 {{--队长查看任务页面--}}
-@extends('team.displayOneAuth')
-
+@if($team_info['team_funder_id']==session('user_id'))
+    @extends('team.displayOneAuth')
+@else
+    @extends('team.displayOne')
+@endif
 @section('team_content')
     <div class="layui-collapse box" lay-filter="test" style="height: auto;min-height: 630px" >
         @foreach($tasks as $task)
@@ -23,9 +26,9 @@
                 <div style="min-height: 500px;height: auto;" >
                     <ul class="layui-timeline">
                         @foreach($task['trans'] as $tran)
-                            <li class="layui-timeline-item">
+                            <li class="layui-timeline-item" style="width: 540px;">
                                 <i class="layui-icon layui-timeline-axis"></i>
-                                <div class="layui-timeline-content layui-text">
+                                <div class="layui-timeline-content layui-text" style="width: 500px;">
                                     <h3 class="layui-timeline-title">{{ date('Y-m-d H:i:s',$tran['time']) }}</h3>
                                     <p> <span style="color: #0C0C0C;font-size: 15px;font-weight: 800;">{{ $tran['trans_brief'] }}</span><br><br>
 
@@ -44,14 +47,17 @@
                                             {{ $tran['trans_Resource_intro'] }}
                                         </p>
                                     @endunless
+                                    @unless($team_info['team_funder_id']!=session('user_id'))
                                     <p>
                                         <img src="{{URL::asset('/images/delete2.png')}}" class="delete_tran">
                                     </p>
+                                    @endunless
                                     <input type="hidden" name="tran_id" value="{{$tran['tran_id']}}">
                                     <input type="hidden" name="originator" value="{{session('code')}}">
                                 </div>
                             </li>
                         @endforeach
+                        @unless($team_info['team_funder_id']!=session('user_id'))
                         <li class="layui-timeline-item" class="scroll" >
                             <i class="layui-icon layui-timeline-axis"></i>
                             <div class="layui-timeline-content layui-text" >
@@ -121,6 +127,7 @@
 
                             </div>
                         </li>
+                        @endunless
                     </ul>
 
                 </div>
