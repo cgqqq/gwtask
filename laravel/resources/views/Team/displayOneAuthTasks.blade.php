@@ -1,9 +1,6 @@
 {{--队长查看任务页面--}}
-@if($team_info['team_funder_id']==session('user_id'))
-    @extends('team.displayOneAuth')
-@else
-    @extends('team.displayOne')
-@endif
+@extends('team.'.$AuthOrNot)
+
 @section('team_content')
     <div class="layui-collapse box" lay-filter="test" style="height: auto;min-height: 630px" >
         @foreach($tasks as $task)

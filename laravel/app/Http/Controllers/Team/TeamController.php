@@ -768,7 +768,13 @@ class TeamController extends Controller
             }
 
         }
-        return view('Team/displayOneAuthTasks',['tasks'=>$tasks,'team_info'=>$teamInfo[0],'pageOut'=>$pageOut,'paged'=>$paged,'data'=>$data,'uploadings'=>$uploadings]);
+        if(session('user_id')==$teamInfo[0]['team_funder_id']){
+            $AuthOrNot='displayOneAuth';
+        }
+        else{
+            $AuthOrNot='displayOne';
+        }
+        return view('Team/displayOneAuthTasks',['tasks'=>$tasks,'team_info'=>$teamInfo[0],'pageOut'=>$pageOut,'paged'=>$paged,'data'=>$data,'uploadings'=>$uploadings,'AuthOrNot'=>$AuthOrNot]);
 
 
     }
