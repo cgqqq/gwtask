@@ -133,7 +133,7 @@
 	</li>
 @endforeach
 </div>
-
+{{ $paged->links() }}
 </div>
 
 <script type="text/javascript">
@@ -169,5 +169,5 @@
 		});
 	});
 </script>
-{{ $paged->links() }}
+
 @endsection

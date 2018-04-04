@@ -131,6 +131,8 @@ Route::group(['middleware'=>'auth','namespace'=>'Team','prefix'=>'team'],functio
 
     Route::any('displayOneAuthTasks/{team_id}','TeamController@displayOneAuthTasks')->name('displayOneAuthTasks');
 
+    Route::any('displayOneAuthResources/{team_id}','TeamController@displayOneAuthResources')->name('displayOneAuthResources');
+
 });
 //任务路由
 Route::group(['middleware'=>'auth','namespace'=>'Task','prefix'=>'task'],function(){

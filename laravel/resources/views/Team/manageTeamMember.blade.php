@@ -1,10 +1,16 @@
 @extends('layouts.home')
 {{--管理队员--}}
 @section('content')
+    <div style="width: 1050px;height: 40px;margin-bottom: 30px" id="profile"  class="newA" >
+
+        <img class="layui-circle" style="border: 1px solid black;margin-left: 20px;margin-top: 10px" src="{{URL::asset('/images/back.png')}}"  href="javascript:void(0)"  onclick="javascript:window.history.go(-1);">
+
+    </div>
     <div style="width: 1050px;height: 50px;color: black;margin-bottom: 30px">
+
     <p style="font-size: 50px;font-family: 'Source Sans Pro', sans-serif;font-weight: 800;text-decoration: none;margin-left: 50px;">Delete</p>
     </div>
-    <div style="float: left;width: 120px;height:800px;margin-left: 30px;">
+    <div style="float: left;width: 120px;height:700px;margin-left: 30px;">
         <div style="margin-left: 20px;margin-top:50px;width: 40px;display: block" id='profile'>
             <a href="{{url('team/manageTeamMember?team_name='.$team_info['team_name'])}}">
             <img class="layui-circle" src="{{URL::asset('/images/delete.png')}}" >

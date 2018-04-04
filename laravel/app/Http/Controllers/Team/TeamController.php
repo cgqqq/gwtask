@@ -772,5 +772,81 @@ class TeamController extends Controller
 
 
     }
+    public function displayOneAuthResources(Request $request,$team_id,TaskTransaction $taskTransaction,Task $task){
+        $allTask=$task->where(['task_team_id'=>$team_id])->get()->toArray();
+        $i=0;
+       foreach ($allTask as &$aTask){
+           $taskTrans=$taskTransaction->where(['task_id'=>$aTask['task_id']])->get(['trans_Resource_path','trans_Resource_intro'])->toArray();
+           $j=0;
+           foreach ($taskTrans as &$taskTran){
+               if($taskTran['trans_Resource_path']==null){
+
+               }
+               else{
+                   $str=$taskTran['trans_Resource_path'];
+                   $arr=substr($str, -3, 3);
+                   $taskTran['trans_Resource_path']= substr(strrchr($str, "/"), 1);;
+
+
+                   if($arr=='mkv'||$arr=='mov'||$arr=='mp4'||$arr=='rmvb'||$arr=='wmv'||$arr=='vob'){
+                       $taskTran['type']='video';
+                   }
+                   elseif($arr=='bmp'||$arr=='jpeg'||$arr=='png'||$arr=='jpg'||$arr=='gif'){
+                       $taskTran['type']='picture';
+                   }
+                   elseif($arr=='txt'){
+                       $taskTran['type']='txt';
+                   }
+                   elseif($arr=='pdf'){
+                       $taskTran['type']='pdf';
+                   }
+                   elseif($arr=='zip'){
+                       $taskTran['type']='zip';
+                   }
+                   elseif($arr=='word'){
+                       $taskTran['type']='word';
+                   }
+                   elseif($arr=='excel'){
+                       $taskTran['type']='excel';
+                   }
+                   elseif($arr=='ppt'){
+                       $taskTran['type']='ppt';
+                   }
+                   else{
+                       $taskTran['type']='unknown-file';
+                   }
+                   $pagedata[$i][$j]=&$taskTran;
+                   $j=$j+1;
+               }
+
+           }
+
+           $i=$i+1;
+       }
+
+       if(isset($pagedata)){
+           // pd($pagedata);
+           // 默认页码
+           $page = $request->input('page')?$request->input('page'):1;
+           // pd($page);
+           //设定一页行数
+           $pagesize=8;
+           //总共行数
+           $total=count($pagedata);
+           //实例化分页类
+           $paged=new LengthAwarePaginator($pagedata,$total,$pagesize);
+           //设置分页跳转路由
+           $paged=$paged->setPath(route('displayOneAuthResources',$team_id));
+           //截取指定页数据
+           $pageout=array_slice($pagedata, ($page-1)*$pagesize,$pagesize);
+           // pd($pageout);
+          return view('Team/displayOneAuthResources',['resources'=>$pageout,'paged'=>$paged]);
+
+       }
+       else{
+           return view('Team/displayOneAuthResources');
+       }
+
+    }
     
 }
