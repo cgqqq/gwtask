@@ -9,7 +9,9 @@ use Storage;
 use App\Models\Team;
 use App\Models\User;
 use App\Models\Task;
+use App\Models\Stask;
 use App\Models\Membership;
+Use App\Models\Stask_allocation;
 use App\Models\TaskTransaction;
 use App\Models\TeamUploading;
 use DB;
@@ -272,6 +274,63 @@ class TaskController extends Controller
             array_push($team_user_list,$userInfo);
         }
         return response()->json(['team_user_list'=>$team_user_list]);
+    }
+    //分配指定任务的子任务名、子任务描述及子任务对应组员
+    public function allocateSub(Request $request,Stask $stask,Stask_allocation $stask_allocation){
+    	$sub_task_all = $request->input('sub_task_all');
+    	$isSuccessfull = true;
+    	foreach($sub_task_all as $key ){
+    		$flag = true ; 
+    		$map = [
+    			'stask_id'=>md5(uniqid(mt_rand(),true)),
+    			'stask_name'=>$key['sub_task_name'],
+    			'stask_description'=>$key['sub_task_descri'],
+    			'task_id'=>$request->input('task_id'),
+    			'status'=>'0'
+    		];
+    		try {
+	            //开始事务
+	            DB::beginTransaction();
+	            $stask->add($map);
+	            //提交事务
+	            DB::commit();	            
+	        } catch(QueryException $ex) {
+	            //回滚事务
+	            DB::rollback();
+	            $isSuccessfull = false ;
+	            breask;
+	        }
+	        foreach($key['sub_task_users'] as $key1){
+	        	$map1 = [
+	        		'a_id'=>md5(uniqid(mt_rand(),true)),
+	        		'stask_id'=>$map['stask_id'],
+	        		'res_id'=>$key1
+	        	];
+	        	try {
+		            //开始事务
+		            DB::beginTransaction();
+		            $stask_allocation->add($map1);
+		            //提交事务
+		            DB::commit();	            
+	       		} catch(QueryException $ex) {
+		            //回滚事务
+		            DB::rollback();
+		            $isSuccessfull = false ;
+		            $flag = false ;
+		            breask;
+	       		}
+	        }
+	        if(!$flag){
+	        	break;
+	        }
+    	}
+    	if($isSuccessfull){
+			//返回前端添加成功结果
+            return response()->json(['msg' => 'Allocate Sub-task Successfully!']);
+    	}else{
+			//返回前端添加失败结果
+	         return response()->json(['msg' => 'Failed To Allocate Sub-task!']);
+    	}
     }
 
 

@@ -45,15 +45,15 @@
 			//新增子任务
 			$('#addSTask').on('click',function(){
 				var sub_task_html = 
-				'<tr class="sub-task-items">'+
+				'<tr class="sub_task_item">'+
 				'<td>'+
-				'<input name="title" lay-verify="title" autocomplete="off" placeholder="请输入子任务名" class="layui-input task_name" type="text">'+
-				'<input name="title" lay-verify="title" autocomplete="off" placeholder="请输入子任务描述" class="layui-input task_descri" type="text">'+
+				'<input name="title" lay-verify="title" autocomplete="off" placeholder="请输入子任务名" class="layui-input sub_task_name" type="text">'+
+				'<input name="title" lay-verify="title" autocomplete="off" placeholder="请输入子任务描述" class="layui-input sub_task_descri" type="text">'+
 				'</td>'+
 				'<td>'+
 				'<button class="layui-btn layui-btn-primary layui-btn-sm del"><i class="layui-icon"></i></button>'+
 				'<button data-type="auto" class="layui-btn layui-btn-normal choose">选择组员</button>'+
-				'<b></b>'+
+				'<b class="user_box"></b>'+
 				'</td>'+
 				'</tr>';
 				$('#STask_table').append(sub_task_html);
@@ -86,40 +86,81 @@
 						}
 				}
 				//确认选中的队员			
-				$('.confirm').on('click',{'user_box':parent_user_box},function(event){
-					//保存传过来的要显示选中组员的地方
-					var user_box = event.data.user_box;
-					//保存选中的组员列表
+				$('.confirm').on('click',{'parent_user_box':parent_user_box},function(event){
+					//传过来的子任务界面要显示选中组员的地方
+					var parent_user_box = event.data.parent_user_box;
+					//选中的组员列表
 					$('input:checked').each(function(){
-						selected_user = $(this).next().html();
-						allocate_user.push(selected_user);
+						var selected_user_id = $(this).prev().val();
+						var selected_user = $(this).next().html();
+						//所选中组员的user_id和user_name
+						var selected_user_info = {
+							'selected_user_id':selected_user_id,
+							'selected_user':selected_user
+						};
+						allocate_user.push(selected_user_info);
 						for(var i in team_user_list){
+							//若未被选中组员与当前
 							if(selected_user.trim()==team_user_list[i][1].user_name){
 								team_user_list[i][2] = {'isSelected':'1'};
 							}
 						}
 					});
-					// console.log('选中列表:'+allocate_user);
-					console.log('选完用户后所剩用户：'+JSON.stringify(team_user_list));
+					console.log('选中列表:'+JSON.stringify(allocate_user));
+					console.log('选完用户后：'+JSON.stringify(team_user_list));
+					//关闭选择子任务成员界面
 					layer.closeAll();		
+					//对指定子任务显示显示所选组员姓名及传user_id
 					for(var i in allocate_user){
 						// alert(allocate_user[i]);
-						user_box.append(allocate_user[i]+',');
+						parent_user_box.append('<input type="hidden" name="" class="selected_user_id" value="'+allocate_user[i].selected_user_id+'">');
+						parent_user_box.append(allocate_user[i].selected_user+',');
 					}					
 				});
 			});
 			//发布子任务
 			$('#submit').on('click',function(){
-				var sub_task_list = [];
-				$('.sub-task-items').each(function(){
+				var sub_task_all = [];
+				$('.sub_task_item').each(function(){
+					//子任务项
 					var sub_task_item = [];
-					var task_name = $(this).children().children('.task_name').val();
-					var task_descri = $(this).children().children('.task_descri').val();
-					sub_task_item.push(task_name);
-					sub_task_item.push(task_descri);
-					sub_task_list.push(sub_task_item);
+					//子任务成员user_id
+					var sub_task_users = [];
+					//子任务名
+					var sub_task_name = $(this).find('.sub_task_name').val();
+					//子任务描述
+					var sub_task_descri = $(this).find('.sub_task_descri').val();
+					$(this).find('.user_box').find('.selected_user_id').each(function(){
+						sub_task_users.push($(this).val());
+					});
+					// sub_task_item['sub_task_name'] = sub_task_name;
+					// sub_task_item['sub_task_descri'] = sub_task_descri;
+					// sub_task_item['sub_task_users'] = sub_task_users;
+
+					sub_task_item = {
+						'sub_task_name':sub_task_name,
+						'sub_task_descri':sub_task_descri,
+						'sub_task_users':sub_task_users
+					};
+					sub_task_all.push(sub_task_item);
 				});
-				console.log(sub_task_list);
+				console.log('传给后台的子任务信息及对应成员:'+sub_task_all);
+				$.ajax({
+					url: "{{ url('task/allocateSub') }}",
+					type: 'post',
+					dataType: 'json',
+					data: {'task_id':$('#task_id').val(),'sub_task_all':sub_task_all,"_token":"{{csrf_token()}}"},
+				})
+				.done(function(data) {
+						layer.msg(data.msg);
+				})
+				.fail(function() {
+					console.log("error");
+				})
+				.always(function() {
+					console.log("complete");
+				});
+				
 			});
 
 		});
@@ -133,17 +174,17 @@
     return arr;
 }
 </script>
-
+{{ csrf_field() }}
 <input type="hidden" name="" id="team_id" value="{{$team_id}}">
 <input type="hidden" name="" id="has-get-users" value="0">
 <table class='layui-table' style='width: 900px;'>
 	<thead>
 		<tr>
-			<td>所属团队</td>
+			<td>团队名称</td>
 			<td>任务名称</td>
 		</tr>
 	</thead>
-	<input type='hidden' name='' value='{{$task_id}}'>
+	<input type='hidden' name='' id='task_id' value='{{$task_id}}'>
 	<tr>			
 		<td>{{$team_name}}</td>
 		<td>{{$task_name}}</td>
@@ -155,15 +196,15 @@
 	<button class='layui-btn layui-btn-primary layui-btn-sm' id='submit'>发布</button>
 	<form class='layui-form' action='' id="sub-task-form">
 	<table class='layui-table' id='STask_table'>
-			<tr class="sub-task-items">
+			<tr class="sub_task_item">
 				<td>
-					<input name='title' lay-verify='title' autocomplete='off' placeholder='请输入子任务名' class='layui-input task_name' type='text'>
-					<input name='title' lay-verify='title' autocomplete='off' placeholder='请输入子任务描述' class='layui-input task_descri' type='text'>
+					<input name='title' lay-verify='title' autocomplete='off' placeholder='请输入子任务名' class='layui-input sub_task_name' type='text'>
+					<input name='title' lay-verify='title' autocomplete='off' placeholder='请输入子任务描述' class='layui-input sub_task_descri' type='text'>
 				</td>
 				<td>
 					<button class='layui-btn layui-btn-primary layui-btn-sm del'><i class='layui-icon'></i></button>
 					  <button data-type="auto" class="layui-btn layui-btn-normal choose">选择组员</button>
-					  <b></b>
+					  <b class="user_box"></b>
 				</td>
 			</tr>
 		</table>
@@ -171,5 +212,4 @@
 </fieldset>
 
 <tr class="sub-task-items">
-<div></div>				
 @endsection
