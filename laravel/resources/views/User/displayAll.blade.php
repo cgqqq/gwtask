@@ -6,7 +6,7 @@
 	$(function(){
 		layui.use('layer',function(){
 			$('.layui-table').on('click','.follow-btn',function(){
-				var followed_id = $(this).parent().siblings('.td-id').text();
+				var followed_id = $(this).parent().siblings('.td-id').val();
 				var type = null;
 				var msg = null;
 				if($(this).text()==='关注'){
@@ -45,7 +45,7 @@
 			});
 
 			$('.layui-table').on('click','.btn',function(){
-				var url = null,data=null,user_id = $(this).parent().siblings('td-id').text();
+				var url = null,data=null,user_id = $(this).parent().siblings('td-id').val();
 				if($(this).text()==='修改'){
 					url = "{{ url('user/edit') }}";
 					data = "{'user_id':"+user_id+",}";
@@ -83,41 +83,36 @@
 	<thead>
 		<tr>
 			<td>
-				用户ID
+				Name
 			</td>
 			<td>
-				姓名
+				E-mail
 			</td>
-			<td>
-				邮箱
-			</td>
-			<td colspan="4">
-				操作
+			<td colspan="2">
+				Operation
 			</td>
 		</tr>
 	</thead>
 	@foreach($users as $user)
 		<tr>
-			<td class="td-id">
-				{{ $user->user_id }}
-			</td>
+		<input type="hidden" class="td-id" value="{{ $user->user_id }}" name="">
 			<td>
 				{{ $user->user_name }}
 			</td>
 			<td>
 				{{ $user->user_email }}
 			</td>
-			<td>
+			<!-- <td>
 				<button class="btn" >修改</button>
-			</td>
-			<td>
+			</td
+			><td>
 				<button class="btn">删除</button>
+			</td> -->
+			<td>
+				<button class="layui-btn layui-btn-sm follow-btn" >关注</button>
 			</td>
 			<td>
-				<button class="follow-btn" >关注</button>
-			</td>
-			<td>
-				<button class="follow-btn">取关</button>
+				<button class="layui-btn layui-btn-sm follow-btn">取关</button>
 			</td>
 		</tr>
 	@endforeach

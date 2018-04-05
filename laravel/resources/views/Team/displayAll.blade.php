@@ -36,11 +36,11 @@
 <table class="layui-table" style="width: 900px;">
 <thead>
 	<tr>
-		<td>团队名称</td>
-			<td>创建者ID</td>
-			<td>创建日期</td>
-			<td>团队简介</td>
-			<td>操作</td>
+		<td>Team name</td>
+			<td>Founder id</td>
+			<td>Creation date</td>
+			<td>Team description</td>
+			<td>Operation</td>
 	</tr>
 </thead>
 	@foreach($teams as $team)
