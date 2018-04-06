@@ -31,9 +31,7 @@ Route::group(['prefix'=>'register'],function(){
 });
 
 //回到主页
-Route::get('home', function() {
-    return view('Home/home');
-})->middleware('auth');
+Route::any('home','Controller@home' )->middleware('auth')->name('home');
 
 //用户相关路由
 Route::group(['middleware'=>'auth','namespace'=>'User','prefix'=>'user'],function(){
@@ -66,7 +64,7 @@ Route::group(['middleware'=>'auth','namespace'=>'User','prefix'=>'user'],functio
 
     Route::any('displaySearchResult', 'UserController@displaySearchResult');
 
-    Route::get('displayOthersInfo/{user_id}','UserController@displayOthersInfo');
+    Route::any('displayOthersInfo/{user_id}','UserController@displayOthersInfo');
 
     Route::get('displayOthersInfoTeams','UserController@displayOthersInfoTeams')->name('displayOthersInfoTeams');
 
@@ -87,6 +85,10 @@ Route::group(['middleware'=>'auth','namespace'=>'User','prefix'=>'user'],functio
     Route::any('displayInfoMailContent/{mail_id}','UserController@displayInfoMailContent');
 
     Route::any('displayInfoMyMailContent/{mail_id}','UserController@displayInfoMyMailContent');
+
+    Route::get('displayOthersInfoResourceSharings','UserController@displayOthersInfoResourceSharings');
+
+    Route::get('displayOthersInfoTasks','UserController@displayOthersInfoTasks');
 
 });
 //团队相关路由

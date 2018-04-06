@@ -27,10 +27,15 @@
             @else
 
                 <div class="layui-inline" style="margin-left:200px;margin-top: 30px;" id="profile" >
-                    <img class="layui-circle" style="height: 100px;width:100px;" src="{{ asset('/uploads/user_profile/'.$result[0]['user_profile']) }}" onclick='javascrtpt:window.location.href="{{url('user/displayOthersInfo/'.$result['0']['user_id'])}}"'>
+                    @if($result[0]['user_id']==session('user_id'))
+                        <img class="layui-circle" style="height: 100px;width:100px;" src="{{ asset('/uploads/user_profile/'.$result[0]['user_profile']) }}" onclick='javascrtpt:window.location.href="{{url('user/displayInfo')}}"'>
+                    @else
+                        <img class="layui-circle" style="height: 100px;width:100px;" src="{{ asset('/uploads/user_profile/'.$result[0]['user_profile']) }}" onclick='javascrtpt:window.location.href="{{url('user/displayOthersInfo/'.$result['0']['user_id'])}}"'>
+                    @endif
                     <p style="text-align: center;margin-top: 10px;color: #0C0C0C">
-                       Name: {{$result[0]['user_name']}}
+                        Name: {{$result[0]['user_name']}}
                     </p>
+
 
                 </div>
                 <div style="width:50px;float: right;margin-top: 70px;margin-right: 250px;color: #0C0C0C">

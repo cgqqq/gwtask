@@ -15,6 +15,7 @@ use App\Models\User;
 use App\Models\Friend;
 use App\Models\Membership;
 use App\Models\TeamUploading;
+use App\Models\UserUpdating;
 use App\Models\Task;
 use DB;
 
@@ -23,20 +24,30 @@ use App\Http\Controllers\Controller;
 class TeamController extends Controller
 {
     //创建团队
-    public function add(Request $request,Team $team,Membership $membership){
+    public function add(Request $request,Team $team,Membership $membership,UserUpdating $userUpdating){
         //对前端传参检查
         $request->validate([
             'team_name'=>'required',
             'team_info'=>'required|max:1000'
         ]);
         //团队信息
+        $team_id=md5(uniqid(mt_rand(),true));
         $data_team = [
-            'team_id'=>md5(uniqid(mt_rand(),true)),
+            'team_id'=>$team_id,
             'team_name'=>$request->input('team_name'),
             'created_at'=>strtotime(date("Y-m-d H:i:s")),
             'team_funder_id'=>session('user_id'),
             'team_info'=>$request->input('team_info')
         ];
+        $map_updating = [
+            'id'=>md5(uniqid(mt_rand(),true)),
+            'updater_id'=>session('user_id'),
+            'time'=>strtotime(date("Y-m-d H:i:s")),
+            'type'=>'cTeam',
+            'content'=>'Hey!I have created a team named :'+$request->input('team_name')+'! Come over and check out details !',
+            'resource'=>$team_id
+        ];
+        //加入用户个人动态
         //添加队长的团队-组员关系记录
         $data_membership = [
             'membership_id'=>md5(uniqid(mt_rand(),true)),
@@ -47,6 +58,7 @@ class TeamController extends Controller
             //开始事务
             DB::beginTransaction();
             $team->add($data_team)&&$membership->add($data_membership);
+            $userUpdating->add($map_updating);
             //提交事务
             DB::commit();
             //返回前端添加成功结果
@@ -539,7 +551,7 @@ class TeamController extends Controller
         $request->validate([
             'team_id'=>'required',
             'user_id'=>'required',
-           'title'=>'max:100',
+            'title'=>'max:100',
             'content'=>'max:10000'
         ]);
         $team_id=$request->input('team_id');
@@ -563,7 +575,7 @@ class TeamController extends Controller
             DB::commit();
             //返回前端添加成功结果
             return response()->json(['msg'=>'Your invitation has been successfully sent!!','icon'=>'1']);
-       } catch(QueryException $ex) {
+        } catch(QueryException $ex) {
             //回滚事务
             DB::rollback();
             //返回前端添加失败结果
@@ -589,10 +601,10 @@ class TeamController extends Controller
                 'member_id'=>$application[0]['applicant_id']
             ];
             $map_uploading = [
-               'id'=>md5(uniqid(mt_rand(),true)),
-               'team_id'=>$application[0]['app_team_id'],
-               'uploader_id'=>$teamFounder[0]['team_funder_id'],
-               'time'=>strtotime(date("Y-m-d H:i:s")),
+                'id'=>md5(uniqid(mt_rand(),true)),
+                'team_id'=>$application[0]['app_team_id'],
+                'uploader_id'=>$teamFounder[0]['team_funder_id'],
+                'time'=>strtotime(date("Y-m-d H:i:s")),
                 'content'=>'Welcome new member——'.$teamFounder[0]['user_name']." to join in ".$teamFounder[0]['team_name']."!"
             ];
         }
@@ -606,7 +618,7 @@ class TeamController extends Controller
             $membership->add($data);
             $teamUploading->add($map_uploading);
             if(isset($data)){
-            $app_join->edit($map,$update_data);}
+                $app_join->edit($map,$update_data);}
             DB::commit();
             //返回前端添加成功结果
             return response()->json(['msg'=>'Operation Succeed.']);
@@ -781,78 +793,76 @@ class TeamController extends Controller
     public function displayOneAuthResources(Request $request,$team_id,TaskTransaction $taskTransaction,Task $task){
         $allTask=$task->where(['task_team_id'=>$team_id])->get()->toArray();
         $i=0;
-       foreach ($allTask as &$aTask){
-           $taskTrans=$taskTransaction->where(['task_id'=>$aTask['task_id']])->get(['trans_Resource_path','trans_Resource_intro'])->toArray();
-           $j=0;
-           foreach ($taskTrans as &$taskTran){
-               if($taskTran['trans_Resource_path']==null){
+        foreach ($allTask as &$aTask){
+            $taskTrans=$taskTransaction->where(['task_id'=>$aTask['task_id']])->get(['trans_Resource_path','trans_Resource_intro'])->toArray();
+            $j=0;
+            foreach ($taskTrans as &$taskTran){
+                if($taskTran['trans_Resource_path']==null){
 
-               }
-               else{
-                   $str=$taskTran['trans_Resource_path'];
-                   $arr=substr($str, -3, 3);
-                   $taskTran['trans_Resource_path']= substr(strrchr($str, "/"), 1);;
+                }
+                else{
+                    $str=$taskTran['trans_Resource_path'];
+                    $arr=substr($str, -3, 3);
+                    $taskTran['resourceName']= substr(strrchr($str, "-"), 1);
+                    if($arr=='mkv'||$arr=='mov'||$arr=='mp4'||$arr=='rmvb'||$arr=='wmv'||$arr=='vob'){
+                        $taskTran['type']='video';
+                    }
+                    elseif($arr=='bmp'||$arr=='peg'||$arr=='png'||$arr=='jpg'||$arr=='gif'){
+                        $taskTran['type']='picture';
+                    }
+                    elseif($arr=='txt'){
+                        $taskTran['type']='txt';
+                    }
+                    elseif($arr=='pdf'){
+                        $taskTran['type']='pdf';
+                    }
+                    elseif($arr=='zip'){
+                        $taskTran['type']='zip';
+                    }
+                    elseif($arr=='ord'||'doc'||'ocx'){
+                        $taskTran['type']='word';
+                    }
+                    elseif($arr=='cel'){
+                        $taskTran['type']='excel';
+                    }
+                    elseif($arr=='ppt'){
+                        $taskTran['type']='ppt';
+                    }
+                    else{
+                        $taskTran['type']='unknown-file';
+                    }
+                    $pagedata[$i][$j]=&$taskTran;
+                    $j=$j+1;
+                }
 
+            }
 
-                   if($arr=='mkv'||$arr=='mov'||$arr=='mp4'||$arr=='rmvb'||$arr=='wmv'||$arr=='vob'){
-                       $taskTran['type']='video';
-                   }
-                   elseif($arr=='bmp'||$arr=='jpeg'||$arr=='png'||$arr=='jpg'||$arr=='gif'){
-                       $taskTran['type']='picture';
-                   }
-                   elseif($arr=='txt'){
-                       $taskTran['type']='txt';
-                   }
-                   elseif($arr=='pdf'){
-                       $taskTran['type']='pdf';
-                   }
-                   elseif($arr=='zip'){
-                       $taskTran['type']='zip';
-                   }
-                   elseif($arr=='word'){
-                       $taskTran['type']='word';
-                   }
-                   elseif($arr=='excel'){
-                       $taskTran['type']='excel';
-                   }
-                   elseif($arr=='ppt'){
-                       $taskTran['type']='ppt';
-                   }
-                   else{
-                       $taskTran['type']='unknown-file';
-                   }
-                   $pagedata[$i][$j]=&$taskTran;
-                   $j=$j+1;
-               }
+            $i=$i+1;
+        }
 
-           }
+        if(isset($pagedata)){
+            // pd($pagedata);
+            // 默认页码
+            $page = $request->input('page')?$request->input('page'):1;
+            // pd($page);
+            //设定一页行数
+            $pagesize=8;
+            //总共行数
+            $total=count($pagedata);
+            //实例化分页类
+            $paged=new LengthAwarePaginator($pagedata,$total,$pagesize);
+            //设置分页跳转路由
+            $paged=$paged->setPath(route('displayOneAuthResources',$team_id));
+            //截取指定页数据
+            $pageout=array_slice($pagedata, ($page-1)*$pagesize,$pagesize);
+            // pd($pageout);
+            return view('Team/displayOneAuthResources',['resources'=>$pageout,'paged'=>$paged]);
 
-           $i=$i+1;
-       }
-
-       if(isset($pagedata)){
-           // pd($pagedata);
-           // 默认页码
-           $page = $request->input('page')?$request->input('page'):1;
-           // pd($page);
-           //设定一页行数
-           $pagesize=8;
-           //总共行数
-           $total=count($pagedata);
-           //实例化分页类
-           $paged=new LengthAwarePaginator($pagedata,$total,$pagesize);
-           //设置分页跳转路由
-           $paged=$paged->setPath(route('displayOneAuthResources',$team_id));
-           //截取指定页数据
-           $pageout=array_slice($pagedata, ($page-1)*$pagesize,$pagesize);
-           // pd($pageout);
-          return view('Team/displayOneAuthResources',['resources'=>$pageout,'paged'=>$paged]);
-
-       }
-       else{
-           return view('Team/displayOneAuthResources');
-       }
+        }
+        else{
+            return view('Team/displayOneAuthResources');
+        }
 
     }
-    
+
 }

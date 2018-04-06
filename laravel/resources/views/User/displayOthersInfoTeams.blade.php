@@ -6,23 +6,26 @@
             <p style=" background-color:#fcfcfc;margin-top: 10px;font-weight: 800;font-size: 16px;text-align:center; width:280px;height:20px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;  ">
                 {{$user_info['user_name']}}
             </p>
-<div style="font-size: 14px;color: #fcfcfc;margin-left: 20px">
-            User ID: {{$user_info['user_id']}}</br>
-            Emial Address:  {{$user_info['user_email']}}
-</div>
+            <div style="font-size: 14px;color: #fcfcfc;margin-left: 20px">
+                User ID: {{$user_info['user_id']}}</br>
+                Emial Address:  {{$user_info['user_email']}}
+            </div>
 
         </div>
 
         <div style="width: 280px;height:520px;float: left">
             <div class="collection" style="margin-top: 20px;width: 280px;padding: 5px;">
-                <a href="" class="collection-item" style="font-size: 20px;line-height: 30px">
-                    Resource Sharings
+                <a href="{{url('user/displayOthersInfo/'.$user_info['user_id'])}}" class="collection-item" style="font-size: 20px;line-height: 30px">
+                    Personal Updatings
                 </a>
-                <a href="" class="collection-item" style="font-size: 20px;line-height: 30px">
+                <a href="{{url('user/displayOthersInfoTeams?user_id='.$user_info['user_id'])}}" class="collection-item" style="font-size: 20px;line-height: 30px">
                     Teams
                 </a>
-                <a href="" class="collection-item" style="font-size: 20px;line-height: 30px">
+                <a href="{{url('user/displayOthersInfoTasks?user_id='.$user_info['user_id'])}}" class="collection-item" style="font-size: 20px;line-height: 30px">
                     Tasks
+                </a>
+                <a href="{{url('user/displayOthersInfoResourceSharings?user_id='.$user_info['user_id'])}}" class="collection-item" style="font-size: 20px;line-height: 30px">
+                    Resource Sharings
                 </a>
 
             </div>
@@ -34,7 +37,7 @@
         <div class="layui-tab" >
             <ul class="layui-tab-title">
                 <li class="layui-this" style="background-color: #4aaf51;">{{$user_info['user_name']}} Has Built Up These Teams</li>
-                <li style="background-color: #4aaf51;">{{$user_info['user_name']}} Has Join In These Teams</li>
+                <li style="background-color: #4aaf51;">{{$user_info['user_name']}} Joins In These Tasks</li>
             </ul>
             <div class="layui-tab-content" style="color: #0C0C0C">
                 <div class="layui-tab-item layui-show" >
@@ -82,41 +85,41 @@
                 <div class="layui-tab-item" >
                     <div class="portfolio-grid portfolioContainer scroll"  STYLE="width: 100%;height: 750px;">
                         <ul id="thumbs" class="col3"  style="width: 100%;height: 100%; ">
-                    @foreach($myTeams as $myTeams)
-                    <li style="width: 350px;height: 265px;margin-left:10px;margin-bottom: 60px;margin-top: 30px;">
-                        <div class="portfolio-image-wrapper" style="position: relative">
-                            <img src="{{URL::asset('/images/team.png')}}" alt=""  style="border:3px dashed #000;">
-                            <div class="item-info-overlay">
+                            @foreach($myTeams as $myTeams)
+                                <li style="width: 350px;height: 265px;margin-left:10px;margin-bottom: 60px;margin-top: 30px;">
+                                    <div class="portfolio-image-wrapper" style="position: relative">
+                                        <img src="{{URL::asset('/images/team.png')}}" alt=""  style="border:3px dashed #000;">
+                                        <div class="item-info-overlay">
 
-                                <div style="width: 280px;height: 40px;white-space:nowrap;overflow: hidden;text-overflow: ellipsis;">
-                                    <h3 class="text-white semi-bold p-t-60 project-title " style="color: #fff200;font-weight: 900;">
-                                        Team Name:{{ $myTeams['team_name'] }}</h3>
-                                </div>
-                                <P> </P>
-                                <div style="width: 280px;height: 30px;white-space:nowrap;overflow: hidden;text-overflow: ellipsis;">
-                                    <p class="project-description">
-                                        Team Founder:{{ $myTeams['user_name'] }}</p>
-                                </div>
-                                <div style="width: 280px;height: 20px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap">
-                                    <p class="project-description">
-                                        Team Intro:{{ $myTeams['team_info'] }}</p>
-                                </div>
-                                <div style="width: 300px;	" class="project-description">
-                                    <button class="view_icon" onclick='javascrtpt:window.location.href="{{url('team/displayOne',['team_name'=> $myTeams['team_name']])}}"'> </button>
-                                </div>
+                                            <div style="width: 280px;height: 40px;white-space:nowrap;overflow: hidden;text-overflow: ellipsis;">
+                                                <h3 class="text-white semi-bold p-t-60 project-title " style="color: #fff200;font-weight: 900;">
+                                                    Team Name:{{ $myTeams['team_name'] }}</h3>
+                                            </div>
+                                            <P> </P>
+                                            <div style="width: 280px;height: 30px;white-space:nowrap;overflow: hidden;text-overflow: ellipsis;">
+                                                <p class="project-description">
+                                                    Team Founder:{{ $myTeams['user_name'] }}</p>
+                                            </div>
+                                            <div style="width: 280px;height: 20px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap">
+                                                <p class="project-description">
+                                                    Team Intro:{{ $myTeams['team_info'] }}</p>
+                                            </div>
+                                            <div style="width: 300px;	" class="project-description">
+                                                <button class="view_icon" onclick='javascrtpt:window.location.href="{{url('team/displayOne',['team_name'=> $myTeams['team_name']])}}"'> </button>
+                                            </div>
 
-                            </div>
+                                        </div>
 
-                        </div>
-                        <div class="item-info" style="position: inherit">
-                            <h4 class="text-dark no-margin p-t-10">
-                                Team Name:{{ $myTeams['team_name'] }}</h4>
-                            <p>
-                                Established At :{{ date('Y-m-d H:i:s',$myTeams['created_at']) }}</p>
+                                    </div>
+                                    <div class="item-info" style="position: inherit">
+                                        <h4 class="text-dark no-margin p-t-10">
+                                            Team Name:{{ $myTeams['team_name'] }}</h4>
+                                        <p>
+                                            Established At :{{ date('Y-m-d H:i:s',$myTeams['created_at']) }}</p>
 
-                        </div>
-                        @endforeach
-                    </li>
+                                    </div>
+                                    @endforeach
+                                </li>
                         </ul>
 
                     </div>

@@ -4,7 +4,11 @@ namespace App\Http\Controllers\User;
 
 use App\Models\Invitation;
 use App\Models\Mail;
+use App\Models\Task;
+use App\Models\TaskTransaction;
 use Illuminate\Http\Request;
+use PhpParser\Node\Expr\Array_;
+use PhpParser\Node\Scalar\String_;
 use Storage;
 use App\Models\User;
 use Illuminate\Validation\Rule;
@@ -12,6 +16,7 @@ use App\Models\Friend;
 use App\Models\Membership;
 use App\Models\Team;
 use App\Models\App_join;
+use App\Models\UserUpdating;
 use App\Models\TeamUploading;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\DB;
@@ -412,19 +417,12 @@ class UserController extends Controller
         return view('User/displaySearchResult', ['friendship' => $friendship, 'result' => $result]);
     }
 
-    public function displayOthersInfo(Request $request, $user_id, User $user, Team $team, Membership $membership, Friend $friend)
+    public function displayOthersInfo(Request $request, $user_id,UserUpdating $userUpdating,User $user)
     {
         /*查询用户信息*/
         $user_info = $user->get(['user_id' => $user_id])->toArray();
-
-        /*   $team_mine_info=$team->get(['team_funder_id'=>$user_id])->toArray();
-           $team_in_info=$membership->where(['member_id'=>$user_id])->join('team','membership.team_id','=','team.team_id')->get()->toArray();
-           $following=$friend->get(['follow_id'=>$user_id])->toArray();
-           $followingNum=count($following);
-           $follower=$friend->get(['followed_id'=>$user_id])->toArray();
-           $followerNum=count($follower);*/
-
-        return view('User/displayOthersInfo', ['user_info' => $user_info[0]]);
+        $personalUpdatings=$userUpdating->where(['updater_id'=>$user_info[0]['user_id']])->orderBy('time','desc')->get()->toArray();
+        return view('User/displayOthersInfo', ['user_info' => $user_info[0],'personalUpdatings'=>$personalUpdatings]);
     }
 
     public function displayOthersInfoTeams(Request $request, Membership $membership, Team $team, User $user)
@@ -506,24 +504,24 @@ class UserController extends Controller
                 $value['mail_from_name'] = "DINO";
             }
 
-        /*计算邮件发送时间与系统时间的间隔*/
-        $now = date("Y-m-d H:i:s");
-        if (floor(strtotime($now) - $value['mail_sent_time']) > 86400) {
-            $value['mail_time_gap'] = (floor((strtotime($now) - $value['mail_sent_time']) / 86400)) . 'day(s) ago';
-        } elseif (floor(strtotime($now) - $value['mail_sent_time']) > 3600) {
-            $value['mail_time_gap'] = (floor((strtotime($now) - $value['mail_sent_time']) / 3600)) . 'hour(s) ago';
+            /*计算邮件发送时间与系统时间的间隔*/
+            $now = date("Y-m-d H:i:s");
+            if (floor(strtotime($now) - $value['mail_sent_time']) > 86400) {
+                $value['mail_time_gap'] = (floor((strtotime($now) - $value['mail_sent_time']) / 86400)) . 'day(s) ago';
+            } elseif (floor(strtotime($now) - $value['mail_sent_time']) > 3600) {
+                $value['mail_time_gap'] = (floor((strtotime($now) - $value['mail_sent_time']) / 3600)) . 'hour(s) ago';
 
-        } elseif (floor(strtotime($now) - $value['mail_sent_time']) > 60) {
-            $value['mail_time_gap'] = (floor((strtotime($now) - $value['mail_sent_time']) / 60)) . " minute(s) ago";
+            } elseif (floor(strtotime($now) - $value['mail_sent_time']) > 60) {
+                $value['mail_time_gap'] = (floor((strtotime($now) - $value['mail_sent_time']) / 60)) . " minute(s) ago";
 
-        } else {
-            $value['mail_time_gap'] = 'just now';
+            } else {
+                $value['mail_time_gap'] = 'just now';
+            }
+
         }
 
-        }
 
-
-/*查询是否有新的未读邀请*/
+        /*查询是否有新的未读邀请*/
         $invite=$invitation->where(['user_id'=>session('user_id'),'status'=>'0'])->get()->toArray();
         /*查询当前已发送的邮件*/
         $sentMails=$mail->where(['mail_from_id'=>session('user_id')])->orderBy('mail_sent_time','desc')->get()->toArray();
@@ -558,9 +556,9 @@ class UserController extends Controller
             }
         }
         if($newsNum>0){
-        session()->put('news',true);}
+            session()->put('news',true);}
         else{
-        session()->put('news',false);
+            session()->put('news',false);
         }
         return view('User/displayInfoMailBox',['newsNum'=>$newsNum,'mailsNum'=>$mailsNum,'invitationNum'=>$invitationNum,'mailsRecieved'=>$mailsRecieved,'sentMails'=>$sentMails,'invitations'=>$invite,'applications'=>$applications,'applicationNum'=>$applicationNum ]);
 
@@ -635,7 +633,7 @@ class UserController extends Controller
             'user_id'=>$user_id
         ];
         $update_data=[
-          'status'=>'2'
+            'status'=>'2'
         ];
         $team_info=$team->get(['team_id'=>$team_id])->toArray();
         $funder_name=$user->where(['user_id'=>$team_info[0]['team_funder_id']])->value('user_name');
@@ -675,7 +673,7 @@ class UserController extends Controller
         $mail_from_id=$request->input('mail_from_id');
         $mail_title=$request->input('mail_title');
         $mail_content=$request->input('mail_content');
-       /* $existID=$user->where(['user_id'=>$mail_to_id])->get();*/
+        /* $existID=$user->where(['user_id'=>$mail_to_id])->get();*/
         $data = [
             'user_id'=>$mail_to_id
         ];
@@ -719,7 +717,7 @@ class UserController extends Controller
         $mailId=$request->input('mail_id');
         $map=[
             'mail_id'=>$mailId
-            ];
+        ];
         try {
             //开始事务
             DB::beginTransaction();
@@ -775,6 +773,78 @@ class UserController extends Controller
         $mail_content = $mail->get(['mail_id' => $mail_id])->toArray();
         $mail_to_info = $user->get(['user_id' => $mail_content[0]['mail_to_id']])->toArray();
         return view('User/displayInfoMyMailContent', ['newsNum' => $newsNum, 'mail_content' => $mail_content[0], 'mail_to_info' => $mail_to_info[0]]);
+    }
+
+    public function displayOthersInfoResourceSharings(Request $request,UserUpdating $userUpdating,User $user){
+        $user_id = $request->input('user_id');
+        $resources=$userUpdating->where(['updater_id'=>$user_id,'type'=>'sResource'])->get(['resource','content','time'])->toArray();
+        foreach ($resources as &$resource){
+            $str=$resource['resource'];
+            $arr=substr($str, -3, 3);
+            $resource['name']= substr(strrchr($str, "-"), 1);
+
+
+            if($arr=='mkv'||$arr=='mov'||$arr=='mp4'||$arr=='rmvb'||$arr=='wmv'||$arr=='vob'){
+                $resource['type']='video';
+            }
+            elseif($arr=='bmp'||$arr=='peg'||$arr=='png'||$arr=='jpg'||$arr=='gif'){
+                $resource['type']='picture';
+            }
+            elseif($arr=='txt'){
+                $resource['type']='txt';
+            }
+            elseif($arr=='pdf'){
+                $resource['type']='pdf';
+            }
+            elseif($arr=='zip'){
+                $resource['type']='zip';
+            }
+            elseif($arr=='ord'||'doc'||'ocx'){
+                $resource['type']='word';
+            }
+            elseif($arr=='cel'){
+                $resource['type']='excel';
+            }
+            elseif($arr=='ppt'){
+                $resource['type']='ppt';
+            }
+            else{
+                $resource['type']='unknown-file';
+            }
+        }
+        $user_info = $user->get(['user_id' => $user_id])->toArray();
+        return view('User/displayOthersInfoResourceSharings',['resources'=>$resources,'user_info'=>$user_info[0]]);
+
+    }
+
+    public function displayOthersInfoTasks(Request $request,User $user,TaskTransaction $taskTransaction,Team $team,Task $task,Membership $membership){
+        $user_id = $request->input('user_id');
+        $user_info = $user->get(['user_id' => $user_id])->toArray();
+        $tasks=$task->where(['task_manager_id'=>$user_id])->get()->toArray();
+        foreach ($tasks as &$aTask){
+            $i=0;
+            $trans=$taskTransaction->where(['task_id'=>$aTask['task_id']])->get()->toArray();
+            $aTask['team_name']=$team->where(['team_id'=>$aTask['task_team_id']])->value('team_name');
+            foreach ($trans as &$tran){
+                $aTask['trans'][$i]=&$tran;
+                $i=$i+1;
+            }
+        }
+
+        $teamArray=$membership->where(['member_id'=>$user_id])->get(['team_id'])->toArray();
+        foreach ($teamArray as &$key){
+            $taskArray=$task->where(['task_team_id'=>$key['team_id']])->get()->toArray();
+            foreach ($taskArray as &$aTask){
+                $trans=$taskTransaction->where(['task_id'=>$aTask['task_id']])->get()->toArray();
+                $j=0;
+                foreach ($trans as &$tran){
+                    $aTask['trans'][$j]=&$tran;
+                    $j=$j+1;
+                }
+            }
+        }
+        return view('User/displayOthersInfoTasks',['user_info'=>$user_info[0],'transData1'=>$tasks,'transData2'=>$taskArray]);
+
     }
 }
 
