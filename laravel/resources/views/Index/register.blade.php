@@ -31,7 +31,7 @@
 
                         <div class="col-md-6">
                         <!-- 姓名不允许输入空格 -->
-                            <input id="user_name" type="text" class="form-control" name="user_name" value="{{ old('user_name') }}" required onkeyup="this.value=this.value.replace(/[^\w]/g,'');">
+                            <input id="user_name" type="text" class="form-control" name="user_name" value="{{ old('user_name') }}" required on="this.value=this.value.replace(/[^\w]/g,'');">
 
                             @if ($errors->has('user_name'))
                                 <span class="help-block">
@@ -73,7 +73,7 @@
                         <label for="password-confirm" class="col-md-4 control-label">Confirm Password</label>
 
                         <div class="col-md-6">
-                            <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
+                            <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required onblur="validate()">
                         </div>
                     </div>
 
@@ -101,7 +101,7 @@
 
                     <div class="form-group">
                 <div class="col-md-6 col-md-offset-4">
-                    <button id="submit" type="submit" class="layui-btn shadow" style="border: 2px solid #0C0C0C;">
+                    <button id="submit" type="submit" class="layui-btn shadow" style="border: 2px solid #0C0C0C;" >
                         <a style="color: #0C0C0C;"> REGISTER</a>
                     </button>
                 </div>
@@ -114,6 +114,19 @@
 
 @endsection
 <script>
+    function validate(){
+        var pwd1 = document.getElementById("user_password").value;
+        var pwd2 = document.getElementById("password-confirm").value;
+        if(pwd1 != pwd2) {
+            layui.use('layer', function(){
+                layer.msg('The two passwords you have entered are inconsistent !');
+
+            });
+        }
+        else{
+            document.getElementById("submit").disabled = true;
+        }
+    }
     var send=document.getElementById("submit");
     send.onclick=function(){
         var file=document.getElementById("user_profile").value;

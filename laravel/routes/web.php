@@ -32,6 +32,9 @@ Route::group(['prefix'=>'register'],function(){
 
 //回到主页
 Route::any('home','Controller@home' )->middleware('auth')->name('home');
+/*发送验证邮箱*/
+Route::any('mail/email','Auth\ForgotPasswordController@send');
+Route::any('mail/resetPassword','Auth\ForgotPasswordController@resetPassword');
 
 //用户相关路由
 Route::group(['middleware'=>'auth','namespace'=>'User','prefix'=>'user'],function(){
