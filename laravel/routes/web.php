@@ -91,8 +91,6 @@ Route::group(['middleware'=>'auth','namespace'=>'User','prefix'=>'user'],functio
 
     Route::get('displayOthersInfoTasks','UserController@displayOthersInfoTasks');
 
-    Route::any('checkEmail','UserController@checkEmail');
-
 });
 //团队相关路由
 Route::group(['middleware'=>'auth','namespace'=>'Team','prefix'=>'team'],function(){

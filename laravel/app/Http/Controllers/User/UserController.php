@@ -846,17 +846,6 @@ class UserController extends Controller
         return view('User/displayOthersInfoTasks',['user_info'=>$user_info[0],'transData1'=>$tasks,'transData2'=>$taskArray]);
 
     }
-    public function checkEmail(Request $request,User $user){
-        /*$email=$request->input('email');
-        $result=$user->where(['user_email'=>$email])->get();
-        if($result){
-            return response()->json(['msg'=>'The email address has been registered !']);
-        }
-        else{
-            return response()->json(['msg'=>'1']);
-        }*/
-        return response()->json(['msg'=>'The email address has been registered !']);
-    }
 }
 
 

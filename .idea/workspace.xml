@@ -5,13 +5,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="03c77c43-de62-47b9-8a66-f413799d84dc" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/laravel/app/Http/Controllers/Auth/ForgotPasswordController.php" afterPath="$PROJECT_DIR$/laravel/app/Http/Controllers/Auth/ForgotPasswordController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/laravel/app/Http/Controllers/Controller.php" afterPath="$PROJECT_DIR$/laravel/app/Http/Controllers/Controller.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/laravel/app/Http/Controllers/User/UserController.php" afterPath="$PROJECT_DIR$/laravel/app/Http/Controllers/User/UserController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/laravel/public/css/style.css" afterPath="$PROJECT_DIR$/laravel/public/css/style.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/laravel/resources/views/Index/register.blade.php" afterPath="$PROJECT_DIR$/laravel/resources/views/Index/register.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/laravel/resources/views/Mail/resetPassword.blade.php" afterPath="$PROJECT_DIR$/laravel/resources/views/Mail/resetPassword.blade.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/laravel/routes/web.php" afterPath="$PROJECT_DIR$/laravel/routes/web.php" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -23,19 +16,7 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="ForgotPasswordController.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/laravel/app/Http/Controllers/Auth/ForgotPasswordController.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="345">
-              <caret line="67" column="42" lean-forward="false" selection-start-line="67" selection-start-column="42" selection-end-line="67" selection-end-column="42" />
-              <folding>
-                <element signature="e#45#81#0#PHP" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="resetPassword.blade.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="resetPassword.blade.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/laravel/resources/views/Mail/resetPassword.blade.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="355">
@@ -47,11 +28,21 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name=".env" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/laravel/.env">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="437">
+              <caret line="23" column="0" lean-forward="false" selection-start-line="23" selection-start-column="0" selection-end-line="28" selection-end-column="19" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="web.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/laravel/routes/web.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="251">
-              <caret line="25" column="44" lean-forward="false" selection-start-line="25" selection-start-column="44" selection-end-line="25" selection-end-column="44" />
+            <state relative-caret-position="76">
+              <caret line="91" column="81" lean-forward="false" selection-start-line="91" selection-start-column="81" selection-end-line="91" selection-end-column="81" />
               <folding>
                 <element signature="e#7#390#0#PHP" expanded="true" />
               </folding>
@@ -118,11 +109,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="UserController.php" pinned="false" current-in-tab="false">
+      <file leaf-file-name="UserController.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/laravel/app/Http/Controllers/User/UserController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="267">
-              <caret line="856" column="11" lean-forward="true" selection-start-line="849" selection-start-column="7" selection-end-line="856" selection-end-column="11" />
+            <state relative-caret-position="291">
+              <caret line="848" column="0" lean-forward="false" selection-start-line="848" selection-start-column="0" selection-end-line="848" selection-end-column="0" />
               <folding>
                 <element signature="e#45#71#0#PHP" expanded="true" />
               </folding>
@@ -175,9 +166,9 @@
       <find>edit</find>
       <find>resp</find>
       <find>va</find>
-      <find>register</find>
       <find>dumpM</find>
       <find>img</find>
+      <find>register</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -231,12 +222,12 @@
         <option value="$PROJECT_DIR$/laravel/resources/views/auth/passwords/email.blade.php" />
         <option value="$PROJECT_DIR$/laravel/app/Http/Controllers/Auth/ForgotPasswordController.php" />
         <option value="$PROJECT_DIR$/laravel/resources/views/User/displayInfoMailBox.blade.php" />
-        <option value="$PROJECT_DIR$/laravel/app/Http/Controllers/User/UserController.php" />
-        <option value="$PROJECT_DIR$/laravel/routes/web.php" />
         <option value="$PROJECT_DIR$/laravel/app/Http/Controllers/Controller.php" />
         <option value="$PROJECT_DIR$/laravel/public/css/style.css" />
         <option value="$PROJECT_DIR$/laravel/resources/views/Index/register.blade.php" />
         <option value="$PROJECT_DIR$/laravel/resources/views/Mail/resetPassword.blade.php" />
+        <option value="$PROJECT_DIR$/laravel/routes/web.php" />
+        <option value="$PROJECT_DIR$/laravel/app/Http/Controllers/User/UserController.php" />
       </list>
     </option>
   </component>
@@ -462,12 +453,12 @@
       <workItem from="1522734831016" duration="23274000" />
       <workItem from="1522826146465" duration="14807000" />
       <workItem from="1523025862124" duration="3577000" />
-      <workItem from="1523068036169" duration="9601000" />
+      <workItem from="1523068036169" duration="10264000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="301727000" />
+    <option name="totallyTimeSpent" value="302390000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -719,14 +710,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/laravel/.env">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="513">
-          <caret line="27" column="29" lean-forward="false" selection-start-line="27" selection-start-column="29" selection-end-line="27" selection-end-column="29" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/laravel/config/mail.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1672">
@@ -782,26 +765,6 @@
           <caret line="67" column="42" lean-forward="false" selection-start-line="67" selection-start-column="42" selection-end-line="67" selection-end-column="42" />
           <folding>
             <element signature="e#45#81#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/laravel/routes/web.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="251">
-          <caret line="25" column="44" lean-forward="false" selection-start-line="25" selection-start-column="44" selection-end-line="25" selection-end-column="44" />
-          <folding>
-            <element signature="e#7#390#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/laravel/app/Http/Controllers/User/UserController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="267">
-          <caret line="856" column="11" lean-forward="true" selection-start-line="849" selection-start-column="7" selection-end-line="856" selection-end-column="11" />
-          <folding>
-            <element signature="e#45#71#0#PHP" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -889,6 +852,34 @@
           <caret line="59" column="21" lean-forward="false" selection-start-line="59" selection-start-column="21" selection-end-line="59" selection-end-column="21" />
           <folding>
             <element signature="e#2948#3926#0#HTML" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/laravel/.env">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="437">
+          <caret line="23" column="0" lean-forward="false" selection-start-line="23" selection-start-column="0" selection-end-line="28" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/laravel/routes/web.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="76">
+          <caret line="91" column="81" lean-forward="false" selection-start-line="91" selection-start-column="81" selection-end-line="91" selection-end-column="81" />
+          <folding>
+            <element signature="e#7#390#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/laravel/app/Http/Controllers/User/UserController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="291">
+          <caret line="848" column="0" lean-forward="false" selection-start-line="848" selection-start-column="0" selection-end-line="848" selection-end-column="0" />
+          <folding>
+            <element signature="e#45#71#0#PHP" expanded="true" />
           </folding>
         </state>
       </provider>
