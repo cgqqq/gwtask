@@ -13,7 +13,7 @@
                     </div>
                 @endif
 
-                <form class="form-horizontal reset_form" {{--method="POST" action="{{ url('mail/email')}}"--}} style="margin-top: 100px;">
+                <form class="form-horizontal reset_form" style="margin-top: 100px;">
                     {{ csrf_field() }}
 
                     <div class="form-group{{ $errors->has('user_password') ? ' has-error' : '' }}">
@@ -56,22 +56,23 @@
         var pwd2 = document.getElementById("password-confirm").value;
         if(pwd1 != pwd2) {
             layui.use('layer', function(){
-                layer.msg('The two passwords you have entered are inconsistent !');
-
+                layer.msg('The two passwords ' +
+                    'you have entered are inconsistent !');
+                document.getElementById("submit").disabled = true;
             });
         }
         else{
-            document.getElementById("submit").disabled = true;
+            document.getElementById("submit").disabled = false;
         }
     }
     $(function(){
         layui.use('layer', function(){
-            $('#reset_form').on('click','#submit',function(event){
+            $('.reset_form').on('click','#submit',function(event){
                 event.preventDefault();
                 var id = $(this).siblings("[name='user_id']").val();
                 var password=$('#password-confirm').val();
                 $.ajax({
-                    url: "{{ url('team/createTeamUploading') }}",
+                    url: "{{ url('mail/resetPassword') }}",
                     type: 'post',
                     dataType: 'json',
                     data: {'user_id':id,"password":password,"_token":"{{csrf_token()}}"}

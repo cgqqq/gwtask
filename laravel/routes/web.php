@@ -23,9 +23,7 @@ Route::post('user/login','User\UserController@login');
 //注册路由
 Route::group(['prefix'=>'register'],function(){
 	//显示注册页面
-	Route::get('display',function(){
-		return view('Index/register');
-	});
+	Route::any('display','Controller@display');
 	//执行注册动作
 	Route::post('add','User\UserController@add');
 });
@@ -92,6 +90,8 @@ Route::group(['middleware'=>'auth','namespace'=>'User','prefix'=>'user'],functio
     Route::get('displayOthersInfoResourceSharings','UserController@displayOthersInfoResourceSharings');
 
     Route::get('displayOthersInfoTasks','UserController@displayOthersInfoTasks');
+
+    Route::any('checkEmail','UserController@checkEmail');
 
 });
 //团队相关路由

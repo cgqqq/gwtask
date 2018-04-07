@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
-
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -63,8 +63,9 @@ class ForgotPasswordController extends Controller
             $map=[
               'user_id'=>$user_id
             ];
+            $password=password_hash($request->input('password'), PASSWORD_DEFAULT);
             $update_data=[
-                'user_password'=>$request->input('password')
+                'user_password'=>$password
             ];
             try {
                 //开始事务

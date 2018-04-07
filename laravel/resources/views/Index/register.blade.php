@@ -41,12 +41,13 @@
                         </div>
                     </div>
 
-                    <div class="form-group{{ $errors->has('user_email') ? ' has-error' : '' }}">
+                    <div class="form-group{{ $errors->has('user_email') ? ' has-error' : '' }}" >
                         <label for="user_email" class="col-md-4 control-label">E-mail Address</label>
 
-                        <div class="col-md-6">
-                            <input id="user_email" type="email" class="form-control" name="user_email" value="{{ old('user_email') }}" required >
-
+                        <div class="col-md-6" id="emial_box" style="display: inline-flex" >
+                            <input id="user_email" type="email" class="form-control" name="user_email" value="{{ old('user_email') }}" required onblur="checkEmail()">
+                            <span id='wrong' style="float: left;margin: 5px;display: none"><img src="{{URL::asset('/images/wrong.png')}}"></span>
+                            <span id='correct' style="float: left;margin: 5px;display: none"><img src="{{URL::asset('/images/correct.png')}}"></span>
                             @if ($errors->has('user_email'))
                                 <span class="help-block">
                                         <strong>{{ $errors->first('user_email') }}</strong>
@@ -119,12 +120,13 @@
         var pwd2 = document.getElementById("password-confirm").value;
         if(pwd1 != pwd2) {
             layui.use('layer', function(){
-                layer.msg('The two passwords you have entered are inconsistent !');
-
+                layer.msg('The two passwords ' +
+                    'you have entered are inconsistent !');
+                document.getElementById("submit").disabled = true;
             });
         }
         else{
-            document.getElementById("submit").disabled = true;
+            document.getElementById("submit").disabled = false;
         }
     }
     var send=document.getElementById("submit");
@@ -135,4 +137,37 @@
             return false;
         }
     }
+    function checkEmail(){
+        layui.use('layer', function(){
+            var email = $('#user_email').val();
+            var flag='1';
+            $.ajax({
+                url: "{{ url('register/display') }}",
+                type: 'post',
+                dataType: 'json',
+                data: {"email": email,'flag':flag, "_token": "{{csrf_token()}}"}
+            })
+                .done(function (data) {
+                    var c = document.getElementById('correct');
+                    var w = document.getElementById('wrong');
+                    if (data.msg == '1') {
+                        layer.msg("This email address is available !");
+                        document.getElementById("submit").disabled = false;
+                        w.style.display = 'none';
+                        c.style.display = 'block';
+                    } else {
+                        layer.msg(data.msg);
+                        document.getElementById("submit").disabled = true;
+                        c.style.display = 'none';
+                        w.style.display = 'block';
+                    }
+
+                })
+                .fail(function () {
+                    layer.msg("Busy Network,try again later!");
+                })
+                .always(function () {
+                    console.log("complete");
+                });
+        });    }
 </script>

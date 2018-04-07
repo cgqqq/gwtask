@@ -1274,3 +1274,8 @@ span.badge2.new:after {
 .modal .modal-close {
 	cursor: pointer;
 }
+#error{
+	background-color: #D50000;
+	opacity: 0.5;
+}
+

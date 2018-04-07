@@ -144,4 +144,21 @@ class Controller extends BaseController
             return view('Home/home',['teamUpdatings'=>$teamUpdatings]);
         }
     }
+    public function display(Request $request,User $user){
+        if(empty($request->input('flag'))){
+            return view('Index/register');
+        }
+        else {
+            $email = $request->input('email');
+            $result = $user->where(['user_email' => $email])->get()->toArray();
+            if($result!=null){
+                return response()->json(['msg'=>'The email address has been registered !']);
+            }
+            else{
+                 return response()->json(['msg'=>'1']);
+            }
+        }
+
+
+    }
 }
