@@ -3,15 +3,15 @@
 @section('icon')
 @stop
 @section('content')
-    @unless(empty($msg))
+    @unless(empty($res))
+        <input type="hidden" value="{{$res}}" id="msg">
         <script>
             window.onload = function(){
                 layui.use('layer', function(){
-                    @if($msg=='1')
-                   layer.msg('Email has been sent successfully!');
-                   @else
-                   layer.msg('Please input the email address which you have signed up with!');
-                   @endif
+                    var msg=$('#msg').val();
+                    if(msg=='1'){
+                        layer.msg('Email has been sent successfully!');
+                    }
                 });
             }
         </script>
@@ -33,7 +33,13 @@
                         <label for="email" class="col-md-4 control-label">E-Mail Address</label>
 
                         <div class="col-md-6">
-                            <input id="email" type="email" class="form-control" name="email_address" value="{{ old('email') }}" required>
+                            <input id="email" type="email" class="form-control" name="email_address" value="{{ old('email') }}" required >
+
+                            @unless(empty($res))
+                                @unless($res=='1')
+                            <span style="font-size: 12px;color: #b9151b">Please input the email address which you has signed up with!</span>
+                                @endunless
+                            @endunless
                             @if ($errors->has('email'))
                                 <span class="help-block">
                                         <strong>{{ $errors->first('email') }}</strong>
@@ -53,7 +59,4 @@
             </div>
         </div>
     </div>
-
-
-
 @endsection

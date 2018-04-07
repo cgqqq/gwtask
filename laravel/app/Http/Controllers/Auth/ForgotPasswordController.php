@@ -39,7 +39,8 @@ class ForgotPasswordController extends Controller
     public function send(Request $request,User $user)
     {
         $email=$request->input(['email_address']);
-        if($user->where(['user_email'=>$email])){
+        $res=$user->where(['user_email'=>$email])->get()->toarray();
+        if($res!=null){
             $user_name=$user->where(['user_email'=>$email])->value('user_name');
             $user_id=$user->where(['user_email'=>$email])->value('user_id');
             $data = ['email'=>$email, 'name'=>'DINO', 'user_name'=>$user_name,'user_id'=>$user_id];
@@ -47,11 +48,10 @@ class ForgotPasswordController extends Controller
             {
                 $message->to($data['email'], $data['name'])->subject('DINO');
             });
-            return view('auth/passwords/email',['msg'=>"1"]);
+            return view('auth/passwords/email',['res'=>"1"]);
         }
-        else{
-            return view('auth/passwords/email',['msg'=>"0"]);
-        }
+
+        return view('auth/passwords/email',['res'=>"2"]);
 
     }
     public function resetPassword(Request $request,User $user){
