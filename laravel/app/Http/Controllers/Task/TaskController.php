@@ -159,7 +159,7 @@ class TaskController extends Controller
         return view('Task/displayAll',['tasks'=>$pageout,'paged'=>$paged]);
     }
     //显示子任务分配界面
-    public function displayAllocateSubTask(Request $request,Team $team,Task $task,$task_id,$team_id){
+    public function displayAllocateSubTask(Request $request,Team $team,Task $task,$task_id,$team_id,Membership $membership,User $user){
     	$teamInfo = $team->get(['team_id'=>$team_id])->toArray();
     	$team_name = $teamInfo[0]['team_name'];
     	$taskInfo = $task->get(['task_id'=>$task_id])->toArray();
@@ -171,7 +171,14 @@ class TaskController extends Controller
     		'task_id'=>$task_id,
     		'team_id'=>$team_id
     	];
-    	return view('Task/displayAllocateSubTask',$return_data);
+        $teamMates=$membership->where(['team_id'=>$team_id])->get()->toArray();
+        foreach ($teamMates as &$teamMate){
+            $teamMate['member_name']=$user->where(['user_id'=>$teamMate['member_id']])->value('user_name');
+            $teamMate['member_profile']=$user->where(['user_id'=>$teamMate['member_id']])->value('user_profile');
+            $teamMate['choose']=false;
+
+        }
+        return view('Task/displayAllocateSubTask',['return_data'=>$return_data,'teamMates'=>$teamMates]);
 
     }
     public function createTransaction(TaskTransaction $taskTransaction,Request $request,TeamUploading $teamUploading,Task $task){

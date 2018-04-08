@@ -153,7 +153,7 @@ Route::group(['middleware'=>'auth','namespace'=>'Task','prefix'=>'task'],functio
 
     Route::get('getTeamUsers','TaskController@getTeamUsers');
 
-    Route::post('allocateSub','TaskController@allocateSub');
+    Route::any('allocateSub','TaskController@allocateSub');
 });
 
 Auth::routes();

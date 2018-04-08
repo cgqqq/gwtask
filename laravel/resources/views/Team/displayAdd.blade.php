@@ -22,6 +22,7 @@
 							icon:data.icon,
 							time:2500
 						});
+                        window.location.href="{{url('team/displayMineCre/default')}}";
 
 	                })
 					.fail(function() {

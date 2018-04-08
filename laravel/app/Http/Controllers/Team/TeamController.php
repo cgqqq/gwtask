@@ -44,7 +44,7 @@ class TeamController extends Controller
             'updater_id'=>session('user_id'),
             'time'=>strtotime(date("Y-m-d H:i:s")),
             'type'=>'cTeam',
-            'content'=>'Hey!I have created a team named :'+$request->input('team_name')+'! Come over and check out details !',
+            'content'=>'Hey!I have created a team named : '.$request->input('team_name').' ! Come over and check out details !',
             'resource'=>$team_id
         ];
         //加入用户个人动态

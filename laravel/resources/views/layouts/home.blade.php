@@ -15,7 +15,7 @@
     <link href="{{ asset('css/style.css') }}" rel="stylesheet" type="text/css" media="all" >
     <link href="{{ asset('css/bootstrap.css') }}" rel="stylesheet" type="text/css" media="all" >
     <script src="{{ asset('js/jquery-3.2.1.min.js') }}" type="text/javascript"></script>
-    <!-- <script src="{{ asset('js/') }}" type="text/javascript"></script> -->
+<!-- <script src="{{ asset('js/') }}" type="text/javascript"></script> -->
     <script src="{{ asset('layui.js') }}" charset="utf-8"></script>
     <script type="text/javascript" src="{{ asset('js/bootstrap.min.js') }}"></script>
 
@@ -46,7 +46,7 @@
                         @if(session('news'))
                             <li><a href="{{ url('user/displayInfo') }}" class="center_icon2"> </a></li>
                         @else
-                        <li><a href="{{ url('user/displayInfo') }}" class="center_icon"> </a></li>
+                            <li><a href="{{ url('user/displayInfo') }}" class="center_icon"> </a></li>
                         @endif
                         <li><a href="javascript:void(0)" class="logout_icon"> </a></li>
 
@@ -57,14 +57,14 @@
             {{--网页LOGO--}}
             <div class="logo" style="margin-bottom: 0;margin-left:420px;">
 
-            @if (session('user_name')==null)
+                @if (session('user_name')==null)
 
-                <a href="{{ url('/') }}" style="font-weight: 900; "><img src="{{URL::asset('/images/logo.png')}}" alt=" " >DINO</a>
+                    <a href="{{ url('/') }}" style="font-weight: 900; "><img src="{{URL::asset('/images/logo.png')}}" alt=" " >DINO</a>
 
-            @else
-                <a href="{{ url('home') }}" style="font-weight: 900; "><img src="{{URL::asset('/images/logo.png')}}" alt=" " >DINO</a>
+                @else
+                    <a href="{{ url('home') }}" style="font-weight: 900; "><img src="{{URL::asset('/images/logo.png')}}" alt=" " >DINO</a>
 
-            @endif
+                @endif
             </div>
 
             <div class="main-panel2" style="display:flex;min-height: 630px;height:auto;width: 100%;padding-left:0;background-color: transparent;">
@@ -72,7 +72,7 @@
                 <ul class="layui-nav"  style="width: 100%;height: 100%;background-color:#34bf49;">
                     <li class="layui-nav-item"><a href="{{url('home')}}">Home</a></li>
                     <li class="layui-nav-item">
-                        <a href="#">Teams</a>
+                        <a href="{{url('team/displayMine/default')}}">Teams</a>
                         <dl class="layui-nav-child">
                             <dd><a href="{{url('team/displayMine/default')}}">Teams I Am In</a></dd>
                             <dd><a href="{{url('team/displayMineCre/default')}}">Teams I Created</a></dd>
@@ -96,34 +96,33 @@
 
                     <div class="search_input2" style="width: 450px;float: right;margin-top: 15px">
 
-                     @if(empty($_COOKIE['flag']) or $_COOKIE['flag']==1)
+                        @if(empty($_COOKIE['flag']) or $_COOKIE['flag']==1)
                             <button type="button" id="search_user" class="search_btn">
                             </button>
-                        <form style="background-color: #34bf49;border-radius:40px;margin-right: 0;" method="post" action="{{url('user/displaySearchResult')}}">
-                            {{ csrf_field() }}
+                            <form style="background-color: #34bf49;border-radius:40px;margin-right: 0;" method="post" action="{{url('user/displaySearchResult')}}">
+                                {{ csrf_field() }}
 
-                           <input name='key' id="key" type="text" placeholder="Search For User With ID......" id="placeholder" >
+                                <input name='key' id="key" type="text" placeholder="Search For User With ID......" id="placeholder" >
 
 
-                        </form>
+                            </form>
                         @else
                             <button type="button" id="search_team" class="search_btn">
                             </button>
-                        <form style="background-color: #34bf49;border-radius:40px;margin-right: 0;" method="post" action="{{url('team/displaySearchResult')}}">
-                            {{ csrf_field() }}
-                           <input name='key' id="key" type="text" placeholder="Search For Team With Team Name......" id="placeholder" >
+                            <form style="background-color: #34bf49;border-radius:40px;margin-right: 0;" method="post" action="{{url('team/displaySearchResult')}}">
+                                {{ csrf_field() }}
+                                <input name='key' id="key" type="text" placeholder="Search For Team With Team Name......" id="placeholder" >
 
 
-                        </form>
+                            </form>
 
                         @endif
                     </div>
 
                     {{--主要内容区域--}}
-                    <div style="background-color:#fcfcfc;width:1100px;min-height:900px;height:auto;margin-left: 0px;margin-right: 0px; padding-top:35px;padding-left:30px;  " class="shadow">
+                    <div style="background-color:#fcfcfc;width:1100px;min-height:900px;height:auto;margin-left: 0px;margin-right: 0px; padding-top:35px;padding-left:30px;  " class="shadow box">
                         @section('content')
 
-                          首页未设计
                         @show
                     </div>
                 </ul>
@@ -161,20 +160,20 @@
     $(function(){
         layui.use('layer',function(){
             $('.icons').on('click','.logout_icon',function(){
-                    //配置一个透明的询问框
-                    layer.msg('<span style="font-weight: 700">Are you sure to log out ?</span>', {
-                        anim:6
-                        ,time: 0 //不自动关闭
-                        ,btn: ['yes', 'no']
-                        ,skin:'a-class'
-                        ,btnAlign: 'c'
-                        ,btn1:function(index,layero){
-                           window.location.href="{{url('user/logout')}}";
-                        }
-                        ,btn2:function(index){
-                            layer.close(index);
-                        }
-                    });
+                //配置一个透明的询问框
+                layer.msg('<span style="font-weight: 700">Are you sure to log out ?</span>', {
+                    anim:6
+                    ,time: 0 //不自动关闭
+                    ,btn: ['yes', 'no']
+                    ,skin:'a-class'
+                    ,btnAlign: 'c'
+                    ,btn1:function(index,layero){
+                        window.location.href="{{url('user/logout')}}";
+                    }
+                    ,btn2:function(index){
+                        layer.close(index);
+                    }
+                });
 
 
             });
