@@ -159,7 +159,7 @@ class TaskController extends Controller
         return view('Task/displayAll',['tasks'=>$pageout,'paged'=>$paged]);
     }
     //显示子任务分配界面
-    public function displayAllocateSubTask(Request $request,Team $team,Task $task,$task_id,$team_id,Membership $membership,User $user){
+    public function displayAllocateSubTask(Request $request,Team $team,Task $task,$task_id,$team_id){
     	$teamInfo = $team->get(['team_id'=>$team_id])->toArray();
     	$team_name = $teamInfo[0]['team_name'];
     	$taskInfo = $task->get(['task_id'=>$task_id])->toArray();
@@ -171,14 +171,8 @@ class TaskController extends Controller
     		'task_id'=>$task_id,
     		'team_id'=>$team_id
     	];
-        $teamMates=$membership->where(['team_id'=>$team_id])->get()->toArray();
-        foreach ($teamMates as &$teamMate){
-            $teamMate['member_name']=$user->where(['user_id'=>$teamMate['member_id']])->value('user_name');
-            $teamMate['member_profile']=$user->where(['user_id'=>$teamMate['member_id']])->value('user_profile');
-            $teamMate['choose']=false;
 
-        }
-        return view('Task/displayAllocateSubTask',['return_data'=>$return_data,'teamMates'=>$teamMates]);
+        return view('Task/displayAllocateSubTask',['return_data'=>$return_data]);
 
     }
     public function createTransaction(TaskTransaction $taskTransaction,Request $request,TeamUploading $teamUploading,Task $task){
@@ -283,22 +277,44 @@ class TaskController extends Controller
         return response()->json(['team_user_list'=>$team_user_list]);
     }
     //分配指定任务的子任务名、子任务描述及子任务对应组员
-    public function allocateSub(Request $request,Stask $stask,Stask_allocation $stask_allocation){
+    public function allocateSub(Request $request,Stask $stask,Stask_allocation $stask_allocation,TaskTransaction $taskTransaction,TeamUploading $teamUploading,Task $task){
     	$sub_task_all = $request->input('sub_task_all');
     	$isSuccessfull = true;
     	foreach($sub_task_all as $key ){
-    		$flag = true ; 
+    		$flag = true ;
+    		$stask_id=md5(uniqid(mt_rand(),true));
     		$map = [
-    			'stask_id'=>md5(uniqid(mt_rand(),true)),
+    			'stask_id'=>$stask_id,
     			'stask_name'=>$key['sub_task_name'],
     			'stask_description'=>$key['sub_task_descri'],
     			'task_id'=>$request->input('task_id'),
     			'status'=>'0'
     		];
+            /*更新transaction列表*/
+            $map_trans = [
+                'tran_id'=>md5(uniqid(mt_rand(),true)),
+                'trans_brief'=>"Created sub task : ".$key['sub_task_name'],
+                'trans_description'=>$key['sub_task_descri'],
+                'task_id'=>$request->input('task_id'),
+                'time'=>strtotime(date("Y-m-d H:i:s")),
+                'trans_Resource_path'=>$stask_id,
+                'trans_Resource_intro'=>'stask'
+            ];
+            $task_info=$task->where(['task_id'=>$request->input('task_id')])->get()->toArray();
+            $map_uploading = [
+                'id'=>md5(uniqid(mt_rand(),true)),
+                'team_id'=>$task_info[0]['task_team_id'],
+                'uploader_id'=>session('user_id'),
+                'time'=>strtotime(date("Y-m-d H:i:s")),
+                'content'=>'Hey guys,I have updated progress of task :'.$task_info[0]['task_name']." ! Come over and check out the detail !",
+                'resource'=>null,
+            ];
     		try {
 	            //开始事务
 	            DB::beginTransaction();
 	            $stask->add($map);
+	            $taskTransaction->add($map_trans);
+	            $teamUploading->add($map_uploading);
 	            //提交事务
 	            DB::commit();	            
 	        } catch(QueryException $ex) {

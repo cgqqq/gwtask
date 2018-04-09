@@ -45,7 +45,7 @@
 			//新增子任务
             $('.addSTask').on('click',function(){
                 var new_div=$('#0').clone();
-                var id=$('.stask_form_clone').attr("id",'1');
+                /*$('#0').attr("id",'1');*/
                 $('#1').className='stark_form';
                 $('#stask_box').append(new_div);
             });
@@ -112,9 +112,9 @@
 							' ><img src='+
                             delete_img+
                             ' ></i>' +
+                            '<input type="hidden" name="" class="selected_user_id" value="'+allocate_user[i].selected_user_id+'">'+
                             '</div>';
-						parent_user_box.append('<input type="hidden" name="" class="selected_user_id" value="'+allocate_user[i].selected_user_id+'">');
-						parent_user_box.append(new_chip);
+                        parent_user_box.append(new_chip);
 					}					
 				});
 			});
@@ -227,9 +227,9 @@
 </fieldset>
 
 <tr class="sub-task-items">--}}
-<p style="opacity: 0">{{$i=0}}</p>
 <div style="width: 1030px;height: 150px;">
-	<p style="font-size: 40px;font-family: 'Source Sans Pro', sans-serif;font-weight: 800;color: #0C0C0C;padding: 10px;width: 100%">{{$return_data['team_name']}}</p>
+	<p style="font-size: 40px;font-family: 'Source Sans Pro', sans-serif;font-weight: 800;color: #0C0C0C;padding: 10px;width: 100%">{{$return_data['team_name']}}{{$return_data['task_name']}}</p>
+	<p style="font-size: 25px;font-family: 'Source Sans Pro', sans-serif;font-weight: 800;color: #3F3F3F;padding: 10px;width: 100%">Task Name : {{$return_data['task_name']}}</p>
 	<div style="float: right;margin-right: 30px;">
 		<button type="submit" class="layui-btn shadow addSTask" style="border: 2px solid #0C0C0C;color: #0C0C0C;background-color: #fff200" >
 			+ Sub Task
@@ -281,8 +281,10 @@
 		</button>
 	</div>
 </div>
+{{$i=0}}
 <div style="display: none">
-	<div style="width: 1030px;height:300px;float: left;margin-top: 20px;" class="stask_form_clone" id="0" >
+	<div style="width: 1030px;height:300px;float: left;margin-top: 20px;" class="stask_form_clone" id="{{$i}}" >
+		{{$i=$i+1}}
 		<div style="width:900px;height: 300px; margin-left: auto;margin-right: auto;border: 3px solid black;" >
 			<div style="width: 850px;height:180px;float: left;margin-top: 20px">
 				<div class="form-group" style="margin-bottom: 30px;">

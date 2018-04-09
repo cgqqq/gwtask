@@ -29,21 +29,27 @@
                                     <h3 class="layui-timeline-title">{{ date('Y-m-d H:i:s',$tran['time']) }}</h3>
                                     <p> <span style="color: #0C0C0C;font-size: 15px;font-weight: 800;">{{ $tran['trans_brief'] }}</span><br><br>
 
-                                        <span style="color: #0C0C0C;font-size: 13px;">Task Description :</span>
+                                        <span style="color: #0C0C0C;font-size: 13px;">Detailed Information :</span>
                                         {{ $tran['trans_description'] }}
                                     </p>
-                                    @unless($tran['trans_Resource_path']==null)
+                                    @if($tran['trans_Resource_intro']=='stask')
+                                        <button type="submit" class="layui-btn choose" style="border: 2px solid #0C0C0C;color: #0C0C0C;background-color: #fcfcfc;margin-bottom: 20px" onclick='javascrtpt:window.location.href="{{url('team/displayOneAuthStask?team_id='.$team_info['team_id'].'&stask_id='.$tran['trans_Resource_path'])}}"' >
+                                           Sub Task Detail
+                                        </button>
+                                    @else
+                                        @unless($tran['trans_Resource_path']==null)
                                         <span style="color: #0C0C0C;font-size: 13px;">Download Resource : </span>
                                         <a href={{URL::asset($tran['trans_Resource_path'])}} download={{$tran['trans_Resource_path']}}>
                                             <img src="{{URL::asset('/images/download.png')}}" >
                                         </a><br>
                                     @endunless
-                                    @unless($tran['trans_Resource_intro']==null)
+                                        @unless($tran['trans_Resource_intro']==null)
                                         <p>
                                             <span style="color: #0C0C0C;font-size: 13px;">Resource Description :</span>
                                             {{ $tran['trans_Resource_intro'] }}
                                         </p>
                                     @endunless
+                                    @endif
                                     @unless($team_info['team_funder_id']!=session('user_id'))
                                     <p>
                                         <img src="{{URL::asset('/images/delete2.png')}}" class="delete_tran">
@@ -114,7 +120,6 @@
                                             </div>
                                             <input type="hidden" name="task_id" value="{{$task['task_id']}}">
                                             <input type="hidden" name="flag" value='1' id="flag">
-                                            <input type="hidden" name="code" value='{{session('code')}}'>
                                             <a class="newA" onclick="isHidden('{{$task['task_id']+$task['task_id']}}')" style="color: #0C0C0C;float:left;display: block;width: 900px;margin-top: 30px" id="a">I Wanna Upload Resource. </a>
                                         </form>
                                     </div>
@@ -152,9 +157,6 @@
                     })
                         .done(function(data) {
                             layer.msg(data.msg);
-
-                            location.reload();
-
                         })
                         .fail(function(data) {
                             layer.msg(data.msg);
@@ -162,8 +164,9 @@
                         .always(function() {
                             console.log("complete");
                         });
+                    event.preventDefault();
+                    $(this).parent().parent().parent().remove();
                 });
-
             });
         });
     </script>

@@ -17,6 +17,7 @@ use App\Models\Membership;
 use App\Models\TeamUploading;
 use App\Models\UserUpdating;
 use App\Models\Task;
+use App\Models\Stask;
 use DB;
 
 use App\Http\Controllers\Controller;
@@ -665,7 +666,7 @@ class TeamController extends Controller
         else{
             $create_trans=new TaskController();
             $create_trans->createTransaction($taskTransaction,$request,$teamUploading,$task);
-            session()->remove('code');
+
         }
 
         //获取该团队信息
@@ -863,6 +864,87 @@ class TeamController extends Controller
             return view('Team/displayOneAuthResources');
         }
 
+    }
+    public function displayOneAuthStask(Request $request,Task $task,Team $team,User $user,Membership $membership,Friend $friend,Stask $stask,TeamUploading $teamUploading){
+        //获取该团队信息
+        $team_id=$request->input('team_id');
+        $stask_id=$request->input('stask_id');
+        $teamInfo = $team->get(['team_id'=>$team_id])->toarray();
+        //获取该团队创建者信息
+        $funderName = $user->where(['user_id'=>$teamInfo[0]['team_funder_id']])->value('user_name');
+        $funderProfile = $user->where(['user_id'=>$teamInfo[0]['team_funder_id']])->value('user_profile');
+        //团队信息加入该团队创建者信息
+        $teamInfo[0] = array_merge($teamInfo[0],['user_name'=>$funderName]);
+        $teamInfo[0] = array_merge($teamInfo[0],['user_profile'=>$funderProfile]);
+        //获取组员列表
+        $teamMember = $membership->get(['team_id'=>$teamInfo[0]['team_id']])->toarray();
+        // pd($teamMember);
+        //该团队有组员，搜索成员信息
+        $data['belong2team']=false;/*该属性用于判断当前用户是否属于该团队，false代表不属于该团队*/
+        if(!empty($teamMember)){
+            //对组员列表添加每个组员详细信息
+
+            foreach ($teamMember as $key => &$value) {
+                //获取单个组员信息
+                $userInfo = $user->get(['user_id'=>$value['member_id']])->toArray();
+                // pd($userInfo[0]);
+                //组员列表添加该组员信息
+                $value = array_merge($value,$userInfo[0]);
+
+                /*判断用户是否属于该团队*/
+                if($value['member_id']==session('user_id')){
+                    $data['belong2team']=true;
+                }
+            }
+        }
+        //页码
+        $page = $request->input('page')?$request->input('page'):1;
+
+        //总数
+        $total = count($teamMember);/*算上一个add icon*/
+        //每页记录数
+        $pageSize = 9;
+        //实例化分页类
+        $paged = new LengthAwarePaginator($teamMember,$total,$pageSize);
+        //分页url
+        $paged = $paged->setPath(route('displayOneAuthStask',$stask_id));
+        //要显示页的内容
+        $pageOut = array_slice($teamMember,($page-1)*$pageSize,$pageSize);
+        /*判断是否为最后一页*/
+        if($page*$pageSize>=$total){
+            $data['finalPage']=true;
+        }
+        else{
+            $data['finalPage']=false;
+        }
+
+        /*用户的关注数量 与被关注数量*/
+        $map1=[
+            'followed_id'=>session('user_id')
+        ];
+        $map2 = [
+            'follow_id'=>session('user_id')
+        ];
+
+        $data['followNum']=count($friend->get($map2)->toArray());
+        $data['followerNum']=count($friend->get($map1)->toArray());
+        //获取该团队动态信息
+        $uploadings=$teamUploading->where(['team_id'=>$teamInfo[0]['team_id']])->orderBy('time','desc')->get()->toArray();
+        //添加上传人的头像信息和姓名
+        foreach ($uploadings as &$key){
+            $uploader_info=$user->where(['user_id'=>$key['uploader_id']])->get()->toArray();
+            $key['uploader_profile']=$uploader_info[0]['user_profile'];
+            $key['uploader_name']=$uploader_info[0]['user_name'];
+        }
+        if(session('user_id')==$teamInfo[0]['team_funder_id']){
+            $AuthOrNot='displayOneAuth';
+        }
+        else{
+            $AuthOrNot='displayOne';
+        }
+        /*获取子任务信息*/
+        $stask_info=$stask->where(['stask_id'=>$stask_id])->get()->toArray();
+        return view('Team/displayOneAuthStask',['stask_info'=>$stask_info[0],'team_info'=>$teamInfo[0],'pageOut'=>$pageOut,'paged'=>$paged,'data'=>$data,'uploadings'=>$uploadings,'AuthOrNot'=>$AuthOrNot]);
     }
 
 }
