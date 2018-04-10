@@ -109,7 +109,7 @@
 		</div>
 	</div>
 	<div class="form-group" style="margin-bottom: 40px;">
-		<label for="task_description" class="col-md-4 control-label layui-form-label">开始日期</label>
+		<label for="task_description" class="col-md-4 control-label">Start Date</label>
 
 		<div class="col-md-6"  id="a_input">
 			<!-- <textarea rows="4" cols="50" class="form-control" id="task_description"></textarea> -->
@@ -117,7 +117,7 @@
 		</div>
 	</div>
 	<div class="form-group" style="margin-bottom: 40px;">
-		<label for="task_description" class="col-md-4 control-label layui-form-label">结束日期</label>
+		<label for="task_description" class="col-md-4 control-label">End Date</label>
 
 		<div class="col-md-6"  id="a_input">
 			<!-- <textarea rows="4" cols="50" class="form-control" id="task_description"></textarea> -->

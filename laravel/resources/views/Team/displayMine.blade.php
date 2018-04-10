@@ -79,9 +79,7 @@
 								</button>
 								<input type="hidden" name="team_id" value="{{ $team['team_id'] }}">
 								<ul class="dropdown-menu" role="menu" style="z-index: 9999">
-									<li><a href="#">Change Team Name</a></li>
 									<li><a href="{{url('team/displayOne',$team['team_name'])}}">Show teammates</a></li>
-									<li id="quit-team"><a href="#">Quit/Dismiss</a></li>
 									<li><a href="#">others</a></li>
 
 								</ul>
