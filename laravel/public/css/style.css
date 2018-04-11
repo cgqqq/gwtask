@@ -215,6 +215,47 @@ body .demo-class .layui-btn{
 	-o-transition:.5s all;
 	-ms-transition:.5s all;
 }
+
+.icons ul li a.comment_icon{
+	background:url(../images/comment.png) no-repeat 0px 0px;
+	display:block;
+	height: 32px;
+	width: 40px;
+	transition:.5s all;
+	-webkit-transition:.5s all;
+	-moz-transition:.5s all;
+	-o-transition:.5s all;
+	-ms-transition:.5s all;
+}
+.icons ul li a.comment_icon:hover{
+	background:url(../images/comment.png) no-repeat 0px -44px;
+	display:block;
+	transition:.5s all;
+	-webkit-transition:.5s all;
+	-moz-transition:.5s all;
+	-o-transition:.5s all;
+	-ms-transition:.5s all;
+}
+.icons ul li a.score_icon{
+	background:url(../images/score.png) no-repeat 0px -1px;
+	display:block;
+	height: 32px;
+	width: 40px;
+	transition:.5s all;
+	-webkit-transition:.5s all;
+	-moz-transition:.5s all;
+	-o-transition:.5s all;
+	-ms-transition:.5s all;
+}
+.icons ul li a.score_icon:hover{
+	background:url(../images/score.png) no-repeat 0px -38px;
+	display:block;
+	transition:.5s all;
+	-webkit-transition:.5s all;
+	-moz-transition:.5s all;
+	-o-transition:.5s all;
+	-ms-transition:.5s all;
+}
 .banner-info{
 	margin-top:18em;
 	text-align:center;
@@ -1236,6 +1277,7 @@ span.badge2.new:after {
 
 .newA a{
 	color: #0C0C0C;
+	text-decoration: none;
 }
 .newA a:hover{
 	text-decoration: none;

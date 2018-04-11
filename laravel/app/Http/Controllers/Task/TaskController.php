@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Task;
 
+use App\Models\Stask_submission;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Validation\Rule;
@@ -10,6 +11,7 @@ use App\Models\Team;
 use App\Models\User;
 use App\Models\Task;
 use App\Models\Stask;
+use App\Models\Stask_comment;
 use App\Models\Membership;
 Use App\Models\Stask_allocation;
 use App\Models\TaskTransaction;
@@ -280,7 +282,7 @@ class TaskController extends Controller
     public function allocateSub(Request $request,Stask $stask,Stask_allocation $stask_allocation,TaskTransaction $taskTransaction,TeamUploading $teamUploading,Task $task){
     	$sub_task_all = $request->input('sub_task_all');
     	$isSuccessfull = true;
-    	foreach($sub_task_all as $key ){
+    	foreach($sub_task_all as &$key ){
     		$flag = true ;
     		$stask_id=md5(uniqid(mt_rand(),true));
     		$map = [
@@ -309,12 +311,15 @@ class TaskController extends Controller
                 'content'=>'Hey guys,I have updated progress of task :'.$task_info[0]['task_name']." ! Come over and check out the detail !",
                 'resource'=>null,
             ];
+            $map_task=[ 'task_id'=>$request->input('task_id')];
+            $map_update_allocationStatus=['task_allocation_status'=>'1'];
     		try {
 	            //开始事务
 	            DB::beginTransaction();
 	            $stask->add($map);
 	            $taskTransaction->add($map_trans);
 	            $teamUploading->add($map_uploading);
+	            $task->edit($map_task,$map_update_allocationStatus);
 	            //提交事务
 	            DB::commit();	            
 	        } catch(QueryException $ex) {
@@ -323,7 +328,7 @@ class TaskController extends Controller
 	            $isSuccessfull = false ;
 	            breask;
 	        }
-	        foreach($key['sub_task_users'] as $key1){
+	        foreach($key['sub_task_users'] as &$key1){
 	        	$map1 = [
 	        		'a_id'=>md5(uniqid(mt_rand(),true)),
 	        		'stask_id'=>$map['stask_id'],
@@ -349,13 +354,62 @@ class TaskController extends Controller
     	}
     	if($isSuccessfull){
 			//返回前端添加成功结果
-            return response()->json(['msg' => 'Allocate Sub-task Successfully!']);
+            return response()->json(['msg' => 'Allocate Sub-task Successfully!','team_id'=>$map_uploading['team_id']]);
     	}else{
 			//返回前端添加失败结果
 	         return response()->json(['msg' => 'Failed To Allocate Sub-task!']);
     	}
     }
+    public function score(Request $request,Stask_submission $stask_submission,Stask $stask){
+        $stask_id=$request->input('stask_id');
+        $score=$request->input('score');
+        $map=['stask_id'=>$stask_id];
+        $map_score=['score'=>$score];
+        $map1=[
+            'stask_id'=>$stask_id
+        ];
+        $update=[
+            'status'=>$request->input('status')
+        ];
+        try {
+            //开始事务
+            DB::beginTransaction();
+           $stask_submission->edit($map,$map_score);
+            $stask->edit($map1,$update);
+            //提交事务
+            DB::commit();
+            return response()->json(['msg'=>'Score saved']);
+        } catch(QueryException $ex) {
+            //回滚事务
+            DB::rollback();
+            return response()->json(['msg'=>'Busy network,try again later!']);
+        }
+    }
+    public function comment(Request $request,Stask_comment $stask_comment,Stask $stask){
+        $stask_id=$request->input('stask_id');
+        $comment=$request->input('comment');
+        $map=[
+            'id'=>md5(uniqid(mt_rand(),true)),
+            'stask_id'=>$stask_id,
+            'commentator_id'=>session('user_id'),
+            'comment'=>$comment,
+            'time'=>strtotime(date("Y-m-d H:i:s"))
 
+        ];
+
+        try {
+            //开始事务
+            DB::beginTransaction();
+            $stask_comment->add($map);
+            //提交事务
+            DB::commit();
+            return response()->json(['msg'=>'Comment successfully']);
+        } catch(QueryException $ex) {
+            //回滚事务
+            DB::rollback();
+            return response()->json(['msg'=>'Busy network,try again later!']);
+        }
+    }
 
 }
 

@@ -6,6 +6,9 @@ use App\Http\Controllers\Task\TaskController;
 use App\Models\Invitation;
 use App\Models\App_join;
 use App\Models\Mail;
+use App\Models\Stask_allocation;
+use App\Models\Stask_comment;
+use App\Models\Stask_submission;
 use App\Models\TaskTransaction;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
@@ -741,8 +744,8 @@ class TeamController extends Controller
 
         $tasks=$task->where(['task_team_id'=>$team_id])->get()->toArray();
         foreach ($tasks as &$key ) {
-            $team_Info = $team->get(['team_id'=>$key['task_team_id']])->toArray();
-            array_push($key,$team_Info[0]['team_name']);
+            $teamInformation = $team->get(['team_id'=>$key['task_team_id']])->toArray();
+            array_push($key,$teamInformation[0]['team_name']);
             $userInfo = $user->get(['user_id'=>$key['task_manager_id']])->toArray();
             array_push($key,$userInfo[0]['user_name']);
             if($key['task_status']=='1'){
@@ -865,10 +868,100 @@ class TeamController extends Controller
         }
 
     }
-    public function displayOneAuthStask(Request $request,Task $task,Team $team,User $user,Membership $membership,Friend $friend,Stask $stask,TeamUploading $teamUploading){
+    public function displayOneAuthStask(Request $request,$team_id,User $user,Stask $stask,Stask_allocation $stask_allocation,Stask_submission $stask_submission,Team $team){
         //获取该团队信息
-        $team_id=$request->input('team_id');
+        $team_funder_id=$team->where(['team_id'=>$team_id])->value('team_funder_id');
         $stask_id=$request->input('stask_id');
+        $stask_info=$stask->where(['stask_id'=>$stask_id])->get()->toArray();
+        $stask_members=$stask_allocation->where(['stask_id'=>$stask_id])->get(['res_id'])->toArray();
+        foreach ($stask_members as &$stask_member){
+            $stask_member['res_name']=$user->where(['user_id'=>$stask_member['res_id']])->value('user_name');
+            $stask_member['res_profile']=$user->where(['user_id'=>$stask_member['res_id']])->value('user_profile');
+        }
+        if(empty($request->input('flag'))){
+            if($stask_info[0]['status']=='0'){
+                return view('Team/displayOneAuthStask',['stask_members'=>$stask_members,'stask_info'=>$stask_info[0]]);
+            }
+            else{
+                $file_path=$stask_submission->where(['stask_id'=>$request->input('stask_id')])->value('file');
+                return view('Team/displayOneAuthStask',['stask_members'=>$stask_members,'stask_info'=>$stask_info[0],'task_manager_id'=>$team_funder_id,'file_path'=>$file_path]);
+            }
+
+        }
+        else{
+            $file_path=$this->submitStask($request,$stask_submission,$stask,$stask_allocation,$user);
+            if($file_path==null){
+                $result=false;
+            }
+            else{$result=true;}
+            return view('Team/displayOneAuthStask',['stask_members'=>$stask_members,'stask_info'=>$stask_info[0],'isSubmitted'=>$result,'task_manager_id'=>$team_funder_id,'file_path'=>$file_path]);
+        }
+    }
+    public function submitStask(Request $request,Stask_submission $stask_submission,Stask $stask){
+        $request->validate([
+            'stask_file'=>'required'
+        ]);
+
+        $file = $request->stask_file;
+        // 判断文件是否上传成功
+        if ($request->hasFile('stask_file') && $file->isValid()) {
+
+            //资源存储文件夹
+            $destinatePath = 'uploads/resources';
+            //指定上传后的文件文件名
+            $file_name = time()."-".$file->getClientOriginalName();
+            //从上传临时位置转移到指定位置
+            $file->move($destinatePath, $file_name);
+            $file_path=$destinatePath.'/'.$file_name;
+        }
+        else{
+            $file_path=null;
+        }
+        $fileExist=$stask_submission->where(['stask_id'=>$request->input('stask_id')])->get()->toArray();
+        if(empty($fileExist)){
+
+            $map_submission=[
+                'id'=>md5(uniqid(mt_rand(),true)),
+                'stask_id'=>$request->input('stask_id'),
+                'time'=>strtotime(date("Y-m-d H:i:s")),
+                'file'=>$file_path
+            ];
+            $map=['stask_id'=>$request->input('stask_id')];
+            $map_update=['status'=>'1'];
+        }
+        else{
+            $map1=[
+                'stask_id'=>$request->input('stask_id')
+            ];
+            $map_file_update=[
+                'file'=>$file_path
+            ];
+        }
+        try {
+            //开始事务
+            DB::beginTransaction();
+            if(empty($fileExist)){
+            $stask_submission->add($map_submission);
+            $stask->edit($map,$map_update);}
+            else{
+                $stask_submission->edit($map1,$map_file_update);
+            }
+            //提交事务
+            DB::commit();
+            //返回前端添加成功结果
+
+        } catch(QueryException $ex) {
+            //回滚事务
+            DB::rollback();
+            //返回前端添加失败结果
+        }
+        return $file_path;
+    }
+    public function displayOneAuthStasks(Request $request,$team_id,Task $task,Team $team,User $user,Membership $membership,Friend $friend,TeamUploading $teamUploading,Stask_submission $stask_submission,Stask_allocation $stask_allocation,Stask $stask,Stask_comment $stask_comment){
+        if(!empty($request->input('flag'))){
+            $this->submitStask($request,$stask_submission,$stask,$stask_allocation,$user);
+        }
+        //获取该团队信息
         $teamInfo = $team->get(['team_id'=>$team_id])->toarray();
         //获取该团队创建者信息
         $funderName = $user->where(['user_id'=>$teamInfo[0]['team_funder_id']])->value('user_name');
@@ -907,7 +1000,7 @@ class TeamController extends Controller
         //实例化分页类
         $paged = new LengthAwarePaginator($teamMember,$total,$pageSize);
         //分页url
-        $paged = $paged->setPath(route('displayOneAuthStask',$stask_id));
+        $paged = $paged->setPath(route('displayOneTeam',['team_name'=>$teamInfo[0]['team_name']]));
         //要显示页的内容
         $pageOut = array_slice($teamMember,($page-1)*$pageSize,$pageSize);
         /*判断是否为最后一页*/
@@ -928,6 +1021,7 @@ class TeamController extends Controller
 
         $data['followNum']=count($friend->get($map2)->toArray());
         $data['followerNum']=count($friend->get($map1)->toArray());
+
         //获取该团队动态信息
         $uploadings=$teamUploading->where(['team_id'=>$teamInfo[0]['team_id']])->orderBy('time','desc')->get()->toArray();
         //添加上传人的头像信息和姓名
@@ -942,9 +1036,31 @@ class TeamController extends Controller
         else{
             $AuthOrNot='displayOne';
         }
-        /*获取子任务信息*/
-        $stask_info=$stask->where(['stask_id'=>$stask_id])->get()->toArray();
-        return view('Team/displayOneAuthStask',['stask_info'=>$stask_info[0],'team_info'=>$teamInfo[0],'pageOut'=>$pageOut,'paged'=>$paged,'data'=>$data,'uploadings'=>$uploadings,'AuthOrNot'=>$AuthOrNot]);
-    }
 
+        $tasks=$task->where(['task_team_id'=>$team_id,'task_allocation_status'=>'1'])->get()->toArray();
+        $i=0;
+        foreach ($tasks as &$aTask ) {
+            /*获取每个任务下的子任务*/
+            $tasks[$i]['stasks']=$stask->where(['task_id'=>$aTask['task_id']])->get()->toarray();
+            $stasks =& $tasks[$i]['stasks'];
+            $i = $i + 1;
+            foreach ($stasks as &$aStask) {
+                /*获取子任务的成员信息*/
+                $aStask['members'] = $stask_allocation->where(['stask_id' => $aStask['stask_id']])->get(['res_id'])->toarray();
+                foreach ($aStask['members'] as &$member){
+                    $member['res_profile']=$user->where(['user_id'=>$member['res_id']])->value('user_profile');
+                    $member['res_name']=$user->where(['user_id'=>$member['res_id']])->value('user_name');
+                }
+                if ($aStask['status'] != '0') {
+                    $aStask['infors'] = $stask_submission->where(['stask_id' => $aStask['stask_id']])->get()->toArray();
+                    $aStask['comments']=$stask_comment->where(['stask_id'=>$aStask['stask_id']])->orderBy('time','desc')->get()->toArray();
+                    foreach($aStask['comments'] as &$comment){
+                        $comment['commentator_profile']=$user->where(['user_id'=>$comment['commentator_id']])->value('user_profile');
+                    }
+                }
+            }
+        }
+
+        return view('Team/displayOneAuthStasks',['stasks'=>$tasks,'team_info'=>$teamInfo[0],'pageOut'=>$pageOut,'paged'=>$paged,'data'=>$data,'uploadings'=>$uploadings,'AuthOrNot'=>$AuthOrNot]);
+    }
 }

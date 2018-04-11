@@ -52,7 +52,7 @@
                                         @else
                                             <img src="{{URL::asset('/uploads/user_profile/'.$friendsUpdating['user_profile'])}}" class="layui-circle" width="65px" height="65px" style="margin-left: 15px;" onclick='javascrtpt:window.location.href="{{url('user/displayOthersInfo/'.$friendsUpdating['updater_id'])}}"' >
                                         @endif
-                                        <div style="float:right;width: 90%;font-weight: 800;font-size: 18px;word-wrap: break-word;line-height: 40px;display: table;padding-right: 40px" >
+                                        <div style="float:right;width: 90%;font-weight: 800;font-size: 18px;word-wrap: break-word;line-height: 40px;display: table;padding-right: 40px;color: black" >
                                             {{$friendsUpdating['user_name']}} : {{$friendsUpdating['content']}}
                                         </div>
                                         <div style="width:760px;float: left ;font-size: 12px;color:#0C0C0C;line-height: 10px" >

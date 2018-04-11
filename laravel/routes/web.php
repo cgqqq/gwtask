@@ -136,7 +136,9 @@ Route::group(['middleware'=>'auth','namespace'=>'Team','prefix'=>'team'],functio
 
     Route::any('displayOneAuthResources/{team_id}','TeamController@displayOneAuthResources')->name('displayOneAuthResources');
 
-    Route::get('displayOneAuthStask','TeamController@displayOneAuthStask')->name('displayOneAuthStask');
+    Route::any('displayOneAuthTasks/displayOneAuthStask/{team_id}','TeamController@displayOneAuthStask')->name('displayOneAuthStask');
+
+    Route::any('displayAllocateSubTask/displayOneAuthStasks/{team_id}','TeamController@displayOneAuthStasks')->name('displayOneAuthStasks');
 });
 //任务路由
 Route::group(['middleware'=>'auth','namespace'=>'Task','prefix'=>'task'],function(){
@@ -155,6 +157,10 @@ Route::group(['middleware'=>'auth','namespace'=>'Task','prefix'=>'task'],functio
     Route::get('getTeamUsers','TaskController@getTeamUsers');
 
     Route::post('allocateSub','TaskController@allocateSub');
+
+    Route::any('score','TaskController@score');
+
+    Route::any('comment','TaskController@comment');
 });
 
 Auth::routes();

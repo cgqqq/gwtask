@@ -33,9 +33,11 @@
                                         {{ $tran['trans_description'] }}
                                     </p>
                                     @if($tran['trans_Resource_intro']=='stask')
-                                        <button type="submit" class="layui-btn choose" style="border: 2px solid #0C0C0C;color: #0C0C0C;background-color: #fcfcfc;margin-bottom: 20px" onclick='javascrtpt:window.location.href="{{url('team/displayOneAuthStask?team_id='.$team_info['team_id'].'&stask_id='.$tran['trans_Resource_path'])}}"' >
+                                        <button type="submit" class="layui-btn choose" style="border: 2px solid #0C0C0C;color: #0C0C0C;background-color: #fcfcfc;margin-bottom: 20px" id="sub_task_detail">
                                            Sub Task Detail
                                         </button>
+                                        <input type="hidden" name="team_id" value="{{$team_info['team_id']}}">
+                                        <input type="hidden" name="stask_id" value="{{$tran['trans_Resource_path']}}">
                                     @else
                                         @unless($tran['trans_Resource_path']==null)
                                         <span style="color: #0C0C0C;font-size: 13px;">Download Resource : </span>
@@ -166,6 +168,21 @@
                         });
                     event.preventDefault();
                     $(this).parent().parent().parent().remove();
+                });
+                $('.layui-timeline').on('click','#sub_task_detail',function(event){
+                    event.preventDefault();
+                    var stask_id = $(this).siblings("[name='stask_id']").val();
+                    var stask_name = $(this).siblings("[name='stask_name']").val();
+                    var team_id=$(this).siblings("[name='team_id']").val();
+                    layer.open({
+                        type: 2,
+                        title: 'Sub Task Detail',
+                        shadeClose: true,
+                        shade: 0.8,
+                        area: ['600px', '600px'],
+                        content: 'displayOneAuthStask/'+team_id+'/?stask_id='+stask_id,
+                        scrollbar:false
+                    });
                 });
             });
         });

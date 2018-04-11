@@ -45,13 +45,24 @@
 			//新增子任务
             $('.addSTask').on('click',function(){
                 var new_div=$('#0').clone();
-                /*$('#0').attr("id",'1');*/
-                $('#1').className='stark_form';
+                $('#1').each(function(){
+                    $('#1').attr("class",'stask_form');
+				});
                 $('#stask_box').append(new_div);
+
             });
 			//删除子任务
 			$('#stask_box').on('click','.del',function(event){
 				event.preventDefault();
+               $(this).parent().find('.user_box').find('.close').each(function () {
+                   var id=$(this).attr('id');
+                    for(var i in team_user_list) {
+                        if (id == team_user_list[i][0].user_id) {
+                            team_user_list[i][2] = {'isSelected': '0'};
+                        }
+                    }
+                });
+
 				$(this).parent().parent().remove();
 			});
             //选择组员
@@ -63,13 +74,13 @@
 				layer.open({
 						type: 1,
 						skin: 'layui-layer-rim', //加上边框
-						area: ['500px', '500px'], //宽高
+						area: ['550px', '500px'], //宽高
 						title:"Choose Members In Charge",
 						content:'<table class="layui-table team_user_item" ><tr><td><label class="layui-form-label" style="padding:0;font-weight:700;font-size: 14px;color: #0C0C0C">User List</label></td><td><button class="layui-btn layui-btn-primary confirm" style="border: solid 2px black;background-color: white;color:#0C0C0C;font-weight:700;font-size: 14px;">Confirm</button></td></tr></table>'
 				});	
 				var user_id_head = "<input type='hidden' name='' class='user_id' value='";
 				var user_id_tail = "'>";
-				var checkBox = "<input name='' lay-skin='primary' type='checkbox' style='position: relative;top:5px;margin-left:250px;''>";
+				var checkBox = "<input name='' lay-skin='primary' type='checkbox' style='position: relative;top:5px;margin-right: 200px;float: right'>";
 				//显示所有可选组员
 				for(var i in team_user_list){
 						// console.log(team_user_list[i]);
@@ -119,12 +130,11 @@
 				});
 			});
             //删除已选
-            $('.user_box').on('click','.close',function(event){
+            $('#stask_box').on('click','.close',function(event){
                 event.preventDefault();
                 var id=$(this).attr('id');
                 for(var i in team_user_list){
                     //若未被选中组员与当前
-
                     for(var i in team_user_list) {
                         if (id == team_user_list[i][0].user_id) {
                             team_user_list[i][2] = {'isSelected': '0'};
@@ -151,13 +161,15 @@
                         // sub_task_item['sub_task_name'] = sub_task_name;
                         // sub_task_item['sub_task_descri'] = sub_task_descri;
                         // sub_task_item['sub_task_users'] = sub_task_users;
-
+						if(sub_task_name==''||sub_task_name==null){
+						}else{
                         sub_task_item = {
                             'sub_task_name': sub_task_name,
                             'sub_task_descri': sub_task_descri,
                             'sub_task_users': sub_task_users
                         };
-                        sub_task_all.push(sub_task_item);
+                        sub_task_all.push(sub_task_item);}
+
 				});
 				console.log('传给后台的子任务信息及对应成员:'+sub_task_all);
 				$.ajax({
@@ -167,7 +179,9 @@
 					data: {'task_id':$('#task_id').val(),'sub_task_all':sub_task_all,"_token":"{{csrf_token()}}"},
 				})
 				.done(function(data) {
+                    	var return_team_id = data.team_id;
 						layer.msg(data.msg);
+                    	setTimeout("location.href='displayOneAuthStasks/"+return_team_id+"'",1500);
 				})
 				.fail(function() {
 					console.log("error");
@@ -189,47 +203,9 @@
     return arr;
 }
 </script>
-{{--{{ csrf_field() }}
-<input type="hidden" name="" id="team_id" value="{{$team_id}}">
-<input type="hidden" name="" id="has-get-users" value="0">
-<table class='layui-table' style='width: 900px;'>
-	<thead>
-		<tr>
-			<td>团队名称</td>
-			<td>任务名称</td>
-		</tr>
-	</thead>
-	<input type='hidden' name='' id='task_id' value='{{$task_id}}'>
-	<tr>			
-		<td>{{$team_name}}</td>
-		<td>{{$task_name}}</td>
-	</tr>
-</table>
-<fieldset class='layui-elem-field site-demo-button' style='width: 900px'>  
-	<legend>增加子任务</legend>
-	<button class='layui-btn layui-btn-primary layui-btn-sm' id='addSTask'><i class='layui-icon'></i></button>
-	<button class='layui-btn layui-btn-primary layui-btn-sm' id='submit'>发布</button>
-	<form class='layui-form' action='' id="sub-task-form">
-	<table class='layui-table' id='STask_table'>
-			<tr class="sub_task_item">
-				<td>
-					<input name='title' lay-verify='title' autocomplete='off' placeholder='请输入子任务名' class='layui-input sub_task_name' type='text'>
-					<input name='title' lay-verify='title' autocomplete='off' placeholder='请输入子任务描述' class='layui-input sub_task_descri' type='text'>
-				</td>
-				<td>
-					<button class='layui-btn layui-btn-primary layui-btn-sm del'><i class='layui-icon'></i></button>
-					  <button data-type="auto" class="layui-btn layui-btn-normal choose">选择组员</button>
-					  <b class="user_box"></b>
-				</td>
-			</tr>
-		</table>
-	</form>
-</fieldset>
-
-<tr class="sub-task-items">--}}
 <div style="width: 1030px;height: 150px;">
-	<p style="font-size: 40px;font-family: 'Source Sans Pro', sans-serif;font-weight: 800;color: #0C0C0C;padding: 10px;width: 100%">{{$return_data['team_name']}}{{$return_data['task_name']}}</p>
-	<p style="font-size: 25px;font-family: 'Source Sans Pro', sans-serif;font-weight: 800;color: #3F3F3F;padding: 10px;width: 100%">Task Name : {{$return_data['task_name']}}</p>
+	<p style="font-size: 40px;font-family: 'Source Sans Pro', sans-serif;font-weight: 800;color: #0C0C0C;padding: 10px;width: 100%">Team : {{$return_data['team_name']}}</p>
+	<p style="font-size: 25px;font-family: 'Source Sans Pro', sans-serif;font-weight: 800;color: #3F3F3F;padding: 10px;width: 100%">Task : {{$return_data['task_name']}}</p>
 	<div style="float: right;margin-right: 30px;">
 		<button type="submit" class="layui-btn shadow addSTask" style="border: 2px solid #0C0C0C;color: #0C0C0C;background-color: #fff200" >
 			+ Sub Task
@@ -265,7 +241,6 @@
 							+ Teammate In Charge
 						</button>
 						<div style="width:600px;height:60px;margin-left:308px;margin-top: 20px;color: black;" class="user_box scroll"  >
-
 						</div>
 					</div>
 				</div>
@@ -281,10 +256,10 @@
 		</button>
 	</div>
 </div>
-{{$i=0}}
+<span style="opacity: 0">{{$i=0}}</span>
 <div style="display: none">
-	<div style="width: 1030px;height:300px;float: left;margin-top: 20px;" class="stask_form_clone" id="{{$i}}" >
-		{{$i=$i+1}}
+	<div style="width: 1030px;height:300px;float: left;margin-top: 20px;" class="stask_form" id="{{$i}}" >
+		<span style="opacity: 0"> {{$i=$i+1}}</span>
 		<div style="width:900px;height: 300px; margin-left: auto;margin-right: auto;border: 3px solid black;" >
 			<div style="width: 850px;height:180px;float: left;margin-top: 20px">
 				<div class="form-group" style="margin-bottom: 30px;">
@@ -296,7 +271,7 @@
 				<div class="form-group" style="margin-bottom: 20px;" >
 					<label for="stask_descri" class="col-md-4 control-label">Brief Introduction</label>
 					<div class="col-md-6"  >
-						<textarea rows="2" cols="25" class="form-control sub_task_descri" ></textarea>
+						<textarea rows="2" cols="25" class="form-control sub_task_descri"></textarea>
 					</div>
 				</div>
 				<div class="form-group " style="text-align: center;margin-right: 65px">
@@ -314,5 +289,4 @@
 		</div>
 	</div>
 </div>
-
 @endsection

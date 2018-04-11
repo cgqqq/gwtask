@@ -28,7 +28,7 @@
 					<a href="{{url('team/displayOneAuthTasks',$team_info['team_id'])}}" class="collection-item" style="font-size: 12px;line-height: 30px">
 						All Tasks
 					</a>
-					<a href="#!" class="collection-item" style="font-size: 12px;line-height: 30px">
+					<a href="{{url('team/displayAllocateSubTask/displayOneAuthStasks',$team_info['team_id'])}}" class="collection-item" style="font-size: 12px;line-height: 30px">
 						Sub Tasks
 					</a>
 					<a href="{{url('team/displayOneAuthResources',$team_info['team_id'])}}" class="collection-item" style="font-size: 12px;line-height: 30px">{{--<span class="new badge2" style="margin-top: 10px;font-size: 10px">99</span>--}}
@@ -63,7 +63,7 @@
                     <li class="collection-item shadow" style="width:510px;height:auto;min-height:180px;margin-left: 5px;margin-top: 10px;"  >
                         <div style="height:100px;width: 130px;float: left;">
                             @if(session('user_id')==$uploading['uploader_id'])
-                                <img src="{{URL::asset('/uploads/user_profile/'.$uploading['uploader_profile'])}}" class="layui-circle" width="65px" height="65px" style="margin-left: 15px;" onclick='javascrtpt:window.location.href="{{url('user/displayInfo')}}"' >
+                                <img src="{{URL::asset('/uploads/user_profile/'.$uploading['uploader_profile'])}}" class="layui-circle" width="65px" height="65px" style="margin-left: 15px;" >
                             @else
                                 <img src="{{URL::asset('/uploads/user_profile/'.$uploading['uploader_profile'])}}" class="layui-circle" width="65px" height="65px" style="margin-left: 15px;" onclick='javascrtpt:window.location.href="{{url('user/displayOthersInfo/'.$uploading['uploader_id'])}}"' >
                             @endif
