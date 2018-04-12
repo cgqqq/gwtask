@@ -196,7 +196,7 @@ body .demo-class .layui-btn{
 }
 
 .icons ul li a.change_icon{
-	background:url(../images/4.png) no-repeat -0px 0px;
+	background:url(../images/4.png) no-repeat -0px 1px;
 	display:block;
 	height: 25px;
 	width: 25px;

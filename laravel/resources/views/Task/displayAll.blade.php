@@ -3,11 +3,13 @@
 
 @section('content')
 
-<div class="layui-collapse box" lay-filter="test" class="scroll">
-	@foreach($tasks as $task)
-	<li class="layui-colla-item" style="width: 1000px;">
+<div class="layui-collapse box" lay-filter="test">
+	@foreach($teams as $team)
+		<span style="color: black;font-weight: 800;font-size: 20px;padding: 5px">Team : {{$team['team_name']}}</span>
+		@foreach($team['tasks'] as $task)
+	<li class="layui-colla-item" style="width: 1000px;" >
 		<h2 class="layui-colla-title" style="color: #0C0C0C;font-weight: 800;font-size: 15px;width: 1030px;background-color: #34bf49">{{ $task['task_name'] }}
-			<span  style="color: #fcfcfc">Published By : </span> {{ $task['1'] }} <span  style="color: #fcfcfc"> From </span> {{$task['0']}}
+			<span  style="color: #fcfcfc">Published By : </span> {{ $task['funder_name'] }}
 			<span style="float: right;">
 				@if( $task['task_status'] =='0')
 				<img class="layui-circle" style="height: 30px;width:30px;" src="{{URL::asset('/images/pending.png')}}" >
@@ -17,11 +19,14 @@
 				<img class="layui-circle" style="height: 30px;width:30px;" src="{{URL::asset('/images/finishing.png')}}" >
 				@endif
 			</span>
-
 		</h2>
-
-		<div class="layui-colla-content" id="tran_box">
-			<div style="max-height: 500px;height: auto;" class="scroll">
+		<div style="width:900px;height: 30px;margin-left: 30px">
+			<div class="layui-progress layui-progress-big" lay-showpercent="true" >
+				<div class="layui-progress-bar" lay-percent="{{$task['progress']}}%"></div>
+			</div>
+		</div>
+		<div class="layui-colla-content scroll" id="tran_box">
+			<div style="min-height: 500px;height: auto;">
 				<ul class="layui-timeline">
 					@foreach($task['trans'] as $tran)
 					<li class="layui-timeline-item">
@@ -33,6 +38,13 @@
 								<span style="color: #0C0C0C;font-size: 13px;">Task Description :</span>
 								{{ $tran['trans_description'] }}
 							</p>
+							@if($tran['trans_Resource_intro']=='stask')
+								<button type="submit" class="layui-btn choose" style="border: 2px solid #0C0C0C;color: #0C0C0C;background-color: #fcfcfc;margin-bottom: 20px" id="sub_task_detail">
+									Sub Task Detail
+								</button>
+								<input type="hidden" name="team_id" value="{{$team['team_id']}}">
+								<input type="hidden" name="stask_id" value="{{$tran['trans_Resource_path']}}">
+							@else
 							@unless($tran['trans_Resource_path']==null)
 								<span style="color: #0C0C0C;font-size: 13px;">Download Resource : </span>
 								<a href={{URL::asset($tran['trans_Resource_path'])}} download={{$tran['trans_Resource_path']}}>
@@ -45,6 +57,7 @@
 									{{ $tran['trans_Resource_intro'] }}
 								</p>
 							@endunless
+							@endif
 							<p>
 								<img src="{{URL::asset('/images/delete2.png')}}" class="delete_tran">
 							</p>
@@ -52,7 +65,7 @@
 						</div>
 					</li>
 					@endforeach
-					<li class="layui-timeline-item" class="scroll" >
+					<li class="layui-timeline-item"  >
 						<i class="layui-icon layui-timeline-axis"></i>
 						<div class="layui-timeline-content layui-text" >
 							<h3 class="layui-timeline-title">
@@ -132,7 +145,8 @@
 		</div>
 	</li>
 @endforeach
-</div>
+	@endforeach
+
 {{ $paged->links() }}
 </div>
 
@@ -167,7 +181,20 @@
 			});
 
 		});
+        $('.layui-timeline').on('click','#sub_task_detail',function(event){
+            event.preventDefault();
+            var stask_id = $(this).siblings("[name='stask_id']").val();
+            var team_id=$(this).siblings("[name='team_id']").val();
+            layer.open({
+                type: 2,
+                title: 'Sub Task Detail',
+                shadeClose: true,
+                shade: 0.8,
+                area: ['600px', '600px'],
+                content:'displayOneAuthTasks/displayOneAuthStask/'+team_id+"/?stask_id="+stask_id,
+                scrollbar:false
+            });
+        });
 	});
 </script>
-
 @endsection

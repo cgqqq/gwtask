@@ -23,7 +23,7 @@
                        Team Updatings
                     </a>
                     <a href="{{url('task/displayAdd',$team_info['team_name'])}}" class="collection-item" style="font-size: 12px;line-height: 30px">
-                        Create Tasks
+                        Create A Task
                     </a>
 					<a href="{{url('team/displayOneAuthTasks',$team_info['team_id'])}}" class="collection-item" style="font-size: 12px;line-height: 30px">
 						All Tasks

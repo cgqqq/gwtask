@@ -662,7 +662,7 @@ class TeamController extends Controller
         }
 
     }
-    public function displayOneAuthTasks(Request $request,$team_id,Task $task,Team $team,User $user,Membership $membership,Friend $friend,TeamUploading $teamUploading,TaskTransaction $taskTransaction){
+    public function displayOneAuthTasks(Request $request,$team_id,Task $task,Team $team,User $user,Membership $membership,Friend $friend,TeamUploading $teamUploading,TaskTransaction $taskTransaction,Stask $stask){
 
         if(empty($request->input('flag'))){
         }
@@ -782,7 +782,16 @@ class TeamController extends Controller
                 $key['trans'][$i]=&$tran;
                 $i=$i+1;
             }
-
+            /*查看子任务的数量*/
+            $stask_num=count($stask->where(['task_id'=>$key['task_id']])->get());
+            /*查看状态为完成的人物数量*/
+            $completedStask_num=count($stask->where(['task_id'=>$key['task_id'],'status'=>'2'])->get());
+            /*返回完成比例*/
+            $progress=0;
+            if($stask_num!=0){
+            $progress=round(($completedStask_num/$stask_num)*100);
+            }
+            $key['progress']=$progress;
         }
         if(session('user_id')==$teamInfo[0]['team_funder_id']){
             $AuthOrNot='displayOneAuth';

@@ -181,7 +181,8 @@
 				.done(function(data) {
                     	var return_team_id = data.team_id;
 						layer.msg(data.msg);
-                    	setTimeout("location.href='displayOneAuthStasks/"+return_team_id+"'",1500);
+						var url="{{url('task/displayAll')}}";
+                    	setTimeout("location.href='"+url+"'",1500);
 				})
 				.fail(function() {
 					console.log("error");
@@ -189,7 +190,7 @@
 				.always(function() {
 					console.log("complete");
 				});
-				
+
 			});
 
 		});

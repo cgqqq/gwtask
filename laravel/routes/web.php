@@ -140,8 +140,11 @@ Route::group(['middleware'=>'auth','namespace'=>'Team','prefix'=>'team'],functio
 
     Route::any('displayAllocateSubTask/displayOneAuthStasks/{team_id}','TeamController@displayOneAuthStasks')->name('displayOneAuthStasks');
 });
+Route::any('task/displayOneAuthTasks/displayOneAuthStask/{team_id}','Team\TeamController@displayOneAuthStask')->name('displayOneAuthStask')->middleware('auth');
 //任务路由
 Route::group(['middleware'=>'auth','namespace'=>'Task','prefix'=>'task'],function(){
+
+
 	Route::get('displayAdd/{team_name}','TaskController@displayAdd');
 
 	Route::post('add','TaskController@add');

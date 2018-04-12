@@ -83,17 +83,67 @@ class TaskController extends Controller
 	}
 
 	//显示所有任务
-    public function displayAll(User $user,Team $team,Request $request,TaskTransaction $taskTransaction,TeamUploading $teamUploading,Task $task){
+    public function displayAll(User $user,Team $team,Request $request,TaskTransaction $taskTransaction,TeamUploading $teamUploading,Task $task,Stask $stask){
 	     if(empty($request->input('flag'))){
 
        }
        else{
            $this->createTransaction($taskTransaction,$request,$teamUploading,$task);
        }
+        $teams=$team->where(['team_funder_id'=>session('user_id')])->get()->toArray();
+	     foreach($teams as &$aTeam){
+	         $aTeam['tasks']=$task->where(['task_manager_id'=>session('user_id'),'task_team_id'=>$aTeam['team_id']])->get()->toArray();
+	         foreach ($aTeam['tasks'] as &$key){
+	             $key['funder_name']=$user->where(['user_id'=>$key['task_manager_id']])->value('user_name');
+                 /*查看子任务的数量*/
+                 $stask_num=count($stask->where(['task_id'=>$key['task_id']])->get());
+                 /*查看状态为完成的人物数量*/
+                 $completedStask_num=count($stask->where(['task_id'=>$key['task_id'],'status'=>'2'])->get());
+                 /*返回完成比例*/
+                 $progress=0;
+                 if($stask_num!=0){
+                     $progress=round(($completedStask_num/$stask_num)*100);
+                 }
+                 $key['progress']=$progress;
+                 if($key['task_status']=='1'){
+                     if($key['task_deadline']<time()){
+                         $timeLeft="Task Expired";
+                     }
+                     else{
+                         $time=$key['task_deadline']-time();
+                         $timeDay=0;
+                         $timeHour=0;
+                         $timeMin=0;
+                         if($time>=86400){
+                             $timeDay=(int)($time/86400);
+                             $time=$time%86400;
+                         }
+                         if($time>=3600){
+                             $timeHour=(int)($time/3600);
+                             $time=$time%3600;
+                         }
+                         $timeMin=(int)($time/60);
 
-    	$pagedata = $task->all()->toArray();
+                         $timeLeft=$timeDay." day(s) and ".$timeHour." hour(s) ".$timeMin."minute(s) before deadline";
+                     }
+                     $key['timeLeft']=$timeLeft;
+                 }elseif($key['task_status']=="0"){
+                     $key['timeLeft']="Task Will Kick Off At ".date("Y-m-d H:i:s",$key['task_kickoff_date']);
+                 }
+                 else{
+                     $key['timeLeft']="Task Has Finished";
+                 }
+                 $trans=$taskTransaction->where(['task_id'=>$key['task_id']])->orderBy('time','asc')->get()->toArray();
+                 $i=0;
+                 foreach ($trans as &$tran){
+                     $key['trans'][$i]=&$tran;
+                     $i=$i+1;
+                 }
+             }
+         }
+    	$pagedata = $teams;
     	// pd($pagedata);
-        // 默认页码
+        // 默认页码team
         $page = $request->input('page')?$request->input('page'):1;
         // pd($page);
         //设定一页行数
@@ -107,50 +157,13 @@ class TaskController extends Controller
         //截取指定页数据
         $pageout=array_slice($pagedata, ($page-1)*$pagesize,$pagesize);
         foreach ($pageout as &$key ) {
-    		$teamInfo = $team->get(['team_id'=>$key['task_team_id']])->toArray();
-    		array_push($key,$teamInfo[0]['team_name']);
-    		$userInfo = $user->get(['user_id'=>$key['task_manager_id']])->toArray();
-    		array_push($key,$userInfo[0]['user_name']);
-			if($key['task_status']=='1'){
-                if($key['task_deadline']<time()){
-                    $timeLeft="Task Expired";
-                }
-                else{
-                    $time=$key['task_deadline']-time();
-                    $timeDay=0;
-                    $timeHour=0;
-                    $timeMin=0;
-                    if($time>=86400){
-                        $timeDay=(int)($time/86400);
-                        $time=$time%86400;
-                    }
-                    if($time>=3600){
-                        $timeHour=(int)($time/3600);
-                        $time=$time%3600;
-                    }
-                    $timeMin=(int)($time/60);
 
-                    $timeLeft=$timeDay." day(s) and ".$timeHour." hour(s) ".$timeMin."minute(s) before deadline";
-                }
-                $key['timeLeft']=$timeLeft;
-			}elseif($key['status']=="0"){
-                $key['timeLeft']="Task Will Kick Off At ".date("Y-m-d H:i:s",$key['task_kickoff_date']);
-			}
-			else{
-                $key['timeLeft']="Task Has Finished";
-			}
-            $trans=$taskTransaction->where(['task_id'=>$key['task_id']])->orderBy('time','asc')->get()->toArray();
-			$i=0;
-			foreach ($trans as &$tran){
-			    $key['trans'][$i]=&$tran;
-			    $i=$i+1;
-            }
 
     	}
         // pd($pageout);
 
 
-        return view('Task/displayAll',['tasks'=>$pageout,'paged'=>$paged]);
+        return view('Task/displayAll',['teams'=>$pageout,'paged'=>$paged]);
     }
     //显示子任务分配界面
     public function displayAllocateSubTask(Request $request,Team $team,Task $task,$task_id,$team_id){

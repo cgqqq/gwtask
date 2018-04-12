@@ -15,9 +15,9 @@
                     @elseif($aStask['status']=='1')
                         <img class="layui-circle" style="height: 30px;width:30px;" src="{{URL::asset('/images/pending.png')}}" >
                     @elseif($aStask['status']=='2')
-                        <img class="layui-circle" style="height: 30px;width:30px;" src="{{URL::asset('/images/finishing.png')}}" id="status_img">
+                        <img class="layui-circle" style="height: 30px;width:30px;" src="{{URL::asset('/images/finishing.png')}}" id="{{$aStask['stask_id']}}status_img">
                     @else
-                        <img class="layui-circle" style="height: 30px;width:30px;" src="{{URL::asset('/images/unfinishing.png')}}" id="status_img">
+                        <img class="layui-circle" style="height: 30px;width:30px;" src="{{URL::asset('/images/unfinishing.png')}}" id="{{$aStask['stask_id']}}status_img">
                     @endif
 			</span>
 
@@ -225,10 +225,10 @@
         document.getElementById(name).style.display='none';
         var status=document.getElementById('select_val').value;
         if(status=='3'){
-            $("#status_img").attr("src",'{{URL::asset('/images/unfinishing.png')}}');
+            $("#"+stask_id+"status_img").attr("src",'{{URL::asset('/images/unfinishing.png')}}');
         }
         else{
-            $("#status_img").attr("src",'{{URL::asset('/images/finishing.png')}}');
+            $("#"+stask_id+"status_img").attr("src",'{{URL::asset('/images/finishing.png')}}');
         }
         $.ajax({
             url: "{{url('task/score')}}",
@@ -295,7 +295,7 @@
                 data: {"stask_id":stask_id,'comment':comment,"_token":"{{csrf_token()}}"}
             })
                 .done(function(data) {
-                    layer.msg(data.msg);
+
                 })
                 .fail(function(data) {
                     layer.msg("Something went wrong,try again later");

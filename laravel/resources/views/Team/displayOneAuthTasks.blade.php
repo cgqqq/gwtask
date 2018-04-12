@@ -19,6 +19,11 @@
 			</span>
 
             </h2>
+            <div style="width:500px;height: 30px;margin-left: 20px">
+                <div class="layui-progress layui-progress-big" lay-showpercent="true" >
+                    <div class="layui-progress-bar" lay-percent="{{$task['progress']}}%"></div>
+                </div>
+            </div>
             <div class="layui-colla-content" >
                 <div style="min-height: 500px;height: auto;" >
                     <ul class="layui-timeline">
