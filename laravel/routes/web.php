@@ -161,6 +161,8 @@ Route::group(['middleware'=>'auth','namespace'=>'Task','prefix'=>'task'],functio
     Route::any('score','TaskController@score');
 
     Route::any('comment','TaskController@comment');
+
+    Route::any('deleteComment','TaskController@deleteComment');
 });
 
 Auth::routes();

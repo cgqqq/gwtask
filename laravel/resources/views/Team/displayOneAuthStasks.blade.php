@@ -9,15 +9,15 @@
         <li class="layui-colla-item" style="width: 550px;">
             <h2 class="layui-colla-title" style="color: #0C0C0C;font-weight: 800;font-size: 15px;width: 530px;background-color: #fff200;border: 2px solid black;">
                 Sub Task Name : {{ $aStask['stask_name'] }}
-                <span style="float: right;" id="status_img">
+                <span style="float: right;" >
 				@if( $aStask['status'] =='0')
                         <img class="layui-circle" style="height: 30px;width:30px;" src="{{URL::asset('/images/ongoing.png')}}" >
                     @elseif($aStask['status']=='1')
                         <img class="layui-circle" style="height: 30px;width:30px;" src="{{URL::asset('/images/pending.png')}}" >
                     @elseif($aStask['status']=='2')
-                        <img class="layui-circle" style="height: 30px;width:30px;" src="{{URL::asset('/images/finishing.png')}}" >
+                        <img class="layui-circle" style="height: 30px;width:30px;" src="{{URL::asset('/images/finishing.png')}}" id="status_img">
                     @else
-                        <img class="layui-circle" style="height: 30px;width:30px;" src="{{URL::asset('/images/unfinishing.png')}}" >
+                        <img class="layui-circle" style="height: 30px;width:30px;" src="{{URL::asset('/images/unfinishing.png')}}" id="status_img">
                     @endif
 			</span>
 
@@ -95,10 +95,13 @@
                             <button id="submit" class="layui-btn submit" style="color: #0C0C0C;background-color: #fcfcfc;border: 2px solid #0C0C0C"  onclick="isHidden('{{$aStask['stask_id']}}'+'submit_box')">
                                 Change File
                             </button>
-                        @unless(empty($aStask['infors'][0]['score']))
-                            <p id='show_score_p' style="font-size: 15px;font-family: 'Source Sans Pro', sans-serif;font-weight: 800;color: #0C0C0C;padding: 10px;width: 100%" >Score : {{$aStask['infors'][0]['score']}}
+                        @if(empty($aStask['infors'][0]['score']))
+                            <p id='{{$aStask['stask_id']}}show_score_p' style="display:none;font-size: 15px;font-family: 'Source Sans Pro', sans-serif;font-weight: 800;color: #0C0C0C;padding: 10px;width: 100%" >
                             </p>
-                        @endunless
+                        @else
+                            <p id='{{$aStask['stask_id']}}show_score_p' style="font-size: 15px;font-family: 'Source Sans Pro', sans-serif;font-weight: 800;color: #0C0C0C;padding: 10px;width: 100%" >Score : {{$aStask['infors'][0]['score']}}
+                            </p>
+                        @endif
                         <div id="{{$aStask['stask_id']}}score" style="display: none">
                             <div id="action_score" style="float: left;width: 100%">
                                 <form style="line-height:20px;float:left;color: #0C0C0C;margin-left: 10px;" class="form-group" id="{{$aStask['stask_id']}}">
@@ -114,7 +117,7 @@
                                        </select>
                                     </div>
                                     <div style="float: left;margin-left: 30px">
-                                        <button id="submit_score" class="layui-btn shadow submit" style="border: 2px solid #0C0C0C;color: #0C0C0C;background-color: #fcfcfc">
+                                        <button id="submit_score" class="layui-btn shadow submit" style="border: 2px solid #0C0C0C;color: #0C0C0C;background-color: #fcfcfc" >
                                             Save
                                         </button>
                                         <input type="hidden" name="stask_id" value="{{$aStask['stask_id']}}" >
@@ -163,9 +166,11 @@
                                             @endif
                                         </div>
                                         <div style="float:left;width: 400px;min-height:120px;font-weight: 800;font-size: 18px;line-height: 40px;height:auto;" >
-                                            <textarea  value="" style="width:350px;border: 1px solid transparent;height: 120px;resize: none;" readonly>
-                                                {{$comment['comment']}}
-                                            </textarea>
+                                            <textarea  value="" style="width:320px;border: 1px solid transparent;height: 120px;resize: none;" readonly>{{$comment['comment']}}</textarea>
+                                            <div style="width: 40px;float: right;margin-right:20px;margin-top:0;" id="del">
+                                                <img src="{{URL::asset('/images/delete2.png')}}" >
+                                            </div>
+                                            <input type="hidden" value="{{$comment['id']}}" name="id">
                                         </div>
                                         <div style="width:400px;height:30px;line-height: 10px;margin-bottom: 10px;">
                                             <p style="font-size: 12px;margin-right: 0px;color: #8D8D8D">
@@ -182,7 +187,10 @@
                                         <img src="{{URL::asset(session('user_profile'))}}" class="layui-circle" width="65px" height="65px" style="margin-left: 15px;" onclick='javascrtpt:window.location.href="{{url('user/displayInfo')}}"' >
                                     </div>
                                     <div style="float:left;width: 400px;min-height:120px;font-weight: 800;font-size: 18px;line-height: 40px;height:auto;" >
-                                        <textarea id="{{$i}}" value="" style="width:350px;border: 1px solid transparent;height: 120px;resize: none;" readonly></textarea>
+                                        <textarea id="{{$i}}" value="" style="width:320px;border: 1px solid transparent;height: 120px;resize: none;"readonly></textarea>
+                                        <div style="width: 40px;float: right;margin-right:20px;margin-top:0;" id="del2">
+                                            <img src="{{URL::asset('/images/delete2.png')}}" >
+                                        </div>
                                     </div>
                                     <div style="width:400px;height:30px;line-height: 10px;margin-bottom: 10px;">
                                         <p style="font-size: 12px;margin-right: 0px;color: #8D8D8D">
@@ -200,9 +208,73 @@
                 </div>
             </div>
         </li>
+
         @endforeach
     @endforeach
 </ul>
+<script>
+    $('.box').on('click','#submit_score',function(event){
+        event.preventDefault();
+        var stask_id = $(this).siblings("[name='stask_id']").val();
+        var score= $(this).parent().parent().find('#score_input').val();
+        if(document.getElementById(stask_id+'show_score_p').style.display=='none'){
+            document.getElementById(stask_id+'show_score_p').style.display='block';
+        }
+        document.getElementById(stask_id+'show_score_p').innerHTML='Score : '+score;
+        var name=stask_id+'score';
+        document.getElementById(name).style.display='none';
+        var status=document.getElementById('select_val').value;
+        if(status=='3'){
+            $("#status_img").attr("src",'{{URL::asset('/images/unfinishing.png')}}');
+        }
+        else{
+            $("#status_img").attr("src",'{{URL::asset('/images/finishing.png')}}');
+        }
+        $.ajax({
+            url: "{{url('task/score')}}",
+            type: 'post',
+            dataType: 'json',
+            skin:'demo-class',
+            data: {"stask_id":stask_id,'status':status,'score':score,"_token":"{{csrf_token()}}"}
+        })
+            .done(function(data) {
+                layer.msg(data.msg);
+            })
+            .fail(function(data) {
+                layer.msg("Something went wrong!try again later.");
+            })
+            .always(function() {
+                console.log("complete");
+
+            });
+
+
+    });
+    $('.box').on('click','#del',function(event){
+        var id=$(this).siblings([name='id']).val();
+        $.ajax({
+            url: "{{url('task/deleteComment')}}",
+            type: 'post',
+            dataType: 'json',
+            skin:'demo-class',
+            data: {'id':id,"_token":"{{csrf_token()}}"}
+        })
+            .done(function(data) {
+                layer.msg(data.msg);
+            })
+            .fail(function(data) {
+                layer.msg("Something went wrong,try again later");
+            })
+            .always(function() {
+                console.log("complete");
+            });
+       $(this).parent().parent().remove();
+    });
+    $('.box').on('click','#del2',function(event){
+      layer.msg('Comment deleted!');
+        $(this).parent().parent().remove();
+    });
+</script>
     <script>
         function isHidden(oDiv){
             var vDiv = document.getElementById(oDiv);
@@ -212,7 +284,7 @@
             document.getElementById('0').innerHTML=document.getElementById('comment_input').value;
             var new_comment=$('#c0').clone();
             document.getElementById('comment_input').value=null;
-            $('#com').append(new_comment);
+            $('#com').prepend(new_comment);
             var comment=document.getElementById('0').value;
             var stask_id=$('#input0').val();
            $.ajax({
@@ -232,34 +304,6 @@
                     console.log("complete");
                 });
         }
-        $('.box').on('click','#submit_score',function(event){
-            event.preventDefault();
-            var stask_id = $(this).siblings("[name='stask_id']").val();
-            var score= $(this).parent().parent().find('#score_input').val();
-            document.getElementById('show_score_p').innerHTML='Score : '+score;
-            var name=stask_id+'score';
-            document.getElementById(name).style.display='none';
-            var status=document.getElementById('select_val').value;
-            $.ajax({
-                url: "{{ url('task/score') }}",
-                type: 'post',
-                dataType: 'json',
-                skin:'demo-class',
-                data: {"stask_id":stask_id,'status':status,'score':score,"_token":"{{csrf_token()}}"}
-            })
-                .done(function(data) {
-                    layer.msg(data.msg);
-                })
-                .fail(function(data) {
-                    layer.msg("Something went wrong!try again later.");
-                })
-                .always(function() {
-                    console.log("complete");
-
-                });
-
-
-        });
 
     </script>
 @endsection

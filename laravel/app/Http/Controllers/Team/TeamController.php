@@ -238,7 +238,7 @@ class TeamController extends Controller
         //总数
         $total = count($teamMember);/*算上一个add icon*/
         //每页记录数
-        $pageSize = 9;
+        $pageSize = 18;
         //实例化分页类
         $paged = new LengthAwarePaginator($teamMember,$total,$pageSize);
         //分页url
@@ -794,11 +794,11 @@ class TeamController extends Controller
 
 
     }
-    public function displayOneAuthResources(Request $request,$team_id,TaskTransaction $taskTransaction,Task $task){
+    public function displayOneAuthResources(Request $request,$team_id,TaskTransaction $taskTransaction,Task $task,Stask_submission $stask_submission,Stask $stask ){
         $allTask=$task->where(['task_team_id'=>$team_id])->get()->toArray();
         $i=0;
         foreach ($allTask as &$aTask){
-            $taskTrans=$taskTransaction->where(['task_id'=>$aTask['task_id']])->get(['trans_Resource_path','trans_Resource_intro'])->toArray();
+            $taskTrans=$taskTransaction->where(['task_id'=>$aTask['task_id']])->where('trans_Resource_intro','!=','stask')->get(['trans_Resource_path','trans_Resource_intro'])->toArray();
             $j=0;
             foreach ($taskTrans as &$taskTran){
                 if($taskTran['trans_Resource_path']==null){

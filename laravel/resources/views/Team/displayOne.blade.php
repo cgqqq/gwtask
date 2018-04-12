@@ -117,12 +117,7 @@
 		</div>
 
 		<div style="float: left;width: 250px;height: 550px;border-left: double 4px #8D8D8D;color: #8d8d8d;">
-			<div style="float: left;width: 250px;height: 250px;">
-				<p style="margin-top: 10px;margin-left: 10px;font-size: 15px">
-					Notice(群通告)</p>
-
-			</div>
-			<div style="float: left;width: 250px;height: 350px;">
+			<div style="float: left;width: 250px;height: 550px;">
 				<p style="margin-top: 10px;margin-left: 10px;">
 					Team Members:</p>
 				<div style="width: 245px;height: 520px;margin-left: 5px;margin-top: 8px;">

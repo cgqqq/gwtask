@@ -64,19 +64,11 @@ class TaskController extends Controller
             'task_id'=>$task_id,
             'time'=>strtotime(date("Y-m-d H:i:s"))
         ];
-        $map_uploading = [
-            'id'=>md5(uniqid(mt_rand(),true)),
-            'team_id'=>$request->input('team_id'),
-            'uploader_id'=>session('user_id'),
-            'time'=>strtotime(date("Y-m-d H:i:s")),
-            'content'=>'Hey guys,I have published a task just right now!!Come over and check out the detail!'
-        ];
         try {
             //开始事务
             DB::beginTransaction();
             $task->add($map);
             $taskTransaction->add($map_trans);
-            $teamUploading->add($map_uploading);
             //提交事务
             DB::commit();
             //返回前端添加成功结果
@@ -410,7 +402,24 @@ class TaskController extends Controller
             return response()->json(['msg'=>'Busy network,try again later!']);
         }
     }
-
+    public function deleteComment(Request $request,Stask_comment $comment){
+        $request->validate(['comment_id'=>$request->input('id')]);
+        $map=[
+            'id'=>$request->input('id')
+        ];
+        try {
+            //开始事务
+            DB::beginTransaction();
+          $comment->del($map);
+            //提交事务
+            DB::commit();
+            return response()->json(['msg'=>'Comment deleted!']);
+        } catch(QueryException $ex) {
+            //回滚事务
+            DB::rollback();
+            return response()->json(['msg'=>'Busy network,try again later!']);
+        }
+    }
 }
 
 
