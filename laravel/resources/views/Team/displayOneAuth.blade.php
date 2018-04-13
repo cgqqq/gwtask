@@ -230,7 +230,7 @@
                 });
             });
             $('.collection-item').on('click','#del',function(event){
-                var id=$(this).siblings([name='id']).val();
+                var id=$(this).siblings("[name='id']").val();
                 $.ajax({
                     url: "{{url('team/deleteTeamUploading')}}",
                     type: 'post',

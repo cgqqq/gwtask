@@ -115,6 +115,7 @@ class Controller extends BaseController
 
         $teamUpdatings=null;
         $i=0;
+        /*我所在的team*/
         foreach($teamArray as $aTeam){
             $teamUploadings=$teamUploading->where(['team_id'=>$aTeam['team_id']])->get()->toarray();
             foreach ($teamUploadings as &$item) {
@@ -124,14 +125,6 @@ class Controller extends BaseController
                 $teamUpdatings[$i]=&$item;
                 $i=$i+1;
             }
-        }
-        $myTeamUploadings=$teamUploading->where(['uploader_id'=>session('user_id')])->get()->toarray();
-        foreach ($myTeamUploadings as &$item) {
-            $item['user_profile']=$user->where(['user_id'=>$item['uploader_id']])->value('user_profile');
-            $item['user_name']=$user->where(['user_id'=>$item['uploader_id']])->value('user_name');
-            $item['team_name']=$team->where(['team_id'=>$item['team_id']])->value('team_name');
-            $teamUpdatings[$i]=&$item;
-            $i=$i+1;
         }
         if($teamUpdatings!=null){
             $sortT = array_column($teamUpdatings, 'time');

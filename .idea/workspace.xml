@@ -2,20 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="03c77c43-de62-47b9-8a66-f413799d84dc" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/laravel/app/Http/Controllers/Controller.php" afterPath="$PROJECT_DIR$/laravel/app/Http/Controllers/Controller.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/laravel/app/Http/Controllers/Task/TaskController.php" afterPath="$PROJECT_DIR$/laravel/app/Http/Controllers/Task/TaskController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/laravel/app/Http/Controllers/Team/TeamController.php" afterPath="$PROJECT_DIR$/laravel/app/Http/Controllers/Team/TeamController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/laravel/app/Http/Controllers/User/UserController.php" afterPath="$PROJECT_DIR$/laravel/app/Http/Controllers/User/UserController.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/laravel/resources/views/Home/home.blade.php" afterPath="$PROJECT_DIR$/laravel/resources/views/Home/home.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/laravel/resources/views/Team/displayOne.blade.php" afterPath="$PROJECT_DIR$/laravel/resources/views/Team/displayOne.blade.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/laravel/resources/views/Team/displayOneAuth.blade.php" afterPath="$PROJECT_DIR$/laravel/resources/views/Team/displayOneAuth.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/laravel/resources/views/Team/displayOneAuthStasks.blade.php" afterPath="$PROJECT_DIR$/laravel/resources/views/Team/displayOneAuthStasks.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/laravel/routes/web.php" afterPath="$PROJECT_DIR$/laravel/routes/web.php" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/laravel/database/migrations/2018_03_29_114948_create_team_uploading_table.php" afterPath="$PROJECT_DIR$/laravel/database/migrations/2018_04_13_062803_create_team_uploading_table.php" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/laravel/database/migrations/2018_04_04_124517_create_user_updating_table.php" afterPath="$PROJECT_DIR$/laravel/database/migrations/2018_04_13_063054_create_user_updating_table.php" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/laravel/database/migrations/2018_04_10_081905_create_stask_submission_table.php" afterPath="$PROJECT_DIR$/laravel/database/migrations/2018_04_13_063529_create_stask_submission_table.php" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/laravel/database/migrations/2018_04_11_120407_create_stask_comment_table.php" afterPath="$PROJECT_DIR$/laravel/database/migrations/2018_04_13_063820_create_stask_comment_table.php" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -41,8 +30,8 @@
       <file leaf-file-name="displayOneAuth.blade.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/laravel/resources/views/Team/displayOneAuth.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="253">
-              <caret line="243" column="41" lean-forward="false" selection-start-line="243" selection-start-column="40" selection-end-line="243" selection-end-column="41" />
+            <state relative-caret-position="452">
+              <caret line="212" column="41" lean-forward="true" selection-start-line="212" selection-start-column="41" selection-end-line="212" selection-end-column="41" />
               <folding />
             </state>
           </provider>
@@ -51,18 +40,26 @@
       <file leaf-file-name="home.blade.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/laravel/resources/views/Home/home.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="128">
-              <caret line="124" column="111" lean-forward="false" selection-start-line="124" selection-start-column="111" selection-end-line="124" selection-end-column="111" />
+            <state relative-caret-position="184">
+              <caret line="57" column="117" lean-forward="false" selection-start-line="57" selection-start-column="114" selection-end-line="57" selection-end-column="117" />
               <folding>
                 <element signature="e#3956#4107#0#HTML" expanded="true" />
                 <element signature="e#4271#4320#0#HTML" expanded="true" />
-                <element signature="e#6752#7621#0#HTML" expanded="false" />
-                <element signature="e#7658#9154#0#HTML" expanded="false" />
-                <element signature="e#7882#8039#0#HTML" expanded="false" />
-                <element signature="e#0#11207#0#Blade" expanded="false" />
-                <element signature="e#8860#9111#0#HTML" expanded="false" />
-                <element signature="e#9196#9245#0#HTML" expanded="true" />
+                <element signature="e#5895#6057#0#HTML" expanded="false" />
+                <element signature="e#6805#7674#0#HTML" expanded="false" />
+                <element signature="e#7711#9240#0#HTML" expanded="false" />
+                <element signature="e#9282#9331#0#HTML" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Controller.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/laravel/app/Http/Controllers/Controller.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="60">
+              <caret line="127" column="9" lean-forward="false" selection-start-line="127" selection-start-column="9" selection-end-line="127" selection-end-column="9" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -90,16 +87,6 @@
                 <element signature="e#29240#29313#0#PHP" expanded="false" />
                 <element signature="e#29459#29567#0#PHP" expanded="false" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="displayOneAuthStask.blade.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/laravel/resources/views/Team/displayOneAuthStask.blade.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="184">
-              <caret line="70" column="114" lean-forward="false" selection-start-line="70" selection-start-column="114" selection-end-line="70" selection-end-column="114" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -166,10 +153,10 @@
       <find>comment_id</find>
       <find>createTra</find>
       <find>progress</find>
-      <find>hidden</find>
-      <find>Hey guys,I have updated progress of</find>
-      <find>'id</find>
       <find>delete</find>
+      <find>Hey guys,I have updated progress of</find>
+      <find>hidden</find>
+      <find>'id</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -224,10 +211,10 @@
         <option value="$PROJECT_DIR$/laravel/resources/views/Team/displayOneAuthStasks.blade.php" />
         <option value="$PROJECT_DIR$/laravel/app/Http/Controllers/Task/TaskController.php" />
         <option value="$PROJECT_DIR$/laravel/resources/views/Team/displayOne.blade.php" />
-        <option value="$PROJECT_DIR$/laravel/resources/views/Team/displayOneAuth.blade.php" />
-        <option value="$PROJECT_DIR$/laravel/app/Http/Controllers/Controller.php" />
         <option value="$PROJECT_DIR$/laravel/routes/web.php" />
         <option value="$PROJECT_DIR$/laravel/app/Http/Controllers/User/UserController.php" />
+        <option value="$PROJECT_DIR$/laravel/app/Http/Controllers/Controller.php" />
+        <option value="$PROJECT_DIR$/laravel/resources/views/Team/displayOneAuth.blade.php" />
         <option value="$PROJECT_DIR$/laravel/resources/views/Home/home.blade.php" />
       </list>
     </option>
@@ -412,12 +399,12 @@
       <workItem from="1523415265463" duration="28675000" />
       <workItem from="1523456650383" duration="19573000" />
       <workItem from="1523514772355" duration="29276000" />
-      <workItem from="1523593697305" duration="7402000" />
+      <workItem from="1523593697305" duration="8641000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="471444000" />
+    <option name="totallyTimeSpent" value="472683000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -742,16 +729,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/laravel/resources/views/Team/displayOneAuthStasks.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="250">
-          <caret line="250" column="0" lean-forward="false" selection-start-line="250" selection-start-column="0" selection-end-line="250" selection-end-column="0" />
-          <folding>
-            <element signature="e#14154#14231#0#HTML" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/laravel/app/Http/Controllers/HomeController.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-66">
@@ -760,26 +737,44 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/laravel/app/Http/Controllers/Controller.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="542">
-          <caret line="49" column="26" lean-forward="false" selection-start-line="49" selection-start-column="26" selection-end-line="49" selection-end-column="26" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/laravel/resources/views/Team/displayOneAuth.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="253">
-          <caret line="243" column="41" lean-forward="false" selection-start-line="243" selection-start-column="40" selection-end-line="243" selection-end-column="41" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/laravel/routes/web.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="416">
           <caret line="93" column="35" lean-forward="false" selection-start-line="93" selection-start-column="17" selection-end-line="93" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/laravel/app/Http/Controllers/User/UserController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="400">
+          <caret line="858" column="24" lean-forward="false" selection-start-line="858" selection-start-column="24" selection-end-line="858" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/laravel/resources/views/Team/displayOne.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="436">
+          <caret line="315" column="11" lean-forward="false" selection-start-line="297" selection-start-column="8" selection-end-line="315" selection-end-column="11" />
+          <folding>
+            <element signature="e#0#16666#0#Blade" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/laravel/app/Http/Controllers/Controller.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="127" column="9" lean-forward="false" selection-start-line="127" selection-start-column="9" selection-end-line="127" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/laravel/resources/views/Team/displayOneAuthStask.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1166">
+          <caret line="70" column="114" lean-forward="false" selection-start-line="70" selection-start-column="114" selection-end-line="70" selection-end-column="114" />
           <folding />
         </state>
       </provider>
@@ -797,45 +792,35 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/laravel/app/Http/Controllers/User/UserController.php">
+    <entry file="file://$PROJECT_DIR$/laravel/resources/views/Team/displayOneAuthStasks.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="400">
-          <caret line="858" column="24" lean-forward="false" selection-start-line="858" selection-start-column="24" selection-end-line="858" selection-end-column="24" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/laravel/resources/views/Team/displayOneAuthStask.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="184">
-          <caret line="70" column="114" lean-forward="false" selection-start-line="70" selection-start-column="114" selection-end-line="70" selection-end-column="114" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/laravel/resources/views/Team/displayOne.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="436">
-          <caret line="315" column="11" lean-forward="false" selection-start-line="297" selection-start-column="8" selection-end-line="315" selection-end-column="11" />
+        <state relative-caret-position="250">
+          <caret line="250" column="0" lean-forward="false" selection-start-line="250" selection-start-column="0" selection-end-line="250" selection-end-column="0" />
           <folding>
-            <element signature="e#0#16666#0#Blade" expanded="false" />
+            <element signature="e#14154#14231#0#HTML" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/laravel/resources/views/Team/displayOneAuth.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="452">
+          <caret line="212" column="41" lean-forward="true" selection-start-line="212" selection-start-column="41" selection-end-line="212" selection-end-column="41" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/laravel/resources/views/Home/home.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="128">
-          <caret line="124" column="111" lean-forward="false" selection-start-line="124" selection-start-column="111" selection-end-line="124" selection-end-column="111" />
+        <state relative-caret-position="184">
+          <caret line="57" column="117" lean-forward="false" selection-start-line="57" selection-start-column="114" selection-end-line="57" selection-end-column="117" />
           <folding>
             <element signature="e#3956#4107#0#HTML" expanded="true" />
             <element signature="e#4271#4320#0#HTML" expanded="true" />
-            <element signature="e#6752#7621#0#HTML" expanded="false" />
-            <element signature="e#7658#9154#0#HTML" expanded="false" />
-            <element signature="e#7882#8039#0#HTML" expanded="false" />
-            <element signature="e#0#11207#0#Blade" expanded="false" />
-            <element signature="e#8860#9111#0#HTML" expanded="false" />
-            <element signature="e#9196#9245#0#HTML" expanded="true" />
+            <element signature="e#5895#6057#0#HTML" expanded="false" />
+            <element signature="e#6805#7674#0#HTML" expanded="false" />
+            <element signature="e#7711#9240#0#HTML" expanded="false" />
+            <element signature="e#9282#9331#0#HTML" expanded="true" />
           </folding>
         </state>
       </provider>

@@ -92,6 +92,7 @@
                         </p>
                     @else
                         <ul class="collection" style="width: 1050px;float: left">
+                            {{dump($teamUpdatings)}}
                             @foreach($teamUpdatings as $teamUpdating)
                                 <li class="collection-item shadow" style="width:1020px;height:auto;min-height:180px;margin-left: 5px;margin-top: 10px;"  >
                                     <div style="height:100px;width: 130px;float: left;">
@@ -118,7 +119,7 @@
                                             </p>
                                         @endunless
                                         <p style="font-size: 10px;color:#8D8D8D;float:right;position:absolute;top:130px;padding: 0px;margin-right: 0px; ">
-                                            {{ date('Y-m-d H:i:s',$teamUpdating['time']) }}
+                                            {{ date('Y-m-d H:i:s',$teamUpdating['time']) }}{{$teamUpdating['uploading_id']}}
                                         </p>
                                     </div>
                                     <div style="width:20px;float: right;margin-left: 5px;" id="del_team_uploading"> <img src="{{URL::asset('/images/delete2.png')}}" class="delete_tran"></div>
@@ -136,7 +137,7 @@
     </div>
     <script>
         $('.collection-item').on('click','#del_user_updating',function(event){
-            var id=$(this).siblings([name='id']).val();
+            var id=$(this).siblings("[name='id']").val();
             $.ajax({
                 url: "{{url('user/deleteUserUpdating')}}",
                 type: 'post',
@@ -155,7 +156,7 @@
             $(this).parent().parent().remove();
         });
         $('.collection-item').on('click','#del_team_uploading',function(event){
-            var id=$(this).siblings([name='t_id']).val();
+            var id=$(this).siblings("[name='t_id']").val();
             $.ajax({
                 url: "{{url('team/deleteTeamUploading')}}",
                 type: 'post',
