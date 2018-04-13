@@ -91,6 +91,7 @@ Route::group(['middleware'=>'auth','namespace'=>'User','prefix'=>'user'],functio
 
     Route::get('displayOthersInfoTasks','UserController@displayOthersInfoTasks');
 
+    Route::post('deleteUserUpdating','UserController@deleteUserUpdating');
 });
 //团队相关路由
 Route::group(['middleware'=>'auth','namespace'=>'Team','prefix'=>'team'],function(){
@@ -139,6 +140,8 @@ Route::group(['middleware'=>'auth','namespace'=>'Team','prefix'=>'team'],functio
     Route::any('displayOneAuthTasks/displayOneAuthStask/{team_id}','TeamController@displayOneAuthStask')->name('displayOneAuthStask');
 
     Route::any('displayAllocateSubTask/displayOneAuthStasks/{team_id}','TeamController@displayOneAuthStasks')->name('displayOneAuthStasks');
+
+    Route::post('deleteTeamUploading','TeamController@deleteTeamUploading');
 });
 Route::any('task/displayOneAuthTasks/displayOneAuthStask/{team_id}','Team\TeamController@displayOneAuthStask')->name('displayOneAuthStask')->middleware('auth');
 //任务路由

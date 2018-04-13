@@ -79,6 +79,8 @@
 
                                 </div>
                                 <div style="font-weight:600;font-size:18px;color:#0C0C0C;height:auto;min-height:130px;width: 340px;float: left;word-wrap:break-word;line-height: 30px;position:relative ;margin-top: 10px">
+                                    <div style="width:20px;float: right;margin-left: 5px;" id="del"> <img src="{{URL::asset('/images/delete2.png')}}" class="delete_tran"></div>
+                                    <input type="hidden" value="{{$uploading['uploading_id']}}" name="id">
                                     {{$uploading['content']}}
 
                                     @unless($uploading['resource']==null)
@@ -293,6 +295,25 @@
             var vDiv = document.getElementById(oDiv);
             vDiv.style.display = (vDiv.style.display == 'none')?'block':'none';
         }
+        $('.collection-item').on('click','#del',function(event){
+            var id=$(this).siblings([name='id']).val();
+            $.ajax({
+                url: "{{url('team/deleteTeamUploading')}}",
+                type: 'post',
+                dataType: 'json',
+                data: {'id':id,"_token":"{{csrf_token()}}"}
+            })
+                .done(function(data) {
+                    layer.msg(data.msg);
+                })
+                .fail(function(data) {
+                    layer.msg("Something went wrong,try again later");
+                })
+                .always(function() {
+                    console.log("complete");
+                });
+            $(this).parent().parent().remove();
+        });
 	</script>
 
 @endsection

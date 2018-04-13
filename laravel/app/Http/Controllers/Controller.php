@@ -47,7 +47,7 @@ class Controller extends BaseController
                 $type='pUpdating';
             }
             $map_updater = [
-                'id'=>md5(uniqid(mt_rand(),true)),
+                'updating_id'=>md5(uniqid(mt_rand(),true)),
                 'updater_id'=>$request->input('updater_id'),
                 'time'=>strtotime(date("Y-m-d H:i:s")),
                 'content'=>$request->input('content'),

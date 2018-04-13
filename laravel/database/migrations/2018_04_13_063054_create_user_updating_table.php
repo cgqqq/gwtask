@@ -14,13 +14,13 @@ class CreateUserUpdatingTable extends Migration
     public function up()
     {
         Schema::create('user_updating', function (Blueprint $table) {
-            $table->string('id',32);
+            $table->string('updating_id',32);
             $table->string('updater_id',20);
             $table->integer('time',false);
             $table->string('content',10000);
             $table->string('resource',100)->default(null)->nullable();
             $table->enum('type',['cTeam','sResource','pUpdating']);
-            $table->primary('id');
+            $table->primary('updating_id');
         });
     }
 

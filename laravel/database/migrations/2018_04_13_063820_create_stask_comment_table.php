@@ -14,12 +14,12 @@ class CreateStaskCommentTable extends Migration
     public function up()
     {
         Schema::create('stask_comment', function (Blueprint $table) {
-            $table->string('id',32);
+            $table->string('comment_id',32);
             $table->string('stask_id',32);
             $table->integer('time',false);
             $table->string('commentator_id',32);
             $table->string('comment',1000);
-            $table->primary('id');
+            $table->primary('comment_id');
         });
     }
 

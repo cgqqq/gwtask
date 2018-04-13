@@ -143,18 +143,18 @@
                         <div id="action_comment" style="float: left;width: 100%;color: #0C0C0C;margin-left: 10px;line-height: 20px">
                                 <div class="form-group" style="width: 300px;float: left;margin-left: 50px">
                                     <div >
-                                        <textarea type="text" required="" class="form-control" id="comment_input"></textarea>
+                                        <textarea type="text" required="" class="form-control" id="comment_input{{$aStask['stask_id']}}"></textarea>
                                     </div>
                                 </div>
                                 <div style="float: left;margin-top: 20px;margin-left: 30px">
-                                    <button id="submit_comment" class="layui-btn shadow" style="border: 2px solid #0C0C0C;color: #0C0C0C;background-color: #fcfcfc" onclick="show()">
+                                    <button id="submit_comment" class="layui-btn shadow" style="border: 2px solid #0C0C0C;color: #0C0C0C;background-color: #fcfcfc" onclick="show('{{$aStask['stask_id']}}')">
                                         send
                                     </button>
                                     <input type="hidden" name="stask_id" value="{{$aStask['stask_id']}}" >
                                 </div>
                         </div>
                        <span style="display: none"> {{$i="0"}}</span>
-                        <ul class="collection" style="float: left" id="com">
+                        <ul class="collection" style="float: left" id="com{{$aStask['stask_id']}}">
                             @unless(empty($aStask['comments']))
                                 @foreach($aStask['comments'] as $comment)
                                     <li class="collection-item avatar" style="color: #0C0C0C;height: auto;min-height: 160px;width: 550px;padding-bottom: 10px" >
@@ -170,11 +170,11 @@
                                             <div style="width: 40px;float: right;margin-right:20px;margin-top:0;" id="del">
                                                 <img src="{{URL::asset('/images/delete2.png')}}" >
                                             </div>
-                                            <input type="hidden" value="{{$comment['id']}}" name="id">
+                                            <input type="hidden" value="{{$comment['comment_id']}}" name="comment_id">
                                         </div>
                                         <div style="width:400px;height:30px;line-height: 10px;margin-bottom: 10px;">
                                             <p style="font-size: 12px;margin-right: 0px;color: #8D8D8D">
-                                                {{ date('Y-m-d H:i:s',$comment['time']) }}
+                                                {{ date('Y-m-d H:i:s',$comment['time']) }}{{$comment['comment_id']}}
                                             </p>
                                         </div>
                                     </li>
@@ -182,12 +182,12 @@
                                 @endforeach
                             @endunless
                             <div style="display:none;">
-                                <li class="collection-item avatar" style="color: #0C0C0C;height: auto;min-height: 160px;width: 550px;padding-bottom: 10px" id="c{{$i}}">
+                                <li class="collection-item avatar" style="color: #0C0C0C;height: auto;min-height: 160px;width: 550px;padding-bottom: 10px" id="c{{$i}}{{$aStask['stask_id']}}">
                                     <div style="float:left;width:100px;height:120px;">
                                         <img src="{{URL::asset(session('user_profile'))}}" class="layui-circle" width="65px" height="65px" style="margin-left: 15px;" onclick='javascrtpt:window.location.href="{{url('user/displayInfo')}}"' >
                                     </div>
                                     <div style="float:left;width: 400px;min-height:120px;font-weight: 800;font-size: 18px;line-height: 40px;height:auto;" >
-                                        <textarea id="{{$i}}" value="" style="width:320px;border: 1px solid transparent;height: 120px;resize: none;"readonly></textarea>
+                                        <textarea id="{{$i}}{{$aStask['stask_id']}}" value="" style="width:320px;border: 1px solid transparent;height: 120px;resize: none;"readonly></textarea>
                                         <div style="width: 40px;float: right;margin-right:20px;margin-top:0;" id="del2">
                                             <img src="{{URL::asset('/images/delete2.png')}}" >
                                         </div>
@@ -251,7 +251,7 @@
 
     });
     $('.box').on('click','#del',function(event){
-        var id=$(this).siblings([name='id']).val();
+        var id=$(this).siblings("[name='comment_id']").val();
         $.ajax({
             url: "{{url('task/deleteComment')}}",
             type: 'post',
@@ -280,13 +280,17 @@
             var vDiv = document.getElementById(oDiv);
             vDiv.style.display = (vDiv.style.display == 'none')?'block':'none';
         }
-        function show() {
-            document.getElementById('0').innerHTML=document.getElementById('comment_input').value;
-            var new_comment=$('#c0').clone();
-            document.getElementById('comment_input').value=null;
-            $('#com').prepend(new_comment);
-            var comment=document.getElementById('0').value;
-            var stask_id=$('#input0').val();
+        function show(stask_id) {
+            var stask_id=stask_id;
+            /*得到输入框的评论，并加入到预的clone*/
+            var comment=document.getElementById('comment_input'+stask_id).value;
+            document.getElementById('0'+stask_id).innerHTML=document.getElementById('comment_input'+stask_id).value;
+            /*clone得到的是c1*/
+            var new_comment=$('#c0'+stask_id).clone();
+            /*清空*/
+            document.getElementById('comment_input'+stask_id).value=null;
+            /*显示*/
+            $('#com'+stask_id).prepend(new_comment);
            $.ajax({
                 url: "{{url('task/comment')}}",
                 type: 'post',

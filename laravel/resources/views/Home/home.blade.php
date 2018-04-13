@@ -54,6 +54,8 @@
                                         @endif
                                         <div style="float:right;width: 90%;font-weight: 800;font-size: 18px;word-wrap: break-word;line-height: 40px;display: table;padding-right: 40px;color: black" >
                                             {{$friendsUpdating['user_name']}} : {{$friendsUpdating['content']}}
+                                            <div style="width:20px;float: right;margin-left: 5px;" id="del_user_updating"> <img src="{{URL::asset('/images/delete2.png')}}" class="delete_tran"></div>
+                                            <input type="hidden" value="{{$friendsUpdating['updating_id']}}" name="id">
                                         </div>
                                         <div style="width:760px;float: left ;font-size: 12px;color:#0C0C0C;line-height: 10px" >
                                             @unless($friendsUpdating['type']!='sResource')
@@ -119,6 +121,8 @@
                                             {{ date('Y-m-d H:i:s',$teamUpdating['time']) }}
                                         </p>
                                     </div>
+                                    <div style="width:20px;float: right;margin-left: 5px;" id="del_team_uploading"> <img src="{{URL::asset('/images/delete2.png')}}" class="delete_tran"></div>
+                                    <input type="hidden" value="{{$teamUpdating['uploading_id']}}" name="t_id">
                                 </li>
                             @endforeach
                         </ul>
@@ -131,7 +135,44 @@
     </div>
     </div>
     <script>
-
+        $('.collection-item').on('click','#del_user_updating',function(event){
+            var id=$(this).siblings([name='id']).val();
+            $.ajax({
+                url: "{{url('user/deleteUserUpdating')}}",
+                type: 'post',
+                dataType: 'json',
+                data: {'id':id,"_token":"{{csrf_token()}}"}
+            })
+                .done(function(data) {
+                    layer.msg(data.msg);
+                })
+                .fail(function(data) {
+                    layer.msg("Something went wrong,try again later");
+                })
+                .always(function() {
+                    console.log("complete");
+                });
+            $(this).parent().parent().remove();
+        });
+        $('.collection-item').on('click','#del_team_uploading',function(event){
+            var id=$(this).siblings([name='t_id']).val();
+            $.ajax({
+                url: "{{url('team/deleteTeamUploading')}}",
+                type: 'post',
+                dataType: 'json',
+                data: {'id':id,"_token":"{{csrf_token()}}"}
+            })
+                .done(function(data) {
+                    layer.msg(data.msg);
+                })
+                .fail(function(data) {
+                    layer.msg("Something went wrong,try again later");
+                })
+                .always(function() {
+                    console.log("complete");
+                });
+            $(this).parent().parent().remove();
+        });
     </script>
 
 @endsection

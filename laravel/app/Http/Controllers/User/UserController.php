@@ -596,7 +596,7 @@ class UserController extends Controller
             'mail_sent_time'=>strtotime(date("Y-m-d H:i:s"))
         ];
         $map_uploading = [
-            'id'=>md5(uniqid(mt_rand(),true)),
+            'uploading_id'=>md5(uniqid(mt_rand(),true)),
             'team_id'=>$team_id,
             'uploader_id'=>$team_info[0]['team_funder_id'],
             'time'=>strtotime(date("Y-m-d H:i:s")),
@@ -845,6 +845,24 @@ class UserController extends Controller
         }
         return view('User/displayOthersInfoTasks',['user_info'=>$user_info[0],'transData1'=>$tasks,'transData2'=>$taskArray]);
 
+    }
+
+    public function deleteUserUpdating(Request $request,UserUpdating $userUpdating){
+        $map=['updating_id'=>$request->input('id')];
+        try {
+            //开始事务
+            DB::beginTransaction();
+            $userUpdating->del($map);
+            //提交事务
+            DB::commit();
+            //返回前端添加成功结果
+            return response()->json(['msg'=>'Deleted successfully!']);
+        } catch(QueryException $ex) {
+            //回滚事务
+            DB::rollback();
+            //返回前端添加失败结果
+            return response()->json(['msg'=>'Busy network!Try again later!']);
+        }
     }
 }
 

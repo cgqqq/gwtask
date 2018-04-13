@@ -217,19 +217,10 @@ class TaskController extends Controller
             'trans_Resource_path'=>$trans_Resource_path,
             'trans_Resource_intro'=>$request->input('trans_Resource_intro')
         ];
-        $map_uploading = [
-            'id'=>md5(uniqid(mt_rand(),true)),
-            'team_id'=>$task_info[0]['task_team_id'],
-            'uploader_id'=>$task_info[0]['task_manager_id'],
-            'time'=>strtotime(date("Y-m-d H:i:s")),
-            'content'=>'Hey guys,I have updated progress of task :'.$task_info[0]['task_name']." ! Come over and check out the detail !",
-            'resource'=>$trans_Resource_path,
-        ];
         try {
             //开始事务
             DB::beginTransaction();
             $taskTransaction->add($map_trans);
-            $teamUploading->add($map_uploading);
             //提交事务
             DB::commit();
             //返回前端添加成功结果
@@ -308,14 +299,7 @@ class TaskController extends Controller
                 'trans_Resource_intro'=>'stask'
             ];
             $task_info=$task->where(['task_id'=>$request->input('task_id')])->get()->toArray();
-            $map_uploading = [
-                'id'=>md5(uniqid(mt_rand(),true)),
-                'team_id'=>$task_info[0]['task_team_id'],
-                'uploader_id'=>session('user_id'),
-                'time'=>strtotime(date("Y-m-d H:i:s")),
-                'content'=>'Hey guys,I have updated progress of task :'.$task_info[0]['task_name']." ! Come over and check out the detail !",
-                'resource'=>null,
-            ];
+
             $map_task=[ 'task_id'=>$request->input('task_id')];
             $map_update_allocationStatus=['task_allocation_status'=>'1'];
     		try {
@@ -323,7 +307,6 @@ class TaskController extends Controller
 	            DB::beginTransaction();
 	            $stask->add($map);
 	            $taskTransaction->add($map_trans);
-	            $teamUploading->add($map_uploading);
 	            $task->edit($map_task,$map_update_allocationStatus);
 	            //提交事务
 	            DB::commit();	            
@@ -394,7 +377,7 @@ class TaskController extends Controller
         $stask_id=$request->input('stask_id');
         $comment=$request->input('comment');
         $map=[
-            'id'=>md5(uniqid(mt_rand(),true)),
+            'comment_id'=>md5(uniqid(mt_rand(),true)),
             'stask_id'=>$stask_id,
             'commentator_id'=>session('user_id'),
             'comment'=>$comment,
@@ -416,7 +399,9 @@ class TaskController extends Controller
         }
     }
     public function deleteComment(Request $request,Stask_comment $comment){
-        $request->validate(['comment_id'=>$request->input('id')]);
+        $request->validate([
+            'id'=>"required"
+        ]);
         $map=[
             'id'=>$request->input('id')
         ];

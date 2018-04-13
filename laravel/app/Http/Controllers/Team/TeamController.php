@@ -44,7 +44,7 @@ class TeamController extends Controller
             'team_info'=>$request->input('team_info')
         ];
         $map_updating = [
-            'id'=>md5(uniqid(mt_rand(),true)),
+            'updating_id'=>md5(uniqid(mt_rand(),true)),
             'updater_id'=>session('user_id'),
             'time'=>strtotime(date("Y-m-d H:i:s")),
             'type'=>'cTeam',
@@ -266,7 +266,7 @@ class TeamController extends Controller
 
 
         //获取该团队动态信息
-        $uploadings=$teamUploading->where(['team_id'=>$teamInfo[0]['team_id']])->orderBy('time','desc')->get()->toArray();
+        $uploadings=$teamUploading->where(['team_id'=>$teamInfo[0]['team_id']])->orderBy('time','desc')->get()->toarray();
         //添加上传人的头像信息和姓名
         foreach ($uploadings as &$key){
             $uploader_info=$user->where(['user_id'=>$key['uploader_id']])->get()->toArray();
@@ -605,7 +605,7 @@ class TeamController extends Controller
                 'member_id'=>$application[0]['applicant_id']
             ];
             $map_uploading = [
-                'id'=>md5(uniqid(mt_rand(),true)),
+                'uploading_id'=>md5(uniqid(mt_rand(),true)),
                 'team_id'=>$application[0]['app_team_id'],
                 'uploader_id'=>$teamFounder[0]['team_funder_id'],
                 'time'=>strtotime(date("Y-m-d H:i:s")),
@@ -640,7 +640,7 @@ class TeamController extends Controller
             'team_id'=>'required'
         ]);
         $map_uploading=[
-            'id'=>md5(uniqid(mt_rand(),true)),
+            'uploading_id'=>md5(uniqid(mt_rand(),true)),
             'team_id'=>$request->input('team_id'),
             'uploader_id'=>session('user_id'),
             'time'=>strtotime(date("Y-m-d H:i:s")),
@@ -930,7 +930,7 @@ class TeamController extends Controller
         if(empty($fileExist)){
 
             $map_submission=[
-                'id'=>md5(uniqid(mt_rand(),true)),
+                'submission_id'=>md5(uniqid(mt_rand(),true)),
                 'stask_id'=>$request->input('stask_id'),
                 'time'=>strtotime(date("Y-m-d H:i:s")),
                 'file'=>$file_path
@@ -1071,5 +1071,25 @@ class TeamController extends Controller
         }
 
         return view('Team/displayOneAuthStasks',['stasks'=>$tasks,'team_info'=>$teamInfo[0],'pageOut'=>$pageOut,'paged'=>$paged,'data'=>$data,'uploadings'=>$uploadings,'AuthOrNot'=>$AuthOrNot]);
+
+
+    }
+    public function deleteTeamUploading(Request $request,TeamUploading $teamUploading){
+
+        $map=['uploading_id'=>$request->input('id')];
+        try {
+            //开始事务
+            DB::beginTransaction();
+           $teamUploading->del($map);
+            //提交事务
+            DB::commit();
+            //返回前端添加成功结果
+            return response()->json(['msg'=>'Deleted successfully!']);
+        } catch(QueryException $ex) {
+            //回滚事务
+            DB::rollback();
+            //返回前端添加失败结果
+            return response()->json(['msg'=>'Busy network!Try again later!']);
+        }
     }
 }

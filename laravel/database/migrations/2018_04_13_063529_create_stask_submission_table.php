@@ -14,12 +14,12 @@ class CreateStaskSubmissionTable extends Migration
     public function up()
     {
         Schema::create('stask_submission', function (Blueprint $table) {
-            $table->string('id',32);
+            $table->string('submission_id',32);
             $table->string('stask_id',32);
             $table->integer('time',false);
             $table->string('score',100)->default(null)->nullable();
             $table->string('file',100)->default(null)->nullable();
-            $table->primary('id');
+            $table->primary('submission_id');
         });
     }
 

@@ -14,13 +14,13 @@ class CreateTeamUploadingTable extends Migration
     public function up()
     {
         Schema::create('team_uploading', function (Blueprint $table) {
-            $table->string('id',32);
+            $table->string('uploading_id',32);
             $table->string('team_id',32);
             $table->string('uploader_id',20);
             $table->integer('time',false);
             $table->string('content',10000);
             $table->string('resource',100)->default(null)->nullable();;
-            $table->primary('id');
+            $table->primary('uploading_id');
         });
     }
 
