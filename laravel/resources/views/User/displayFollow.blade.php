@@ -25,7 +25,7 @@
 
 			{{--关注用户列表--}}
 			@foreach($pageOut as $user)
-			<div class="chip">
+			<div class="chip_f">
 					<img src="{{URL::asset('/uploads/user_profile/'.$user['user_profile'])}}" alt="IMG" style="margin-right: 20px" onclick='javascrtpt:window.location.href="{{url('user/displayOthersInfo/'.$user['user_id'])}}"'>
 					{{ $user['user_name'] }}
 					{{--关注与取关操作--}}

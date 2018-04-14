@@ -33,11 +33,29 @@
         </div>
     </div>
     <div style="width:770px;min-height: 800px;float: left;height: auto;" class="scroll">
+        @unless($download_resource=='0')
+        <div style="width:770px;height: 40px; text-align: center;display: none" id="tip">
+            <p style="font-size: 12px;color:#800000;">
+                User  {{$user_info['user_name']}} Has Forbidden others to download files.
+            </p>
+        </div>
+        @endunless
+        @if(empty($resources))
+            <div style="text-align: center;margin-top: 40%">
+            <p style="color: #bbbbb7;font-size: 20px;font-weight: 900;">
+                <img src="{{URL::asset('/images/empty.png')}}" >No Resource Has Been Uploaded Yet!
+            </p>
+            </div>
+        @else
         @foreach($resources as $resource)
             <div style="width:200px;height:400px;float: left;margin-top: 20px;margin-left: 40px">
                 <div class="card" style="width:200px;height:200px">
                     <div class="card-image" id="profile">
+                        @if($download_resource=='1')
+                        <a href="javascript:void(0);"  onclick="tip()">
+                            @else
                         <a href={{URL::asset($resource['resource'])}} download={{$resource['resource']}}>
+                            @endif
                             @if($resource['type']=='video')
                                 <img src="{{URL::asset('/images/video.png')}}" width="200px" height="200px">
                             @elseif($resource['type']=='picture')
@@ -70,6 +88,11 @@
                 </div>
             </div>
         @endforeach
+        @endif
     </div>
-
+<script>
+    function tip() {
+        document.getElementById('tip').style.display='block';
+    }
+</script>
 @endsection

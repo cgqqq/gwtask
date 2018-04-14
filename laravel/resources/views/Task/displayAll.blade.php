@@ -5,7 +5,9 @@
 
 <div class="layui-collapse box" lay-filter="test">
 	@foreach($teams as $team)
+		@unless(empty($team['tasks']))
 		<span style="color: black;font-weight: 800;font-size: 20px;padding: 5px">Team : {{$team['team_name']}}</span>
+		@endunless
 		@foreach($team['tasks'] as $task)
 	<li class="layui-colla-item" style="width: 1000px;" >
 		<h2 class="layui-colla-title" style="color: #0C0C0C;font-weight: 800;font-size: 15px;width: 1030px;background-color: #34bf49">{{ $task['task_name'] }}

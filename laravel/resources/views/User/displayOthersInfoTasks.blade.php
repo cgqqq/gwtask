@@ -33,6 +33,7 @@
         </div>
     </div>
     <div style="width:770px;min-height: 800px;float: left;height: auto;">
+        @if(empty($privacy_task))
         <div class="layui-tab" >
             <ul class="layui-tab-title">
                 <li class="layui-this" style="background-color: #4aaf51;">{{$user_info['user_name']}} Has Published These Tasks</li>
@@ -41,8 +42,11 @@
             <div class="layui-tab-content" style="color: #0C0C0C">
                 <div class="layui-tab-item layui-show">
                     @if(empty($transData1))
-                        <p style="color: #0C0C0C;font-size: 20px;font-weight: 900;margin-left: 200px;margin-top: 100px">
-                            No Task Has Been Published Yet!</p>
+                        <div style="text-align: center;margin-top: 40%">
+                            <p style="color: #bbbbb7;font-size: 20px;font-weight: 900;">
+                                <img src="{{URL::asset('/images/empty.png')}}" > No Task Has Been Published Yet!
+                            </p>
+                        </div>
                     @else
                     <div class="layui-collapse scroll" lay-filter="test" style="width: 770px;height: 770px">
                 @foreach($transData1 as $task)
@@ -99,8 +103,11 @@
                 </div>
                 <div class="layui-tab-item">
                     @if(empty($transData2))
-                        <p style="color: #0C0C0C;font-size: 20px;font-weight: 900;margin-left: 200px;margin-top: 100px">
-                            No Task Has Been Joined In Yet!</p>
+                        <div style="text-align: center;margin-top: 40%">
+                            <p style="color: #bbbbb7;font-size: 20px;font-weight: 900;">
+                                <img src="{{URL::asset('/images/empty.png')}}" >No Task Has Been Joined In Yet!
+                            </p>
+                        </div>
                     @else
                         <div class="layui-collapse scroll" lay-filter="test" style="width: 770px;height: 770px">
                             @foreach($transData2 as $task)
@@ -158,7 +165,13 @@
                 </div>
             </div>
         </div>
-
+        @else
+            <div style="text-align: center;margin-top: 40%">
+                <p style="color: #bbbbb7;font-size: 20px;font-weight: 900;">
+                    <img src="{{URL::asset('/images/lock.png')}}" > User {{$user_info['user_name']}} Has Locked This Task Page!
+                </p>
+            </div>
+        @endif
     </div>
 
 @endsection

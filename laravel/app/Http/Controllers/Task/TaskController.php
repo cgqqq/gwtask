@@ -91,6 +91,7 @@ class TaskController extends Controller
            $this->createTransaction($taskTransaction,$request,$teamUploading,$task);
        }
         $teams=$team->where(['team_funder_id'=>session('user_id')])->get()->toArray();
+
 	     foreach($teams as &$aTeam){
 	         $aTeam['tasks']=$task->where(['task_manager_id'=>session('user_id'),'task_team_id'=>$aTeam['team_id']])->get()->toArray();
 	         foreach ($aTeam['tasks'] as &$key){
@@ -342,7 +343,7 @@ class TaskController extends Controller
     	}
     	if($isSuccessfull){
 			//返回前端添加成功结果
-            return response()->json(['msg' => 'Allocate Sub-task Successfully!','team_id'=>$map_uploading['team_id']]);
+            return response()->json(['msg' => 'Allocate Sub-task Successfully!','team_id'=>$task_info[0]['task_team_id']]);
     	}else{
 			//返回前端添加失败结果
 	         return response()->json(['msg' => 'Failed To Allocate Sub-task!']);

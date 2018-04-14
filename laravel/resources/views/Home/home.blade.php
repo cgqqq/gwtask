@@ -39,9 +39,11 @@
                     </div>
                     <div style="width: 1030px;float: left;min-height: 550px;height: auto;" >
                         @if(empty($friendsUpdatings))
-                            <p style="color: #0C0C0C;font-size: 20px;font-weight: 900;margin-left:350px;margin-top: 160px">
-                                No One Has Posted Updating Yet!
-                            </p>
+                            <div style="text-align: center;margin-top: 20%">
+                                <p style="color: #bbbbb7;font-size: 20px;font-weight: 900;">
+                                    <img src="{{URL::asset('/images/empty.png')}}" >No One Has Posted Any Updating Yet!
+                                </p>
+                            </div>
                         @else
 
                             <ul class="collection" id="flow">
@@ -87,12 +89,14 @@
                 </div>
                 <div class="layui-tab-item">
                     @if(empty($teamUpdatings))
-                        <p style="color: #0C0C0C;font-size: 20px;font-weight: 900;margin-left:350px;margin-top: 160px">
-                            No Team Has Posted Updating Yet!
-                        </p>
+                        <div style="text-align: center;margin-top: 40%;margin-left: 40%">
+                            <p style="color: #bbbbb7;font-size: 20px;font-weight: 900;">
+                                <img src="{{URL::asset('/images/empty.png')}}" >No Team Has Posted Any Updating Yet!
+                            </p>
+                        </div>
                     @else
                         <ul class="collection" style="width: 1050px;float: left">
-                            {{dump($teamUpdatings)}}
+
                             @foreach($teamUpdatings as $teamUpdating)
                                 <li class="collection-item shadow" style="width:1020px;height:auto;min-height:180px;margin-left: 5px;margin-top: 10px;"  >
                                     <div style="height:100px;width: 130px;float: left;">
@@ -126,6 +130,7 @@
                                     <input type="hidden" value="{{$teamUpdating['uploading_id']}}" name="t_id">
                                 </li>
                             @endforeach
+
                         </ul>
                     @endif
                 </div>

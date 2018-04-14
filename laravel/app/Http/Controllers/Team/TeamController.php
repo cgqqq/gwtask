@@ -6,6 +6,7 @@ use App\Http\Controllers\Task\TaskController;
 use App\Models\Invitation;
 use App\Models\App_join;
 use App\Models\Mail;
+use App\Models\Privacy;
 use App\Models\Stask_allocation;
 use App\Models\Stask_comment;
 use App\Models\Stask_submission;
@@ -1092,4 +1093,5 @@ class TeamController extends Controller
             return response()->json(['msg'=>'Busy network!Try again later!']);
         }
     }
+
 }

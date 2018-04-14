@@ -4,6 +4,7 @@ namespace App\Http\Controllers\User;
 
 use App\Models\Invitation;
 use App\Models\Mail;
+use App\Models\Privacy;
 use App\Models\Task;
 use App\Models\TaskTransaction;
 use Illuminate\Http\Request;
@@ -417,33 +418,55 @@ class UserController extends Controller
         return view('User/displaySearchResult', ['friendship' => $friendship, 'result' => $result]);
     }
 
-    public function displayOthersInfo(Request $request, $user_id,UserUpdating $userUpdating,User $user)
+    public function displayOthersInfo(Request $request, $user_id,UserUpdating $userUpdating,User $user,Privacy $privacy)
     {
-        /*查询用户信息*/
         $user_info = $user->get(['user_id' => $user_id])->toArray();
+        /*查询隐私设置*/
+        $re=$privacy->where(['user_id'=>$user_id])->value('view_page');
+        if(count($re)!=0&&$re=='1'){
+            return view('User/displayOthersInfo', ['user_info' => $user_info[0],'privacy_updating'=>'1']);
+        }
+        else{
+        /*查询用户个人动态信息*/
         $personalUpdatings=$userUpdating->where(['updater_id'=>$user_info[0]['user_id']])->orderBy('time','desc')->get()->toArray();
         return view('User/displayOthersInfo', ['user_info' => $user_info[0],'personalUpdatings'=>$personalUpdatings]);
+        }
     }
 
-    public function displayOthersInfoTeams(Request $request, Membership $membership, Team $team, User $user)
+    public function displayOthersInfoTeams(Request $request, Membership $membership, Team $team, User $user,Privacy $privacy)
     {
         $user_id = $request->input('user_id');
         $user_info = $user->get(['user_id' => $user_id])->toArray();
+        $privacy_team_joined=$privacy->where(['user_id'=>$user_id])->value('view_team_joined');
+        if(count($privacy_team_joined)==0){
+            $privacy_team_joined='0';
+        }
+        $privacy_team_created=$privacy->where(['user_id'=>$user_id])->value('view_team_created');
+        if(count($privacy_team_created)==0){
+            $privacy_team_created='0';
+        }
         $team_mine_info = $team->where(['team_funder_id' => $user_id])->join('user', 'user.user_id', '=', 'team.team_funder_id')->get()->toArray();
-        $team_in_info = $membership->where(['member_id' => $user_id])
+        $team_in = $membership->where(['member_id' => $user_id])
             ->join('team', 'membership.team_id', '=', 'team.team_id')
             ->join('user', 'user.user_id', '=', 'team.team_funder_id')->get()->toArray();
+        $i=0;
+        foreach($team_in as &$item){
+            if($item['team_funder_id']!=$user_id){
+                $team_in_info[$i]=&$item;
+                $i=$i+1;
+            }
+        }
 
-
-        return view('User/displayOthersInfoTeams', ['teams' => $team_in_info, 'user_info' => $user_info[0], 'myTeams' => $team_mine_info]);
+        return view('User/displayOthersInfoTeams', ['teams' => $team_mine_info, 'user_info' => $user_info[0], 'myTeams' => $team_in_info,'privacy_team_joined'=>$privacy_team_joined,'privacy_team_created'=>$privacy_team_created]);
 
     }
 
-    public function displayInfoOptions(App_join $app_join,Invitation $invitation,Mail $mail)
+    public function displayInfoOptions(App_join $app_join,Invitation $invitation,Mail $mail,Privacy $privacy)
     {
         $applications=$app_join->where(['status' =>"0"])->join('team','team.team_id','=','app_join.app_team_id')->where(['team.team_funder_id' => session('user_id')])->get()->toArray();
         $newsNum = count($mail->where(['mail_status' =>"0", 'mail_to_id' => session('user_id')])->get()->toArray()) + count($invitation->where(['user_id' => session('user_id'), 'status' => '0'])->get()->toArray())+count($applications);
-        return view('User/displayInfoOptions',['newsNum'=>$newsNum]);
+        $privacies=$privacy->where(['user_id'=>session('user_id')])->get()->toArray();
+        return view('User/displayInfoOptions',['newsNum'=>$newsNum,'privacies'=>$privacies[0]]);
     }
 
     public function applyJoinTeam(Request $request, App_join $app_join,Team $team)
@@ -775,7 +798,7 @@ class UserController extends Controller
         return view('User/displayInfoMyMailContent', ['newsNum' => $newsNum, 'mail_content' => $mail_content[0], 'mail_to_info' => $mail_to_info[0]]);
     }
 
-    public function displayOthersInfoResourceSharings(Request $request,UserUpdating $userUpdating,User $user){
+    public function displayOthersInfoResourceSharings(Request $request,UserUpdating $userUpdating,User $user,Privacy $privacy){
         $user_id = $request->input('user_id');
         $resources=$userUpdating->where(['updater_id'=>$user_id,'type'=>'sResource'])->get(['resource','content','time'])->toArray();
         foreach ($resources as &$resource){
@@ -813,13 +836,23 @@ class UserController extends Controller
             }
         }
         $user_info = $user->get(['user_id' => $user_id])->toArray();
-        return view('User/displayOthersInfoResourceSharings',['resources'=>$resources,'user_info'=>$user_info[0]]);
+        /*资源下载权限*/
+        $download_resource=$privacy->where(['user_id'=>$user_id])->value('download_resource');
+        if(count($download_resource)==0){
+            $download_resource='0';
+        }
+        return view('User/displayOthersInfoResourceSharings',['resources'=>$resources,'user_info'=>$user_info[0],'download_resource'=>$download_resource]);
 
     }
 
-    public function displayOthersInfoTasks(Request $request,User $user,TaskTransaction $taskTransaction,Team $team,Task $task,Membership $membership){
+    public function displayOthersInfoTasks(Request $request,User $user,TaskTransaction $taskTransaction,Team $team,Task $task,Membership $membership,Privacy $privacy){
         $user_id = $request->input('user_id');
         $user_info = $user->get(['user_id' => $user_id])->toArray();
+        $re=$privacy->where(['user_id'=>$user_id])->value('view_task');
+        if(count($re)!=0&&$re=='1'){
+            return view('User/displayOthersInfoTasks',['user_info'=>$user_info[0],'privacy_task'=>"1"]);
+        }
+        else{
         $tasks=$task->where(['task_manager_id'=>$user_id])->get()->toArray();
         foreach ($tasks as &$aTask){
             $i=0;
@@ -843,7 +876,7 @@ class UserController extends Controller
                 }
             }
         }
-        return view('User/displayOthersInfoTasks',['user_info'=>$user_info[0],'transData1'=>$tasks,'transData2'=>$taskArray]);
+        return view('User/displayOthersInfoTasks',['user_info'=>$user_info[0],'transData1'=>$tasks,'transData2'=>$taskArray]);}
 
     }
 
@@ -857,6 +890,55 @@ class UserController extends Controller
             DB::commit();
             //返回前端添加成功结果
             return response()->json(['msg'=>'Deleted successfully!']);
+        } catch(QueryException $ex) {
+            //回滚事务
+            DB::rollback();
+            //返回前端添加失败结果
+            return response()->json(['msg'=>'Busy network!Try again later!']);
+        }
+    }
+    public function setPrivacy(Request $request,Privacy $privacy){
+        $request->validate(['type'=>'required']);
+        $user_id=session('user_id');
+        if(count($privacy->where(['user_id'=>$user_id])->get())==0){
+            $map=[
+                'privacy_id'=>md5(uniqid(mt_rand(),true)),
+                'user_id'=>$user_id,
+                'view_page'=>'0',
+                'view_team_joined'=>'0',
+                'view_team_created'=>'0',
+                'view_task'=>'0',
+                'download_resource'=>'0'
+            ];
+            try {
+                //开始事务
+                DB::beginTransaction();
+                $privacy->add($map);
+                //提交事务
+                DB::commit();
+                //返回前端添加成功结果
+                return response()->json(['msg'=>'Deleted successfully!']);
+            } catch(QueryException $ex) {
+                //回滚事务
+                DB::rollback();
+                //返回前端添加失败结果
+                return response()->json(['msg'=>'Busy network!Try again later!']);
+            }
+        }
+        $map2=['user_id'=>$user_id];
+        $type_val=$privacy->where(['user_id'=>$user_id])->value($request->input('type'));
+        $val=($type_val=='1')?'0':'1';
+        $map3=[
+            $request->input('type')=>$val
+        ];
+        try {
+            //开始事务
+            DB::beginTransaction();
+            $privacy->edit($map2,$map3);
+            //提交事务
+            DB::commit();
+            //返回前端添加成功结果
+            return response()->json(['msg'=>'Set successfully!']);
         } catch(QueryException $ex) {
             //回滚事务
             DB::rollback();

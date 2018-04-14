@@ -42,6 +42,14 @@
             <div class="layui-tab-content" style="color: #0C0C0C">
                 <div class="layui-tab-item layui-show" >
                     <div class="portfolio-grid portfolioContainer scroll"  STYLE="width: 100%;height: 750px;">
+                        @if($privacy_team_created=='0')
+                        @if(empty($teams))
+                            <div style="text-align: center;margin-top: 40%">
+                                <p style="color: #bbbbb7;font-size: 20px;font-weight: 900;">
+                                    <img src="{{URL::asset('/images/empty.png')}}" >{{$user_info['user_name']}} Has Not Joined Any Team Yet!
+                                </p>
+                            </div>
+                        @else
                         <ul id="thumbs" class="col3"  style="width: 100%;height: 100%; ">
                             @foreach($teams as $teams)
                                 <li style="width: 350px;height: 265px;margin-left:10px;margin-bottom: 60px;margin-top: 30px;">
@@ -79,11 +87,26 @@
                                     @endforeach
                                 </li>
                         </ul>
-
+                        @endif
+                        @else
+                            <div style="text-align: center;margin-top: 40%">
+                                <p style="color: #bbbbb7;font-size: 20px;font-weight: 900;">
+                                    <img src="{{URL::asset('/images/lock.png')}}" > User {{$user_info['user_name']}} Has Locked This Page!
+                                </p>
+                            </div>
+                        @endif
                     </div>
                 </div>
                 <div class="layui-tab-item" >
                     <div class="portfolio-grid portfolioContainer scroll"  STYLE="width: 100%;height: 750px;">
+                        @if($privacy_team_joined=='0')
+                        @if(empty($myTeams))
+                            <div style="text-align: center;margin-top: 40%">
+                                <p style="color: #bbbbb7;font-size: 20px;font-weight: 900;">
+                                    <img src="{{URL::asset('/images/empty.png')}}" >{{$user_info['user_name']}} Has Not Joined IAny Team Yet!
+                                </p>
+                            </div>
+                        @else
                         <ul id="thumbs" class="col3"  style="width: 100%;height: 100%; ">
                             @foreach($myTeams as $myTeams)
                                 <li style="width: 350px;height: 265px;margin-left:10px;margin-bottom: 60px;margin-top: 30px;">
@@ -121,7 +144,14 @@
                                     @endforeach
                                 </li>
                         </ul>
-
+                        @endif
+                            @else
+                            <div style="text-align: center;margin-top: 40%">
+                                <p style="color: #bbbbb7;font-size: 20px;font-weight: 900;">
+                                    <img src="{{URL::asset('/images/lock.png')}}" > User {{$user_info['user_name']}} Has Locked This Page!
+                                </p>
+                            </div>
+                        @endif
                     </div>
                 </div>
             </div>

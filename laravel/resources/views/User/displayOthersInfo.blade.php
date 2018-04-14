@@ -36,8 +36,15 @@
     <div style="width:770px;height: 800px;float: left">
 
         <div style="width:770px;height:800px;" class="scroll">
-            @unless(empty($personalUpdatings))
-                <ul class="collection">
+            @if(empty($privacy_updating))
+                @if(empty($personalUpdatings))
+                <div style="text-align: center;margin-top: 40%">
+                    <p style="color: #bbbbb7;font-size: 20px;font-weight: 900;">
+                        <img src="{{URL::asset('/images/empty.png')}}" >{{$user_info['user_name']}} Has Not Posted Any Updating Yet!
+                    </p>
+                </div>
+            @else
+                    <ul class="collection">
                     @foreach($personalUpdatings as $personalUpdating)
                         <li class="collection-item avatar shadow" style="color: #0C0C0C;margin-bottom:20px;height: auto;min-height: 80px;display: table;width: 760px" >
                             <img src="{{URL::asset('/uploads/user_profile/'.$user_info['user_profile'])}}" alt="" class="layui-circle" width="50px" height="50px" >
@@ -63,7 +70,14 @@
                         </li>
                     @endforeach
                 </ul>
-            @endunless
+                @endif
+            @else
+                <div style="text-align: center;margin-top: 40%">
+                    <p style="color: #bbbbb7;font-size: 20px;font-weight: 900;">
+                        <img src="{{URL::asset('/images/lock.png')}}" > User {{$user_info['user_name']}} Has Locked This Personal Updating Page!
+                    </p>
+                </div>
+            @endif
         </div>
     </div>
     <script>
