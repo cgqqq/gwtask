@@ -19,7 +19,7 @@
     <div class="main-panel">
         <div class="sec-panel">
             <div style="width: 90%;height:80%;margin-left: 50px;">
-                <p style="font-size: 50px;font-family: 'Source Sans Pro', sans-serif;font-weight: 800;text-decoration: none;">Password Retrival</p>
+                <p style="font-size: 50px;font-family: 'Source Sans Pro', sans-serif;font-weight: 800;text-decoration: none;"> {{trans('Mail/email.1')}}</p>
                 @if (session('status'))
                     <div class="alert alert-success">
                         {{ session('status') }}
@@ -30,14 +30,14 @@
                     {{ csrf_field() }}
 
                     <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                        <label for="email" class="col-md-4 control-label">E-Mail Address</label>
+                        <label for="email" class="col-md-4 control-label"> {{trans('Mail/email.2')}}</label>
 
                         <div class="col-md-6">
                             <input id="email" type="email" class="form-control" name="email_address" value="{{ old('email') }}" required >
 
                             @unless(empty($res))
                                 @unless($res=='1')
-                            <span style="font-size: 12px;color: #b9151b">Please input the email address which you has signed up with!</span>
+                            <span style="font-size: 12px;color: #b9151b">{{trans('Mail/email.3')}}</span>
                                 @endunless
                             @endunless
                             @if ($errors->has('email'))
@@ -51,7 +51,7 @@
                     <div class="form-group">
                         <div class="col-md-6 col-md-offset-4">
                             <button id="submit" type="submit" class="layui-btn shadow submit" style="border: 2px solid #0C0C0C;color: #0C0C0C;margin-top: 30px;float: right">
-                                Send Password Reset Link
+                                {{trans('Mail/email.4')}}
                             </button>
                         </div>
                     </div>

@@ -7,7 +7,7 @@
 
     </div>
     <div style="width: 1050px;height: 50px;color: black;margin-bottom: 30px">
-        <p style="font-size: 50px;font-family: 'Source Sans Pro', sans-serif;font-weight: 800;text-decoration: none;margin-left: 50px;">Invite</p>
+        <p style="font-size: 50px;font-family: 'Source Sans Pro', sans-serif;font-weight: 800;text-decoration: none;margin-left: 50px;">{{trans('Team/manageTeamMember.8')}}</p>
     </div>
     <div style="float: left;width: 120px;height:700px;margin-left: 30px;">
         <div style="margin-left: 20px;margin-top:50px;width: 40px;display: block" id='profile'>
@@ -33,18 +33,18 @@
                         <img class="layui-circle" style="height: 100px;width:100px;" src="{{ asset('/uploads/user_profile/'.$result[0]['user_profile']) }}" onclick='javascrtpt:window.location.href="{{url('user/displayOthersInfo/'.$result['0']['user_id'])}}"'>
                     @endif
                     <p style="text-align: center;margin-top: 10px;color: #0C0C0C">
-                        Name: {{$result[0]['user_name']}}
+                        {{trans('Team/manageTeamMember.9')}} {{$result[0]['user_name']}}
                     </p>
 
 
                 </div>
                 <div style="width:50px;float: right;margin-top: 70px;margin-right: 250px;color: #0C0C0C">
                     @if($result[0]['user_id']==session('user_id'))
-                        <button class="layui-btn layui-btn-small" style="background-color: #34bf49;border: 1px solid #0C0C0C; color: #0C0C0C;">Me</button>
+                        <button class="layui-btn layui-btn-small" style="background-color: #34bf49;border: 1px solid #0C0C0C; color: #0C0C0C;">{{trans('Team/manageTeamMember.10')}}</button>
                     @elseif($isMember==1)
-                        <button class="layui-btn layui-btn-small" style="background-color: #34bf49;border: 1px solid #0C0C0C; color: #0C0C0C">Member</button>
+                        <button class="layui-btn layui-btn-small" style="background-color: #34bf49;border: 1px solid #0C0C0C; color: #0C0C0C">{{trans('Team/manageTeamMember.11')}}</button>
                     @else
-                        <button class="layui-btn layui-btn-small invite" style="background-color: #fcfcfc;border: 1px solid #0C0C0C; color: #0C0C0C">Invite</button>
+                        <button class="layui-btn layui-btn-small invite" style="background-color: #fcfcfc;border: 1px solid #0C0C0C; color: #0C0C0C">{{trans('Team/manageTeamMember.8')}}</button>
                         <input type="hidden" name="team_id" value="{{ $team_info['team_id'] }}">
                         <input type="hidden" name="user_id" value="{{ $result[0]['user_id'] }}">
                     @endif

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="{{ app()->getLocale() }}">
+<html >
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -40,7 +41,7 @@
     <div id="home" class="banner" style="min-height:800px;height:auto; ">
         <div class="container" >
             {{--个人中心以及登出的icons--}}
-            <div class="icons" style="margin-top: 0; ">
+            <div class="icons newA" style="margin-top: 0;">
                 @section('icon')
                     <ul>
                         @if(session('news'))
@@ -49,7 +50,12 @@
                             <li><a href="{{ url('user/displayInfo') }}" class="center_icon"> </a></li>
                         @endif
                         <li><a href="javascript:void(0)" class="logout_icon"> </a></li>
-
+                            @foreach (Config::get('app.locales') as $lang => $language)
+                                @if ($lang != App::getLocale())
+                                    <li style="font-weight: 800;font-family: 微软雅黑;position: relative;bottom: 13px"><a href="{{ route('lang.change', $lang) }}">{{$language}}</a>
+                                    </li>
+                                @endif
+                            @endforeach
 
                     </ul>
                 @show
@@ -69,29 +75,29 @@
 
             <div class="main-panel2" style="display:flex;min-height: 630px;height:auto;width: 100%;padding-left:0;background-color: transparent;">
                 {{--Layui的导航--}}
-                <ul class="layui-nav"  style="width: 100%;height: 100%;background-color:#34bf49;">
-                    <li class="layui-nav-item"><a href="{{url('home')}}">Home</a></li>
+                <ul class="layui-nav"  style="width: 100%;height: 100%;background-color:#34bf49;">{{trans('layouts/home.1')}}
+                    <li class="layui-nav-item"><a href="{{url(session('lang').'/home')}}">{{trans('layouts/home.1')}}</a></li>
                     <li class="layui-nav-item">
-                        <a href="{{url('team/displayMine/default')}}">Teams</a>
+                        <a href="{{url('team/displayMine/default')}}">{{trans('layouts/home.2')}}</a>
                         <dl class="layui-nav-child">
-                            <dd><a href="{{url('team/displayMine/default')}}">Teams I Am In</a></dd>
-                            <dd><a href="{{url('team/displayMineCre/default')}}">Teams I Created</a></dd>
-                            <dd><a href="{{url('team/displayAdd')}}">Create One</a></dd>
+                            <dd><a href="{{url('team/displayMine/default')}}">{{trans('layouts/home.3')}}</a></dd>
+                            <dd><a href="{{url('team/displayMineCre/default')}}">{{trans('layouts/home.4')}}</a></dd>
+                            <dd><a href="{{url('team/displayAdd')}}">{{trans('layouts/home.5')}}</a></dd>
                         </dl>
                     </li>
-                    <li class="layui-nav-item"><a href="{{url('task/displayAll')}}">Tasks</a>
-                        <dl class="layui-nav-child">
+                    <li class="layui-nav-item"><a href="{{url('task/displayAll')}}">{{trans('layouts/home.6')}}</a>
+                       {{-- <dl class="layui-nav-child">
                             <dd><a href="{{url('')}}">Tasks In Charged</a></dd>
                             <dd><a href="{{url('')}}">Tasks Published By Me</a></dd>
-                        </dl>
+                        </dl>--}}
                     </li>
-                    <li class="layui-nav-item">
+                {{--    <li class="layui-nav-item">
                         <a href="{{url('team/displayAll')}}">All Teams</a>
                     </li>
                     <li class="layui-nav-item">
                         <a href="{{url('user/displayAll')}}">All Users</a>
                     </li>
-                    <li class="layui-nav-item"><a href="#">Others</a></li>
+                    <li class="layui-nav-item"><a href="#">Others</a></li>--}}
 
 
                     <div class="search_input2" style="width: 450px;float: right;margin-top: 15px">
@@ -102,7 +108,7 @@
                             <form style="background-color: #34bf49;border-radius:40px;margin-right: 0;" method="post" action="{{url('user/displaySearchResult')}}">
                                 {{ csrf_field() }}
 
-                                <input name='key' id="key" type="text" placeholder="Search For User With ID......" id="placeholder" >
+                                <input name='key' id="key" type="text" placeholder="{{trans('layouts/home.7')}}" id="placeholder" >
 
 
                             </form>
@@ -111,7 +117,7 @@
                             </button>
                             <form style="background-color: #34bf49;border-radius:40px;margin-right: 0;" method="post" action="{{url('team/displaySearchResult')}}">
                                 {{ csrf_field() }}
-                                <input name='key' id="key" type="text" placeholder="Search For Team With Team Name......" id="placeholder" >
+                                <input name='key' id="key" type="text" placeholder="{{trans('layouts/home.8')}}" id="placeholder" >
 
 
                             </form>
@@ -136,7 +142,7 @@
         @yield('foot')
         <div class="container">
             <div style="margin-bottom: 70px">
-                <h3>BLAHBLAHBLAHBLAHBLAH AND BLAH</h3>
+                <h3>{{trans('layouts/home.9')}}</h3>
 
             </div>
             <p style="text-align: center">Copyright &copy; 2018 Graduation Project-Chen Guo Qing & Peng Wen Shu from GDUFS 任务管理系统</p>

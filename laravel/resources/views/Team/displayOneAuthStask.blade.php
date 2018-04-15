@@ -64,9 +64,9 @@
 <div style="width: 100%;height: 100%;padding:0px;background-color: #34bf49">
     <div style="min-height: 200px;height: auto;word-wrap:break-word;margin-left: 100px;margin-top: 30px">
 
-        <p style="font-size: 25px;font-family: 'Source Sans Pro', sans-serif;font-weight: 800;color: #0C0C0C;padding: 10px;width: 100%"><span style="font-size: 25px;color: #fcfcfc">Sub Task : </span>{{$stask_info['stask_name']}}</p>
-        <p style="word-wrap:break-word;font-size: 15px;font-family: 'Source Sans Pro', sans-serif;font-weight: 800;color: #0C0C0C;padding: 10px;width: 100%"><span style="font-size: 18px;color: #fcfcfc">Detail : </span>{{$stask_info['stask_description']}}</p>
-        <p style="font-size: 15px;font-family: 'Source Sans Pro', sans-serif;font-weight: 800;color: #0C0C0C;padding: 10px;width: 100%"><span style="font-size: 18px;color: #fcfcfc">Status : </span>
+        <p style="font-size: 25px;font-family: 'Source Sans Pro', sans-serif;font-weight: 800;color: #0C0C0C;padding: 10px;width: 100%"><span style="font-size: 25px;color: #fcfcfc">{{trans('Team/dOAStask.1')}}</span>{{$stask_info['stask_name']}}</p>
+        <p style="word-wrap:break-word;font-size: 15px;font-family: 'Source Sans Pro', sans-serif;font-weight: 800;color: #0C0C0C;padding: 10px;width: 100%"><span style="font-size: 18px;color: #fcfcfc">{{trans('Team/dOAStask.2')}}</span>{{$stask_info['stask_description']}}</p>
+        <p style="font-size: 15px;font-family: 'Source Sans Pro', sans-serif;font-weight: 800;color: #0C0C0C;padding: 10px;width: 100%"><span style="font-size: 18px;color: #fcfcfc">{{trans('Team/dOAStask.3')}}</span>
             @if( $stask_info['status'] =='0')
                 <img class="layui-circle" style="height: 30px;width:30px;" src="{{URL::asset('/images/ongoing.png')}}" >
             @elseif($stask_info['status'] =='1')
@@ -78,7 +78,7 @@
             @endif
 
         </p>
-        <p style="font-size: 15px;font-family: 'Source Sans Pro', sans-serif;font-weight: 800;color: #0C0C0C;padding: 10px;width: 100%"><span style="font-size: 18px;color: #fcfcfc">Responsible Teammate(s) : </span>
+        <p style="font-size: 15px;font-family: 'Source Sans Pro', sans-serif;font-weight: 800;color: #0C0C0C;padding: 10px;width: 100%"><span style="font-size: 18px;color: #fcfcfc">{{trans('Team/dOAStask.4')}}</span>
         <div class="newA">
             @foreach($stask_members as $stask_member)
                 @if(session('user_id')==$stask_member['res_id'])
@@ -104,51 +104,51 @@
                 @if($stask_info['status'] =='0')
                 <form class="form-group"  enctype="multipart/form-data" style="color: #333333;font-size: large;width: 90%;line-height:20px;float:left;margin-left:10px;color: #0C0C0C;cursor: hand;height: 200px;" id="submit_box" method="post" action="">
                     {{ csrf_field() }}
-                    <p style="font-size: 15px;font-family: 'Source Sans Pro', sans-serif;font-weight: 800;color: #0C0C0C;width: 250px"><span style="font-size: 18px;color: #fcfcfc">Sub Task Submission :
+                    <p style="font-size: 15px;font-family: 'Source Sans Pro', sans-serif;font-weight: 800;color: #0C0C0C;width: 250px"><span style="font-size: 18px;color: #fcfcfc">{{trans('Team/dOAStask.5')}}
                     </span></p>
                     <div class="form-group" STYLE="width:150px;float: left ;margin-top: 20px" >
                 <span class="btn btn-success fileinput-button" style="background-color: #fcfcfc;float: left;border:4px solid black;width: 150px" >
-                    <span style="font-weight: 700;color: #0C0C0C;font-size: 15px;">Select File</span>
+                    <span style="font-weight: 700;color: #0C0C0C;font-size: 15px;">{{trans('Team/dOAStask.6')}}</span>
                     <input type="file" id="file" class="" name="stask_file"  style="opacity: 0;">
                 </span>
                     </div>
                     <input type="hidden" name="stask_id" value="{{$stask_info['stask_id']}}" >
                     <input type="hidden" name="flag" value="1" >
                     <button id="submit" type="submit" class="layui-btn shadow submit" style="font-size: 12px;border: 4px solid #0C0C0C;color: #0C0C0C;float: left;height: 40px;background-color: #fff200;margin-top: 20px;margin-left: 20px;width: 80px">
-                        Submit
+                        {{trans('Team/dOAStask.7')}}
                     </button>
                 </form>
                 @else
                 <form class="form-group test1"  enctype="multipart/form-data" style="color: #333333;font-size: large;width: 90%;line-height:20px;float:left;margin-left:10px;color: #0C0C0C;cursor: hand;height: 200px;display: none" id="submit_box" method="post" action="">
                 {{ csrf_field() }}
-                <p style="font-size: 15px;font-family: 'Source Sans Pro', sans-serif;font-weight: 800;color: #0C0C0C;width: 250px"><span style="font-size: 18px;color: #fcfcfc">Sub Task Submission :
+                <p style="font-size: 15px;font-family: 'Source Sans Pro', sans-serif;font-weight: 800;color: #0C0C0C;width: 250px"><span style="font-size: 18px;color: #fcfcfc">{{trans('Team/dOAStask.8')}}
                     </span></p>
                 <div class="form-group" STYLE="width:150px;float: left ;margin-top: 20px" >
                 <span class="btn btn-success fileinput-button" style="background-color: #fcfcfc;float: left;border:4px solid black;width: 150px" >
-                    <span style="font-weight: 700;color: #0C0C0C;font-size: 15px;">Select File</span>
+                    <span style="font-weight: 700;color: #0C0C0C;font-size: 15px;">{{trans('Team/dOAStask.7')}}Select File</span>
                     <input type="file" id="file" class="" name="stask_file"  style="opacity: 0;">
                 </span>
                 </div>
                 <input type="hidden" name="stask_id" value="{{$stask_info['stask_id']}}" >
                 <input type="hidden" name="flag" value="1" >
                 <button id="submit" type="submit" class="layui-btn shadow submit" style="font-size: 12px;border: 4px solid #0C0C0C;color: #0C0C0C;float: left;height: 40px;background-color: #fff200;margin-top: 20px;margin-left: 20px;width: 80px">
-                    Submit
+                    {{trans('Team/dOAStask.8')}}Submit
                 </button>
             </form>
                 @endif
             @endif
         @unless($stask_info['status'] =='0')
-        <p style="font-size: 15px;font-family: 'Source Sans Pro', sans-serif;font-weight: 800;color: #0C0C0C;padding: 10px;width: 100%" ><span style="font-size: 18px;color: #fcfcfc">Submitted File :
+        <p style="font-size: 15px;font-family: 'Source Sans Pro', sans-serif;font-weight: 800;color: #0C0C0C;padding: 10px;width: 100%" ><span style="font-size: 18px;color: #fcfcfc">{{trans('Team/dOAStask.9')}}
                 <a href={{URL::asset($file_path)}}  download={{$file_path}}>
                     <span>  </span>
                 <img src="{{URL::asset('/images/download.png')}}" >
                 </a></span>
             <button id="submit_score" class="layui-btn submit" style="color: #fcfcfc;background-color: transparent" onclick="isHidden('submit_box')">
-                Change File
+                {{trans('Team/dOAStask.10')}}
             </button>
         </p>
             @unless(empty($stask_info['score']))
-            <p style="font-size: 15px;font-family: 'Source Sans Pro', sans-serif;font-weight: 800;color: #0C0C0C;padding: 10px;width: 100%"><span style="font-size: 18px;color: #fcfcfc">Score : </span> {{$stask_info['score']}}</p>
+            <p style="font-size: 15px;font-family: 'Source Sans Pro', sans-serif;font-weight: 800;color: #0C0C0C;padding: 10px;width: 100%"><span style="font-size: 18px;color: #fcfcfc">{{trans('Team/dOAStask.11')}}</span> {{$stask_info['score']}}</p>
             @endunless
         @endunless
     </div>

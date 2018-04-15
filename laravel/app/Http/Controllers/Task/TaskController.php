@@ -292,7 +292,7 @@ class TaskController extends Controller
             /*更新transaction列表*/
             $map_trans = [
                 'tran_id'=>md5(uniqid(mt_rand(),true)),
-                'trans_brief'=>"Created sub task : ".$key['sub_task_name'],
+                'trans_brief'=>"stask",
                 'trans_description'=>$key['sub_task_descri'],
                 'task_id'=>$request->input('task_id'),
                 'time'=>strtotime(date("Y-m-d H:i:s")),

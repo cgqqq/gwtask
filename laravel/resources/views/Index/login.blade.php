@@ -7,12 +7,12 @@
     <div class="sec-panel">
         <div style="width: 90%;height:80%;margin-left: 50px;">
             {{--用户登录信息填写表格--}}
-            <p style="font-size: 50px;font-family: 'Source Sans Pro', sans-serif;font-weight: 800;text-decoration: none;">LOGIN</p>
+            <p style="font-size: 50px;font-family: 'Source Sans Pro', sans-serif;font-weight: 800;text-decoration: none;">{{trans('Index/login.1')}}</p>
             <form class="form-horizontal" style="margin-top: 70px;">
                 {{ csrf_field() }}
 
                 <div class="form-group{{ $errors->has('user_id') ? ' has-error' : '' }}">
-                    <label for="user_id" class="col-md-4 control-label">UserID</label>
+                    <label for="user_id" class="col-md-4 control-label">{{trans('Index/login.2')}}</label>
 
                     <div class="col-md-6">
                         <input id="user_id" type="text" class="form-control" name="user_id" value="{{ old('user_id') }} " required autofocus>
@@ -26,7 +26,7 @@
                 </div>
 
                 <div class="form-group{{ $errors->has('user_password') ? ' has-error' : '' }}">
-                    <label for="user_password" class="col-md-4 control-label">Password</label>
+                    <label for="user_password" class="col-md-4 control-label">{{trans('Index/login.3')}}</label>
 
                     <div class="col-md-6">
                         <input id="user_password" type="password" class="form-control" name="user_password" required>
@@ -45,7 +45,7 @@
                     <div class="col-md-6 col-md-offset-4">
                         <div class="drag" style="">
                             <div class="bg"></div>
-                            <p class="text">Drag Here</p>
+                            <p class="text">{{trans('Index/login.4')}}</p>
                             <div class="btn1"></div>
                         </div>
 
@@ -57,10 +57,10 @@
                 <div class="form-group">
                     <div class="col-md-8 col-md-offset-4">
                         <button id="submit" type="submit" class="layui-btn shadow" style="border: 2px solid #0C0C0C;">
-                            <a style="color: #0C0C0C"> LOGIN</a>
+                            <a style="color: #0C0C0C">{{trans('Index/login.5')}}</a>
                         </button>
                         <a class="link"  href="{{ route('password.request') }}">
-                            Forgot Your Password?
+                            {{trans('Index/login.6')}}
                         </a>
                     </div>
                 </div>
@@ -155,6 +155,7 @@
                                 console.log("complete");
                             });
                         }else{
+
                             alert('请输入用户名和密码！');
                             location.reload();
                         }

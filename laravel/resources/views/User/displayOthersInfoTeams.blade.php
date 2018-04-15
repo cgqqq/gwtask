@@ -7,8 +7,8 @@
                 {{$user_info['user_name']}}
             </p>
             <div style="font-size: 14px;color: #fcfcfc;margin-left: 20px">
-                User ID: {{$user_info['user_id']}}</br>
-                Emial Address:  {{$user_info['user_email']}}
+                {{trans('User/displayOthersInfo.1')}}{{$user_info['user_id']}}</br>
+                {{trans('User/displayOthersInfo.2')}}{{$user_info['user_email']}}
             </div>
 
         </div>
@@ -16,16 +16,16 @@
         <div style="width: 280px;height:520px;float: left">
             <div class="collection" style="margin-top: 20px;width: 280px;padding: 5px;">
                 <a href="{{url('user/displayOthersInfo/'.$user_info['user_id'])}}" class="collection-item" style="font-size: 20px;line-height: 30px">
-                    Personal Updatings
+                    {{trans('User/displayOthersInfo.3')}}
                 </a>
                 <a href="{{url('user/displayOthersInfoTeams?user_id='.$user_info['user_id'])}}" class="collection-item" style="font-size: 20px;line-height: 30px">
-                    Teams
+                    {{trans('User/displayOthersInfo.4')}}
                 </a>
                 <a href="{{url('user/displayOthersInfoTasks?user_id='.$user_info['user_id'])}}" class="collection-item" style="font-size: 20px;line-height: 30px">
-                    Tasks
+                    {{trans('User/displayOthersInfo.5')}}
                 </a>
                 <a href="{{url('user/displayOthersInfoResourceSharings?user_id='.$user_info['user_id'])}}" class="collection-item" style="font-size: 20px;line-height: 30px">
-                    Resource Sharings
+                    {{trans('User/displayOthersInfo.6')}}
                 </a>
 
             </div>
@@ -36,8 +36,8 @@
 
         <div class="layui-tab" >
             <ul class="layui-tab-title">
-                <li class="layui-this" style="background-color: #4aaf51;">{{$user_info['user_name']}} Has Built Up These Teams</li>
-                <li style="background-color: #4aaf51;">{{$user_info['user_name']}} Joins In These Tasks</li>
+                <li class="layui-this" style="background-color: #4aaf51;">{{$user_info['user_name']}} {{trans('User/displayOthersInfo.22')}}</li>
+                <li style="background-color: #4aaf51;">{{$user_info['user_name']}} {{trans('User/displayOthersInfo.23')}}</li>
             </ul>
             <div class="layui-tab-content" style="color: #0C0C0C">
                 <div class="layui-tab-item layui-show" >
@@ -46,7 +46,7 @@
                         @if(empty($teams))
                             <div style="text-align: center;margin-top: 40%">
                                 <p style="color: #bbbbb7;font-size: 20px;font-weight: 900;">
-                                    <img src="{{URL::asset('/images/empty.png')}}" >{{$user_info['user_name']}} Has Not Joined Any Team Yet!
+                                    <img src="{{URL::asset('/images/empty.png')}}" >{{$user_info['user_name']}} {{trans('User/displayOthersInfo.24')}}
                                 </p>
                             </div>
                         @else
@@ -59,16 +59,16 @@
 
                                             <div style="width: 280px;height: 40px;white-space:nowrap;overflow: hidden;text-overflow: ellipsis;">
                                                 <h3 class="text-white semi-bold p-t-60 project-title " style="color: #fff200;font-weight: 900;">
-                                                    Team Name:{{ $teams['team_name'] }}</h3>
+                                                    {{trans('User/displayOthersInfo.25')}}{{ $teams['team_name'] }}</h3>
                                             </div>
                                             <P> </P>
                                             <div style="width: 280px;height: 30px;white-space:nowrap;overflow: hidden;text-overflow: ellipsis;">
                                                 <p class="project-description">
-                                                    Team Founder:{{ $teams['user_name'] }}</p>
+                                                    {{trans('User/displayOthersInfo.26')}}{{ $teams['user_name'] }}</p>
                                             </div>
                                             <div style="width: 280px;height: 20px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap">
                                                 <p class="project-description">
-                                                    Team Intro:{{ $teams['team_info'] }}</p>
+                                                    {{trans('User/displayOthersInfo.27')}}{{ $teams['team_info'] }}</p>
                                             </div>
                                             <div style="width: 300px;	" class="project-description">
                                                 <button class="view_icon" onclick='javascrtpt:window.location.href="{{url('team/displayOne',['team_name'=> $teams['team_name']])}}"'> </button>
@@ -79,9 +79,9 @@
                                     </div>
                                     <div class="item-info" style="position: inherit">
                                         <h4 class="text-dark no-margin p-t-10">
-                                            Team Name:{{ $teams['team_name'] }}</h4>
+                                            {{trans('User/displayOthersInfo.25')}}{{ $teams['team_name'] }}</h4>
                                         <p>
-                                            Established At :{{ date('Y-m-d H:i:s',$teams['created_at']) }}</p>
+                                            {{trans('User/displayOthersInfo.28')}}{{ date('Y-m-d H:i:s',$teams['created_at']) }}</p>
 
                                     </div>
                                     @endforeach
@@ -91,7 +91,7 @@
                         @else
                             <div style="text-align: center;margin-top: 40%">
                                 <p style="color: #bbbbb7;font-size: 20px;font-weight: 900;">
-                                    <img src="{{URL::asset('/images/lock.png')}}" > User {{$user_info['user_name']}} Has Locked This Page!
+                                    <img src="{{URL::asset('/images/lock.png')}}" > {{trans('User/displayOthersInfo.9')}} {{$user_info['user_name']}} {{trans('User/displayOthersInfo.21')}}
                                 </p>
                             </div>
                         @endif
@@ -103,7 +103,7 @@
                         @if(empty($myTeams))
                             <div style="text-align: center;margin-top: 40%">
                                 <p style="color: #bbbbb7;font-size: 20px;font-weight: 900;">
-                                    <img src="{{URL::asset('/images/empty.png')}}" >{{$user_info['user_name']}} Has Not Joined IAny Team Yet!
+                                    <img src="{{URL::asset('/images/empty.png')}}" >{{$user_info['user_name']}} {{trans('User/displayOthersInfo.29')}}
                                 </p>
                             </div>
                         @else
@@ -116,16 +116,16 @@
 
                                             <div style="width: 280px;height: 40px;white-space:nowrap;overflow: hidden;text-overflow: ellipsis;">
                                                 <h3 class="text-white semi-bold p-t-60 project-title " style="color: #fff200;font-weight: 900;">
-                                                    Team Name:{{ $myTeams['team_name'] }}</h3>
+                                                    {{trans('User/displayOthersInfo.25')}}{{ $myTeams['team_name'] }}</h3>
                                             </div>
                                             <P> </P>
                                             <div style="width: 280px;height: 30px;white-space:nowrap;overflow: hidden;text-overflow: ellipsis;">
                                                 <p class="project-description">
-                                                    Team Founder:{{ $myTeams['user_name'] }}</p>
+                                                    {{trans('User/displayOthersInfo.26')}}{{ $myTeams['user_name'] }}</p>
                                             </div>
                                             <div style="width: 280px;height: 20px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap">
                                                 <p class="project-description">
-                                                    Team Intro:{{ $myTeams['team_info'] }}</p>
+                                                    {{trans('User/displayOthersInfo.27')}}{{ $myTeams['team_info'] }}</p>
                                             </div>
                                             <div style="width: 300px;	" class="project-description">
                                                 <button class="view_icon" onclick='javascrtpt:window.location.href="{{url('team/displayOne',['team_name'=> $myTeams['team_name']])}}"'> </button>
@@ -136,9 +136,9 @@
                                     </div>
                                     <div class="item-info" style="position: inherit">
                                         <h4 class="text-dark no-margin p-t-10">
-                                            Team Name:{{ $myTeams['team_name'] }}</h4>
+                                            {{trans('User/displayOthersInfo.25')}}{{ $myTeams['team_name'] }}</h4>
                                         <p>
-                                            Established At :{{ date('Y-m-d H:i:s',$myTeams['created_at']) }}</p>
+                                            {{trans('User/displayOthersInfo.28')}}{{ date('Y-m-d H:i:s',$myTeams['created_at']) }}</p>
 
                                     </div>
                                     @endforeach
@@ -148,7 +148,7 @@
                             @else
                             <div style="text-align: center;margin-top: 40%">
                                 <p style="color: #bbbbb7;font-size: 20px;font-weight: 900;">
-                                    <img src="{{URL::asset('/images/lock.png')}}" > User {{$user_info['user_name']}} Has Locked This Page!
+                                    <img src="{{URL::asset('/images/lock.png')}}" > {{trans('User/displayOthersInfo.9')}}{{$user_info['user_name']}} {{trans('User/displayOthersInfo.21')}}
                                 </p>
                             </div>
                         @endif

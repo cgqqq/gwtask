@@ -75,7 +75,7 @@
         @yield('foot')
         <div class="container">
             <div style="margin-bottom: 70px">
-                <h3>BLAHBLAHBLAHBLAHBLAH AND BLAH</h3>
+                <h3>Contact Us</h3>
 
             </div>
             <p style="text-align: center">Copyright &copy; 2018 Graduation Project-Chen Guo Qing & Peng Wen Shu from GDUFS 任务管理系统</p>

@@ -4,7 +4,7 @@
 
     @if($pageout)
         <span style="color: #000;font-size: 20px">
-            Result(s)
+            {{trans('Team/displaySearchResult.1')}}
         <div class="collection" style="margin-top: 50px">
 
             @foreach($pageout as $team)
@@ -12,13 +12,8 @@
                 <a href="{{url('team/displayOne',['team_name'=> $team['team_name']])}}" class="collection-item"  ><span class="new badge" style="margin-top: 35px" >{{ $team[0]['count'] }}</span>
                     {{ $team['team_name'] }}
                     <span style="color: #8D8D8D">
-                    Team Founder:{{ $team['team_funder_id'] }}
+                     {{trans('Team/displaySearchResult.2')}}{{ $team['team_funder_id'] }}
                 </span>
-                    {{--    <p>
-                            <div style="height: 20px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;color: #8D8D8D">
-                            BIO:{{$team['team_info']}}
-                            </div>
-                        </p>--}}
             </a>
 
             @endforeach
@@ -31,7 +26,7 @@
 
     @else
         <div style="margin-top: 150px;margin-left: 450px">
-            <span style="color: #8D8D8D;font-size: 20px;">NO RESULT</span>
+            <span style="color: #8D8D8D;font-size: 20px;"> {{trans('Team/displaySearchResult.3')}}</span>
 
 
         </div>

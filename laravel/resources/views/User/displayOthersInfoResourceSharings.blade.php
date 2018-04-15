@@ -7,8 +7,8 @@
                 {{$user_info['user_name']}}
             </p>
 <div style="font-size: 14px;color: #fcfcfc;margin-left: 20px">
-            User ID: {{$user_info['user_id']}}</br>
-            Emial Address:  {{$user_info['user_email']}}
+            {{trans('User/displayOthersInfo.1')}}{{$user_info['user_id']}}</br>
+            {{trans('User/displayOthersInfo.2')}}{{$user_info['user_email']}}
 </div>
 
         </div>
@@ -16,16 +16,16 @@
         <div style="width: 280px;height:520px;float: left">
             <div class="collection" style="margin-top: 20px;width: 280px;padding: 5px;">
                 <a href="{{url('user/displayOthersInfo/'.$user_info['user_id'])}}" class="collection-item" style="font-size: 20px;line-height: 30px">
-                    Personal Updatings
+                    {{trans('User/displayOthersInfo.3')}}
                 </a>
                 <a href="{{url('user/displayOthersInfoTeams?user_id='.$user_info['user_id'])}}" class="collection-item" style="font-size: 20px;line-height: 30px">
-                    Teams
+                    {{trans('User/displayOthersInfo.4')}}
                 </a>
                 <a href="{{url('user/displayOthersInfoTasks?user_id='.$user_info['user_id'])}}" class="collection-item" style="font-size: 20px;line-height: 30px">
-                    Tasks
+                    {{trans('User/displayOthersInfo.5')}}
                 </a>
                 <a href="{{url('user/displayOthersInfoResourceSharings?user_id='.$user_info['user_id'])}}" class="collection-item" style="font-size: 20px;line-height: 30px">
-                    Resource Sharings
+                    {{trans('User/displayOthersInfo.6')}}
                 </a>
 
             </div>
@@ -36,14 +36,14 @@
         @unless($download_resource=='0')
         <div style="width:770px;height: 40px; text-align: center;display: none" id="tip">
             <p style="font-size: 12px;color:#800000;">
-                User  {{$user_info['user_name']}} Has Forbidden others to download files.
+                {{trans('User/displayOthersInfo.9')}} {{$user_info['user_name']}} {{trans('User/displayOthersInfo.11')}}
             </p>
         </div>
         @endunless
         @if(empty($resources))
             <div style="text-align: center;margin-top: 40%">
             <p style="color: #bbbbb7;font-size: 20px;font-weight: 900;">
-                <img src="{{URL::asset('/images/empty.png')}}" >No Resource Has Been Uploaded Yet!
+                <img src="{{URL::asset('/images/empty.png')}}" >{{trans('User/displayOthersInfo.12')}}
             </p>
             </div>
         @else

@@ -5,11 +5,11 @@
 
 		<div class="following" style="margin-bottom: 25px;">
 			<div style="float: left;margin-bottom: 40px">
-				<p style="font-size: 50px;font-family: 'Source Sans Pro', sans-serif;font-weight: 800;color: #333333;width: 500px;">MY FOLLOWERS</p>
+				<p style="font-size: 50px;font-family: 'Source Sans Pro', sans-serif;font-weight: 800;color: #333333;width: 500px;">{{trans('User/displayFollow.4')}}</p>
 			</div>
 
 			{{--搜索框--}}
-			<div class="search_input" style="width: 400px;float: right;margin-top: 15px;">
+		{{--	<div class="search_input" style="width: 400px;float: right;margin-top: 15px;">
 				<form style="background-color: #34bf49;border-radius:40px;padding-right: 5px; float: right;">
 					<div class="btn-group" >
 						<button type="button" class="search" data-toggle="dropdown">
@@ -19,7 +19,7 @@
 
 				</form>
 
-			</div>
+			</div>--}}
 
 
 
@@ -33,10 +33,10 @@
 					<div class="switch" style="float: right;margin-right: 10px;">
 						<input type="hidden" value="{{ $user['user_id'] }}" name="td-id">
 						<label>
-							Unfollow
+							{{trans('User/displayFollow.2')}}
 							<input type="checkbox" checked="checked" class="fo_checkbox">
 							<span class="lever"></span>
-							Follow
+							{{trans('User/displayFollow.3')}}
 						</label>
 					</div>
 			</div>

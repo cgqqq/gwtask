@@ -6,12 +6,12 @@
 <div class="layui-collapse box" lay-filter="test">
 	@foreach($teams as $team)
 		@unless(empty($team['tasks']))
-		<span style="color: black;font-weight: 800;font-size: 20px;padding: 5px">Team : {{$team['team_name']}}</span>
+		<span style="color: black;font-weight: 800;font-size: 20px;padding: 5px">{{trans('Task/displayAll.12')}}{{$team['team_name']}}</span>
 		@endunless
 		@foreach($team['tasks'] as $task)
 	<li class="layui-colla-item" style="width: 1000px;" >
 		<h2 class="layui-colla-title" style="color: #0C0C0C;font-weight: 800;font-size: 15px;width: 1030px;background-color: #34bf49">{{ $task['task_name'] }}
-			<span  style="color: #fcfcfc">Published By : </span> {{ $task['funder_name'] }}
+			<span  style="color: #fcfcfc">{{trans('Task/displayAll.1')}}</span> {{ $task['funder_name'] }}
 			<span style="float: right;">
 				@if( $task['task_status'] =='0')
 				<img class="layui-circle" style="height: 30px;width:30px;" src="{{URL::asset('/images/pending.png')}}" >
@@ -35,27 +35,35 @@
 						<i class="layui-icon layui-timeline-axis"></i>
 						<div class="layui-timeline-content layui-text">
 							<h3 class="layui-timeline-title">{{ date('Y-m-d H:i:s',$tran['time']) }}</h3>
-							<p> <span style="color: #0C0C0C;font-size: 15px;font-weight: 800;">{{ $tran['trans_brief'] }}</span><br><br>
+							<p> <span style="color: #0C0C0C;font-size: 15px;font-weight: 800;">
+									@if($tran['trans_brief'] =='Task Created')
+										{{trans('Task/displayAll.13')}}
+									@elseif($tran['trans_brief']=='stask')
+										{{trans('Task/displayAll.14')}}
+									@else
+										{{$tran['trans_brief']}}
+									@endif
+								</span><br><br>
 
-								<span style="color: #0C0C0C;font-size: 13px;">Task Description :</span>
+								<span style="color: #0C0C0C;font-size: 13px;">{{trans('Task/displayAll.2')}}</span><br>
 								{{ $tran['trans_description'] }}
 							</p>
 							@if($tran['trans_Resource_intro']=='stask')
 								<button type="submit" class="layui-btn choose" style="border: 2px solid #0C0C0C;color: #0C0C0C;background-color: #fcfcfc;margin-bottom: 20px" id="sub_task_detail">
-									Sub Task Detail
+									{{trans('Task/displayAll.3')}}
 								</button>
 								<input type="hidden" name="team_id" value="{{$team['team_id']}}">
 								<input type="hidden" name="stask_id" value="{{$tran['trans_Resource_path']}}">
 							@else
 							@unless($tran['trans_Resource_path']==null)
-								<span style="color: #0C0C0C;font-size: 13px;">Download Resource : </span>
+								<span style="color: #0C0C0C;font-size: 13px;">{{trans('Task/displayAll.4')}}</span>
 								<a href={{URL::asset($tran['trans_Resource_path'])}} download={{$tran['trans_Resource_path']}}>
 									<img src="{{URL::asset('/images/download.png')}}" >
 								</a><br>
 							@endunless
 							@unless($tran['trans_Resource_intro']==null)
 								<p>
-									<span style="color: #0C0C0C;font-size: 13px;">Resource Description :</span>
+									<span style="color: #0C0C0C;font-size: 13px;">{{trans('Task/displayAll.5')}}</span>
 									{{ $tran['trans_Resource_intro'] }}
 								</p>
 							@endunless
@@ -76,14 +84,14 @@
 									<form id="{{$task['task_id']}}" style="line-height:20px;margin: 20px;padding:20px;width: 1000px;float:left;color: #0C0C0C;cursor: hand;display: none" class="form-group" enctype="multipart/form-data" method="post" action="{{ url('task/displayAll') }}">
 										{{ csrf_field() }}
 										<div class="form-group" style="margin-bottom: 40px;">
-											<label class="col-md-4 control-label" >Transaction Title</label>
+											<label class="col-md-4 control-label" >{{trans('Task/displayAll.6')}}</label>
 											<div class="col-md-6">
 												<input type="text" name='trans_brief' id="trans_brief" required="" class="form-control" >
 											</div>
 										</div>
 
 										<div class="form-group" >
-											<label class="col-md-4 control-label" >Transaction Description</label>
+											<label class="col-md-4 control-label" >{{trans('Task/displayAll.7')}}</label>
 
 											<div class="col-md-6">
 												<textarea type="text" name="trans_description" id="trans_description" required="" class="form-control scroll" ></textarea>
@@ -104,7 +112,7 @@
 												<div class="aaa" >
 
 													<span class="btn btn-success fileinput-button" style="background: #34bf49;border-color: #34bf49;border-radius: 0;margin-top: 10px;margin-bottom: 10px" >
-														<span style="font-weight: 700;">Upload</span>
+														<span style="font-weight: 700;">{{trans('Task/displayAll.8')}}</span>
 														<input type="file" id="trans_Resource_Path" class="" name="trans_Resource_Path" >
 													</span>
 												</div>
@@ -118,7 +126,7 @@
 										</div>
 
 										<div class="form-group" style="margin-bottom: 40px;" >
-											<label class="col-md-4 control-label" >Resource Description</label>
+											<label class="col-md-4 control-label" >{{trans('Task/displayAll.9')}}</label>
 
 											<div class="col-md-6">
 												<textarea type="text" name="trans_Resource_intro" id="trans_Resource_intro" class="form-control" class="scroll"></textarea>
@@ -127,12 +135,12 @@
 									</div>
 									<div class="col-md-6 col-md-offset-4">
 										<button id="submit" type="submit" class="layui-btn shadow submit" style="border: 2px solid #0C0C0C;color: #0C0C0C;margin-top: 20px">
-											Submit
+											{{trans('Task/displayAll.10')}}
 										</button>
 									</div>
 									<input type="hidden" name="task_id" value="{{$task['task_id']}}">
 									<input type="hidden" name="flag" value='1'>
-									<a class="newA" onclick="isHidden('{{$task['task_id'].$task['task_id']}}')" style="color: #0C0C0C;float:left;display: block;width: 900px;margin-top: 30px" id="a">I Wanna Upload Resource. </a>
+									<a class="newA" onclick="isHidden('{{$task['task_id'].$task['task_id']}}')" style="color: #0C0C0C;float:left;display: block;width: 900px;margin-top: 30px" id="a">{{trans('Task/displayAll.11')}} </a>
 								</form>
 							</div>
 						</h3>
@@ -171,8 +179,6 @@
 				})
 				.done(function(data) {
 					layer.msg(data.msg);
-					location.reload();
-
 				})
 				.fail(function(data) {
 					layer.msg(data.msg);
@@ -180,6 +186,7 @@
 				.always(function() {
 					console.log("complete");
 				});
+                $(this).parent().parent().parent().remove();
 			});
 
 		});

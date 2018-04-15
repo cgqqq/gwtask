@@ -8,8 +8,8 @@
     <div style="display: table">
         <div class="layui-tab" >
             <ul class="layui-tab-title">
-                <li class="layui-this" style="background-color: #4aaf51;"> Friends' Updatings</li>
-                <li style="background-color: #4aaf51;">Teams' Updatings</li>
+                <li class="layui-this" style="background-color: #4aaf51;"> {{trans('Home/home.1')}}</li>
+                <li style="background-color: #4aaf51;">{{trans('Home/home.2')}}</li>
             </ul>
             <div class="layui-tab-content" style="color: #0C0C0C;">
                 <div class="layui-tab-item layui-show" style="">
@@ -23,13 +23,13 @@
                             </div>
                             <div>
                                 <button id="submit" type="submit" class="layui-btn shadow submit" style="border: 2px solid #0C0C0C;color: #0C0C0C;margin-top: 30px;float: right">
-                                    Submit
+                                    {{trans('Home/home.3')}}
                                 </button>
                                 <input type="hidden" name="user_id" value="{{session('user_id')}}">
                             </div>
                             <div>
                 <span class="btn btn-success fileinput-button" style="background-color: transparent;margin-top: 5px;float: right;margin-right: 540px;border: solid 1px transparent" >
-                    <span style="font-weight: 700;color: #0C0C0C;font-size: 15px">Upload Resource</span>
+                    <span style="font-weight: 700;color: #0C0C0C;font-size: 15px">{{trans('Home/home.4')}}</span>
                     <input type="file" id="resource" class="" name="resource"  style="opacity: 0;">
                 </span>
                             </div>
@@ -41,7 +41,7 @@
                         @if(empty($friendsUpdatings))
                             <div style="text-align: center;margin-top: 20%">
                                 <p style="color: #bbbbb7;font-size: 20px;font-weight: 900;">
-                                    <img src="{{URL::asset('/images/empty.png')}}" >No One Has Posted Any Updating Yet!
+                                    <img src="{{URL::asset('/images/empty.png')}}" >{{trans('Home/home.5')}}
                                 </p>
                             </div>
                         @else
@@ -63,7 +63,7 @@
                                             @unless($friendsUpdating['type']!='sResource')
 
                                                 <p style=" font-weight:700;font-size:15px;" >
-                                                    Resource Download :
+                                                    {{trans('Home/home.6')}}
                                                     <a href={{URL::asset($friendsUpdating['resource'])}} download={{$friendsUpdating['resource']}}>
                                                         <img src="{{URL::asset('/images/click.png')}}" >
                                                     </a>
@@ -89,9 +89,9 @@
                 </div>
                 <div class="layui-tab-item">
                     @if(empty($teamUpdatings))
-                        <div style="text-align: center;margin-top: 40%;margin-left: 40%">
+                        <div style="text-align: center;margin-top: 40%;margin-left:300px; ">
                             <p style="color: #bbbbb7;font-size: 20px;font-weight: 900;">
-                                <img src="{{URL::asset('/images/empty.png')}}" >No Team Has Posted Any Updating Yet!
+                                <img src="{{URL::asset('/images/empty.png')}}" >{{trans('Home/home.7')}}
                             </p>
                         </div>
                     @else
@@ -109,13 +109,13 @@
                                     </div>
                                     <div style="font-weight:600;font-size:18px;color:#0C0C0C;height:auto;min-height:140px;width: 700px;float: left;word-wrap:break-word;line-height: 30px;position:relative ;margin-top: 10px">
                                     <span style="color: #34bf49;font-weight: 800">
-                                    {{$teamUpdating['user_name']}} From {{$teamUpdating['team_name']}}:</span>
+                                    {{$teamUpdating['user_name']}} {{trans('Home/home.8')}} {{$teamUpdating['team_name']}}:</span>
                                         <br>
                                         {{$teamUpdating['content']}}
 
                                         @unless($teamUpdating['resource']==null)
                                             <p style=" font-weight:600;font-size:15px;color:#0C0C0C;margin-bottom: 5px; ">
-                                                Resource Download :
+                                                {{trans('Home/home.9')}}
 
                                                 <a href={{URL::asset($teamUpdating['resource'])}} download={{$teamUpdating['resource']}}>
                                                     <img src="{{URL::asset('/images/click.png')}}" >

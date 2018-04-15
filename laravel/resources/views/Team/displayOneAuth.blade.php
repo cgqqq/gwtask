@@ -9,7 +9,7 @@
 		</span>
 
 			<p STYLE="color: #8D8D8D;font-size: 15px;margin-left: 40px;margin-bottom: 6px" style="width: 500px	;float: left">
-				Founder :
+                {{trans('Team/displayOne.3')}}
 				<img class="activator" src="{{URL::asset('/uploads/user_profile/'.$team_info['user_profile'])}}"  style="width: 30px;height: 30px;border-radius: 100%" onclick='javascrtpt:window.location.href="{{ url('user/displayInfo') }}"'>
 
 			</p>
@@ -20,19 +20,19 @@
 			<div style="border-right: double 4px #8D8D8D;float: left;width:250px;height: 630px; color: #0C0C0C">
 				<div class="collection" style="margin-top: 20px;width: 230px;margin-right: 20px;padding: 5px;">
                     <a href="{{url('team/displayOne',$team_info['team_name'])}}" class="collection-item" style="font-size: 12px;line-height: 30px">
-                       Team Updatings
+                        {{trans('Team/displayOne.4')}}
                     </a>
                     <a href="{{url('task/displayAdd',$team_info['team_name'])}}" class="collection-item" style="font-size: 12px;line-height: 30px">
-                        Create A Task
+                        {{trans('Team/displayOne.5')}}
                     </a>
 					<a href="{{url('team/displayOneAuthTasks',$team_info['team_id'])}}" class="collection-item" style="font-size: 12px;line-height: 30px">
-						All Tasks
+                        {{trans('Team/displayOne.6')}}
 					</a>
 					<a href="{{url('team/displayAllocateSubTask/displayOneAuthStasks',$team_info['team_id'])}}" class="collection-item" style="font-size: 12px;line-height: 30px">
-						Sub Tasks
+                        {{trans('Team/displayOne.7')}}
 					</a>
 					<a href="{{url('team/displayOneAuthResources',$team_info['team_id'])}}" class="collection-item" style="font-size: 12px;line-height: 30px">{{--<span class="new badge2" style="margin-top: 10px;font-size: 10px">99</span>--}}
-						Resource Sharings
+                        {{trans('Team/displayOne.8')}}
 					</a>
 
 				</div>
@@ -53,7 +53,7 @@
                             </div>
                             <div class="col-md-6 col-md-offset-4">
                                 <button id="submit" type="submit" class="layui-btn shadow submit" style="border: 2px solid #0C0C0C;color: #0C0C0C;margin-top: 10px">
-                                    Submit
+                                    {{trans('Team/displayOne.8')}}
                                 </button>
                             </div>
                             <input type="hidden" value="{{$team_info['team_id']}}" name="team_id">
@@ -75,7 +75,7 @@
                             {{$uploading['content']}}
                             @unless($uploading['resource']==null)
                                 <p style=" font-weight:600;font-size:15px;color:#0C0C0C;margin-bottom: 5px; ">
-                                    Resource Download :
+                                    {{trans('Team/displayOne.9')}}
 
                                 <a href={{URL::asset($uploading['resource'])}} download={{$uploading['resource']}}>
                                     <img src="{{URL::asset('/images/click.png')}}" >
@@ -112,7 +112,7 @@
 			<div style="float: left;width: 250px;height:550px;">
 				<div style="float: left;width: 200px;height: 20px">
 					<p style="margin:10px;">
-						Team Members:
+                        {{trans('Team/displayOne.10')}}
 					</p>
 				</div>
 				<div style="float: right;width:25px;height: 24px;margin-top: 5px;">

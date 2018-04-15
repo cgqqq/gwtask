@@ -23,21 +23,21 @@
 			<div class="collection" style="margin-top: 20px;width: 350px;padding: 5px;">
 				<a href="{{url('user/displayInfo')}}" class="collection-item" style="font-size: 20px;line-height: 30px;">
 					<img class="layui-circle" style="height: 35px;width:35px;" src="{{URL::asset('/images/personal_info.png')}}" >
-					Pesonal Information
+					{{trans('User/displayInfo.1')}}
 				</a>
 				<a href="{{url('user/displayInfoOptions')}}" class="collection-item" style="font-size: 20px;line-height: 30px">
 					<img class="layui-circle" style="height: 35px;width:35px;" src="{{URL::asset('/images/option.png')}}" >
-					Options
+					{{trans('User/displayInfo.2')}}
 				</a>
 				@if($newsNum=='0')
 				<a href="{{url('user/displayInfoMailBox')}}" class="collection-item" style="font-size: 20px;line-height: 30px">
 					<img class="layui-circle" style="height: 35px;width:35px;" src="{{URL::asset('/images/mail_box.png')}}" >
-					Mail Box
+					{{trans('User/displayInfo.3')}}
 				</a>
 					@else
 					<a href="{{url('user/displayInfoMailBox')}}" class="collection-item" style="font-size: 20px;line-height: 30px"><span class="new badge2">{{$newsNum}}</span>
 						<img class="layui-circle" style="height: 35px;width:35px;" src="{{URL::asset('/images/mail_box.png')}}" >
-						Mail Box
+						{{trans('User/displayInfo.3')}}
 					</a>
 				@endif
 
@@ -47,14 +47,14 @@
 			@section('displayInfo_content')
 			<div class="personal_info">
 				<hr class="layui-bg-black">
-				User ID ：{{ session('user_id')}}
+				{{trans('User/displayInfo.4')}}{{ session('user_id')}}
 				<hr class="layui-bg-black">
-				Name ：{{ session('user_name')}}
+				{{trans('User/displayInfo.5')}}{{ session('user_name')}}
 				<hr class="layui-bg-black">
-				Email Address：{{ session('user_email')}}
+				{{trans('User/displayInfo.6')}}{{ session('user_email')}}
 				<hr class="layui-bg-black">
 				<div id="password-field"></div>
-				<button id="edit" class="layui-btn layui-btn-small" style="background-color: #fff200;border: 2px solid black;color: black">Change Passcode</button>
+				<button id="edit" class="layui-btn layui-btn-small" style="background-color: #fff200;border: 2px solid black;color: black">{{trans('User/displayInfo.7')}}</button>
 			</div>
 				@show
 

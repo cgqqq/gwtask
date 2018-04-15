@@ -16,15 +16,15 @@
                         @else
                             @foreach($applications as $application)
                                 <fieldset class="layui-elem-field layui-field-title" style="width: 650px;color: #0C0C0C;font-weight: 600;">
-                                    <legend>Application({{($applicationNum)}})</legend>
+                                    <legend>{{trans('User/displayInfo.26')}}({{($applicationNum)}})</legend>
                                     <div class="card" >
                                         <div class="card-content scroll" style="margin-left:10px;padding:5px;width: 600px;max-height: 120px;height:auto;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;border: 2px solid #0C0C0C" >
                               <span STYLE="font-size: 20px;font-weight: 600;">
                                 <img src="{{URL::asset('/images/invitation.png')}}">
-                                  You got an Team Application for {{$application['team_name']}} from user : {{$application['application_name']}}
+                                  {{trans('User/displayInfo.8')}} {{$application['team_name']}} {{trans('User/displayInfo.9')}}{{$application['application_name']}}
                             </span>
-                                 <button class="layui-btn app_approve" style="background-color: #fcfcfc;float: right;color: #0C0C0C;border: solid 2px black;">Approve</button>
-                                 <button class="layui-btn app_disapprove" style="background-color: #fcfcfc;float: right;color: #0C0C0C;border: solid 2px black;margin-right: 5px">Disapprove</button>
+                                 <button class="layui-btn app_approve" style="background-color: #fcfcfc;float: right;color: #0C0C0C;border: solid 2px black;">{{trans('User/displayInfo.10')}}</button>
+                                 <button class="layui-btn app_disapprove" style="background-color: #fcfcfc;float: right;color: #0C0C0C;border: solid 2px black;margin-right: 5px">{{trans('User/displayInfo.11')}}</button>
                                  <input type="hidden" name="app_id" value="{{$application['app_id']}}">
 
                                         </div>
@@ -36,14 +36,14 @@
                         @else
                             @foreach($invitations as $invitation)
                         <fieldset class="layui-elem-field layui-field-title" style="width: 650px;color: #0C0C0C;font-weight: 600;">
-                            <legend>Invitation({{($invitationNum)}})</legend>
+                            <legend>{{trans('User/displayInfo.12')}}({{($invitationNum)}})</legend>
                         <div class="card" >
                             <div class="card-content" style="margin-left:10px;padding:5px;width: 600px;height: 80px;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;border: 2px solid #0C0C0C">
                               <span STYLE="font-size: 20px;font-weight: 600;">
                                 <img src="{{URL::asset('/images/invitation.png')}}">
-                                  You got an Team Invitation from {{$invitation['invitation_team_name']}}
+                                  {{trans('User/displayInfo.13')}}{{$invitation['invitation_team_name']}}
                             </span>
-                                <button class="layui-btn view_invite" style="background-color: #fcfcfc;float: right;color: #0C0C0C;border: solid 2px black;">view</button>
+                                <button class="layui-btn view_invite" style="background-color: #fcfcfc;float: right;color: #0C0C0C;border: solid 2px black;">{{trans('User/displayInfo.14')}}</button>
                                 <input type="hidden" name="team_id" value="{{$invitation['team_id']}}">
                                 <input type="hidden" name="invitation_title" value="{{$invitation['title']}}">
                                 <input type="hidden" name="invitation_content" value="{{$invitation['content']}}">
@@ -53,7 +53,7 @@
                             @endforeach
                         @endif
                         <fieldset class="layui-elem-field layui-field-title" style="width: 650px;color: #0C0C0C;font-weight: 600;">
-                            <legend>Mails({{$mailsNum}})</legend>
+                            <legend>{{trans('User/displayInfo.15')}}({{$mailsNum}})</legend>
                             @if($mailsNum!=0)
                             @foreach($mailsRecieved as $mail)
                                 @if($mail['mail_status']=="1")
@@ -70,13 +70,13 @@
                                         @else
                                 <img src="{{URL::asset('/images/alert.png')}}">
                                         @endif
-                                  You got a mail from {{$mail['mail_from_name']}}
+                                            {{trans('User/displayInfo.16')}}{{$mail['mail_from_name']}}
                                   <p style="color: #8D8D8D;font-size: 12px;width: 150px;">
                                       {{$mail['mail_time_gap']}}
                                   </p>
                             </span>
 
-                                    <button class="layui-btn" style="background-color: #fcfcfc;float: right;color: #0C0C0C;border: solid 2px black;"   onclick='javascrtpt:window.location.href="{{url('user/displayInfoMailContent/'.$mail['mail_id'])}}"'>view</button>
+                                    <button class="layui-btn" style="background-color: #fcfcfc;float: right;color: #0C0C0C;border: solid 2px black;"   onclick='javascrtpt:window.location.href="{{url('user/displayInfoMailContent/'.$mail['mail_id'])}}"'>{{trans('User/displayInfo.14')}}view</button>
                                 </div>
                             </div>
                             @else
@@ -92,12 +92,12 @@
                                   @else
                                       <img src="{{URL::asset('/images/alert_unread.png')}}">
                                   @endif
-                                   You got a mail from {{$mail['mail_from_name']}}
+                                    {{trans('User/displayInfo.17')}} {{$mail['mail_from_name']}}
                                   <p style="color: #8D8D8D;font-size: 12px;width: 150px;">
                                       {{$mail['mail_time_gap']}}
                                   </p>
                             </span>
-                                    <button class="layui-btn" style="background-color: #fcfcfc;float: right;color: #0C0C0C;border: solid 2px black;" onclick='javascrtpt:window.location.href="{{url('user/displayInfoMailContent/'.$mail['mail_id'])}}"'>view</button>
+                                    <button class="layui-btn" style="background-color: #fcfcfc;float: right;color: #0C0C0C;border: solid 2px black;" onclick='javascrtpt:window.location.href="{{url('user/displayInfoMailContent/'.$mail['mail_id'])}}"'>{{trans('User/displayInfo.14')}}view</button>
 
                                 </div>
                             </div>
@@ -107,7 +107,7 @@
                         </fieldset>
                         @else
                             <p style="color: #0C0C0C;font-size: 20px;font-weight: 900;margin-left: 200px;margin-top: 100px">
-                                No Mail In Your Mail Box!</p>
+                                {{trans('User/displayInfo.18')}}</p>
                         @endif
                     </div>
                 </div>
@@ -117,21 +117,21 @@
                     {{ csrf_field() }}
 
                     <div class="form-group" style="margin-bottom: 20px;">
-                        <label class="col-md-4 control-label" >Sent to</label>
+                        <label class="col-md-4 control-label" >{{trans('User/displayInfo.19')}}</label>
 
                         <div class="col-md-6">
-                            <input type="text" id="mail_to_id" required="" class="form-control" placeholder="Please Input User's ID......">
+                            <input type="text" id="mail_to_id" required="" class="form-control" placeholder="{{trans('User/displayInfo.20')}}">
                         </div>
                     </div>
                     <div class="form-group" style="margin-bottom: 20px;">
-                        <label class="col-md-4 control-label" >Subject</label>
+                        <label class="col-md-4 control-label" >{{trans('User/displayInfo.21')}}</label>
 
                         <div class="col-md-6">
                             <input type="text" id="mail_title" required="" class="form-control" >
                         </div>
                     </div>
                     <div class="form-group" style="margin-bottom: 40px;">
-                        <label class="col-md-4 control-label">Content</label>
+                        <label class="col-md-4 control-label">{{trans('User/displayInfo.25')}}</label>
 
                         <div class="col-md-6">
                             <textarea rows="4" cols="50" class="form-control scroll" style="max-height: 280px;max-width: 320px" id="mail_content"></textarea>
@@ -140,7 +140,7 @@
                     </div>
                     <div class="col-md-6 col-md-offset-4">
                         <button id="submit" type="submit" class="layui-btn shadow" style="border: 2px solid #0C0C0C;color: #0C0C0C">
-                            Send
+                            {{trans('User/displayInfo.22')}}
                         </button>
                     </div>
                     <input type="hidden" name='mail_from_id' value="{{session('user_id')}}">
@@ -159,19 +159,19 @@
                         <input type="hidden" name="mail_id" value="{{$mail['mail_id']}}">
                         <span STYLE="font-size: 20px;font-weight: 600;">
                                 <img src="{{URL::asset('/images/sent.png')}}">
-                                   You have sent a mail to {{$mail['mail_to_name']}}
+                            {{trans('User/displayInfo.23')}}{{$mail['mail_to_name']}}
                             <p style="color: #8D8D8D;font-size: 12px;width: 150px;">
                                       {{$mail['mail_time_gap']}}
                                   </p>
                             </span>
-                        <button class="layui-btn" style="background-color: #fcfcfc;float: right;color: #0C0C0C;border: solid 2px black;" onclick='javascrtpt:window.location.href="{{url('user/displayInfoMyMailContent/'.$mail['mail_id'])}}"'>view</button>
+                        <button class="layui-btn" style="background-color: #fcfcfc;float: right;color: #0C0C0C;border: solid 2px black;" onclick='javascrtpt:window.location.href="{{url('user/displayInfoMyMailContent/'.$mail['mail_id'])}}"'>{{trans('User/displayInfo.14')}}view</button>
 
                     </div>
                 </div>
                     @endforeach
                     @else
                             <p style="color: #0C0C0C;font-size: 20px;font-weight: 900;margin-left: 180px;margin-top: 160px">
-                                  You haven't send any mail yet!
+                                {{trans('User/displayInfo.24')}}
                             </p>
                     @endif
                     </div>

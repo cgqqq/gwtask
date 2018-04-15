@@ -44,18 +44,18 @@
 	});
 </script>
 {{--用户创建的团队信息填写表格--}}
-			<p style="font-size: 50px;font-family: 'Source Sans Pro', sans-serif;font-weight: 800;color: #333333;">Create My Team</p>
+			<p style="font-size: 50px;font-family: 'Source Sans Pro', sans-serif;font-weight: 800;color: #333333;">{{trans('Team/displayAdd.1')}}</p>
 			<form class="form-horizontal"  style="color: #333333;font-size: large;margin-top: 100px;" >
 				{{ csrf_field() }}
 				<div class="form-group" style="margin-bottom: 40px;">
-						<label for="team_name" class="col-md-4 control-label" >Team Name</label>
+						<label for="team_name" class="col-md-4 control-label" >{{trans('Team/displayAdd.2')}}</label>
 
 						<div class="col-md-6">
 							<input type="text" id="team_name" required="" class="form-control" >
 						</div>
 				</div>
 				<div class="form-group" style="margin-bottom: 40px;">
-					<label for="team_info" class="col-md-4 control-label">Brief Introduction</label>
+					<label for="team_info" class="col-md-4 control-label">{{trans('Team/displayAdd.3')}}</label>
 
 					<div class="col-md-6"  id="a_input">
 						<textarea rows="4" cols="50" class="form-control" id="team_info"></textarea>
@@ -64,7 +64,7 @@
 				</div>
 				<div class="col-md-6 col-md-offset-4">
 					<button id="submit" type="submit" class="layui-btn shadow" style="border: 2px solid #0C0C0C;color: #0C0C0C">
-						CREATE
+						{{trans('Team/displayAdd.4')}}
 					</button>
 				</div>
 			</form>

@@ -8,7 +8,7 @@
     </div>
     <div style="width: 1050px;height: 50px;color: black;margin-bottom: 30px">
 
-    <p style="font-size: 50px;font-family: 'Source Sans Pro', sans-serif;font-weight: 800;text-decoration: none;margin-left: 50px;">Delete</p>
+    <p style="font-size: 50px;font-family: 'Source Sans Pro', sans-serif;font-weight: 800;text-decoration: none;margin-left: 50px;">{{trans('Team/manageTeamMember.1')}}</p>
     </div>
     <div style="float: left;width: 120px;height:700px;margin-left: 30px;">
         <div style="margin-left: 20px;margin-top:50px;width: 40px;display: block" id='profile'>
@@ -24,9 +24,9 @@
         <table class="layui-table" style="width: 900px;border-style: none;margin-top: 30px;">
    <thead>
        <tr style="font-weight: 800;font-size: 20px;color: #0C0C0C">
-           <td style="border-style: none">Team Name</td>
-           <td style="border-style: none">Funder</td>
-           <td style="border-style: none;overflow: hidden;text-overflow: ellipsis;white-space: nowrap">Team Intro</td>
+           <td style="border-style: none">{{trans('Team/manageTeamMember.2')}}</td>
+           <td style="border-style: none">{{trans('Team/manageTeamMember.3')}}</td>
+           <td style="border-style: none;overflow: hidden;text-overflow: ellipsis;white-space: nowrap">{{trans('Team/manageTeamMember.4')}}</td>
        </tr>
    </thead>
            <tr>
@@ -38,12 +38,12 @@
    </table>
    <table class="layui-table table-member" style="width: 900px;">
            <thead>
-               <tr>
+               <tr>5
                    <td style="border-style: none;width: 200px">
-                       <input type="checkbox" id='checkAll' style="position: absolute;top: 12px;"><label for="checkAll" style="position: absolute;top: 15px;left: 35px;cursor: pointer;">Member(s)'Name</label>
+                       <input type="checkbox" id='checkAll' style="position: absolute;top: 12px;"><label for="checkAll" style="position: absolute;top: 15px;left: 35px;cursor: pointer;">{{trans('Team/manageTeamMember.5')}}</label>
                    </td>
-                   <td style="border-style: none">E-mail Address</td>
-                   <td style="border-style: none"><button class="layui-btn layui-btn-danger layui-btn-sm removeAll" style="font-weight: 800">Batch Delete</button></td>
+                   <td style="border-style: none">{{trans('Team/manageTeamMember.6')}}</td>
+                   <td style="border-style: none"><button class="layui-btn layui-btn-danger layui-btn-sm removeAll" style="font-weight: 800">{{trans('Team/manageTeamMember.7')}}</button></td>
                </tr>
            </thead>
 
@@ -73,7 +73,7 @@
                    <td style="border-style: none">
                    <script type="text/javascript">
                            if(String({{$team_info['user_name']}}) != String({{$member['user_name']}})){
-                               window.document.write("<button class='layui-btn  layui-btn-danger layui-btn-sm remove'>Delete</button>");
+                               window.document.write("<button class='layui-btn  layui-btn-danger layui-btn-sm remove'>{{trans('Team/manageTeamMember.1')}}</button>");
                            }
                        </script>
 

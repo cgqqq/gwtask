@@ -5,7 +5,7 @@
 
     @if($result)
         <span style="color: #000;font-size: 20px">
-            Result
+            {{trans('User/displayOthersInfo.30')}}
        <fieldset class="layui-elem-field" STYLE="margin-right: 10px;height:300px;margin-top: 20px">
 
             <div class="layui-field-box">
@@ -27,16 +27,16 @@
                     @if(session('user_id')==$result[0]['user_id'])
 
                     @elseif($friendship)
-                        Unfollow
+                        {{trans('User/displayOthersInfo.31')}}
                         <input type="checkbox" class="fo_checkbox" checked="checked">
                         <span class="lever"></span>
-                        Follow
+                        {{trans('User/displayOthersInfo.32')}}
 
                     @else
-                        Unfollow
+                        {{trans('User/displayOthersInfo.31')}}
                         <input type="checkbox" class="unfo_checkbox"   >
                         <span class="lever"></span>
-                        Follow
+                        {{trans('User/displayOthersInfo.32')}}
 
                     @endif
 
@@ -49,7 +49,7 @@
     </span>
         @else
         <div style="margin-top: 150px;margin-left: 450px">
-            <span style="color: #8D8D8D;font-size: 20px;">NO RESULT</span>
+            <span style="color: #8D8D8D;font-size: 20px;">{{trans('User/displayOthersInfo.33')}}</span>
 
 
         </div>

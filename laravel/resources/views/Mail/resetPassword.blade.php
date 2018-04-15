@@ -6,7 +6,7 @@
     <div class="main-panel">
         <div class="sec-panel">
             <div style="width: 90%;height:80%;margin-left: 50px;">
-                <p style="font-size: 50px;font-family: 'Source Sans Pro', sans-serif;font-weight: 800;text-decoration: none;">Reset Password</p>
+                <p style="font-size: 50px;font-family: 'Source Sans Pro', sans-serif;font-weight: 800;text-decoration: none;">{{trans('Mail/resetPassword.1')}}</p>
                 @if (session('status'))
                     <div class="alert alert-success">
                         {{ session('status') }}
@@ -17,7 +17,7 @@
                     {{ csrf_field() }}
 
                     <div class="form-group{{ $errors->has('user_password') ? ' has-error' : '' }}">
-                        <label for="user_password" class="col-md-4 control-label">Password</label>
+                        <label for="user_password" class="col-md-4 control-label">{{trans('Mail/resetPassword.2')}}</label>
 
                         <div class="col-md-6">
                             <input id="user_password" type="password" class="form-control" name="user_password" required>
@@ -31,7 +31,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="password-confirm" class="col-md-4 control-label">Confirm Password</label>
+                        <label for="password-confirm" class="col-md-4 control-label">{{trans('Mail/resetPassword.3')}}</label>
 
                         <div class="col-md-6">
                             <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required onblur="validate()">
@@ -41,7 +41,7 @@
                     <div class="form-group">
                         <div class="col-md-6 col-md-offset-4">
                             <button id="submit" type="submit" class="layui-btn shadow submit" style="border: 2px solid #0C0C0C;color: #0C0C0C;margin-top: 30px;float: right">
-                                Reset Password
+                                {{trans('Mail/resetPassword.4')}}
                             </button>
                             <input type="hidden" name="user_id" value="{{$user_id}}">
                         </div>

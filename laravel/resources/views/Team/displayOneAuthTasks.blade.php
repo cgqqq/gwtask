@@ -6,7 +6,7 @@
         @foreach($tasks as $task)
         <li class="layui-colla-item" style="width: 550px;">
             <h2 class="layui-colla-title" style="color: #0C0C0C;font-weight: 800;font-size: 15px;width: 530px;background-color: #34bf49">
-                <span  style="color: #fcfcfc">Task Name : </span>
+                <span  style="color: #fcfcfc">{{trans('Team/dOATasks.1')}} </span>
                 {{ $task['task_name'] }}
                 <span style="float: right;">
 				@if( $task['task_status'] =='0')
@@ -32,27 +32,35 @@
                                 <i class="layui-icon layui-timeline-axis"></i>
                                 <div class="layui-timeline-content layui-text" style="width: 500px;">
                                     <h3 class="layui-timeline-title">{{ date('Y-m-d H:i:s',$tran['time']) }}</h3>
-                                    <p> <span style="color: #0C0C0C;font-size: 15px;font-weight: 800;">{{ $tran['trans_brief'] }}</span><br><br>
+                                    <p> <span style="color: #0C0C0C;font-size: 15px;font-weight: 800;">
+                                            @if($tran['trans_brief'] =='Task Created')
+                                                {{trans('Task/displayAll.13')}}
+                                            @elseif($tran['trans_brief']=='stask')
+                                                {{trans('Task/displayAll.14')}}
+                                            @else
+                                                {{$tran['trans_brief']}}
+                                            @endif
+                                        </span><br><br>
 
-                                        <span style="color: #0C0C0C;font-size: 13px;">Detailed Information :</span>
+                                        <span style="color: #0C0C0C;font-size: 13px;">{{trans('Team/dOATasks.2')}}</span>
                                         {{ $tran['trans_description'] }}
                                     </p>
                                     @if($tran['trans_Resource_intro']=='stask')
                                         <button type="submit" class="layui-btn choose" style="border: 2px solid #0C0C0C;color: #0C0C0C;background-color: #fcfcfc;margin-bottom: 20px" id="sub_task_detail">
-                                           Sub Task Detail
+                                            {{trans('Team/dOATasks.3')}}
                                         </button>
                                         <input type="hidden" name="team_id" value="{{$team_info['team_id']}}">
                                         <input type="hidden" name="stask_id" value="{{$tran['trans_Resource_path']}}">
                                     @else
                                         @unless($tran['trans_Resource_path']==null)
-                                        <span style="color: #0C0C0C;font-size: 13px;">Download Resource : </span>
+                                        <span style="color: #0C0C0C;font-size: 13px;">{{trans('Team/dOATasks.4')}}</span>
                                         <a href={{URL::asset($tran['trans_Resource_path'])}} download={{$tran['trans_Resource_path']}}>
                                             <img src="{{URL::asset('/images/download.png')}}" >
                                         </a><br>
                                     @endunless
                                         @unless($tran['trans_Resource_intro']==null)
                                         <p>
-                                            <span style="color: #0C0C0C;font-size: 13px;">Resource Description :</span>
+                                            <span style="color: #0C0C0C;font-size: 13px;">{{trans('Team/dOATasks.5')}}</span>
                                             {{ $tran['trans_Resource_intro'] }}
                                         </p>
                                     @endunless
@@ -77,14 +85,14 @@
                                         <form id="{{$task['task_id']}}" style="line-height:20px;margin: 20px;padding:10px;width: 500px;float:left;color: #0C0C0C;cursor: hand;display: none" class="form-group" enctype="multipart/form-data" method="post" action="{{ url('team/displayOneAuthTasks/'.$team_info['team_id']) }}">
                                             {{ csrf_field() }}
                                             <div class="form-group" style="margin-bottom: 40px;">
-                                                <label class="col-md-4 control-label" >Transaction Title</label>
+                                                <label class="col-md-4 control-label" >{{trans('Team/dOATasks.6')}}</label>
                                                 <div class="col-md-6">
                                                     <input type="text" name='trans_brief' id="trans_brief" required="" class="form-control" >
                                                 </div>
                                             </div>
 
                                             <div class="form-group" >
-                                                <label class="col-md-4 control-label" >Transaction Description</label>
+                                                <label class="col-md-4 control-label" >{{trans('Team/dOATasks.7')}}</label>
 
                                                 <div class="col-md-6">
                                                     <textarea type="text" name="trans_description" id="trans_description" required="" class="form-control scroll" ></textarea>
@@ -93,13 +101,13 @@
 
                                             <div style="display: none" id="{{$task['task_id']+$task['task_id']}}">
                                                 <div class="form-group{{ $errors->has('user_profile') ? ' has-error' : '' }}" style="">
-                                                    <label for="trans_Resource_Path" class="col-md-4 control-label">Upload Resources</label>
+                                                    <label for="trans_Resource_Path" class="col-md-4 control-label">{{trans('Team/dOATasks.8')}}</label>
 
                                                     <span class="col-md-6">
 												<div class="aaa" >
 
 													<span class="btn btn-success fileinput-button" style="background: #34bf49;border-color: #34bf49;border-radius: 0;margin-top: 10px;margin-bottom: 10px" >
-														<span style="font-weight: 700;">Upload</span>
+														<span style="font-weight: 700;">{{trans('Team/dOATasks.9')}}</span>
 														<input type="file" id="trans_Resource_Path" class="" name="trans_Resource_Path" >
 													</span>
 												</div>
@@ -113,7 +121,7 @@
                                                 </div>
 
                                                 <div class="form-group" style="margin-bottom: 20px;" >
-                                                    <label class="col-md-4 control-label" >Resource Description</label>
+                                                    <label class="col-md-4 control-label" >{{trans('Team/dOATasks.10')}}</label>
 
                                                     <div class="col-md-6">
                                                         <textarea type="text" name="trans_Resource_intro" id="trans_Resource_intro" class="form-control" class="scroll"></textarea>
@@ -122,12 +130,12 @@
                                             </div>
                                             <div class="col-md-6 col-md-offset-4">
                                                 <button id="submit" type="submit" class="layui-btn shadow submit" style="border: 2px solid #0C0C0C;color: #0C0C0C;margin-top: 20px">
-                                                    Submit
+                                                    {{trans('Team/dOATasks.11')}}
                                                 </button>
                                             </div>
                                             <input type="hidden" name="task_id" value="{{$task['task_id']}}">
                                             <input type="hidden" name="flag" value='1' id="flag">
-                                            <a class="newA" onclick="isHidden('{{$task['task_id']+$task['task_id']}}')" style="color: #0C0C0C;float:left;display: block;width: 900px;margin-top: 30px" id="a">I Wanna Upload Resource. </a>
+                                            <a class="newA" onclick="isHidden('{{$task['task_id']+$task['task_id']}}')" style="color: #0C0C0C;float:left;display: block;width: 900px;margin-top: 30px" id="a">{{trans('Team/dOATasks.12')}}</a>
                                         </form>
                                     </div>
                                 </h3>

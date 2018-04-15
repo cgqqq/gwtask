@@ -1,35 +1,35 @@
 @extends('User.displayInfo')
                 @section('displayInfo_content')
                 <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;width: 650px;color: #0C0C0C;font-weight: 600;">
-                    <legend>Privacy</legend>
+                    <legend> {{trans('User/displayInfo.32')}}</legend>
                     @if(empty($privacies))
                     <div class="switch" style="margin-left: 30px;float: left;margin-top: 40px;width: 620px;">
-                        Allow others to view my personal updatings.
+                        {{trans('User/displayInfo.33')}}
 
                         <label  style="float: right;margin-right: 50px;">
-                            OFF
+                            {{trans('User/displayInfo.34')}}
                             <input type="hidden" name="type" value="view_page">
                             <input type="checkbox" class="fo_checkbox" checked="unchecked">
                             <span class="lever"></span>
-                            ON
+                            {{trans('User/displayInfo.35')}}
                         </label>
                     </div>
                     <div class="switch" style="margin-left: 30px;float: left;margin-top: 40px;width: 620px;">
-                        Allow others to download my resources.
+                        {{trans('User/displayInfo.36')}}
 
                         <label  style="float: right;margin-right: 50px;">
-                            OFF
+                            {{trans('User/displayInfo.34')}}
                             <input type="hidden" name="type" value="download_resource">
                             <input type="checkbox" class="fo_checkbox" checked=true>
                             <span class="lever"></span>
-                            ON
+                            {{trans('User/displayInfo.35')}}
                         </label>
                     </div>
                     <div class="switch" style="margin-left: 30px;float: left;margin-top: 40px;width: 620px;">
-                    Allow others to view the teams I have joined.
+                        {{trans('User/displayInfo.37')}}
 
                     <label  style="float: right;margin-right: 50px;">
-                            OFF
+                        {{trans('User/displayInfo.34')}}
                             <input type="hidden" name="type" value="view_team_joined">
                             <input type="checkbox" class="fo_checkbox" checked="checked">
                             <span class="lever"></span>
@@ -37,33 +37,33 @@
                     </label>
                     </div>
                     <div class="switch" style="margin-left: 30px;float: left;margin-top: 40px;width: 620px;">
-                        Allow others to view the teams I have created.
+                        {{trans('User/displayInfo.38')}}
 
                         <label  style="float: right;margin-right: 50px;">
-                            OFF
+                            {{trans('User/displayInfo.34')}}
                             <input type="hidden" name="type" value="view_team_created">
                             <input type="checkbox" class="fo_checkbox" checked="checked">
                             <span class="lever"></span>
-                            ON
+                            {{trans('User/displayInfo.35')}}
                         </label>
                     </div>
                     <div class="switch" style="margin-left: 30px;float: left;margin-top: 40px;width: 620px;">
-                        Allow others to view the My tasks.
+                        {{trans('User/displayInfo.39')}}
 
                         <label  style="float: right;margin-right: 50px;">
                             OFF
                             <input type="hidden" name="type" value="view_task">
                             <input type="checkbox" class="fo_checkbox" checked="checked">
                             <span class="lever"></span>
-                            ON
+                            {{trans('User/displayInfo.35')}}
                         </label>
                     </div>
                         @else
                         <div class="switch" style="margin-left: 30px;float: left;margin-top: 40px;width: 620px;">
-                            Allow others to view my personal updatings.
+                            {{trans('User/displayInfo.33')}}
 
                             <label  style="float: right;margin-right: 50px;">
-                                OFF
+                                {{trans('User/displayInfo.34')}}
                                 <input type="hidden" name="type" value="view_page">
                                 @if($privacies['view_page']=='0')
                                 <input type="checkbox" class="fo_checkbox" checked="checked">
@@ -71,14 +71,14 @@
                                 <input type="checkbox" class="fo_checkbox">
                                 @endif
                                 <span class="lever"></span>
-                                ON
+                                {{trans('User/displayInfo.35')}}
                             </label>
                         </div>
                         <div class="switch" style="margin-left: 30px;float: left;margin-top: 40px;width: 620px;">
-                            Allow others to download my resources.
+                            {{trans('User/displayInfo.36')}}
 
                             <label  style="float: right;margin-right: 50px;">
-                                OFF
+                                {{trans('User/displayInfo.34')}}
                                 <input type="hidden" name="type" value="download_resource">
                                 @if($privacies['view_page']=='0')
                                     <input type="checkbox" class="fo_checkbox" checked="checked">
@@ -86,14 +86,14 @@
                                     <input type="checkbox" class="fo_checkbox">
                                 @endif
                                 <span class="lever"></span>
-                                ON
+                                {{trans('User/displayInfo.35')}}
                             </label>
                         </div>
                         <div class="switch" style="margin-left: 30px;float: left;margin-top: 40px;width: 620px;">
-                            Allow others to view the teams I have joined.
+                            {{trans('User/displayInfo.37')}}
 
                             <label  style="float: right;margin-right: 50px;">
-                                OFF
+                                {{trans('User/displayInfo.34')}}
                                 <input type="hidden" name="type" value="view_team_joined">
                                 @if($privacies['view_page']=='0')
                                     <input type="checkbox" class="fo_checkbox" checked="checked">
@@ -101,14 +101,14 @@
                                     <input type="checkbox" class="fo_checkbox">
                                 @endif
                                 <span class="lever"></span>
-                                ON
+                                {{trans('User/displayInfo.35')}}
                             </label>
                         </div>
                         <div class="switch" style="margin-left: 30px;float: left;margin-top: 40px;width: 620px;">
-                            Allow others to view the teams I have created.
+                            {{trans('User/displayInfo.38')}}
 
                             <label  style="float: right;margin-right: 50px;">
-                                OFF
+                                {{trans('User/displayInfo.34')}}
                                 <input type="hidden" name="type" value="view_team_created">
                                 @if($privacies['view_page']=='0')
                                     <input type="checkbox" class="fo_checkbox" checked="checked">
@@ -116,14 +116,14 @@
                                     <input type="checkbox" class="fo_checkbox">
                                 @endif
                                 <span class="lever"></span>
-                                ON
+                                {{trans('User/displayInfo.35')}}
                             </label>
                         </div>
                         <div class="switch" style="margin-left: 30px;float: left;margin-top: 40px;width: 620px;">
-                            Allow others to view the My tasks.
+                            {{trans('User/displayInfo.39')}}
 
                             <label  style="float: right;margin-right: 50px;">
-                                OFF
+                                {{trans('User/displayInfo.34')}}
                                 <input type="hidden" name="type" value="view_task">
                                 @if($privacies['view_page']=='0')
                                     <input type="checkbox" class="fo_checkbox" checked="checked">
@@ -131,7 +131,7 @@
                                     <input type="checkbox" class="fo_checkbox">
                                 @endif
                                 <span class="lever"></span>
-                                ON
+                                {{trans('User/displayInfo.35')}}
                             </label>
                         </div>
                     @endif

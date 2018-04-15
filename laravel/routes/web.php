@@ -27,7 +27,7 @@ Route::group(['prefix'=>'register'],function(){
 	//执行注册动作
 	Route::post('add','User\UserController@add');
 });
-
+Route::get('lang/{locale}', ['as'=>'lang.change', 'uses'=>'LanguageController@setLocale']);
 //回到主页
 Route::any('home','Controller@home' )->middleware('auth')->name('home');
 /*发送验证邮箱*/

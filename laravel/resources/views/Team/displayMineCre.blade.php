@@ -14,16 +14,16 @@
 							<button type="button" class="search">
 							</button>
 						</div>
-						<input name='search-key' type="text" placeholder="Search For Teams……" >
+						<input name='search-key' type="text" placeholder="{{trans('Team/displayMine.1')}}" >
 
 						<div class="btn-group" style="margin-left: 630px;">
 							<button type="button" class="dropdown-toggle sort" data-toggle="dropdown">
 							</button>
 							<ul class="dropdown-menu" role="menu" style="z-index: 9999;margin-top: 5px;">
 								<!-- <li><a href="#">All</a></li> -->
-								<li><a href="{{ url('team/displayMineCre/team.created_at') }}">Sorted By Time</a></li>
-								<li><a href="{{ url('team/displayMineCre/team.team_name') }}">Sorted By Name</a></li>
-								<li><a href="{{ url('team/displayMineCre/team.team_funder_id') }}">Sorted By Founder ID</a></li>
+								<li><a href="{{ url('team/displayMineCre/team.created_at') }}">{{trans('Team/displayMine.2')}}</a></li>
+								<li><a href="{{ url('team/displayMineCre/team.team_name') }}">{{trans('Team/displayMine.3')}}</a></li>
+								<li><a href="{{ url('team/displayMineCre/team.team_funder_id') }}">{{trans('Team/displayMine.4')}}</a></li>
 
 							</ul>
 						</div>
@@ -32,7 +32,7 @@
 				</div>
 				@if($pageout==null)
 					<div style="margin-top: 20%;">
-						<p class="Big_Font">You Haven't Create Any Team Yet!<br>Go <a href="{{url('team/displayAdd')}}" class="Big_Font">Create</a> One!</p>
+						<p class="Big_Font">{{trans('Team/displayMine.13')}}<br>{{trans('Team/displayMine.6')}} <a href="{{url('team/displayAdd')}}" class="Big_Font">{{trans('Team/displayMine.7')}}</a> {{trans('Team/displayMine.8')}}</p>
 					</div>
 
 
@@ -48,16 +48,16 @@
 
 							<div style="width: 280px;height: 40px;white-space:nowrap;overflow: hidden;text-overflow: ellipsis;">
 								<h3 class="text-white semi-bold p-t-60 project-title " style="color: #fff200;font-weight: 900;">
-									Team Name:{{ $team['team_name'] }}</h3>
+									{{trans('Team/displayMine.9')}}{{ $team['team_name'] }}</h3>
 							</div>
 							<P> </P>
 							<div style="width: 280px;height: 30px;white-space:nowrap;overflow: hidden;text-overflow: ellipsis;">
 								<p class="project-description">
-									Team Founder:{{ $team['user_name'] }}</p>
+									{{trans('Team/displayMine.10')}}{{ $team['user_name'] }}</p>
 							</div>
 							<div style="width: 280px;height: 20px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap">
 								<p class="project-description">
-									Team Intro:{{ $team['team_info'] }}</p>
+									{{trans('Team/displayMine.11')}}{{ $team['team_info'] }}</p>
 							</div>
 							<div style="width: 300px;	" class="project-description">
 								<button class="view_icon" onclick='javascrtpt:window.location.href="{{url('team/displayOne',['team_name'=> $team['team_name']])}}"'> </button>
@@ -68,9 +68,9 @@
 					</div>
 					<div class="item-info">
 						<h4 class="text-dark no-margin p-t-10">
-							Team Name:{{ $team['team_name'] }}</h4>
+							{{trans('Team/displayMine.9')}}{{ $team['team_name'] }}</h4>
 						<p>
-							Established At :{{ date('Y-m-d H:i:s',$team['created_at']) }}</p>
+							{{trans('Team/displayMine.12')}}{{ date('Y-m-d H:i:s',$team['created_at']) }}</p>
 
 					</div>
 					{{--对Team可进行的操作--}}
@@ -81,9 +81,9 @@
 							<input type="hidden" name="team_id" value="{{ $team['team_id'] }}">
 							<ul class="dropdown-menu" role="menu" style="z-index: 9999">
 								<!-- <li><a href="#">Change Team Name</a></li> -->
-								<li><a href="{{url('team/displayOne',$team['team_name'])}}">Show teammates</a></li>
-								<li><a href="{{url('user/displayAllForAdd',$team['team_name'])}}">Add teammates</a></li>
-								<li><a href="{{url('task/displayAdd',$team['team_name'])}}">Create task</a></li>
+								<li><a href="{{url('team/displayOne',$team['team_name'])}}">{{trans('Team/displayMine.14')}}</a></li>
+								<li><a href="{{url('user/displayAllForAdd',$team['team_name'])}}">{{trans('Team/displayMine.15')}}</a></li>
+								<li><a href="{{url('task/displayAdd',$team['team_name'])}}">{{trans('Team/displayMine.16')}}</a></li>
 								<!-- <li id="quit-team"><a href="#">Quit/Dismiss</a></li> -->
 								<li><a href="#">others</a></li>
 

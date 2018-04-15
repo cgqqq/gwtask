@@ -8,12 +8,12 @@
         <div class="sec-panel">
             <div style="width: 90%;height:80%;margin-left: 50px;">
                 {{--注册信息填写表格--}}
-                <p style="font-size: 50px;font-family: 'Source Sans Pro', sans-serif;font-weight: 800;">REGISTER</p>
+                <p style="font-size: 50px;font-family: 'Source Sans Pro', sans-serif;font-weight: 800;">{{trans('Index/register.1')}}REGISTER</p>
                 <form class="form-horizontal" method="POST" action="{{ url('register/add') }}" enctype="multipart/form-data" >
                     {{ csrf_field() }}
 
                     <div class="form-group{{ $errors->has('user_id') ? ' has-error' : '' }}">
-                        <label for="user_id" class="col-md-4 control-label">User ID</label>
+                        <label for="user_id" class="col-md-4 control-label">{{trans('Index/register.2')}}User ID</label>
 
                         <div class="col-md-6">
                             <input id="user_id" type="text" class="form-control" name="user_id" value="{{ old('user_id') }}" required autofocus>
@@ -27,7 +27,7 @@
                     </div>
 
                     <div class="form-group{{ $errors->has('user_name') ? ' has-error' : '' }}">
-                        <label for="user_name" class="col-md-4 control-label">User Name</label>
+                        <label for="user_name" class="col-md-4 control-label">{{trans('Index/register.3')}}User Name</label>
 
                         <div class="col-md-6">
                         <!-- 姓名不允许输入空格 -->
@@ -57,7 +57,7 @@
                     </div>
 
                     <div class="form-group{{ $errors->has('user_password') ? ' has-error' : '' }}">
-                        <label for="user_password" class="col-md-4 control-label">Password</label>
+                        <label for="user_password" class="col-md-4 control-label">{{trans('Index/register.4')}}Password</label>
 
                         <div class="col-md-6">
                             <input id="user_password" type="password" class="form-control" name="user_password" required>
@@ -71,7 +71,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="password-confirm" class="col-md-4 control-label">Confirm Password</label>
+                        <label for="password-confirm" class="col-md-4 control-label">{{trans('Index/register.5')}}Confirm Password</label>
 
                         <div class="col-md-6">
                             <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required onblur="validate()">
@@ -80,13 +80,13 @@
 
 
                     <div class="form-group{{ $errors->has('user_profile') ? ' has-error' : '' }}">
-                        <label for="user_profile" class="col-md-4 control-label">Profile</label>
+                        <label for="user_profile" class="col-md-4 control-label">{{trans('Index/register.6')}}Profile</label>
 
                         <span class="col-md-6">
                         <div class="aaa" >
 
              <span class="btn btn-success fileinput-button" style="background: #fff200;border-color: #fff200;">
-            <span style="font-weight: 700;">Upload Image</span>
+            <span style="font-weight: 700;">{{trans('Index/register.7')}}Upload Image</span>
             <input id="user_profile" type="file" class="" name="user_profile" required >
              </span>
                         </div>
@@ -103,7 +103,7 @@
                     <div class="form-group">
                 <div class="col-md-6 col-md-offset-4">
                     <button id="submit" type="submit" class="layui-btn shadow" style="border: 2px solid #0C0C0C;" >
-                        <a style="color: #0C0C0C;"> REGISTER</a>
+                        <a style="color: #0C0C0C;">{{trans('Index/register.1')}}</a>
                     </button>
                 </div>
             </div>
