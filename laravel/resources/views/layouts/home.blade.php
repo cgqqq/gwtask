@@ -76,7 +76,7 @@
             <div class="main-panel2" style="display:flex;min-height: 630px;height:auto;width: 100%;padding-left:0;background-color: transparent;">
                 {{--Layui的导航--}}
                 <ul class="layui-nav"  style="width: 100%;height: 100%;background-color:#34bf49;">{{trans('layouts/home.1')}}
-                    <li class="layui-nav-item"><a href="{{url(session('lang').'/home')}}">{{trans('layouts/home.1')}}</a></li>
+                    <li class="layui-nav-item"><a href="{{url('home')}}">{{trans('layouts/home.1')}}</a></li>
                     <li class="layui-nav-item">
                         <a href="{{url('team/displayMine/default')}}">{{trans('layouts/home.2')}}</a>
                         <dl class="layui-nav-child">
