@@ -13,9 +13,9 @@ return [
     |
     */
 
-    '1' => 'Delete',
+    '1' => 'Result(s)',
     '2' =>'Team Name',
-    '3'=>'Funder',
+    '3'=>'Funder :',
     '4' =>'Team Intro',
     '5' =>'Member(s)\'Name',
     '7' =>'Batch Delete',
