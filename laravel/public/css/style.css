@@ -1371,3 +1371,8 @@ span.badge2.new:after {
 .input-field.inline .select-dropdown {
 	margin-bottom: 1rem;
 }
+.ec a:hover{
+	color: #fff200;
+	text-decoration: none;
+}
+

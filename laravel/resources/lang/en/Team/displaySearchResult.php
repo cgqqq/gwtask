@@ -14,14 +14,7 @@ return [
     */
 
     '1' => 'Result(s)',
-    '2' =>'Team Name',
-    '3'=>'Funder :',
-    '4' =>'Team Intro',
-    '5' =>'Member(s)\'Name',
-    '7' =>'Batch Delete',
-    '6' =>'E-mail Address',
-    '8' =>'Invite',
-    '9' =>'Name:',
-    '10' =>'Me',
-    '11' =>'Member',
+    '2' =>'Team Founder:',
+    '3'=>'NO RESULT',
+
 ];

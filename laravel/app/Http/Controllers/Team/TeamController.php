@@ -67,12 +67,22 @@ class TeamController extends Controller
             //提交事务
             DB::commit();
             //返回前端添加成功结果
-            return response()->json(['msg'=>'添加成功!','icon'=>'1']);
+            if(session('applocale')=='en'){
+                $msg='Team created successfully!';
+            }else{
+                $msg = '创建队伍成功！';
+            }
+            return response()->json(['msg'=>$msg]);
         } catch(QueryException $ex) {
             //回滚事务
             DB::rollback();
             //返回前端添加失败结果
-            return response()->json(['msg'=>'该团队已存在！','icon'=>'2']);
+            if(session('applocale')=='en'){
+                $msg='Busy network!Try again later!';
+            }else{
+                $msg = '网络繁忙，请稍后再试！';
+            }
+            return response()->json(['msg'=>$msg]);
         }
     }
     //显示为我所在的团队
@@ -196,10 +206,20 @@ class TeamController extends Controller
             return response()->json(['msg'=>'队长不能退出!','icon'=>'2']);
         }else if($membership->del(['team_id'=>$request->input('team_id')])){
             //组员请求退出，退出成功
-            return response()->json(['msg'=>'退出成功!','icon'=>'1']);
+            if(session('applocale')=='en'){
+                $msg='Operated Successfully!';
+            }else{
+                $msg = '退出成功！';
+            }
+            return response()->json(['msg'=>$msg]);
         }else{
             //组员请求退出，退出失败
-            return response()->json(['msg'=>'退出失败!','icon'=>'2']);
+            if(session('applocale')=='en'){
+                $msg='Busy network!Try again later!';
+            }else{
+                $msg = '网络繁忙，请稍后再试！';
+            }
+            return response()->json(['msg'=>$msg]);
         }
     }
     //显示单个团队信息、成员
@@ -579,12 +599,22 @@ class TeamController extends Controller
             //提交事务
             DB::commit();
             //返回前端添加成功结果
-            return response()->json(['msg'=>'Your invitation has been successfully sent!!','icon'=>'1']);
+            if(session('applocale')=='en'){
+                $msg='Your invitation has been successfully sent!!';
+            }else{
+                $msg = '邀请函发送成功！';
+            }
+            return response()->json(['msg'=>$msg]);
         } catch(QueryException $ex) {
             //回滚事务
             DB::rollback();
             //返回前端添加失败结果
-            return response()->json(['msg'=>'Network is busy now,try again later！','icon'=>'2']);
+            if(session('applocale')=='en'){
+                $msg='Busy network!Try again later!';
+            }else{
+                $msg = '网络繁忙，请稍后再试！';
+            }
+            return response()->json(['msg'=>$msg]);
         }
 
     }
@@ -626,13 +656,23 @@ class TeamController extends Controller
                 $app_join->edit($map,$update_data);}
             DB::commit();
             //返回前端添加成功结果
-            return response()->json(['msg'=>'Operation Succeed.']);
+            if(session('applocale')=='en'){
+                $msg='Operated Succeed.!';
+            }else{
+                $msg = '操作成功！';
+            }
+            return response()->json(['msg'=>$msg]);
 
         } catch(QueryException $ex) {
             //回滚事务
             DB::rollback();
             //返回前端添加失败结果
-            return response()->json(['msg'=>'Network is busy now,try again later！']);
+            if(session('applocale')=='en'){
+                $msg='Busy network!Try again later!';
+            }else{
+                $msg = '网络繁忙，请稍后再试！';
+            }
+            return response()->json(['msg'=>$msg]);
         }
     }
     public function createTeamUploading(TeamUploading $teamUploading,Request $request){
@@ -654,12 +694,22 @@ class TeamController extends Controller
             //提交事务
             DB::commit();
             //返回前端添加成功结果
-            return response()->json(['msg'=>'Post Successfully']);
+            if(session('applocale')=='en'){
+                $msg='Posted Successfully!';
+            }else{
+                $msg = '发送成功！';
+            }
+            return response()->json(['msg'=>$msg]);
         } catch(QueryException $ex) {
             //回滚事务
             DB::rollback();
             //返回前端添加失败结果
-            return response()->json(['msg'=>'Something went wrong!Try again later!']);
+            if(session('applocale')=='en'){
+                $msg='Busy network!Try again later!';
+            }else{
+                $msg = '网络繁忙，请稍后再试！';
+            }
+            return response()->json(['msg'=>$msg]);
         }
 
     }
@@ -1085,12 +1135,22 @@ class TeamController extends Controller
             //提交事务
             DB::commit();
             //返回前端添加成功结果
-            return response()->json(['msg'=>'Deleted successfully!']);
+            if(session('applocale')=='en'){
+                $msg='Deleted successfully!';
+            }else{
+                $msg = '删除成功！';
+            }
+            return response()->json(['msg'=>$msg]);
         } catch(QueryException $ex) {
             //回滚事务
             DB::rollback();
             //返回前端添加失败结果
-            return response()->json(['msg'=>'Busy network!Try again later!']);
+            if(session('applocale')=='en'){
+                $msg='Busy network!Try again later!';
+            }else{
+                $msg = '网络繁忙，请稍后再试！';
+            }
+            return response()->json(['msg'=>$msg]);
         }
     }
 

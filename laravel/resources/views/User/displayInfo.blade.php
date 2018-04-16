@@ -53,8 +53,25 @@
 				<hr class="layui-bg-black">
 				{{trans('User/displayInfo.6')}}{{ session('user_email')}}
 				<hr class="layui-bg-black">
-				<div id="password-field"></div>
 				<button id="edit" class="layui-btn layui-btn-small" style="background-color: #fff200;border: 2px solid black;color: black">{{trans('User/displayInfo.7')}}</button>
+				<div id="password-field" class="form-horizontal" style="display: none;" name="password-field">
+					<div class="form-group">
+						<label for="password-confirm" class="col-md-4 control-label">{{trans('User/displayInfo.40')}}</label>
+
+						<div class="col-md-6">
+							<input type='password' name='password1' id="user_password" value="{{ session('user_password')}}">
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="password-confirm" class="col-md-4 control-label">{{trans('User/displayInfo.41')}}</label>
+
+						<div class="col-md-6">
+							<input type='password' name='password' id="password-confirm" value="{{ session('user_password')}}" required onblur="validate()">
+						</div>
+					</div>
+
+
+				</div>
 			</div>
 				@show
 
@@ -65,12 +82,14 @@
 	<script type="text/javascript">
 	$(function() {
 		layui.use('layer',function(){
-			$('#edit').on('click', function(event) {
-				if($(this).text()==='Change Passcode'){
-					$('#password-field').html("Passcode ：<input type='password' name='password' value={{ session('user_password')}}>");
-					$('#edit').text('Confirm');
+			$('.personal_info').on('click',"#edit",function(event) {
+                var vDiv = document.getElementById('password-field');
+                vDiv.style.display = (vDiv.style.display == 'none')?'block':'none';
+				if(vDiv.style.display=='block'){
+					$('#edit').text('OK');
 					return false;
-				}else{
+				}
+				else{
 					event.preventDefault();
 					var oldPass = "{{ session('user_password') }}";
 					var newPass = $("input[name='password']").val();
@@ -112,13 +131,27 @@
 						});
 						
 					}
-					$('#edit').text('Change Passcode');
+					$('#edit').text('{{trans('User/displayInfo.7')}}');
 				}
 			
 			});	
 		});
 		
 	});
+    function validate(){
+        var pwd1 = document.getElementById("user_password").value;
+        var pwd2 = document.getElementById("password-confirm").value;
+        if(pwd1 != pwd2) {
+            layui.use('layer', function(){
+                layer.msg('The two passwords ' +
+                    'you have entered are inconsistent !');
+                document.getElementById("submit").disabled = true;
+            });
+        }
+        else{
+            document.getElementById("submit").disabled = false;
+        }
+    }
 </script>
 {{--<form action="" class='layui-form' >
 	<table class='layui-table' style="width: 900px;" class="layui-table">

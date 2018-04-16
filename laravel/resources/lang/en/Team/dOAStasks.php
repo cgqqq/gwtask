@@ -19,6 +19,8 @@ return [
     '4'=>'Responsible Teammate(s) : ',
     '5' =>'Save',
     '6' =>'send',
-    '7' =>'sent-time : just now'
+    '7' =>'sent-time : just now',
+    '8' =>'pass',
+    '9' =>'fail'
 
 ];

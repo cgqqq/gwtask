@@ -17,12 +17,14 @@ return [
     '2' => 'Quit',
     '3'=>'Funder :',
     '4'=>'Team Updatings',
-    '5' =>'All Tasks',
-    '6' =>'Sub Tasks',
-    '7' =>'Resource Sharings',
-    '8' =>'Submit',
-    '9' =>'Resource Download :',
-    '10' =>'Team Members:'
-
+    '5'=>'Create A Task',
+    '6' =>'All Tasks',
+    '7' =>'Sub Tasks',
+    '8' =>'Resource Sharings',
+    '9' =>'Submit',
+    '10' =>'Resource Download :',
+    '11' =>'Team Members:',
+    '12' =>'Followings',
+    '13' =>'Followers',
 
 ];

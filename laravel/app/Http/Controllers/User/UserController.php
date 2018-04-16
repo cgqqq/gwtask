@@ -153,10 +153,20 @@ class UserController extends Controller
         $delProfile = unlink(public_path('uploads/user_profile') . '/' . $profile_name);
         $delUser = $user->del($map);
         if ($delProfile && $delUser) {
-            $data['msg'] = '删除成功!';
+            if(session('applocale')=='en'){
+                $data['msg'] = 'Delete Successfully!';
+            }
+            else{
+                $data['msg'] = '删除成功!';
+            }
             $data['icon'] = '1';
         } else {
-            $data['msg'] = '删除失败!';
+            if(session('applocale')=='en'){
+                $data['msg'] = 'Something went wrong!Try again later!';
+            }else{
+                $data['msg'] = '网络繁忙，请稍候再试！';
+            }
+
             $data['icon'] = '2';
         }
         return response()->json($data);
@@ -292,27 +302,51 @@ class UserController extends Controller
         //关注
         if ($request->input('type') === 'follow') {
             if ($exist) {
-                $msg = '已关注!';
+                if(session('applocale')=='en'){
+                    $data['msg'] = 'You followed this user already!';
+                }else{
+                    $data['msg'] = '已关注';
+                }
                 $icon = '7';
             } else {
                 if ($friend->add($data)) {
-                    $msg = '关注成功!';
+                    if(session('applocale')=='en'){
+                        $data['msg'] = 'Operated Successfully!';
+                    }else{
+                        $data['msg'] = '关注成功！';
+                    }
                     $icon = '1';
                 } else {
-                    $msg = '关注失败!';
+                    if(session('applocale')=='en'){
+                        $data['msg'] = 'Something went wrong!Try again later!';
+                    }else{
+                        $data['msg'] = '网络繁忙，请稍候再试！';
+                    }
                     $icon = '2';
                 }
             }
         } else {//取关
             if (!$exist) {
-                $msg = '未关注!';
+                if(session('applocale')=='en'){
+                    $data['msg'] = 'You have not followed yet!';
+                }else{
+                    $data['msg'] = '未关注';
+                }
                 $icon = '7';
             } else {
                 if ($friend->del($data)) {
-                    $msg = '取关成功!';
+                    if(session('applocale')=='en'){
+                        $data['msg'] = 'Unfollow successfully!';
+                    }else{
+                        $data['msg'] = '取关成功！';
+                    }
                     $icon = '1';
                 } else {
-                    $msg = '取关失败!';
+                    if(session('applocale')=='en'){
+                        $data['msg'] = 'Something went wrong!Try again later!';
+                    }else{
+                        $data['msg'] = '网络繁忙，请稍候再试！';
+                    }
                     $icon = '2';
                 }
             }
@@ -491,12 +525,22 @@ class UserController extends Controller
             //提交事务
             DB::commit();
             //返回前端添加成功结果
-            return response()->json(['msg' => 'Your application has been successfully sent!!']);
+            if(session('applocale')=='en'){
+                $msg = 'Your application has been successfully sent!';
+            }else{
+                $msg = '您的申请已成功发送！';
+            }
+            return response()->json(['msg' => $msg]);
         } catch (QueryException $ex) {
             //回滚事务
             DB::rollback();
             //返回前端添加失败结果
-            return response()->json(['msg' => 'Network is busy now,try again later！']);
+            if(session('applocale')=='en'){
+                $data['msg'] = 'Network is busy now,try again later!';
+            }else{
+                $data['msg'] = '网络繁忙，请稍候再试！';
+            }
+            return response()->json(['msg' => $msg]);
         }
     }
 
@@ -635,12 +679,22 @@ class UserController extends Controller
             //提交事务
             DB::commit();
             //返回前端添加成功结果
-            return response()->json(['msg'=>'Welcome to team : '.$team_info[0]['team_name'],'icon'=>'1']);
+            if(session('applocale')=='en'){
+                $msg='Welcome to team : '.$team_info[0]['team_name'];
+            }else{
+                $data['msg'] = '欢迎加入团队： '.$team_info[0]['team_name'];
+            }
+            return response()->json(['msg'=>$msg,'icon'=>'1']);
         } catch(QueryException $ex) {
             //回滚事务
             DB::rollback();
             //返回前端添加失败结果
-            return response()->json(['msg'=>'Network is busy now,try again later！','icon'=>'2']);
+            if(session('applocale')=='en'){
+                $msg='Network is busy now,try again later!';
+            }else{
+                $msg = '网络繁忙！请稍后再试！';
+            }
+            return response()->json(['msg'=>$msg,'icon'=>'2']);
         }
     }
     public function refuseInvitation(Request $request,Invitation $invitation,User $user,Mail $mail,Team $team){
@@ -679,12 +733,23 @@ class UserController extends Controller
             //提交事务
             DB::commit();
             //返回前端添加成功结果
-            return response()->json(['msg'=>'Operation succeeded','icon'=>'1']);
+            if(session('applocale')=='en'){
+                $msg='Operated successfully!';
+            }else{
+                $msg = '操作成功！';
+            }
+            return response()->json(['msg'=>$msg,'icon'=>'1']);
+
         } catch(QueryException $ex) {
             //回滚事务
             DB::rollback();
             //返回前端添加失败结果
-            return response()->json(['msg'=>'Network is busy now,try again later！','icon'=>'2']);
+            if(session('applocale')=='en'){
+                $msg='Network is busy now,try again later!';
+            }else{
+                $msg = '网络繁忙，请稍后再试！';
+            }
+            return response()->json(['msg'=>$msg,'icon'=>'2']);
         }
     }
     public function sendMail(Request $request,Mail $mail,User $user){
@@ -720,16 +785,31 @@ class UserController extends Controller
                 //提交事务
                 DB::commit();
                 //返回前端添加成功结果
-                return response()->json(['msg'=>'Mail has been sent successfully!']);
+                if(session('applocale')=='en'){
+                    $msg='Mail has been sent successfully!';
+                }else{
+                    $msg = '邮件发送成功！';
+                }
+                return response()->json(['msg'=>$msg]);
             } catch(QueryException $ex) {
                 //回滚事务
                 DB::rollback();
                 //返回前端添加失败结果
-                return response()->json(['msg'=>'Network is busy now,try again later!']);
+                if(session('applocale')=='en'){
+                    $msg='Network is busy now,try again later!';
+                }else{
+                    $msg = '网络繁忙！请稍后再试！';
+                }
+                return response()->json(['msg'=>$msg]);
             }
         }
         else{
-            return response()->json(['msg'=>'Sorry!User id does not exist!']);
+            if(session('applocale')=='en'){
+                $msg='Sorry!User id does not exist!';
+            }else{
+                $msg = '抱歉，该用户不存在！';
+            }
+            return response()->json(['msg'=>$msg]);
         }
     }
 
@@ -748,12 +828,22 @@ class UserController extends Controller
             //提交事务
             DB::commit();
             //返回前端添加成功结果
-            return response()->json(['msg'=>'Mail has been deleted successfully!']);
+            if(session('applocale')=='en'){
+                $msg='Mail has been deleted successfully!';
+            }else{
+                $msg = '成功删除邮件！';
+            }
+            return response()->json(['msg'=>$msg]);
         } catch(QueryException $ex) {
             //回滚事务
             DB::rollback();
             //返回前端添加失败结果
-            return response()->json(['msg'=>'Network is busy now,try again later!']);
+            if(session('applocale')=='en'){
+                $msg='Network is busy now,try again later!';
+            }else{
+                $msg = '网络繁忙，请稍后再试！';
+            }
+            return response()->json(['msg'=>$msg]);
         }
 
 
@@ -889,12 +979,23 @@ class UserController extends Controller
             //提交事务
             DB::commit();
             //返回前端添加成功结果
-            return response()->json(['msg'=>'Deleted successfully!']);
+            if(session('applocale')=='en'){
+                $msg='Deleted successfully!';
+            }else{
+                $msg = '删除成功！';
+            }
+            return response()->json(['msg'=>$msg]);
+
         } catch(QueryException $ex) {
             //回滚事务
             DB::rollback();
             //返回前端添加失败结果
-            return response()->json(['msg'=>'Busy network!Try again later!']);
+            if(session('applocale')=='en'){
+                $msg='Busy network!Try again later!';
+            }else{
+                $msg = '网络繁忙，请稍后再试！';
+            }
+            return response()->json(['msg'=>$msg]);
         }
     }
     public function setPrivacy(Request $request,Privacy $privacy){
@@ -917,12 +1018,22 @@ class UserController extends Controller
                 //提交事务
                 DB::commit();
                 //返回前端添加成功结果
-                return response()->json(['msg'=>'Deleted successfully!']);
+                if(session('applocale')=='en'){
+                    $msg='Deleted successfully!';
+                }else{
+                    $msg = '删除成功！';
+                }
+                return response()->json(['msg'=>$msg]);
             } catch(QueryException $ex) {
                 //回滚事务
                 DB::rollback();
                 //返回前端添加失败结果
-                return response()->json(['msg'=>'Busy network!Try again later!']);
+                if(session('applocale')=='en'){
+                    $msg='Busy network!Try again later!';
+                }else{
+                    $msg = '网络繁忙，请稍后再试！';
+                }
+                return response()->json(['msg'=>$msg]);
             }
         }
         $map2=['user_id'=>$user_id];
@@ -938,12 +1049,22 @@ class UserController extends Controller
             //提交事务
             DB::commit();
             //返回前端添加成功结果
-            return response()->json(['msg'=>'Set successfully!']);
+            if(session('applocale')=='en'){
+                $msg='Set successfully!';
+            }else{
+                $msg = '设置保存成功！';
+            }
+            return response()->json(['msg'=>$msg]);
         } catch(QueryException $ex) {
             //回滚事务
             DB::rollback();
             //返回前端添加失败结果
-            return response()->json(['msg'=>'Busy network!Try again later!']);
+            if(session('applocale')=='en'){
+                $msg='Busy network!Try again later!';
+            }else{
+                $msg = '网络繁忙，请稍后再试！';
+            }
+            return response()->json(['msg'=>$msg]);
         }
     }
 }

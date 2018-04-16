@@ -20,6 +20,8 @@ return [
     '5' => 'Name ：',
     '6' => 'Email Address：',
     '7' => 'Change Passcode',
+    '40'=>'New Passcode : ',
+    '40'=>'Confirm Passcode : ',
   /*displayInfoMailBox*/
     '8' => 'You got an Team Application for',
     '9' => 'from user : ',
@@ -59,3 +61,4 @@ return [
 
 
 ];
+

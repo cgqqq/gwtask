@@ -343,10 +343,20 @@ class TaskController extends Controller
     	}
     	if($isSuccessfull){
 			//返回前端添加成功结果
-            return response()->json(['msg' => 'Allocate Sub-task Successfully!','team_id'=>$task_info[0]['task_team_id']]);
+            if(session('applocale')=='en'){
+                $msg='Allocate Sub-task Successfully!';
+            }else{
+                $msg = '分配子任务成功！';
+            }
+            return response()->json(['msg' =>$msg,'team_id'=>$task_info[0]['task_team_id']]);
     	}else{
 			//返回前端添加失败结果
-	         return response()->json(['msg' => 'Failed To Allocate Sub-task!']);
+            if(session('applocale')=='en'){
+                $msg='Busy network!Try again later!';
+            }else{
+                $msg = '网络繁忙，请稍后再试！';
+            }
+            return response()->json(['msg'=>$msg]);
     	}
     }
     public function score(Request $request,Stask_submission $stask_submission,Stask $stask){
@@ -367,11 +377,21 @@ class TaskController extends Controller
             $stask->edit($map1,$update);
             //提交事务
             DB::commit();
-            return response()->json(['msg'=>'Score saved']);
+            if(session('applocale')=='en'){
+                $msg='Score saved!';
+            }else{
+                $msg = '成功评分！';
+            }
+            return response()->json(['msg'=>$msg]);
         } catch(QueryException $ex) {
             //回滚事务
             DB::rollback();
-            return response()->json(['msg'=>'Busy network,try again later!']);
+            if(session('applocale')=='en'){
+                $msg='Busy network!Try again later!';
+            }else{
+                $msg = '网络繁忙，请稍后再试！';
+            }
+            return response()->json(['msg'=>$msg]);
         }
     }
     public function comment(Request $request,Stask_comment $stask_comment,Stask $stask){
@@ -392,11 +412,21 @@ class TaskController extends Controller
             $stask_comment->add($map);
             //提交事务
             DB::commit();
-            return response()->json(['msg'=>'Comment successfully']);
+            if(session('applocale')=='en'){
+                $msg='Commented successfully';
+            }else{
+                $msg = '评论成功！';
+            }
+            return response()->json(['msg'=>$msg]);
         } catch(QueryException $ex) {
             //回滚事务
             DB::rollback();
-            return response()->json(['msg'=>'Busy network,try again later!']);
+            if(session('applocale')=='en'){
+                $msg='Busy network!Try again later!';
+            }else{
+                $msg = '网络繁忙，请稍后再试！';
+            }
+            return response()->json(['msg'=>$msg]);
         }
     }
     public function deleteComment(Request $request,Stask_comment $comment){
@@ -412,11 +442,21 @@ class TaskController extends Controller
           $comment->del($map);
             //提交事务
             DB::commit();
-            return response()->json(['msg'=>'Comment deleted!']);
+            if(session('applocale')=='en'){
+                $msg='Comment deleted!!';
+            }else{
+                $msg = '评论已删除！';
+            }
+            return response()->json(['msg'=>$msg]);     
         } catch(QueryException $ex) {
             //回滚事务
             DB::rollback();
-            return response()->json(['msg'=>'Busy network,try again later!']);
+            if(session('applocale')=='en'){
+                $msg='Busy network!Try again later!';
+            }else{
+                $msg = '网络繁忙，请稍后再试！';
+            }
+            return response()->json(['msg'=>$msg]);
         }
     }
 }

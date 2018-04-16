@@ -53,7 +53,7 @@
                             </div>
                             <div class="col-md-6 col-md-offset-4">
                                 <button id="submit" type="submit" class="layui-btn shadow submit" style="border: 2px solid #0C0C0C;color: #0C0C0C;margin-top: 10px">
-                                    {{trans('Team/displayOne.8')}}
+                                    {{trans('Team/displayOne.9')}}
                                 </button>
                             </div>
                             <input type="hidden" value="{{$team_info['team_id']}}" name="team_id">
@@ -103,7 +103,7 @@
 				</p>
 			</div>
 			<p style="margin-left: 30px" class="newA">
-				<a href="{{  url('user/displayFollow')}}">{{$data['followNum']}} Followings </a> | <a href="{{  url('user/displayFollower')}}">{{$data['followerNum']}} Followers</a>
+				<a href="{{  url('user/displayFollow')}}">{{$data['followNum']}} {{trans('Team/displayOne.12')}} </a> | <a href="{{  url('user/displayFollower')}}">{{$data['followerNum']}} {{trans('Team/displayOne.13')}}</a>
 
 			</p>
 		</div>

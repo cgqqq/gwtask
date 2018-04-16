@@ -52,7 +52,7 @@
                         <li><a href="javascript:void(0)" class="logout_icon"> </a></li>
                             @foreach (Config::get('app.locales') as $lang => $language)
                                 @if ($lang != App::getLocale())
-                                    <li style="font-weight: 800;font-family: 微软雅黑;position: relative;bottom: 13px"><a href="{{ route('lang.change', $lang) }}">{{$language}}</a>
+                                    <li style="font-weight: 800;font-family: 微软雅黑;position: relative;bottom: 15px" class="ec"><a href="{{ route('lang.change', $lang) }}">{{$language}}</a>
                                     </li>
                                 @endif
                             @endforeach

@@ -239,7 +239,7 @@
 					<div class="form-group " style="text-align: center;margin-right: 65px">
 
 						<button type="submit" class="layui-btn choose" style="border: 2px solid #0C0C0C;color: #0C0C0C;background-color: #fcfcfc" >
-							{{trans('Task/displayAllocateSubTask.8')}}+ Teammate In Charge
+							{{trans('Task/displayAllocateSubTask.8')}}
 						</button>
 						<div style="width:600px;height:60px;margin-left:308px;margin-top: 20px;color: black;" class="user_box scroll"  >
 						</div>
@@ -264,20 +264,20 @@
 		<div style="width:900px;height: 300px; margin-left: auto;margin-right: auto;border: 3px solid black;" >
 			<div style="width: 850px;height:180px;float: left;margin-top: 20px">
 				<div class="form-group" style="margin-bottom: 30px;">
-					<label for="stask_name" class="col-md-4 control-label" >{{trans('Task/displayAllocateSubTask.6')}}Sub Task Name</label>
+					<label for="stask_name" class="col-md-4 control-label" >{{trans('Task/displayAllocateSubTask.6')}}</label>
 					<div class="col-md-6"  >
 						<input type="text" required="" class="form-control sub_task_name" >
 					</div>
 				</div>
 				<div class="form-group" style="margin-bottom: 20px;" >
-					<label for="stask_descri" class="col-md-4 control-label">{{trans('Task/displayAllocateSubTask.7')}}Brief Introduction</label>
+					<label for="stask_descri" class="col-md-4 control-label">{{trans('Task/displayAllocateSubTask.7')}}</label>
 					<div class="col-md-6"  >
 						<textarea rows="2" cols="25" class="form-control sub_task_descri"></textarea>
 					</div>
 				</div>
 				<div class="form-group " style="text-align: center;margin-right: 65px">
 					<button type="submit" class="layui-btn choose" style="border: 2px solid #0C0C0C;color: #0C0C0C;background-color: #fcfcfc" >
-						{{trans('Task/displayAllocateSubTask.8')}}+ Teammate In Charge
+						{{trans('Task/displayAllocateSubTask.8')}}
 					</button>
 					<div style="width:600px;height:60px;margin-left:308px;margin-top: 20px;color: black;" class="user_box scroll"  >
 

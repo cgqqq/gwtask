@@ -113,7 +113,7 @@
 				</p>
 			</div>
 			<p style="margin-left: 30px" class="newA">
-				<a href="{{  url('user/displayFollow')}}">{{$data['followNum']}} Followings </a> | <a href="{{  url('user/displayFollower')}}">{{$data['followerNum']}} Followers</a>
+				<a href="{{  url('user/displayFollow')}}">{{$data['followNum']}} {{trans('Team/displayOne.12')}} </a> | <a href="{{  url('user/displayFollower')}}">{{$data['followerNum']}} {{trans('Team/displayOne.13')}}</a>
 
 			</p>
 		</div>
